@@ -116,9 +116,14 @@ dnl   Basic Features.
 dnl
 
 AC_CONFIG_FILES([
+    .M4/Makefile
     Makefile
     Bin/Makefile
     Lib/Makefile
+])
+
+AC_CONFIG_FILES([
+    Include/Score4Core/.Config/ConfiguredScore4Core.h
 ])
 
 dnl
