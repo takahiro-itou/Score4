@@ -5,6 +5,7 @@
 
 EXTRATESTS              =
 TESTS                   =  \
+        Score4CoreSettingsTest  \
         ${EXTRATESTS}
 ##
 ##    Test Configurations.
@@ -28,4 +29,6 @@ TEST_LDFLAGS_COMMON         +=
 ##
 ##    Test Programs.
 ##
+
+Score4CoreSettingsTest_SOURCES  =  Score4CoreSettingsTest.cpp
 
