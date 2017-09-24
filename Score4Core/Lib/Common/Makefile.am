@@ -37,6 +37,7 @@ DIST_NOINST_HEADER_FILES    =  \
 
 INCLIB_HEADER_FILES         =  \
         ${INCLIB_SOURCE_DIR}/Score4CoreSettings.h  \
+        ${INCLIB_SOURCE_DIR}/Score4Types.h         \
         ${INCLIB_SOURCE_DIR}/ScoreDocument.h       \
         ${EXTRA_LIBRARY_HEADER_FILES}
 
