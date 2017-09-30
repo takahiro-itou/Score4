@@ -17,7 +17,7 @@
 #if !defined( SCORE4CORE_COMMON_INCLUDED_SCORE_DOCUMENT_H )
 #    define   SCORE4CORE_COMMON_INCLUDED_SCORE_DOCUMENT_H
 
-#include    "Score4CoreSettings.h"
+#include    "Score4Types.h"
 
 SCORE4_CORE_NAMESPACE_BEGIN
 namespace  Common  {
@@ -29,6 +29,22 @@ namespace  Common  {
 
 class  ScoreDocument
 {
+
+//========================================================================
+//
+//    Internal Type Definitions.
+//
+public:
+
+    struct  GameResult
+    {
+        RecordFlag      eGameFlags;
+        DateSerial      recordDate;
+        TeamIndex       visitorTeam;
+        ScoreValue      homeTeam;
+        TeamIndex       visitorScore;
+        ScoreValue      homeScore;
+    };
 
 //========================================================================
 //
