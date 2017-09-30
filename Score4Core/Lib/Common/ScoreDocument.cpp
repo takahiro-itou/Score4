@@ -29,6 +29,24 @@ namespace  Common  {
 //    Constructor(s) and Destructor.
 //
 
+//----------------------------------------------------------------
+//    インスタンスを初期化する
+//  （デフォルトコンストラクタ）。
+//
+
+ScoreDocument::ScoreDocument()
+{
+}
+
+//----------------------------------------------------------------
+//    インスタンスを破棄する
+//  （デストラクタ）。
+//
+
+ScoreDocument::~ScoreDocument()
+{
+}
+
 //========================================================================
 //
 //    Public Member Functions (Implement Pure Virtual).
@@ -48,6 +66,74 @@ namespace  Common  {
 //
 //    Public Member Functions (Virtual Functions).
 //
+
+//----------------------------------------------------------------
+//    データをバイナリバッファから読み込む。
+//
+
+ErrCode
+ScoreDocument::readFromBinaryBuffer(
+        const   LpcReadBuf  inBuf,
+        const   FileLength  cbBuf)
+{
+    return ( ERR_FAILURE );
+}
+
+//----------------------------------------------------------------
+//    データをバイナリファイルから読み込む。
+//
+
+ErrCode
+ScoreDocument::readFromBinaryFile(
+        const  std::string  &fileName)
+{
+    return ( ERR_FAILURE );
+}
+
+//----------------------------------------------------------------
+//    データをテキストストリームから読み込む。
+//
+
+ErrCode
+ScoreDocument::readFromTextStream(
+        std::istream  & inStr)
+{
+    return ( ERR_FAILURE );
+}
+
+//----------------------------------------------------------------
+//    データをバイナリバッファに書き込む。
+//
+
+ErrCode
+ScoreDocument::saveToBinaryBuffer(
+        LpWriteBuf  const   outBuf,
+        const   FileLength  cbBuf)
+{
+    return ( ERR_FAILURE );
+}
+
+//----------------------------------------------------------------
+//    データをバイナリファイルに書き込む。
+//
+
+ErrCode
+ScoreDocument::saveToBinaryFile(
+        const  std::string  &fileName)
+{
+    return ( ERR_FAILURE );
+}
+
+//----------------------------------------------------------------
+//    データをテキストストリームに書き込む.
+//
+
+ErrCode
+ScoreDocument::saveToTextStream(
+        std::ostream  & outStr)
+{
+    return ( ERR_FAILURE );
+}
 
 //========================================================================
 //

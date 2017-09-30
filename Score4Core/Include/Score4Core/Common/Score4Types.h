@@ -19,6 +19,8 @@
 
 #include    "Score4CoreSettings.h"
 
+#include    <stddef.h>
+
 SCORE4_CORE_NAMESPACE_BEGIN
 namespace  Common  {
 
@@ -113,6 +115,27 @@ typedef     int             GamesCount;
 **/
 
 typedef     int             ScoreValue;
+
+//----------------------------------------------------------------
+/**
+**    ファイルの長さを表す型。
+**/
+
+typedef     size_t          FileLength;
+
+//----------------------------------------------------------------
+/**
+**    読み取り専用バッファ。
+**/
+
+typedef     const  void  *      LpcReadBuf;
+
+//----------------------------------------------------------------
+/**
+**    読み書き両用バッファ。
+**/
+
+typedef     void  *             LpWriteBuf;
 
 }   //  End of namespace  Common
 SCORE4_CORE_NAMESPACE_END
