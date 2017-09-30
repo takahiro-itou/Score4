@@ -6,12 +6,13 @@
 EXTRATESTS              =
 TESTS                   =  \
         Score4CoreSettingsTest  \
+        ScoreDocumentTest       \
         ${EXTRATESTS}
 ##
 ##    Test Configurations.
 ##
 
-TARGET_TESTEE_LIBRARY       +=
+TARGET_TESTEE_LIBRARY       +=  ../libscore4Common.a
 
 DIST_NOINST_DATA_FILES      +=
 DIST_NOINST_HEADER_FILES    +=
@@ -31,4 +32,5 @@ TEST_LDFLAGS_COMMON         +=
 ##
 
 Score4CoreSettingsTest_SOURCES  =  Score4CoreSettingsTest.cpp
+ScoreDocumentTest_SOURCES       =  ScoreDocumentTest.cpp
 
