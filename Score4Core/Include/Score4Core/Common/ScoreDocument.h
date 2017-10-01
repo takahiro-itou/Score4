@@ -185,6 +185,55 @@ public:
 //
 //    For Internal Use Only.
 //
+private:
+
+    typedef     unsigned  int       HeaderItem;
+
+    struct  FileHeader
+    {
+        HeaderItem      fSignature;
+        HeaderItem      fVersion;
+        HeaderItem      headerID;
+        HeaderItem      headerGame;
+        HeaderItem      headerSize;
+        HeaderItem      offsRecord;
+        HeaderItem      reserved06;
+        HeaderItem      reserved07;
+        HeaderItem      offsExtHead;
+        HeaderItem      sizeExtHead;
+        HeaderItem      reserved10;
+        HeaderItem      reserved11;
+        HeaderItem      reserved12;
+        HeaderItem      reserved13;
+        HeaderItem      reserved14;
+        HeaderItem      reserved15;
+    };
+
+    struct  ExtraHeader
+    {
+        DateSerial      lastImport;
+        HeaderItem      hiReserved[14];
+    };
+
+private:
+
+    //----------------------------------------------------------------
+    /**   ファイルヘッダを読み込む。
+    **
+    **  @param [in] inBuf
+    **  @param [in] inBuf   バッファのアドレス。
+    **  @param [in] cbBuf   バッファのバイト数。
+    **  @return     エラーコードを返す。
+    **      -   異常終了の場合は、
+    **          エラーの種類を示す非ゼロ値を返す。
+    **      -   正常終了の場合は、ゼロを返す。
+    **/
+    static  ErrCode
+    readFileHeader(
+            const   LpcReadBuf      inBuf,
+            const   FileLength      cbBuf,
+            FileHeader   *  const   fileHead,
+            ExtraHeader  *  const   extHead);
 
 //========================================================================
 //

@@ -17,6 +17,7 @@
 #include    "Score4Core/Common/ScoreDocument.h"
 
 #include    <fcntl.h>
+#include    <memory.h>
 #include    <stdio.h>
 #include    <sys/stat.h>
 #include    <unistd.h>
@@ -82,6 +83,15 @@ ScoreDocument::readFromBinaryBuffer(
         const   LpcReadBuf  inBuf,
         const   FileLength  cbBuf)
 {
+    ErrCode         retErr;
+    FileHeader      fileHead;
+    ExtraHeader     extHead;
+
+    retErr  = readFileHeader(inBuf, cbBuf, &fileHead, &extHead);
+    if ( retErr != ERR_SUCCESS ) {
+        return ( retErr );
+    }
+
     return ( ERR_FAILURE );
 }
 
@@ -180,6 +190,39 @@ ScoreDocument::saveToTextStream(
 //
 //    For Internal Use Only.
 //
+
+//----------------------------------------------------------------
+//    ファイルヘッダを読み込む。
+//
+
+ErrCode
+ScoreDocument::readFileHeader(
+        const   LpcReadBuf      inBuf,
+        const   FileLength      cbBuf,
+        FileHeader   *  const   fileHead,
+        ExtraHeader  *  const   extHead)
+{
+    CONSTEXPR_VAR   size_t  FILE_HEADER_SIZE    =  sizeof(FileHeader);
+    if ( cbBuf < FILE_HEADER_SIZE ) {
+        return ( ERR_FAILURE );
+    }
+
+    const   unsigned  char  *
+        ptrBuf  =  static_cast<const unsigned char *>(inBuf);
+
+    ::memcpy(fileHead, ptrBuf, sizeof(FileHeader));
+    const   HeaderItem  offsExtHead = fileHead->offsExtHead;
+    const   HeaderItem  sizeExtHead = fileHead->sizeExtHead;
+    if ( (sizeExtHead > 0) && (offsExtHead > 0) ) {
+        ::memset(extHead, 0, sizeof(ExtraHeader));
+        if ( cbBuf < (offsExtHead + sizeExtHead) ) {
+            return ( ERR_FAILURE );
+        }
+        ::memcpy(extHead, ptrBuf + offsExtHead, sizeExtHead);
+    }
+
+    return ( ERR_SUCCESS );
+}
 
 }   //  End of namespace  Common
 SCORE4_CORE_NAMESPACE_END
