@@ -16,6 +16,12 @@
 
 #include    "Score4Core/Common/ScoreDocument.h"
 
+#include    <fcntl.h>
+#include    <stdio.h>
+#include    <sys/stat.h>
+#include    <unistd.h>
+#include    <vector>
+
 SCORE4_CORE_NAMESPACE_BEGIN
 namespace  Common  {
 
@@ -87,7 +93,32 @@ ErrCode
 ScoreDocument::readFromBinaryFile(
         const  std::string  &fileName)
 {
-    return ( ERR_FAILURE );
+    int     fd  =  -1;
+
+    fd  = open(fileName.c_str(), O_RDONLY);
+    if ( fd == -1 ) {
+        return ( ERR_FILE_OPEN_ERROR );
+    }
+
+    struct  stat    stBuf;
+
+    if ( fstat(fd, &stBuf) == -1 ) {
+        close(fd);
+        return ( ERR_FILE_IO_ERROR );
+    }
+
+    const   FileLength  cbFile  = stBuf.st_size;
+    std::vector<unsigned char>  buf(cbFile);
+    if ( read(fd, &(buf[0]), cbFile) != static_cast<ssize_t>(cbFile) )
+    {
+        close(fd);
+        return ( ERR_FILE_IO_ERROR );
+    }
+    close(fd);
+
+    const  ErrCode  retErr  = readFromBinaryBuffer(&(buf[0]), cbFile);
+
+    return ( retErr );
 }
 
 //----------------------------------------------------------------

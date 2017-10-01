@@ -44,7 +44,10 @@ enum  ErrCode
     ERR_FAILURE             = 1,
 
     /**   ファイルオープンエラー。  **/
-    ERR_FILE_OPEN_ERROR     = 2
+    ERR_FILE_OPEN_ERROR     = 2,
+
+    /**   ファイル入出力エラー。    **/
+    ERR_FILE_IO_ERROR       = 3
 };
 
 //----------------------------------------------------------------
