@@ -16,6 +16,8 @@
 
 #include    "Score4Core/Common/DocumentFile.h"
 
+#include    "Score4Core/Common/ScoreDocument.h"
+
 #include    <fcntl.h>
 #include    <memory.h>
 #include    <stdio.h>
@@ -271,6 +273,54 @@ DocumentFile::readRecordBlock(
         ScoreDocument  *    ptrDoc,
         FileLength  *       cbRead)
 {
+    const  LpcByte  ptrBuf  =  static_cast<LpcByte>(inBuf);
+    LpcByte         ptrCur  =  ptrBuf;
+
+    GamesCount  numRecords  = 0;
+    ::memcpy(&numRecords,  ptrCur, sizeof(numRecords));
+    ptrCur  +=  sizeof(numRecords);
+
+    DateSerial  lastGameDate,  lastRecordDate;
+    ::memcpy(&lastGameDate,    ptrCur, sizeof(lastGameDate)  );
+    ptrCur  +=  sizeof(lastGameDate);
+    ::memcpy(&lastRecordDate,  ptrCur, sizeof(lastRecordDate));
+    ptrCur  +=  sizeof(lastRecordDate);
+
+    HeaderItem  fOptimized  =  BOOL_FALSE;
+    ::memcpy(&fOptimized,  ptrCur, sizeof(fOptimized));
+    ptrCur  +=  sizeof(fOptimized);
+
+    ptrCur  +=  (sizeof(HeaderItem) * 12);
+
+    ScoreDocument::GameResult   gameRecord;
+
+    std::ostream  & outLog  =  std::cerr;
+    outLog  <<    "Number of Records = "    <<  numRecords
+            <<  "\nSize of Record    = "    <<  sizeof(gameRecord)
+            <<  "\nLastGameDate      = "    <<  lastGameDate
+            <<  "\nLastRecordDate    = "    <<  lastRecordDate
+            <<  std::endl;
+
+    const   FileLength  RECORD_SIZE     =  28;
+    for ( GamesCount t = 0; t < numRecords; ++ t ) {
+        //::memcpy(&gameRecord,  ptrCur, sizeof(gameRecord));
+        const  unsigned  int  *  const  ptrU32
+            =  pointer_cast<const  unsigned  int  *>(ptrCur);
+        gameRecord.eGameFlags   = static_cast<RecordFlag>(ptrU32[0]);
+        ::memcpy(&(gameRecord.recordDate), ptrU32 + 1, sizeof(DateSerial));
+        gameRecord.visitorTeam  = ptrU32[3];
+        gameRecord.homeTeam     = ptrU32[4];
+        gameRecord.visitorScore = ptrU32[5];
+        gameRecord.homeScore    = ptrU32[6];
+        ptrCur  +=  RECORD_SIZE;
+    }
+
+    (* cbRead)  =  static_cast<FileLength>(ptrCur - ptrBuf);
+
+    outLog  <<  "The Read Size = "  <<  (* cbRead)
+            <<  " Bytes."   <<  std::endl;
+
+
     return ( ERR_SUCCESS );
 }
 

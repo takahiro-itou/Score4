@@ -158,6 +158,23 @@ typedef     const  BtByte  *    LpcByte;
 
 typedef     BtByte  *           LpByte;
 
+//========================================================================
+//
+//    安全なポインタ型のキャスト。
+//
+
+template  <typename  T>
+T  pointer_cast(void  *  p)
+{
+    return ( static_cast<T>(p) );
+}
+
+template  <typename  T>
+T  pointer_cast(const  void  *  p)
+{
+    return ( static_cast<T>(p) );
+}
+
 }   //  End of namespace  Common
 SCORE4_CORE_NAMESPACE_END
 
