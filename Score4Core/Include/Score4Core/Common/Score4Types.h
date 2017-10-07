@@ -140,6 +140,24 @@ typedef     const  void  *      LpcReadBuf;
 
 typedef     void  *             LpWriteBuf;
 
+//----------------------------------------------------------------
+/**
+**    バイト型。
+**/
+
+typedef     unsigned  char      BtByte;
+
+/**
+**    バイト型の読み取り専用バッファ。
+**/
+typedef     const  BtByte  *    LpcByte;
+
+/**
+**    バイト型の読み書き両用バッファ。
+**/
+
+typedef     BtByte  *           LpByte;
+
 }   //  End of namespace  Common
 SCORE4_CORE_NAMESPACE_END
 

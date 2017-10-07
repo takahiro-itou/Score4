@@ -112,8 +112,8 @@ DocumentFile::readFromBinaryBuffer(
             <<  "\nFileHead.SizeExHead = "  <<  fileHead.sizeExtHead
             <<  "\nExtHead.LastImport  = "  <<  extHead.lastImport
             <<  std::endl;
-    const   unsigned  char  *
-        ptrBuf  =  static_cast<const unsigned char *>(inBuf);
+
+    const  LpcByte  ptrBuf  =  static_cast<LpcByte>(inBuf);
 
     FileLength  cbRead  = 0;
     retErr  = readSettingBlock(
@@ -244,8 +244,7 @@ DocumentFile::readFileHeader(
         return ( ERR_FAILURE );
     }
 
-    const   unsigned  char  *
-        ptrBuf  =  static_cast<const unsigned char *>(inBuf);
+    const  LpcByte  ptrBuf  =  static_cast<LpcByte>(inBuf);
 
     ::memcpy(fileHead, ptrBuf, sizeof(FileHeader));
     const   HeaderItem  offsExtHead = fileHead->offsExtHead;
@@ -286,6 +285,81 @@ DocumentFile::readSettingBlock(
         ScoreDocument  *    ptrDoc,
         FileLength  *       cbRead)
 {
+    const  LpcByte  ptrBuf  =  static_cast<LpcByte>(inBuf);
+    LpcByte         ptrCur  =  ptrBuf;
+
+    HeaderItem  blockInfo[8];
+    ::memcpy(blockInfo,  ptrCur, sizeof(blockInfo));
+    ptrCur  +=  sizeof(blockInfo);
+
+    BtByte  dataTitle[152];
+    ::memcpy(dataTitle,  ptrCur, sizeof(dataTitle));
+    ptrCur  +=  sizeof(dataTitle);
+
+    LeagueIndex     numLeagues;
+    TeamIndex       numTeams;
+    ::memcpy(&numLeagues,  ptrCur, sizeof(numLeagues));
+    ptrCur  +=  sizeof(numLeagues);
+    ::memcpy(&numTeams,    ptrCur, sizeof(numTeams)  );
+    ptrCur  +=  sizeof(numTeams);
+
+    std::ostream  & outLog  =  std::cerr;
+    outLog  <<  std::dec    <<  "Setting.BlockInfo:"
+            <<  "\nSetting.BlockInfo[0] = "     <<  blockInfo[0]
+            <<  "\nSetting.BlockInfo[1] = "     <<  blockInfo[1]
+            <<  "\nSetting.BlockInfo[2] = "     <<  blockInfo[2]
+            <<  "\nSetting.BlockInfo[3] = "     <<  blockInfo[3]
+            <<  "\nSetting.BlockInfo[4] = "     <<  blockInfo[4]
+            <<  "\nSetting.BlockInfo[5] = "     <<  blockInfo[5]
+            <<  "\nSetting.BlockInfo[6] = "     <<  blockInfo[6]
+            <<  "\nSetting.BlockInfo[7] = "     <<  blockInfo[7]
+            <<  "\nSetting.NumLeagues   = "     <<  numLeagues
+            <<  "\nSetting.NumTeams     = "     <<  numTeams
+            <<  std::endl;
+
+    for ( LeagueIndex k = 0; k < numLeagues; ++ k ) {
+        BtByte      leagueName[96];
+        HeaderItem  leagueInfo[ 8];
+        ::memcpy(leagueName,  ptrCur, sizeof(leagueName));
+        ptrCur  +=  sizeof(leagueName);
+        ::memcpy(leagueInfo,  ptrCur, sizeof(leagueInfo));
+        ptrCur  +=  sizeof(leagueInfo);
+    }
+
+    const   FileLength  cbTeamInfo  =  blockInfo[0];
+    const   FileLength  cbTeamRsvd  =  blockInfo[1];
+
+    std::vector<HeaderItem>     gameInfo(numTeams * 2);
+    BtByte      teamName[64];
+
+    const   FileLength  cbTeamGame  =  sizeof(HeaderItem) * gameInfo.size();
+    const   FileLength  cbTeamReqs
+        =  sizeof(teamName) + cbTeamGame + sizeof(HeaderItem) * 2;
+    if ( cbTeamReqs != cbTeamInfo ) {
+        outLog  <<  "# ERROR : Size Mismatch. "
+                <<  "Expected = "   <<  cbTeamReqs
+                <<  ", Record = "   <<  cbTeamInfo
+                <<  std::endl;
+        return ( ERR_FAILURE );
+    }
+
+    for ( TeamIndex i = 0; i < numTeams; ++ i ) {
+        HeaderItem  teamInfo[2];
+        ::memcpy(teamName,  ptrCur, sizeof(teamName));
+        ptrCur  +=  sizeof(teamName);
+
+        ::memcpy(teamInfo,  ptrCur, sizeof(teamInfo));
+        ptrCur  +=  sizeof(teamInfo);
+
+        ::memcpy(&(gameInfo[0]),  ptrCur,  cbTeamGame);
+        ptrCur  +=  cbTeamGame;
+        ptrCur  +=  cbTeamRsvd;
+    }
+
+    (* cbRead)  =  static_cast<FileLength>(ptrCur - ptrBuf);
+    outLog  <<  "The Read Size = "  <<  (* cbRead)
+            <<  " Bytes."   <<  std::endl;
+
     return ( ERR_SUCCESS );
 }
 
