@@ -5,6 +5,7 @@
 
 EXTRATESTS              =
 TESTS                   =  \
+        DocumentFileTest        \
         Score4CoreSettingsTest  \
         ScoreDocumentTest       \
         ${EXTRATESTS}
@@ -32,5 +33,6 @@ TEST_LDFLAGS_COMMON         +=
 ##
 
 Score4CoreSettingsTest_SOURCES  =  Score4CoreSettingsTest.cpp
+DocumentFileTest_SOURCES        =  DocumentFileTest.cpp
 ScoreDocumentTest_SOURCES       =  ScoreDocumentTest.cpp
 

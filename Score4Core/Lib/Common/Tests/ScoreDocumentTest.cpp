@@ -35,10 +35,6 @@ class  ScoreDocumentTest : public  TestFixture
 {
     CPPUNIT_TEST_SUITE(ScoreDocumentTest);
     CPPUNIT_TEST(testScoreDocument);
-    CPPUNIT_TEST(testReadFromBinaryBuffer);
-    CPPUNIT_TEST(testReadFromTextStream);
-    CPPUNIT_TEST(testSaveToBinaryBuffer);
-    CPPUNIT_TEST(testSaveToTextStream);
     CPPUNIT_TEST_SUITE_END();
 
 public:
@@ -47,11 +43,6 @@ public:
 
 private:
     void  testScoreDocument();
-
-    void  testReadFromBinaryBuffer();
-    void  testReadFromTextStream();
-    void  testSaveToBinaryBuffer();
-    void  testSaveToTextStream();
 };
 
 CPPUNIT_TEST_SUITE_REGISTRATION( ScoreDocumentTest );
@@ -64,44 +55,6 @@ CPPUNIT_TEST_SUITE_REGISTRATION( ScoreDocumentTest );
 void  ScoreDocumentTest::testScoreDocument()
 {
     ScoreDocument   sd;
-    return;
-}
-
-void  ScoreDocumentTest::testReadFromBinaryBuffer()
-{
-    ScoreDocument   sd;
-    return;
-}
-
-void  ScoreDocumentTest::testReadFromTextStream()
-{
-    ScoreDocument   sd;
-
-    std::ifstream   ifs;
-    CPPUNIT_ASSERT_EQUAL(
-            ERR_SUCCESS,
-            sd.readFromTextStream(ifs)
-    );
-
-    return;
-}
-
-void  ScoreDocumentTest::testSaveToBinaryBuffer()
-{
-    ScoreDocument   sd;
-    return;
-}
-
-void  ScoreDocumentTest::testSaveToTextStream()
-{
-    ScoreDocument   sd;
-
-    std::stringstream   ss;
-    CPPUNIT_ASSERT_EQUAL(
-            ERR_SUCCESS,
-            sd.saveToTextStream(ss)
-    );
-
     return;
 }
 
