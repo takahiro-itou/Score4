@@ -74,6 +74,11 @@ DocumentFile::~DocumentFile()
 //    Public Member Functions (Virtual Functions).
 //
 
+//========================================================================
+//
+//    Public Member Functions.
+//
+
 //----------------------------------------------------------------
 //    データをバイナリバッファから読み込む。
 //
@@ -81,7 +86,8 @@ DocumentFile::~DocumentFile()
 ErrCode
 DocumentFile::readFromBinaryBuffer(
         const   LpcReadBuf  inBuf,
-        const   FileLength  cbBuf)
+        const   FileLength  cbBuf,
+        ScoreDocument  *    ptrDoc)
 {
     ErrCode         retErr;
     FileHeader      fileHead;
@@ -101,7 +107,8 @@ DocumentFile::readFromBinaryBuffer(
 
 ErrCode
 DocumentFile::readFromBinaryFile(
-        const  std::string  &fileName)
+        const  std::string  &fileName,
+        ScoreDocument  *    ptrDoc)
 {
     int     fd  =  -1;
 
@@ -126,7 +133,8 @@ DocumentFile::readFromBinaryFile(
     }
     close(fd);
 
-    const  ErrCode  retErr  = readFromBinaryBuffer(&(buf[0]), cbFile);
+    const  ErrCode
+        retErr  = readFromBinaryBuffer(&(buf[0]), cbFile, ptrDoc);
 
     return ( retErr );
 }
@@ -137,7 +145,8 @@ DocumentFile::readFromBinaryFile(
 
 ErrCode
 DocumentFile::readFromTextStream(
-        std::istream  & inStr)
+        std::istream     &  inStr,
+        ScoreDocument  *    ptrDoc)
 {
     return ( ERR_FAILURE );
 }
@@ -148,8 +157,9 @@ DocumentFile::readFromTextStream(
 
 ErrCode
 DocumentFile::saveToBinaryBuffer(
-        LpWriteBuf  const   outBuf,
-        const   FileLength  cbBuf)
+        const  ScoreDocument  & objDoc,
+        LpWriteBuf  const       outBuf,
+        const   FileLength      cbBuf)
 {
     return ( ERR_FAILURE );
 }
@@ -160,7 +170,8 @@ DocumentFile::saveToBinaryBuffer(
 
 ErrCode
 DocumentFile::saveToBinaryFile(
-        const  std::string  &fileName)
+        const  ScoreDocument  & objDoc,
+        const  std::string    & fileName)
 {
     return ( ERR_FAILURE );
 }
@@ -171,15 +182,11 @@ DocumentFile::saveToBinaryFile(
 
 ErrCode
 DocumentFile::saveToTextStream(
-        std::ostream  & outStr)
+        const  ScoreDocument  & objDoc,
+        std::ostream          & outStr)
 {
     return ( ERR_FAILURE );
 }
-
-//========================================================================
-//
-//    Public Member Functions.
-//
 
 //========================================================================
 //

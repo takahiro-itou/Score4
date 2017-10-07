@@ -17,6 +17,8 @@
 #include    "TestDriver.h"
 #include    "Score4Core/Common/DocumentFile.h"
 
+#include    "Score4Core/Common/ScoreDocument.h"
+
 #include    <fstream>
 #include    <sstream>
 
@@ -76,11 +78,12 @@ void  DocumentFileTest::testReadFromBinaryBuffer()
 void  DocumentFileTest::testReadFromTextStream()
 {
     DocumentFile    docFile;
+    ScoreDocument   objDoc;
 
     std::ifstream   ifs;
     CPPUNIT_ASSERT_EQUAL(
             ERR_SUCCESS,
-            docFile.readFromTextStream(ifs)
+            docFile.readFromTextStream(ifs, &objDoc)
     );
 
     return;
@@ -95,11 +98,12 @@ void  DocumentFileTest::testSaveToBinaryBuffer()
 void  DocumentFileTest::testSaveToTextStream()
 {
     DocumentFile    docFile;
+    ScoreDocument   objDoc;
 
     std::stringstream   ss;
     CPPUNIT_ASSERT_EQUAL(
             ERR_SUCCESS,
-            docFile.saveToTextStream(ss)
+            docFile.saveToTextStream(objDoc, ss)
     );
 
     return;

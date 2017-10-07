@@ -15,7 +15,9 @@
 **/
 
 #include    "Score4Core/Common/Score4CoreSettings.h"
+
 #include    "Score4Core/Common/DocumentFile.h"
+#include    "Score4Core/Common/ScoreDocument.h"
 
 #include    <iostream>
 
@@ -28,8 +30,9 @@ int  main(int argc, char * argv[])
     }
 
     Common::DocumentFile    docFile;
+    Common::ScoreDocument   objDoc;
     Common::ErrCode         retErr;
-    retErr  = docFile.readFromBinaryFile(argv[1]);
+    retErr  = docFile.readFromBinaryFile(argv[1], &objDoc);
     if ( retErr != Common::ERR_SUCCESS )
     {
         return ( retErr );

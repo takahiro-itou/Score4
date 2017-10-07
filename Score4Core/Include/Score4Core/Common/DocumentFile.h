@@ -25,6 +25,9 @@
 SCORE4_CORE_NAMESPACE_BEGIN
 namespace  Common  {
 
+//  クラスの前方宣言。  //
+class   ScoreDocument;
+
 //========================================================================
 //
 //    DocumentFile  class.
@@ -72,40 +75,50 @@ public:
 //
 //    Public Member Functions (Virtual Functions).
 //
+
+//========================================================================
+//
+//    Public Member Functions.
+//
 public:
 
     //----------------------------------------------------------------
     /**   データをバイナリバッファから読み込む。
     **
-    **  @param [in] inBuf   バッファのアドレス。
-    **  @param [in] cbBuf   バッファのバイト数。
+    **  @param [in] inBuf    バッファのアドレス。
+    **  @param [in] cbBuf    バッファのバイト数。
+    **  @param[out] ptrDoc   ドキュメントを格納する変数。
     **  @return     エラーコードを返す。
     **      -   異常終了の場合は、
     **          エラーの種類を示す非ゼロ値を返す。
     **      -   正常終了の場合は、ゼロを返す。
     **/
-    virtual  ErrCode
+    static  ErrCode
     readFromBinaryBuffer(
             const   LpcReadBuf  inBuf,
-            const   FileLength  cbBuf);
+            const   FileLength  cbBuf,
+            ScoreDocument  *    ptrDoc);
 
     //----------------------------------------------------------------
     /**   データをバイナリファイルから読み込む。
     **
     **  @param [in] fileName    ファイル名。
+    **  @param[out] ptrDoc      ドキュメントを格納する変数。
     **  @return     エラーコードを返す。
     **      -   異常終了の場合は、
     **          エラーの種類を示す非ゼロ値を返す。
     **      -   正常終了の場合は、ゼロを返す。
     **/
-    virtual  ErrCode
+    static  ErrCode
     readFromBinaryFile(
-            const  std::string  &fileName);
+            const  std::string  &fileName,
+            ScoreDocument  *    ptrDoc);
 
     //----------------------------------------------------------------
     /**   データをテキストストリームから読み込む。
     **
-    **  @param [in,out] inStr   入力ストリーム。
+    **  @param [in,out] inStr     入力ストリーム。
+    **  @param    [out] ptrDoc    ドキュメントを格納する変数。
     **  @return     エラーコードを返す。
     **      -   異常終了の場合は、
     **          エラーの種類を示す非ゼロ値を返す。
@@ -113,11 +126,13 @@ public:
     **/
     virtual  ErrCode
     readFromTextStream(
-            std::istream  & inStr);
+            std::istream     &  inStr,
+            ScoreDocument  *    ptrDoc);
 
     //----------------------------------------------------------------
     /**   データをバイナリバッファに書き込む。
     **
+    **  @param [in] objDoc    ドキュメント。
     **  @param[out] outBuf    バッファのアドレス。
     **  @param [in] cbBuf     バッファのバイト数。
     **  @return     エラーコードを返す。
@@ -125,14 +140,16 @@ public:
     **          エラーの種類を示す非ゼロ値を返す。
     **      -   正常終了の場合は、ゼロを返す。
     **/
-    virtual  ErrCode
+    static  ErrCode
     saveToBinaryBuffer(
-            LpWriteBuf  const   outBuf,
-            const   FileLength  cbBuf);
+            const  ScoreDocument  & objDoc,
+            LpWriteBuf  const       outBuf,
+            const   FileLength      cbBuf);
 
     //----------------------------------------------------------------
     /**   データをバイナリファイルに書き込む。
     **
+    **  @param [in] objDoc      ドキュメント。
     **  @param [in] fileName    ファイル名。
     **  @return     エラーコードを返す。
     **      -   異常終了の場合は、
@@ -141,10 +158,13 @@ public:
     **/
     virtual  ErrCode
     saveToBinaryFile(
-            const  std::string  &fileName);
+            const  ScoreDocument  & objDoc,
+            const  std::string    & fileName);
+
     //----------------------------------------------------------------
     /**   データをテキストストリームに書き込む.
     **
+    **  @param [in] objDoc    ドキュメント。
     **  @param[out] outStr    出力ストリーム。
     **  @return     エラーコードを返す。
     **      -   異常終了の場合は、
@@ -153,12 +173,8 @@ public:
     **/
     virtual  ErrCode
     saveToTextStream(
-            std::ostream  & outStr);
-
-//========================================================================
-//
-//    Public Member Functions.
-//
+            const  ScoreDocument  & objDoc,
+            std::ostream          & outStr);
 
 //========================================================================
 //
@@ -204,9 +220,10 @@ private:
     //----------------------------------------------------------------
     /**   ファイルヘッダを読み込む。
     **
-    **  @param [in] inBuf
-    **  @param [in] inBuf   バッファのアドレス。
-    **  @param [in] cbBuf   バッファのバイト数。
+    **  @param [in] inBuf       バッファのアドレス。
+    **  @param [in] cbBuf       バッファのバイト数。
+    **  @param[out] fileHead    標準ヘッダを格納する変数。
+    **  @param[out] extHead     拡張ヘッダを格納する変数。
     **  @return     エラーコードを返す。
     **      -   異常終了の場合は、
     **          エラーの種類を示す非ゼロ値を返す。
