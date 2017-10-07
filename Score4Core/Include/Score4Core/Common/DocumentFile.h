@@ -124,7 +124,7 @@ public:
     **          エラーの種類を示す非ゼロ値を返す。
     **      -   正常終了の場合は、ゼロを返す。
     **/
-    virtual  ErrCode
+    static  ErrCode
     readFromTextStream(
             std::istream     &  inStr,
             ScoreDocument  *    ptrDoc);
@@ -156,7 +156,7 @@ public:
     **          エラーの種類を示す非ゼロ値を返す。
     **      -   正常終了の場合は、ゼロを返す。
     **/
-    virtual  ErrCode
+    static  ErrCode
     saveToBinaryFile(
             const  ScoreDocument  & objDoc,
             const  std::string    & fileName);
@@ -171,7 +171,7 @@ public:
     **          エラーの種類を示す非ゼロ値を返す。
     **      -   正常終了の場合は、ゼロを返す。
     **/
-    virtual  ErrCode
+    static  ErrCode
     saveToTextStream(
             const  ScoreDocument  & objDoc,
             std::ostream          & outStr);
@@ -235,6 +235,36 @@ private:
             const   FileLength      cbBuf,
             FileHeader   *  const   fileHead,
             ExtraHeader  *  const   extHead);
+
+    //----------------------------------------------------------------
+    /**   レコードブロックを読み込む。
+    **
+    **  @param [in] inBuf     バッファのアドレス。
+    **  @param [in] cbBuf     バッファのバイト数。
+    **  @param[out] ptrDoc    ドキュメントを格納する変数。
+    **  @param[out] cbRead    読み込んだバイト数。
+    **/
+    static  ErrCode
+    readRecordBlock(
+            const   LpcReadBuf  inBuf,
+            const   FileLength  cbBuf,
+            ScoreDocument  *    ptrDoc,
+            FileLength  *       cbRead);
+
+    //----------------------------------------------------------------
+    /**   設定ブロックを読み込む。
+    **
+    **  @param [in] inBuf     バッファのアドレス。
+    **  @param [in] cbBuf     バッファのバイト数。
+    **  @param[out] ptrDoc    ドキュメントを格納する変数。
+    **  @param[out] cbRead    読み込んだバイト数。
+    **/
+    static  ErrCode
+    readSettingBlock(
+            const   LpcReadBuf  inBuf,
+            const   FileLength  cbBuf,
+            ScoreDocument  *    ptrDoc,
+            FileLength  *       cbRead);
 
 //========================================================================
 //

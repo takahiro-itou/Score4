@@ -23,6 +23,8 @@
 #include    <unistd.h>
 #include    <vector>
 
+#include    <iostream>
+
 SCORE4_CORE_NAMESPACE_BEGIN
 namespace  Common  {
 
@@ -98,6 +100,34 @@ DocumentFile::readFromBinaryBuffer(
         return ( retErr );
     }
 
+    std::ostream  & outLog  =  std::cerr;
+    outLog  <<  std::hex
+            <<    "FileHead.Sigunature = "  <<  fileHead.fSignature
+            <<  "\nFileHead.Version    = "  <<  fileHead.fVersion
+            <<  "\nFileHead.HeaderID   = "  <<  fileHead.headerID
+            <<  "\nFileHead.HeaderGame = "  <<  fileHead.headerGame
+            <<  "\nFileHead.HeaderSize = "  <<  fileHead.headerSize
+            <<  "\nFileHead.OffsRecord = "  <<  fileHead.offsRecord
+            <<  "\nFileHead.OffsExHead = "  <<  fileHead.offsExtHead
+            <<  "\nFileHead.SizeExHead = "  <<  fileHead.sizeExtHead
+            <<  "\nExtHead.LastImport  = "  <<  extHead.lastImport
+            <<  std::endl;
+    const   unsigned  char  *
+        ptrBuf  =  static_cast<const unsigned char *>(inBuf);
+
+    FileLength  cbRead  = 0;
+    retErr  = readSettingBlock(
+                    ptrBuf + fileHead.offsRecord,
+                    cbBuf  - fileHead.offsRecord,
+                    ptrDoc,  &cbRead);
+    if ( retErr != ERR_SUCCESS ) {
+        return ( retErr );
+    }
+
+    retErr  = readRecordBlock(
+                    ptrBuf + fileHead.offsRecord + cbRead,
+                    cbBuf  - fileHead.offsRecord - cbRead,
+                    ptrDoc,  &cbRead);
     return ( ERR_FAILURE );
 }
 
@@ -228,6 +258,34 @@ DocumentFile::readFileHeader(
         ::memcpy(extHead, ptrBuf + offsExtHead, sizeExtHead);
     }
 
+    return ( ERR_SUCCESS );
+}
+
+//----------------------------------------------------------------
+//    レコードブロックを読み込む。
+//
+
+ErrCode
+DocumentFile::readRecordBlock(
+        const   LpcReadBuf  inBuf,
+        const   FileLength  cbBuf,
+        ScoreDocument  *    ptrDoc,
+        FileLength  *       cbRead)
+{
+    return ( ERR_SUCCESS );
+}
+
+//----------------------------------------------------------------
+//    設定ブロックを読み込む。
+//
+
+ErrCode
+DocumentFile::readSettingBlock(
+        const   LpcReadBuf  inBuf,
+        const   FileLength  cbBuf,
+        ScoreDocument  *    ptrDoc,
+        FileLength  *       cbRead)
+{
     return ( ERR_SUCCESS );
 }
 
