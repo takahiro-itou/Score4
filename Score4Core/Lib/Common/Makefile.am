@@ -22,6 +22,7 @@ EXTRA_NOINST_DATA_FILES     =
 EXTRA_NOINST_HEADER_FILES   =
 
 LIBRARY_SOURCE_FILES        =  \
+        DocumentFile.cpp               \
         ScoreDocument.cpp              \
         ${EXTRA_LIBRARY_SOURCE_FILES}
 
@@ -36,6 +37,7 @@ DIST_NOINST_HEADER_FILES    =  \
         ${EXTRA_NOINST_HEADER_FILES}
 
 INCLIB_HEADER_FILES         =  \
+        ${INCLIB_SOURCE_DIR}/DocumentFile.h        \
         ${INCLIB_SOURCE_DIR}/Score4CoreSettings.h  \
         ${INCLIB_SOURCE_DIR}/Score4Types.h         \
         ${INCLIB_SOURCE_DIR}/ScoreDocument.h       \
