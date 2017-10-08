@@ -210,7 +210,39 @@ DocumentFile::saveToTextStream(
         const  ScoreDocument  & objDoc,
         std::ostream          & outStr)
 {
-    return ( ERR_FAILURE );
+    const  LeagueIndex  numLeagues  =  objDoc.getNumLeagues();
+    const  TeamIndex    numTeams    =  objDoc.getNumTeams();
+
+    outStr  <<  "# Settings";
+    for ( LeagueIndex k = 0; k < numLeagues; ++ k ) {
+        const   ScoreDocument::LeagueInfo   &
+            leagueInfo  =  objDoc.getLeagueInfo(k);
+
+        outStr  <<  "\nLeague,"   <<  k     <<  ','
+                <<  leagueInfo.leagueName   <<  ','
+                <<  leagueInfo.numPlayOff;
+    }
+
+    for ( TeamIndex i = 0; i < numTeams; ++ i ) {
+        const   ScoreDocument::TeamInfo
+            & teamInfo  =  objDoc.getTeamInfo(i);
+
+        outStr  <<  "\nTeam,"   <<  i   <<  ','
+                <<  teamInfo.leagueID   <<  ','
+                <<  teamInfo.teamName;
+        for ( Common::TeamIndex j = 0; j < numTeams; ++ j ) {
+            outStr  <<  ','
+                    <<  objDoc.getGameCount(i, j, Common::FILTER_HOME_GAMES);
+        }
+    }
+    outStr  <<  std::endl;
+
+    outStr  <<  "# Records.\n"
+            <<  "Date,HomeTeam,Score,VisitorTeam,Status,";
+
+    outStr  <<  std::endl;
+
+    return ( ERR_SUCCESS );
 }
 
 //========================================================================

@@ -33,55 +33,14 @@ int  main(int argc, char * argv[])
     Common::ScoreDocument   objDoc;
     Common::ErrCode         retErr;
     retErr  = docFile.readFromBinaryFile(argv[1], &objDoc);
-    if ( retErr != Common::ERR_SUCCESS )
-    {
+    if ( retErr != Common::ERR_SUCCESS ) {
         return ( retErr );
     }
 
-    const  Common::LeagueIndex  numLeagues  =  objDoc.getNumLeagues();
-    const  Common::TeamIndex    numTeams    =  objDoc.getNumTeams();
-
-    std::ostream  & outLog  =  std::cout;
-
-    outLog  <<  "League Informations:"
-            <<  "\nNumber of Leagues  = "   <<  (numLeagues);
-    for ( Common::LeagueIndex k = 0; k < numLeagues; ++ k ) {
-        const   Common::ScoreDocument::LeagueInfo   &
-            leagueInfo  =  objDoc.getLeagueInfo(k);
-
-        outLog  <<  "\nLeague ["    <<  k
-                <<  "] Name    = "  <<  leagueInfo.leagueName
-                <<  "\nLeague ["    <<  k
-                <<  "] Playoff = "  <<  leagueInfo.numPlayOff;
+    retErr  = docFile.saveToTextStream(objDoc, std::cout);
+    if ( retErr != Common::ERR_SUCCESS ) {
+        return ( retErr );
     }
-    outLog  <<  std::endl;
-
-    outLog  <<  "Team Informations:"
-            <<  "\nNumber of Teams    = "   <<  (numTeams);
-    outLog.flush();
-
-    for ( Common::TeamIndex i = 0; i < numTeams; ++ i ) {
-        const   Common::ScoreDocument::TeamInfo  &
-            teamInfo    =  objDoc.getTeamInfo(i);
-
-        outLog  <<  "\nTeam ["      <<  i
-                <<  "] Name    = "  <<  teamInfo.teamName
-                <<  "\nTeam ["      <<  i
-                <<  "] LeagueID = " <<  teamInfo.leagueID
-                <<  "\t"
-                <<  objDoc.getLeagueInfo(teamInfo.leagueID).leagueName
-                <<  "\nGames    = ";
-        for ( Common::TeamIndex j = 0; j < numTeams; ++ j ) {
-            outLog  <<  objDoc.getGameCount(i, j, Common::FILTER_HOME_GAMES)
-                    <<  "+"
-                    <<  objDoc.getGameCount(i, j, Common::FILTER_AWAY_GAMES)
-                    <<  "="
-                    <<  objDoc.getGameCount(i, j, Common::FILTER_ALL_GAMES)
-                    <<  ",";
-        }
-    }
-
-    outLog  <<  std::endl;
 
     return ( 0 );
 }
