@@ -264,6 +264,16 @@ public:
             const   GamesCount  gameCount);
 
     //----------------------------------------------------------------
+    /**   ゲームレコードを取得する。
+    **
+    **  @param [in] idxRecord   レコード番号。
+    **  @return     ゲームレコードの内容を返す。
+    **/
+    const   GameResult  &
+    getGameRecord(
+            const  RecordIndex  idxRecord)  const;
+
+    //----------------------------------------------------------------
     /**   登録されているリーグの情報を取得する。
     **
     **  @param [in] idxLeague   リーグ番号。
@@ -295,6 +305,14 @@ public:
     **/
     LeagueIndex
     getNumLeagues()  const;
+
+    //----------------------------------------------------------------
+    /**   記録されているゲームレコード数を取得する。
+    **
+    **  @return     ゲームレコードの数を返す。
+    **/
+    RecordIndex
+    getNumRecords()  const;
 
     //----------------------------------------------------------------
     /**   登録されているチーム数を取得する。
@@ -384,6 +402,7 @@ private:
 
     typedef     std::vector<LeagueInfo>     LeagueInfoList;
     typedef     std::vector<TeamInfo>       TeamInfoList;
+    typedef     std::vector<GameResult>     GameResultList;
 
 private:
 
@@ -393,6 +412,8 @@ private:
     /**   チーム情報。  **/
     TeamInfoList        m_teamInfos;
 
+    /**   ゲームレコード。  **/
+    GameResultList      m_gameResults;
 
 //========================================================================
 //

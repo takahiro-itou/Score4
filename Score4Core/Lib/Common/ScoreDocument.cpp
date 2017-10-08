@@ -217,6 +217,17 @@ ScoreDocument::setGameCount(
 }
 
 //----------------------------------------------------------------
+//    ゲームレコードを取得する。
+//
+
+const   ScoreDocument::GameResult  &
+ScoreDocument::getGameRecord(
+        const  RecordIndex  idxRecord)  const
+{
+    return ( this->m_gameResults.at(idxRecord) );
+}
+
+//----------------------------------------------------------------
 //    登録されているリーグの情報を取得する。
 //
 
@@ -252,6 +263,16 @@ LeagueIndex
 ScoreDocument::getNumLeagues()  const
 {
     return ( this->m_leagueInfos.size() );
+}
+
+//----------------------------------------------------------------
+//    記録されているゲームレコード数を取得する。
+//
+
+RecordIndex
+ScoreDocument::getNumRecords()  const
+{
+    return ( this->m_gameResults.size() );
 }
 
 //----------------------------------------------------------------

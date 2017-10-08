@@ -135,6 +135,11 @@ typedef     int                 LeagueIndex;
 
 typedef     int                 GamesCount;
 
+/**
+**    ゲームレコードのインデックス。
+**/
+typedef     GamesCount          RecordIndex;
+
 //----------------------------------------------------------------
 /**
 **    スコア（点数）の型。
