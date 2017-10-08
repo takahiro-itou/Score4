@@ -102,19 +102,6 @@ DocumentFile::readFromBinaryBuffer(
         return ( retErr );
     }
 
-    std::ostream  & outLog  =  std::cerr;
-    outLog  <<  std::hex
-            <<    "FileHead.Sigunature = "  <<  fileHead.fSignature
-            <<  "\nFileHead.Version    = "  <<  fileHead.fVersion
-            <<  "\nFileHead.HeaderID   = "  <<  fileHead.headerID
-            <<  "\nFileHead.HeaderGame = "  <<  fileHead.headerGame
-            <<  "\nFileHead.HeaderSize = "  <<  fileHead.headerSize
-            <<  "\nFileHead.OffsRecord = "  <<  fileHead.offsRecord
-            <<  "\nFileHead.OffsExHead = "  <<  fileHead.offsExtHead
-            <<  "\nFileHead.SizeExHead = "  <<  fileHead.sizeExtHead
-            <<  "\nExtHead.LastImport  = "  <<  extHead.lastImport
-            <<  std::endl;
-
     ptrDoc->clearDocument();
 
     const  LpcByte  ptrBuf  =  static_cast<LpcByte>(inBuf);
@@ -300,13 +287,6 @@ DocumentFile::readRecordBlock(
 
     ScoreDocument::GameResult   gameRecord;
 
-    std::ostream  & outLog  =  std::cerr;
-    outLog  <<    "Number of Records = "    <<  numRecords
-            <<  "\nSize of Record    = "    <<  sizeof(gameRecord)
-            <<  "\nLastGameDate      = "    <<  lastGameDate
-            <<  "\nLastRecordDate    = "    <<  lastRecordDate
-            <<  std::endl;
-
     const   FileLength  RECORD_SIZE     =  28;
     for ( GamesCount t = 0; t < numRecords; ++ t ) {
         //::memcpy(&gameRecord,  ptrCur, sizeof(gameRecord));
@@ -322,11 +302,6 @@ DocumentFile::readRecordBlock(
     }
 
     (* cbRead)  =  static_cast<FileLength>(ptrCur - ptrBuf);
-
-    outLog  <<  "The Read Size = "  <<  (* cbRead)
-            <<  " Bytes."   <<  std::endl;
-
-
     return ( ERR_SUCCESS );
 }
 
