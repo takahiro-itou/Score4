@@ -43,7 +43,8 @@ namespace  Common  {
 
 ScoreDocument::ScoreDocument()
     : m_leagueInfos(),
-      m_teamInfos  ()
+      m_teamInfos  (),
+      m_gameResults()
 {
 }
 
@@ -75,6 +76,18 @@ ScoreDocument::~ScoreDocument()
 //
 //    Public Member Functions (Virtual Functions).
 //
+
+//----------------------------------------------------------------
+//    ゲームレコードを追加登録する。
+//
+
+ErrCode
+ScoreDocument::appendGameRecord(
+        const   GameResult  &gameRecord)
+{
+    this->m_gameResults.push_back(gameRecord);
+    return ( ERR_SUCCESS );
+}
 
 //----------------------------------------------------------------
 //    リーグ情報を追加登録する。
