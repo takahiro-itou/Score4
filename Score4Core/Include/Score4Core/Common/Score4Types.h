@@ -47,7 +47,10 @@ enum  ErrCode
     ERR_FILE_OPEN_ERROR     = 2,
 
     /**   ファイル入出力エラー。    **/
-    ERR_FILE_IO_ERROR       = 3
+    ERR_FILE_IO_ERROR       = 3,
+
+    /**   無効なインデックス指定。  **/
+    ERR_INDEX_OUT_OF_RANGE  = 4
 };
 
 //----------------------------------------------------------------
@@ -90,41 +93,41 @@ enum  RecordFlag
 **    日付型。
 **/
 
-typedef     double          DateSerial;
+typedef     double              DateSerial;
 
 //----------------------------------------------------------------
 /**
 **    チーム番号。
 **/
 
-typedef     int             TeamIndex;
+typedef     int                 TeamIndex;
 
 //----------------------------------------------------------------
 /**   リーグ番号。
 **/
 
-typedef     int             LeagueIndex;
+typedef     int                 LeagueIndex;
 
 //----------------------------------------------------------------
 /**
 **    ゲーム数、勝数、負数などを表す型。
 **/
 
-typedef     int             GamesCount;
+typedef     int                 GamesCount;
 
 //----------------------------------------------------------------
 /**
 **    スコア（点数）の型。
 **/
 
-typedef     int             ScoreValue;
+typedef     int                 ScoreValue;
 
 //----------------------------------------------------------------
 /**
 **    ファイルの長さを表す型。
 **/
 
-typedef     size_t          FileLength;
+typedef     size_t              FileLength;
 
 //----------------------------------------------------------------
 /**

@@ -21,6 +21,7 @@
 
 #include    <iosfwd>
 #include    <string>
+#include    <vector>
 
 SCORE4_CORE_NAMESPACE_BEGIN
 namespace  Common  {
@@ -39,6 +40,33 @@ class  ScoreDocument
 //
 public:
 
+    typedef     std::vector<GamesCount>     GameCountTable;
+
+    /**
+    **    リーグ情報。
+    **/
+    struct  LeagueInfo
+    {
+        /**   リーグ名。    **/
+        std::string     leagueName;
+
+        /**   プレーオフに進出できるチーム数。  **/
+        TeamIndex       numPlayOff;
+    };
+
+    /**
+    **   　チーム情報。
+    **/
+    struct  TeamInfo
+    {
+        LeagueIndex     leagueID;       /**<  所属リーグ。      **/
+        std::string     teamName;       /**<  チーム名。        **/
+        GameCountTable  gameCounts;     /**<  試合数のリスト。  **/
+    };
+
+    /**
+    **    ゲーム結果のレコード。
+    **/
     struct  GameResult
     {
         RecordFlag      eGameFlags;
@@ -88,11 +116,75 @@ public:
 //
 //    Public Member Functions (Virtual Functions).
 //
+public:
+
+    //----------------------------------------------------------------
+    /**   リーグ情報を追加登録する。
+    **
+    **  @return     エラーコードを返す。
+    **      -   異常終了の場合は、
+    **          エラーの種類を示す非ゼロ値を返す。
+    **      -   正常終了の場合は、ゼロを返す。
+    **  @param [in] leagueInfo    追加するリーグの情報。
+    **/
+    virtual  ErrCode
+    appendLeagueInfo(
+            const   LeagueInfo  &leagueInfo);
+
+    //----------------------------------------------------------------
+    /**   ドキュメントの内容をクリアする。
+    **
+    **  @return     エラーコードを返す。
+    **      -   異常終了の場合は、
+    **          エラーの種類を示す非ゼロ値を返す。
+    **      -   正常終了の場合は、ゼロを返す。
+    **/
+    virtual  ErrCode
+    clearDocument();
 
 //========================================================================
 //
 //    Public Member Functions.
 //
+
+//========================================================================
+//
+//    Accessors.
+//
+public:
+
+    //----------------------------------------------------------------
+    /**   登録されているリーグの情報を取得する。
+    **
+    **  @param [in] idxLeague   リーグ番号。
+    **  @return     リーグの情報を返す。
+    **/
+    const   LeagueInfo  &
+    getLeagueInfo(
+            const  LeagueIndex  idxLeague)  const;
+
+    //----------------------------------------------------------------
+    /**   登録されているリーグの情報を更新する。
+    **
+    **  @param [in] idxLeague     リーグ番号。
+    **  @param [in] leagueInfo    リーグ情報。
+    **  @return     エラーコードを返す。
+    **      -   異常終了の場合は、
+    **          エラーの種類を示す非ゼロ値を返す。
+    **      -   正常終了の場合は、ゼロを返す。
+    **/
+    ErrCode
+    setLeagueInfo(
+            const  LeagueIndex  idxLeague,
+            const  LeagueInfo   &leagueInfo);
+
+    //----------------------------------------------------------------
+    /**   登録されているリーグ数を取得する。
+    **
+    **  @return     リーグの数を返す。
+    **/
+    LeagueIndex
+    getNumLeagues()  const;
 
 //========================================================================
 //
@@ -108,6 +200,19 @@ public:
 //
 //    Member Variables.
 //
+private:
+
+    typedef     std::vector<LeagueInfo>     LeagueInfoList;
+    typedef     std::vector<TeamInfo>       TeamInfoList;
+
+private:
+
+    /**   リーグ情報。  **/
+    LeagueInfoList      m_leagueInfos;
+
+    /**   チーム情報。  **/
+    TeamInfoList        m_teamInfos;
+
 
 //========================================================================
 //

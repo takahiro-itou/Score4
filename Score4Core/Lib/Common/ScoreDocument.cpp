@@ -42,6 +42,8 @@ namespace  Common  {
 //
 
 ScoreDocument::ScoreDocument()
+    : m_leagueInfos(),
+      m_teamInfos  ()
 {
 }
 
@@ -74,10 +76,74 @@ ScoreDocument::~ScoreDocument()
 //    Public Member Functions (Virtual Functions).
 //
 
+//----------------------------------------------------------------
+//    リーグ情報を追加登録する。
+//
+
+ErrCode
+ScoreDocument::appendLeagueInfo(
+        const   LeagueInfo  &leagueInfo)
+{
+    return ( ERR_FAILURE );
+}
+
+//----------------------------------------------------------------
+//    ドキュメントの内容をクリアする。
+//
+
+ErrCode
+ScoreDocument::clearDocument()
+{
+    return ( ERR_FAILURE );
+}
+
 //========================================================================
 //
 //    Public Member Functions.
 //
+
+//========================================================================
+//
+//    Accessors.
+//
+
+//----------------------------------------------------------------
+//    登録されているリーグの情報を取得する。
+//
+
+const   ScoreDocument::LeagueInfo  &
+ScoreDocument::getLeagueInfo(
+        const  LeagueIndex  idxLeague)  const
+{
+    return ( this->m_leagueInfos.at(idxLeague) );
+}
+
+//----------------------------------------------------------------
+//    登録されているリーグの情報を更新する。
+//
+
+ErrCode
+ScoreDocument::setLeagueInfo(
+        const  LeagueIndex  idxLeague,
+        const  LeagueInfo   &leagueInfo)
+{
+    if ( (idxLeague < 0) || (getNumLeagues() <= idxLeague) )
+    {
+        return ( ERR_INDEX_OUT_OF_RANGE );
+    }
+    this->m_leagueInfos.at(idxLeague)   = leagueInfo;
+    return ( ERR_SUCCESS );
+}
+
+//----------------------------------------------------------------
+//    登録されているリーグ数を取得する。
+//
+
+LeagueIndex
+ScoreDocument::getNumLeagues()  const
+{
+    return ( this->m_leagueInfos.size() );
+}
 
 //========================================================================
 //
