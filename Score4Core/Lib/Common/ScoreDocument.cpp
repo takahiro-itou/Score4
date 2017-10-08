@@ -101,6 +101,21 @@ ScoreDocument::appendTeamInfo(
 }
 
 //----------------------------------------------------------------
+//    チーム情報を追加登録する。
+//
+
+ErrCode
+ScoreDocument::appendTeamInfo(
+        const  LeagueIndex  leagueID,
+        const  std::string  &teamName)
+{
+    TeamInfo    tmpInfo = { leagueID, teamName };
+
+    this->m_teamInfos.push_back(tmpInfo);
+    return ( ERR_SUCCESS );
+}
+
+//----------------------------------------------------------------
 //    ドキュメントの内容をクリアする。
 //
 
@@ -122,6 +137,46 @@ ScoreDocument::clearDocument()
 //
 //    Accessors.
 //
+
+//----------------------------------------------------------------
+//    対戦カード毎の試合数を取得する。
+//
+
+GamesCount
+ScoreDocument::getGameCount(
+        const   TeamIndex   srcTeam,
+        const   TeamIndex   trgTeam,
+        const   int         flagGame)  const
+{
+    return ( this->m_teamInfos.at(srcTeam).gameCounts[flagGame][trgTeam] );
+}
+
+//----------------------------------------------------------------
+//    対戦カード毎の試合数を取得する。
+//
+
+GamesCount
+ScoreDocument::getGameCount(
+        const   TeamIndex   homeTeam,
+        const   TeamIndex   visitorTeam)  const
+{
+    return ( this->m_teamInfos.at(homeTeam).gameCounts[0][visitorTeam] );
+}
+
+//----------------------------------------------------------------
+//    対戦カード毎の試合数を設定する。
+//
+
+ErrCode
+ScoreDocument::setGameCount(
+        const   TeamIndex   homeTeam,
+        const   TeamIndex   visitorTeam,
+        const   GamesCount  gameCount)
+{
+    this->m_teamInfos.at(homeTeam).gameCounts[0][visitorTeam]   = gameCount;
+    this->m_teamInfos.at(visitorTeam).gameCounts[1][homeTeam]   = gameCount;
+    return ( ERR_SUCCESS );
+}
 
 //----------------------------------------------------------------
 //    登録されているリーグの情報を取得する。
@@ -207,6 +262,27 @@ ScoreDocument::setTeamInfo(
 //
 //    For Internal Use Only.
 //
+
+//----------------------------------------------------------------
+//    対戦カード毎の試合数を設定する。
+//
+
+ErrCode
+ScoreDocument::setGameCount(
+        const   TeamIndex   srcTeam,
+        const   TeamIndex   trgTeam,
+        const   int         flagGame,
+        const   GamesCount  gameCount)
+{
+    if ( (srcTeam < 0) || (getNumTeams() <= srcTeam)
+            || (trgTeam < 0) || (getNumTeams() <= trgTeam) )
+    {
+        return ( ERR_INDEX_OUT_OF_RANGE );
+    }
+
+    this->m_teamInfos.at(srcTeam).gameCounts[flagGame][trgTeam] = gameCount;
+    return ( ERR_SUCCESS );
+}
 
 }   //  End of namespace  Common
 SCORE4_CORE_NAMESPACE_END

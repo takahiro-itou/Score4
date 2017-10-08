@@ -38,9 +38,12 @@ class  ScoreDocument
 //
 //    Internal Type Definitions.
 //
-public:
+private:
 
-    typedef     std::vector<GamesCount>     GameCountTable;
+    typedef     std::vector< std::vector<GamesCount> >
+    GameCountTable;
+
+public:
 
     /**
     **    リーグ情報。
@@ -149,6 +152,21 @@ public:
             const   TeamInfo    &teamInfo);
 
     //----------------------------------------------------------------
+    /**   チーム情報を追加登録する。
+    **
+    **  @param [in] leagueID    所属するリーグ。
+    **  @param [in] teamName    チーム名。
+    **  @return     エラーコードを返す。
+    **      -   異常終了の場合は、
+    **          エラーの種類を示す非ゼロ値を返す。
+    **      -   正常終了の場合は、ゼロを返す。
+    **/
+    virtual  ErrCode
+    appendTeamInfo(
+            const  LeagueIndex  leagueID,
+            const  std::string  &teamName);
+
+    //----------------------------------------------------------------
     /**   ドキュメントの内容をクリアする。
     **
     **  @return     エラーコードを返す。
@@ -169,6 +187,49 @@ public:
 //    Accessors.
 //
 public:
+
+    //----------------------------------------------------------------
+    /**   対戦カード毎の試合数を取得する。
+    **
+    **  @param [in] srcTeam     チーム番号。
+    **  @param [in] trgTeam     チーム番号。
+    **  @param [in] flagGame    フィルタ。
+    **  @return     試合数を返す。
+    **/
+    GamesCount
+    getGameCount(
+            const   TeamIndex   srcTeam,
+            const   TeamIndex   trgTeam,
+            const   int         flagGame)  const;
+
+    //----------------------------------------------------------------
+    /**   対戦カード毎の試合数を取得する。
+    **
+    **  @param [in] homeTeam      ホームチームの番号。
+    **  @param [in] visitorTeam   ビジタチームの番号。
+    **  @return     試合数を返す。
+    **/
+    GamesCount
+    getGameCount(
+            const   TeamIndex   homeTeam,
+            const   TeamIndex   visitorTeam)  const;
+
+    //----------------------------------------------------------------
+    /**   対戦カード毎の試合数を設定する。
+    **
+    **  @param [in] homeTeam      ホームチームの番号。
+    **  @param [in] visitorTeam   ビジタチームの番号。
+    **  @param [in] gameCount     設定する値。
+    **  @return     エラーコードを返す。
+    **      -   異常終了の場合は、
+    **          エラーの種類を示す非ゼロ値を返す。
+    **      -   正常終了の場合は、ゼロを返す。
+    **/
+    ErrCode
+    setGameCount(
+            const   TeamIndex   homeTeam,
+            const   TeamIndex   visitorTeam,
+            const   GamesCount  gameCount);
 
     //----------------------------------------------------------------
     /**   登録されているリーグの情報を取得する。
@@ -245,6 +306,26 @@ public:
 //
 //    For Internal Use Only.
 //
+private:
+
+    //----------------------------------------------------------------
+    /**   対戦カード毎の試合数を設定する。
+    **
+    **  @param [in] srcTeam     チーム番号。
+    **  @param [in] trgTeam     チーム番号。
+    **  @param [in] flagGame    フィルタ。
+    **  @param [in] gameCount   設定する値。
+    **  @return     エラーコードを返す。
+    **      -   異常終了の場合は、
+    **          エラーの種類を示す非ゼロ値を返す。
+    **      -   正常終了の場合は、ゼロを返す。
+    **/
+    ErrCode
+    setGameCount(
+            const   TeamIndex   srcTeam,
+            const   TeamIndex   trgTeam,
+            const   int         flagGame,
+            const   GamesCount  gameCount);
 
 //========================================================================
 //
