@@ -52,6 +52,10 @@ public:
 
         /**   プレーオフに進出できるチーム数。  **/
         TeamIndex       numPlayOff;
+
+        LeagueInfo()
+            : leagueName(), numPlayOff(0)
+        { }
     };
 
     /**

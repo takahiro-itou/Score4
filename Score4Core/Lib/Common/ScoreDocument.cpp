@@ -84,7 +84,8 @@ ErrCode
 ScoreDocument::appendLeagueInfo(
         const   LeagueInfo  &leagueInfo)
 {
-    return ( ERR_FAILURE );
+    this->m_leagueInfos.push_back(leagueInfo);
+    return ( ERR_SUCCESS );
 }
 
 //----------------------------------------------------------------
@@ -94,7 +95,10 @@ ScoreDocument::appendLeagueInfo(
 ErrCode
 ScoreDocument::clearDocument()
 {
-    return ( ERR_FAILURE );
+    this->m_teamInfos.clear();
+    this->m_leagueInfos.clear();
+
+    return ( ERR_SUCCESS );
 }
 
 //========================================================================

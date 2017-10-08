@@ -115,6 +115,8 @@ DocumentFile::readFromBinaryBuffer(
             <<  "\nExtHead.LastImport  = "  <<  extHead.lastImport
             <<  std::endl;
 
+    ptrDoc->clearDocument();
+
     const  LpcByte  ptrBuf  =  static_cast<LpcByte>(inBuf);
 
     FileLength  cbRead  = 0;
@@ -367,13 +369,19 @@ DocumentFile::readSettingBlock(
             <<  "\nSetting.NumTeams     = "     <<  numTeams
             <<  std::endl;
 
+    ScoreDocument::LeagueInfo   leagueInfo;
     for ( LeagueIndex k = 0; k < numLeagues; ++ k ) {
-        BtByte      leagueName[96];
-        HeaderItem  leagueInfo[ 8];
-        ::memcpy(leagueName,  ptrCur, sizeof(leagueName));
-        ptrCur  +=  sizeof(leagueName);
-        ::memcpy(leagueInfo,  ptrCur, sizeof(leagueInfo));
-        ptrCur  +=  sizeof(leagueInfo);
+        char        tmpName[96];
+        HeaderItem  tmpInfo[ 8];
+        ::memcpy(tmpName,  ptrCur, sizeof(tmpName));
+        ptrCur  +=  sizeof(tmpName);
+
+        ::memcpy(tmpInfo,  ptrCur, sizeof(tmpInfo));
+        ptrCur  +=  sizeof(tmpInfo);
+
+        leagueInfo.leagueName   = std::string(tmpName);
+        leagueInfo.numPlayOff   = tmpInfo[0];
+        ptrDoc->appendLeagueInfo(leagueInfo);
     }
 
     const   FileLength  cbTeamInfo  =  blockInfo[0];
