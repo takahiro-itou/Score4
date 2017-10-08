@@ -38,7 +38,8 @@ int  main(int argc, char * argv[])
         return ( retErr );
     }
 
-    const   Common::LeagueIndex     numLeagues  =  objDoc.getNumLeagues();
+    const  Common::LeagueIndex  numLeagues  =  objDoc.getNumLeagues();
+    const  Common::TeamIndex    numTeams    =  objDoc.getNumTeams();
 
     std::ostream  & outLog  =  std::cout;
 
@@ -53,6 +54,24 @@ int  main(int argc, char * argv[])
                 <<  "\nLeague ["    <<  k
                 <<  "] Playoff = "  <<  leagueInfo.numPlayOff;
     }
+    outLog  <<  std::endl;
+
+    outLog  <<  "Team Informations:"
+            <<  "\nNumber of Teams    = "   <<  (numTeams);
+    outLog.flush();
+
+    for ( Common::TeamIndex i = 0; i < numTeams; ++ i ) {
+        const   Common::ScoreDocument::TeamInfo  &
+            teamInfo    =  objDoc.getTeamInfo(i);
+
+        outLog  <<  "\nTeam ["      <<  i
+                <<  "] Name    = "  <<  teamInfo.teamName
+                <<  "\nTeam ["      <<  i
+                <<  "] LeagueID = " <<  teamInfo.leagueID
+                <<  "\t"
+                <<  objDoc.getLeagueInfo(teamInfo.leagueID).leagueName;
+    }
+
     outLog  <<  std::endl;
 
     return ( 0 );

@@ -392,11 +392,12 @@ DocumentFile::readSettingBlock(
     const   FileLength  cbTeamRsvd  =  blockInfo[1];
 
     std::vector<HeaderItem>     gameInfo(numTeams * 2);
-    BtByte      teamName[64];
+    char        tmpTeamName[64];
+    HeaderItem  tmpTeamInfo[2];
 
     const   FileLength  cbTeamGame  =  sizeof(HeaderItem) * gameInfo.size();
     const   FileLength  cbTeamReqs
-        =  sizeof(teamName) + cbTeamGame + sizeof(HeaderItem) * 2;
+        =  sizeof(tmpTeamName) + cbTeamGame + sizeof(HeaderItem) * 2;
     if ( cbTeamReqs != cbTeamInfo ) {
         outLog  <<  "# ERROR : Size Mismatch. "
                 <<  "Expected = "   <<  cbTeamReqs
@@ -406,12 +407,13 @@ DocumentFile::readSettingBlock(
     }
 
     for ( TeamIndex i = 0; i < numTeams; ++ i ) {
-        HeaderItem  teamInfo[2];
-        ::memcpy(teamName,  ptrCur, sizeof(teamName));
-        ptrCur  +=  sizeof(teamName);
+        ::memcpy(tmpTeamName,  ptrCur, sizeof(tmpTeamName));
+        ptrCur  +=  sizeof(tmpTeamName);
 
-        ::memcpy(teamInfo,  ptrCur, sizeof(teamInfo));
-        ptrCur  +=  sizeof(teamInfo);
+        ::memcpy(tmpTeamInfo,  ptrCur, sizeof(tmpTeamInfo));
+        ptrCur  +=  sizeof(tmpTeamInfo);
+
+        ptrDoc->appendTeamInfo(tmpTeamInfo[1], std::string(tmpTeamName));
 
         ::memcpy(&(gameInfo[0]),  ptrCur,  cbTeamGame);
         ptrCur  +=  cbTeamGame;
