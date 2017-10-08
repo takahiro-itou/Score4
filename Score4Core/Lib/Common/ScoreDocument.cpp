@@ -109,7 +109,10 @@ ScoreDocument::appendTeamInfo(
         const  LeagueIndex  leagueID,
         const  std::string  &teamName)
 {
-    TeamInfo    tmpInfo = { leagueID, teamName };
+    TeamInfo    tmpInfo;
+
+    tmpInfo.leagueID    = leagueID;
+    tmpInfo.teamName    = teamName;
 
     this->m_teamInfos.push_back(tmpInfo);
     return ( ERR_SUCCESS );
@@ -125,6 +128,18 @@ ScoreDocument::clearDocument()
     this->m_teamInfos.clear();
     this->m_leagueInfos.clear();
 
+    return ( ERR_SUCCESS );
+}
+
+//----------------------------------------------------------------
+//    チーム情報用の領域を確保する。
+//
+
+ErrCode
+ScoreDocument::resizeTeamInfos(
+        const   TeamIndex   numTeam)
+{
+    this->m_teamInfos.resize(numTeam);
     return ( ERR_SUCCESS );
 }
 
@@ -146,7 +161,7 @@ GamesCount
 ScoreDocument::getGameCount(
         const   TeamIndex   srcTeam,
         const   TeamIndex   trgTeam,
-        const   int         flagGame)  const
+        const   GameFilter  flagGame)  const
 {
     return ( this->m_teamInfos.at(srcTeam).gameCounts[flagGame][trgTeam] );
 }
@@ -160,7 +175,7 @@ ScoreDocument::getGameCount(
         const   TeamIndex   homeTeam,
         const   TeamIndex   visitorTeam)  const
 {
-    return ( this->m_teamInfos.at(homeTeam).gameCounts[0][visitorTeam] );
+    return ( getGameCount(homeTeam, visitorTeam, FILTER_HOME_GAMES) );
 }
 
 //----------------------------------------------------------------
@@ -173,8 +188,9 @@ ScoreDocument::setGameCount(
         const   TeamIndex   visitorTeam,
         const   GamesCount  gameCount)
 {
-    this->m_teamInfos.at(homeTeam).gameCounts[0][visitorTeam]   = gameCount;
-    this->m_teamInfos.at(visitorTeam).gameCounts[1][homeTeam]   = gameCount;
+    setGameCount(homeTeam, visitorTeam, FILTER_HOME_GAMES,  gameCount);
+    setGameCount(visitorTeam, homeTeam, FILTER_AWAY_GAMES,  gameCount);
+
     return ( ERR_SUCCESS );
 }
 
@@ -271,7 +287,7 @@ ErrCode
 ScoreDocument::setGameCount(
         const   TeamIndex   srcTeam,
         const   TeamIndex   trgTeam,
-        const   int         flagGame,
+        const   GameFilter  flagGame,
         const   GamesCount  gameCount)
 {
     if ( (srcTeam < 0) || (getNumTeams() <= srcTeam)
@@ -280,7 +296,14 @@ ScoreDocument::setGameCount(
         return ( ERR_INDEX_OUT_OF_RANGE );
     }
 
-    this->m_teamInfos.at(srcTeam).gameCounts[flagGame][trgTeam] = gameCount;
+    GameCountTable  & tblCount  =  this->m_teamInfos.at(srcTeam).gameCounts;
+
+    tblCount[flagGame][trgTeam] = gameCount;
+
+    tblCount[FILTER_ALL_GAMES][trgTeam]
+            =  tblCount[FILTER_HOME_GAMES][trgTeam]
+            +  tblCount[FILTER_AWAY_GAMES][trgTeam];
+
     return ( ERR_SUCCESS );
 }
 

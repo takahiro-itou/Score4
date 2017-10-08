@@ -90,6 +90,26 @@ enum  RecordFlag
 
 //----------------------------------------------------------------
 /**
+**    ゲームフィルタフラグ。
+**/
+
+enum  GameFilter
+{
+    FILTER_HOME_GAMES   =  0,
+    FILTER_AWAY_GAMES   =  1,
+    FILTER_ALL_GAMES    =  2,
+
+    FILTER_SCHEDULE     =  4,
+    FILTER_SCDL_HOMES   =  (FILTER_HOME_GAMES | FILTER_SCHEDULE),
+    FILTER_SCDL_AWAYS   =  (FILTER_AWAY_GAMES | FILTER_SCHEDULE),
+    FILTER_SCDL_ALLS    =  (FILTER_ALL_GAMES  | FILTER_SCHEDULE),
+
+    FILTER_GAMES_FITST  =  FILTER_HOME_GAMES,
+    FILTER_GAMES_END    =  (FILTER_AWAY_GAMES + 1)
+};
+
+//----------------------------------------------------------------
+/**
 **    日付型。
 **/
 

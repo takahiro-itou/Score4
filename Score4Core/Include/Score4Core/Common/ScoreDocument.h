@@ -69,6 +69,10 @@ public:
         LeagueIndex     leagueID;       /**<  所属リーグ。      **/
         std::string     teamName;       /**<  チーム名。        **/
         GameCountTable  gameCounts;     /**<  試合数のリスト。  **/
+
+        TeamInfo()
+            : leagueID(-1), teamName(), gameCounts()
+        { }
     };
 
     /**
@@ -177,6 +181,19 @@ public:
     virtual  ErrCode
     clearDocument();
 
+    //----------------------------------------------------------------
+    /**   チーム情報用の領域を確保する。
+    **
+    **  @param [in] numTeam   チーム数。
+    **  @return     エラーコードを返す。
+    **      -   異常終了の場合は、
+    **          エラーの種類を示す非ゼロ値を返す。
+    **      -   正常終了の場合は、ゼロを返す。
+    **/
+    virtual  ErrCode
+    resizeTeamInfos(
+            const   TeamIndex   numTeam);
+
 //========================================================================
 //
 //    Public Member Functions.
@@ -200,7 +217,7 @@ public:
     getGameCount(
             const   TeamIndex   srcTeam,
             const   TeamIndex   trgTeam,
-            const   int         flagGame)  const;
+            const   GameFilter  flagGame)  const;
 
     //----------------------------------------------------------------
     /**   対戦カード毎の試合数を取得する。
@@ -324,7 +341,7 @@ private:
     setGameCount(
             const   TeamIndex   srcTeam,
             const   TeamIndex   trgTeam,
-            const   int         flagGame,
+            const   GameFilter  flagGame,
             const   GamesCount  gameCount);
 
 //========================================================================
