@@ -89,6 +89,18 @@ ScoreDocument::appendLeagueInfo(
 }
 
 //----------------------------------------------------------------
+//    チーム情報を追加登録する。
+//
+
+ErrCode
+ScoreDocument::appendTeamInfo(
+        const   TeamInfo    &teamInfo)
+{
+    this->m_teamInfos.push_back(teamInfo);
+    return ( ERR_SUCCESS );
+}
+
+//----------------------------------------------------------------
 //    ドキュメントの内容をクリアする。
 //
 
@@ -147,6 +159,43 @@ LeagueIndex
 ScoreDocument::getNumLeagues()  const
 {
     return ( this->m_leagueInfos.size() );
+}
+
+//----------------------------------------------------------------
+//    登録されているチーム数を取得する。
+//
+
+TeamIndex
+ScoreDocument::getNumTeams()  const
+{
+    return ( this->m_teamInfos.size() );
+}
+
+//----------------------------------------------------------------
+//    登録されているチームの情報を取得する。
+//
+
+const   ScoreDocument::TeamInfo  &
+ScoreDocument::getTeamInfo(
+        const   TeamIndex   idxTeam)  const
+{
+    return ( this->m_teamInfos.at(idxTeam) );
+}
+
+//----------------------------------------------------------------
+//    登録されているチームの情報を更新する。
+//
+
+ErrCode
+ScoreDocument::setTeamInfo(
+        const   TeamIndex   idxTeam,
+        const   TeamInfo    &teamInfo)
+{
+    if ( (idxTeam < 0) || (getNumTeams() <= idxTeam) ) {
+        return ( ERR_INDEX_OUT_OF_RANGE );
+    }
+    this->m_teamInfos.at(idxTeam)   =  teamInfo;
+    return ( ERR_SUCCESS );
 }
 
 //========================================================================
