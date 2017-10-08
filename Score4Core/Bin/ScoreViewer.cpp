@@ -69,7 +69,16 @@ int  main(int argc, char * argv[])
                 <<  "\nTeam ["      <<  i
                 <<  "] LeagueID = " <<  teamInfo.leagueID
                 <<  "\t"
-                <<  objDoc.getLeagueInfo(teamInfo.leagueID).leagueName;
+                <<  objDoc.getLeagueInfo(teamInfo.leagueID).leagueName
+                <<  "\nGames    = ";
+        for ( Common::TeamIndex j = 0; j < numTeams; ++ j ) {
+            outLog  <<  objDoc.getGameCount(i, j, Common::FILTER_HOME_GAMES)
+                    <<  "+"
+                    <<  objDoc.getGameCount(i, j, Common::FILTER_AWAY_GAMES)
+                    <<  "="
+                    <<  objDoc.getGameCount(i, j, Common::FILTER_ALL_GAMES)
+                    <<  ",";
+        }
     }
 
     outLog  <<  std::endl;

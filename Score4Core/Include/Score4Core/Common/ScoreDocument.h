@@ -42,7 +42,9 @@ class  ScoreDocument
 private:
 
     //typedef     GamesCount      GameCountArray[2];
-    typedef     std::array<GamesCount, 2>       GameCountArray;
+    typedef     std::array<GamesCount, FILTER_GAMES_END>
+    GameCountArray;
+
     typedef     std::vector<GameCountArray>     GameCountTable;
 
 public:
