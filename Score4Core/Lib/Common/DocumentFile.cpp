@@ -359,20 +359,6 @@ DocumentFile::readSettingBlock(
     ::memcpy(&numTeams,    ptrCur, sizeof(numTeams)  );
     ptrCur  +=  sizeof(numTeams);
 
-    std::ostream  & outLog  =  std::cerr;
-    outLog  <<  std::dec    <<  "Setting.BlockInfo:"
-            <<  "\nSetting.BlockInfo[0] = "     <<  blockInfo[0]
-            <<  "\nSetting.BlockInfo[1] = "     <<  blockInfo[1]
-            <<  "\nSetting.BlockInfo[2] = "     <<  blockInfo[2]
-            <<  "\nSetting.BlockInfo[3] = "     <<  blockInfo[3]
-            <<  "\nSetting.BlockInfo[4] = "     <<  blockInfo[4]
-            <<  "\nSetting.BlockInfo[5] = "     <<  blockInfo[5]
-            <<  "\nSetting.BlockInfo[6] = "     <<  blockInfo[6]
-            <<  "\nSetting.BlockInfo[7] = "     <<  blockInfo[7]
-            <<  "\nSetting.NumLeagues   = "     <<  numLeagues
-            <<  "\nSetting.NumTeams     = "     <<  numTeams
-            <<  std::endl;
-
     ScoreDocument::LeagueInfo   leagueInfo;
     for ( LeagueIndex k = 0; k < numLeagues; ++ k ) {
         char        tmpName[96];
@@ -399,10 +385,10 @@ DocumentFile::readSettingBlock(
     const   FileLength  cbTeamReqs
         =  sizeof(tmpTeamName) + cbTeamGame + sizeof(HeaderItem) * 2;
     if ( cbTeamReqs != cbTeamInfo ) {
-        outLog  <<  "# ERROR : Size Mismatch. "
-                <<  "Expected = "   <<  cbTeamReqs
-                <<  ", Record = "   <<  cbTeamInfo
-                <<  std::endl;
+        // std::cerr   <<  "# ERROR : Size Mismatch. "
+        //             <<  "Expected = "   <<  cbTeamReqs
+        //             <<  ", Record = "   <<  cbTeamInfo
+        //             <<  std::endl;
         return ( ERR_FAILURE );
     }
 
@@ -426,9 +412,6 @@ DocumentFile::readSettingBlock(
     }
 
     (* cbRead)  =  static_cast<FileLength>(ptrCur - ptrBuf);
-    outLog  <<  "The Read Size = "  <<  (* cbRead)
-            <<  " Bytes."   <<  std::endl;
-
     return ( ERR_SUCCESS );
 }
 
