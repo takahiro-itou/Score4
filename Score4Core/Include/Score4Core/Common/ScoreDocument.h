@@ -19,6 +19,7 @@
 
 #include    "Score4Types.h"
 
+#include    <array>
 #include    <iosfwd>
 #include    <string>
 #include    <vector>
@@ -40,8 +41,9 @@ class  ScoreDocument
 //
 private:
 
-    typedef     std::vector< std::vector<GamesCount> >
-    GameCountTable;
+    //typedef     GamesCount      GameCountArray[2];
+    typedef     std::array<GamesCount, 2>       GameCountArray;
+    typedef     std::vector<GameCountArray>     GameCountTable;
 
 public:
 
@@ -158,8 +160,8 @@ public:
     //----------------------------------------------------------------
     /**   チーム情報を追加登録する。
     **
-    **  @param [in] leagueID    所属するリーグ。
     **  @param [in] teamName    チーム名。
+    **  @param [in] leagueID    所属するリーグ。
     **  @return     エラーコードを返す。
     **      -   異常終了の場合は、
     **          エラーの種類を示す非ゼロ値を返す。
@@ -167,8 +169,8 @@ public:
     **/
     virtual  ErrCode
     appendTeamInfo(
-            const  LeagueIndex  leagueID,
-            const  std::string  &teamName);
+            const  std::string  &teamName,
+            const  LeagueIndex  leagueID);
 
     //----------------------------------------------------------------
     /**   ドキュメントの内容をクリアする。
@@ -180,6 +182,17 @@ public:
     **/
     virtual  ErrCode
     clearDocument();
+
+    //----------------------------------------------------------------
+    /**   対戦試合数用の領域を確保し初期化する。
+    **
+    **  @return     エラーコードを返す。
+    **      -   異常終了の場合は、
+    **          エラーの種類を示す非ゼロ値を返す。
+    **      -   正常終了の場合は、ゼロを返す。
+    **/
+    virtual  ErrCode
+    initializeGameCountTable();
 
     //----------------------------------------------------------------
     /**   チーム情報用の領域を確保する。
@@ -313,6 +326,23 @@ public:
     setTeamInfo(
             const   TeamIndex   idxTeam,
             const   TeamInfo    &teamInfo);
+
+    //----------------------------------------------------------------
+    /**   登録されているチームの情報を更新する。
+    **
+    **  @param [in] idxTeam     チーム番号。
+    **  @param [in] teamName    チーム名。
+    **  @param [in] leagueID    所属するリーグ。
+    **  @return     エラーコードを返す。
+    **      -   異常終了の場合は、
+    **          エラーの種類を示す非ゼロ値を返す。
+    **      -   正常終了の場合は、ゼロを返す。
+    **/
+    ErrCode
+    setTeamInfo(
+            const  TeamIndex    idxTeam,
+            const  std::string  &teamName,
+            const  LeagueIndex  leagueID);
 
 //========================================================================
 //

@@ -106,8 +106,8 @@ ScoreDocument::appendTeamInfo(
 
 ErrCode
 ScoreDocument::appendTeamInfo(
-        const  LeagueIndex  leagueID,
-        const  std::string  &teamName)
+        const  std::string  &teamName,
+        const  LeagueIndex  leagueID)
 {
     TeamInfo    tmpInfo;
 
@@ -128,6 +128,26 @@ ScoreDocument::clearDocument()
     this->m_teamInfos.clear();
     this->m_leagueInfos.clear();
 
+    return ( ERR_SUCCESS );
+}
+
+//----------------------------------------------------------------
+//    対戦試合数用の領域を確保し初期化する。
+//
+
+ErrCode
+ScoreDocument::initializeGameCountTable()
+{
+    const   TeamIndex  numTeam  = getNumTeams();
+    for ( TeamIndex i = 0; i < numTeam; ++ i ) {
+        GameCountTable  & tblCount  = this->m_teamInfos.at(i).gameCounts;
+        tblCount.resize(numTeam);
+        for ( TeamIndex j = 0; j < numTeam; ++ j ) {
+            tblCount.at(j) [FILTER_HOME_GAMES]  = 0;
+            tblCount.at(j) [FILTER_AWAY_GAMES]  = 0;
+            tblCount.at(j) [FILTER_ALL_GAMES ]  = 0;
+        }
+    }
     return ( ERR_SUCCESS );
 }
 
@@ -163,7 +183,9 @@ ScoreDocument::getGameCount(
         const   TeamIndex   trgTeam,
         const   GameFilter  flagGame)  const
 {
-    return ( this->m_teamInfos.at(srcTeam).gameCounts[flagGame][trgTeam] );
+    const   GameCountTable
+        & tblCount  =  this->m_teamInfos.at(srcTeam).gameCounts;
+    return ( tblCount.at(trgTeam)[flagGame] );
 }
 
 //----------------------------------------------------------------
@@ -269,6 +291,28 @@ ScoreDocument::setTeamInfo(
     return ( ERR_SUCCESS );
 }
 
+//----------------------------------------------------------------
+//    登録されているチームの情報を更新する。
+//
+
+ErrCode
+ScoreDocument::setTeamInfo(
+        const  TeamIndex    idxTeam,
+        const  std::string  &teamName,
+        const  LeagueIndex  leagueID)
+{
+    if ( (idxTeam < 0) || (getNumTeams() <= idxTeam) ) {
+        return ( ERR_INDEX_OUT_OF_RANGE );
+    }
+
+    TeamInfo  &  rdestInfo  =  this->m_teamInfos.at(idxTeam);
+
+    rdestInfo.leagueID  = leagueID;
+    rdestInfo.teamName  = teamName;
+
+    return ( ERR_SUCCESS );
+}
+
 //========================================================================
 //
 //    Protected Member Functions.
@@ -298,11 +342,11 @@ ScoreDocument::setGameCount(
 
     GameCountTable  & tblCount  =  this->m_teamInfos.at(srcTeam).gameCounts;
 
-    tblCount[flagGame][trgTeam] = gameCount;
+    tblCount.at(trgTeam)[flagGame]  = gameCount;
 
-    tblCount[FILTER_ALL_GAMES][trgTeam]
-            =  tblCount[FILTER_HOME_GAMES][trgTeam]
-            +  tblCount[FILTER_AWAY_GAMES][trgTeam];
+    tblCount.at(trgTeam) [FILTER_ALL_GAMES]
+            =  tblCount.at(trgTeam) [FILTER_HOME_GAMES]
+            +  tblCount.at(trgTeam) [FILTER_AWAY_GAMES];
 
     return ( ERR_SUCCESS );
 }

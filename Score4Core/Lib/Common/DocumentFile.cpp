@@ -406,6 +406,8 @@ DocumentFile::readSettingBlock(
         return ( ERR_FAILURE );
     }
 
+    ptrDoc->resizeTeamInfos(numTeams);
+    ptrDoc->initializeGameCountTable();
     for ( TeamIndex i = 0; i < numTeams; ++ i ) {
         ::memcpy(tmpTeamName,  ptrCur, sizeof(tmpTeamName));
         ptrCur  +=  sizeof(tmpTeamName);
@@ -413,11 +415,14 @@ DocumentFile::readSettingBlock(
         ::memcpy(tmpTeamInfo,  ptrCur, sizeof(tmpTeamInfo));
         ptrCur  +=  sizeof(tmpTeamInfo);
 
-        ptrDoc->appendTeamInfo(tmpTeamInfo[1], std::string(tmpTeamName));
+        ptrDoc->setTeamInfo(i, std::string(tmpTeamName), tmpTeamInfo[1]);
 
         ::memcpy(&(gameInfo[0]),  ptrCur,  cbTeamGame);
         ptrCur  +=  cbTeamGame;
         ptrCur  +=  cbTeamRsvd;
+        for ( int j = 0; j < numTeams; ++ j ) {
+            ptrDoc->setGameCount(i, j, gameInfo.at(j * 2 + 0) );
+        }
     }
 
     (* cbRead)  =  static_cast<FileLength>(ptrCur - ptrBuf);
