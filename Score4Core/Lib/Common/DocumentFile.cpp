@@ -245,6 +245,7 @@ DocumentFile::saveToTextStream(
 {
     const  LeagueIndex  numLeagues  =  objDoc.getNumLeagues();
     const  TeamIndex    numTeams    =  objDoc.getNumTeams();
+    const  RecordIndex  numRecords  =  objDoc.getNumRecords();
 
     outStr  <<  "# Settings";
     for ( LeagueIndex k = 0; k < numLeagues; ++ k ) {
@@ -270,9 +271,19 @@ DocumentFile::saveToTextStream(
     }
     outStr  <<  std::endl;
 
-    outStr  <<  "# Records.\n"
-            <<  "Date,HomeTeam,Score,VisitorTeam,Status,";
-
+    outStr  <<  "# Records,"    <<  numRecords
+            <<  "\nDate,HomeTeam,Score,VisitorTeam,Status,";
+    for ( RecordIndex r = 0; r < numRecords; ++ r ) {
+        const   ScoreDocument::GameResult
+            &grRec  = objDoc.getGameRecord(r);
+        outStr  <<  '\n'
+                <<  (grRec.recordDate)      <<  ','
+                <<  objDoc.getTeamInfo(grRec.homeTeam).teamName     <<  ','
+                <<  (grRec.homeScore)       <<  " - "
+                <<  (grRec.visitorScore)    <<  ','
+                <<  objDoc.getTeamInfo(grRec.visitorTeam).teamName  <<  ','
+                <<  (grRec.eGameFlags);
+    }
     outStr  <<  std::endl;
 
     return ( ERR_SUCCESS );
@@ -354,7 +365,6 @@ DocumentFile::readRecordBlock(
 
     const   FileLength  RECORD_SIZE     =  28;
     for ( GamesCount t = 0; t < numRecords; ++ t ) {
-        //::memcpy(&gameRecord,  ptrCur, sizeof(gameRecord));
         const  unsigned  int  *  const  ptrU32
             =  pointer_cast<const  unsigned  int  *>(ptrCur);
         gameRecord.eGameFlags   = static_cast<RecordFlag>(ptrU32[0]);
@@ -363,6 +373,7 @@ DocumentFile::readRecordBlock(
         gameRecord.homeTeam     = ptrU32[4];
         gameRecord.visitorScore = ptrU32[5];
         gameRecord.homeScore    = ptrU32[6];
+        ptrDoc->appendGameRecord(gameRecord);
         ptrCur  +=  RECORD_SIZE;
     }
 
