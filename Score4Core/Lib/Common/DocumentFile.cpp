@@ -84,6 +84,33 @@ DocumentFile::~DocumentFile()
 //
 
 //----------------------------------------------------------------
+//    バイナリ形式で保存するのに必要な容量を計算する。
+//
+
+FileLength
+DocumentFile::computeImageSize(
+        const  ScoreDocument  & objDoc)
+{
+    CONSTEXPR_VAR   FileLength  FILE_HEADER_SIZE    =  sizeof(FileHeader);
+    CONSTEXPR_VAR   FileLength  EXTRA_HEADER_SIZE   =  sizeof(ExtraHeader);
+
+    const  LeagueIndex  numLeagues  =  objDoc.getNumLeagues();
+    const  TeamIndex    numTeams    =  objDoc.getNumTeams();
+    const  FileLength   sizeLeague  =  numLeagues * 128;
+    const  FileLength   sizeTeams   =  numTeams   * 128;
+
+    const  FileLength   cbSettings  =  192 + sizeLeague + sizeTeams;
+    const  FileLength   cbRecords   =  0;
+
+    FileLength  cbTotal = 0;
+    cbTotal += (FILE_HEADER_SIZE + EXTRA_HEADER_SIZE);
+    cbTotal += cbSettings;
+    cbTotal += cbRecords;
+
+    return ( cbTotal );
+}
+
+//----------------------------------------------------------------
 //    データをバイナリバッファから読み込む。
 //
 
@@ -198,7 +225,13 @@ DocumentFile::saveToBinaryFile(
         const  ScoreDocument  & objDoc,
         const  std::string    & fileName)
 {
-    return ( ERR_FAILURE );
+    const   FileLength  cbOuts  = computeImageSize(objDoc);
+    std::vector<BtByte> outBuf(cbOuts);
+
+    const  ErrCode
+        retErr  = saveToBinaryBuffer(objDoc, &(outBuf[0]), cbOuts);
+
+    return ( retErr );
 }
 
 //----------------------------------------------------------------
@@ -266,7 +299,7 @@ DocumentFile::readFileHeader(
         FileHeader   *  const   fileHead,
         ExtraHeader  *  const   extHead)
 {
-    CONSTEXPR_VAR   size_t  FILE_HEADER_SIZE    =  sizeof(FileHeader);
+    CONSTEXPR_VAR   FileLength  FILE_HEADER_SIZE    =  sizeof(FileHeader);
     if ( cbBuf < FILE_HEADER_SIZE ) {
         return ( ERR_FAILURE );
     }
