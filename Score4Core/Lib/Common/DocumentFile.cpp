@@ -132,7 +132,11 @@ DocumentFile::readFromBinaryBuffer(
                     ptrBuf + fileHead.offsRecord + cbRead,
                     cbBuf  - fileHead.offsRecord - cbRead,
                     ptrDoc,  &cbRead);
-    return ( ERR_FAILURE );
+    if ( retErr != ERR_SUCCESS ) {
+        return ( retErr );
+    }
+
+    return ( ERR_SUCCESS );
 }
 
 //----------------------------------------------------------------
