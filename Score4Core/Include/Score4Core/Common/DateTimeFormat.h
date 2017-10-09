@@ -35,6 +35,25 @@ class  DateTimeFormat
 
 //========================================================================
 //
+//    Internal Type Definitions.
+//
+public:
+
+    /**
+    **    日時構造体。
+    **/
+    struct  TDateTime
+    {
+        int     year;
+        int     month;
+        int     day;
+        int     hour;
+        int     minite;
+        int     second;
+    };
+
+//========================================================================
+//
 //    Constructor(s) and Destructor.
 //
 public:
@@ -77,6 +96,36 @@ public:
 //
 //    Public Member Functions.
 //
+public:
+
+    //----------------------------------------------------------------
+    /**   シリアル値から日時構造体に変換する。
+    **
+    **  @param [in] dtSerial    シリアル値。
+    **  @param[out] ptrBuf      日時構造体。
+    **  @return     エラーコードを返す。
+    **      -   異常終了の場合は、
+    **          エラーの種類を示す非ゼロ値を返す。
+    **      -   正常終了の場合は、ゼロを返す。
+    **/
+    static  ErrCode
+    getDateTimeFromSerial(
+            const   DateSerial  dtSerial,
+            TDateTime  *        ptrBuf);
+
+    //----------------------------------------------------------------
+    /**   指定した日付をシリアル値に変換する。
+    **
+    **  @param [in] year
+    **  @param [in] month
+    **  @param [in] day
+    **  @return     指定した日付の午前零時に対するシリアル値。
+    **/
+    static  DateSerial
+    getSerialFromDate(
+            const  int  year,
+            const  int  month,
+            const  int  day);
 
 //========================================================================
 //
