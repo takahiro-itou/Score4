@@ -4,6 +4,10 @@
 ##    テストの設定。
 ##
 
+Add_Test (NAME  DateTimeFormatTest
+    COMMAND  $<TARGET_FILE:DateTimeFormatTest>
+)
+
 Add_Test (NAME  DocumentFileTest
     COMMAND  $<TARGET_FILE:DocumentFileTest>
 )
@@ -21,6 +25,7 @@ Add_Test (NAME  ScoreDocumentTest
 ##    テストプログラムのビルド。
 ##
 
+Add_Executable (DateTimeFormatTest      DateTimeFormatTest.cpp)
 Add_Executable (DocumentFileTest        DocumentFileTest.cpp)
 Add_Executable (Score4CoreSettingsTest  Score4CoreSettingsTest.cpp)
 Add_Executable (ScoreDocumentTest       ScoreDocumentTest.cpp)
