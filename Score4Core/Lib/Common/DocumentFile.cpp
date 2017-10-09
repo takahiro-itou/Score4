@@ -42,7 +42,6 @@ s_tblRecordFlagName[] = {
 
 }   //  End of (Unnamed) namespace.
 
-
 //========================================================================
 //
 //    DocumentFile  class.

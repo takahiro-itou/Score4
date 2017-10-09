@@ -99,7 +99,46 @@ DateTimeFormat::getDateTimeFromSerial(
         const   DateSerial  dtSerial,
         TDateTime  *        ptrBuf)
 {
-    return ( ERR_FAILURE );
+    int  wYear  = static_cast<int>(dtSerial / 365.24) + 1900;
+    int  wMonth = 0;
+    DateSerial  wdsRem  = 0;
+    for ( ; ; ++ wYear )
+    {
+        const   DateSerial  dsValue = getSerialFromDate(wYear, 1, 1);
+        if ( dsValue > dtSerial ) {
+            --  wYear;
+            wdsRem  =  dtSerial - getSerialFromDate(wYear, 1, 1);
+            break;
+        }
+    }
+
+    int     isLeap  = 0;
+    if ( ! (wYear & 3) ) {
+        if ( (wYear % 100) == 0 ) {
+            isLeap  =  ( ((wYear % 400) == 0) ? 1 : 0 );
+        } else {
+            isLeap  =  1;
+        }
+    }
+    for ( wMonth = 1; wMonth <= 12; ++ wMonth ) {
+        const  int  nxDays  =
+            DAYS_OF_MONTH[wMonth]  + (wMonth == 2 ? isLeap : 0);
+        if ( wdsRem < nxDays ) {
+            break;
+        }
+        wdsRem  -=  nxDays;
+    }
+
+    if ( wMonth >= 13 ) {
+        ptrBuf->year    = wYear  +  1;
+        ptrBuf->month   = wMonth - 12;
+    } else {
+        ptrBuf->year    = wYear;
+        ptrBuf->month   = wMonth;
+    }
+    ptrBuf->day     = wdsRem + 1;
+
+    return ( ERR_SUCCESS );
 }
 
 //----------------------------------------------------------------

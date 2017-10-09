@@ -32,6 +32,7 @@ class  DateTimeFormatTest : public  TestFixture
 {
     CPPUNIT_TEST_SUITE(DateTimeFormatTest);
     CPPUNIT_TEST(testDateTimeFormat);
+    CPPUNIT_TEST(testGetDateTimeFromSerial);
     CPPUNIT_TEST(testGetSerialFromDate);
     CPPUNIT_TEST_SUITE_END();
 
@@ -42,6 +43,7 @@ public:
 private:
     void  testDateTimeFormat();
 
+    void  testGetDateTimeFromSerial();
     void  testGetSerialFromDate();
 };
 
@@ -55,7 +57,63 @@ CPPUNIT_TEST_SUITE_REGISTRATION( DateTimeFormatTest );
 void  DateTimeFormatTest::testDateTimeFormat()
 {
     DateTimeFormat  dtFormat;
+
     return;
+}
+
+void  DateTimeFormatTest::testGetDateTimeFromSerial()
+{
+    DateTimeFormat::TDateTime   dt;
+
+    DateTimeFormat::getDateTimeFromSerial(  2,  &dt);
+    CPPUNIT_ASSERT_EQUAL( 1900, dt.year  );
+    CPPUNIT_ASSERT_EQUAL(    1, dt.month );
+    CPPUNIT_ASSERT_EQUAL(    1, dt.day   );
+
+    DateTimeFormat::getDateTimeFromSerial( 60,  &dt);
+    CPPUNIT_ASSERT_EQUAL( 1900, dt.year  );
+    CPPUNIT_ASSERT_EQUAL(    2, dt.month );
+    CPPUNIT_ASSERT_EQUAL(   28, dt.day   );
+
+    DateTimeFormat::getDateTimeFromSerial( 61,  &dt);
+    CPPUNIT_ASSERT_EQUAL( 1900, dt.year  );
+    CPPUNIT_ASSERT_EQUAL(    3, dt.month );
+    CPPUNIT_ASSERT_EQUAL(    1, dt.day   );
+
+    DateTimeFormat::getDateTimeFromSerial(42369,  &dt);
+    CPPUNIT_ASSERT_EQUAL( 2015, dt.year  );
+    CPPUNIT_ASSERT_EQUAL(   12, dt.month );
+    CPPUNIT_ASSERT_EQUAL(   31, dt.day   );
+
+    DateTimeFormat::getDateTimeFromSerial(42370,  &dt);
+    CPPUNIT_ASSERT_EQUAL( 2016, dt.year  );
+    CPPUNIT_ASSERT_EQUAL(    1, dt.month );
+    CPPUNIT_ASSERT_EQUAL(    1, dt.day   );
+
+    DateTimeFormat::getDateTimeFromSerial(42400,  &dt);
+    CPPUNIT_ASSERT_EQUAL( 2016, dt.year  );
+    CPPUNIT_ASSERT_EQUAL(    1, dt.month );
+    CPPUNIT_ASSERT_EQUAL(   31, dt.day   );
+
+    DateTimeFormat::getDateTimeFromSerial(42428,  &dt);
+    CPPUNIT_ASSERT_EQUAL( 2016, dt.year  );
+    CPPUNIT_ASSERT_EQUAL(    2, dt.month );
+    CPPUNIT_ASSERT_EQUAL(   28, dt.day   );
+
+    DateTimeFormat::getDateTimeFromSerial(42429,  &dt);
+    CPPUNIT_ASSERT_EQUAL( 2016, dt.year  );
+    CPPUNIT_ASSERT_EQUAL(    2, dt.month );
+    CPPUNIT_ASSERT_EQUAL(   29, dt.day   );
+
+    DateTimeFormat::getDateTimeFromSerial(42430,  &dt);
+    CPPUNIT_ASSERT_EQUAL( 2016, dt.year  );
+    CPPUNIT_ASSERT_EQUAL(    3, dt.month );
+    CPPUNIT_ASSERT_EQUAL(    1, dt.day   );
+
+    DateTimeFormat::getDateTimeFromSerial(42454,  &dt);
+    CPPUNIT_ASSERT_EQUAL( 2016, dt.year  );
+    CPPUNIT_ASSERT_EQUAL(    3, dt.month );
+    CPPUNIT_ASSERT_EQUAL(   25, dt.day   );
 }
 
 void  DateTimeFormatTest::testGetSerialFromDate()
