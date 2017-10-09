@@ -30,6 +30,19 @@
 SCORE4_CORE_NAMESPACE_BEGIN
 namespace  Common  {
 
+namespace  {
+
+CONSTEXPR_VAR   const   char  *
+s_tblRecordFlagName[] = {
+    "EMPTY",
+    "SCHEDULE",
+    "CANCEL",
+    "RESULT"
+};
+
+}   //  End of (Unnamed) namespace.
+
+
 //========================================================================
 //
 //    DocumentFile  class.
@@ -282,7 +295,7 @@ DocumentFile::saveToTextStream(
                 <<  (grRec.homeScore)       <<  " - "
                 <<  (grRec.visitorScore)    <<  ','
                 <<  objDoc.getTeamInfo(grRec.visitorTeam).teamName  <<  ','
-                <<  (grRec.eGameFlags);
+                <<  s_tblRecordFlagName[grRec.eGameFlags];
     }
     outStr  <<  std::endl;
 
