@@ -45,5 +45,5 @@ dist_noinst_DATA        =  \
 ##
 
 ScoreViewer_SOURCES     =  ScoreViewer.cpp
-ScoreViewer_LDADD       =
+ScoreViewer_LDADD       =  ../Lib/Common/libscore4Common.a
 

@@ -22,6 +22,9 @@ EXTRA_NOINST_DATA_FILES     =
 EXTRA_NOINST_HEADER_FILES   =
 
 LIBRARY_SOURCE_FILES        =  \
+        DateTimeFormat.cpp             \
+        DocumentFile.cpp               \
+        ScoreDocument.cpp              \
         ${EXTRA_LIBRARY_SOURCE_FILES}
 
 LIBRARY_INSTANTIATIONS      =
@@ -35,7 +38,11 @@ DIST_NOINST_HEADER_FILES    =  \
         ${EXTRA_NOINST_HEADER_FILES}
 
 INCLIB_HEADER_FILES         =  \
+        ${INCLIB_SOURCE_DIR}/DateTimeFormat.h      \
+        ${INCLIB_SOURCE_DIR}/DocumentFile.h        \
         ${INCLIB_SOURCE_DIR}/Score4CoreSettings.h  \
+        ${INCLIB_SOURCE_DIR}/Score4Types.h         \
+        ${INCLIB_SOURCE_DIR}/ScoreDocument.h       \
         ${EXTRA_LIBRARY_HEADER_FILES}
 
 INCLIB_NODIST_HEADER_FILES  =
@@ -51,7 +58,7 @@ LIBRARY_COMPILE_SRCFILES    =  \
 ##    List of Libraries.
 ##
 
-STATIC_LIBRARIES_LIST   =
+STATIC_LIBRARIES_LIST   =  libscore4Common.a
 SHARED_LIBRARIES_LIST   =
 
 ##
@@ -76,4 +83,6 @@ include  $(top_srcdir)/.M4/Makefile.Install.inc
 ##
 ##    Build Libraries.
 ##
+
+libscore4Common_a_SOURCES   =  ${LIBRARY_SOURCE_FILES}
 
