@@ -17,6 +17,7 @@
 #include    "Score4Core/Common/DocumentFile.h"
 
 #include    "Score4Core/Common/DateTimeFormat.h"
+#include    "Score4Core/Common/ErrorDetectionCode.h"
 #include    "Score4Core/Common/ScoreDocument.h"
 
 #include    <fcntl.h>
@@ -141,6 +142,14 @@ DocumentFile::readFromBinaryBuffer(
     if ( retErr != ERR_SUCCESS ) {
         return ( retErr );
     }
+
+    ErrorDetectionCode  edc;
+    edc.setupGenPoly(FILE_CRC32_GENPOLY);
+    const  ErrorDetectionCode::EDCode
+        valCRC  =  edc.checkCRC32(inBuf, cbBuf);
+    std::cerr   <<  "FILE CRC = "
+                <<  std::hex    <<  valCRC
+                <<  std::endl;
 
     ptrDoc->clearDocument();
 
