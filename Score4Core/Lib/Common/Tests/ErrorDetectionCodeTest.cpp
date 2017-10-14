@@ -40,6 +40,9 @@ public:
 
 private:
     void  testErrorDetectionCode();
+
+private:
+    typedef     ErrorDetectionCode::EDCode      EDCode;
 };
 
 CPPUNIT_TEST_SUITE_REGISTRATION( ErrorDetectionCodeTest );
@@ -52,6 +55,20 @@ CPPUNIT_TEST_SUITE_REGISTRATION( ErrorDetectionCodeTest );
 void  ErrorDetectionCodeTest::testErrorDetectionCode()
 {
     ErrorDetectionCode  testEDC;
+    EDCode              valCRC;
+
+    BtByte  buf1[] = { 1, 0, 0, 0, 0 };
+
+    testEDC.setupGenPoly(0x04C11DB7);
+    valCRC  =  testEDC.checkCRC32(buf1, sizeof(buf1));
+    CPPUNIT_ASSERT_EQUAL( EDCode(0x04C11DB7), valCRC );
+
+    BtByte  buf2[] = { 0x80, 1, 2, 3, 4, 0, 0, 0, 0 };
+
+    testEDC.setupGenPoly(0x04C11DB7);
+    valCRC  =  testEDC.checkCRC32(buf2, sizeof(buf2));
+    CPPUNIT_ASSERT_EQUAL( EDCode(0xB3A7EC0A), valCRC );
+
     return;
 }
 

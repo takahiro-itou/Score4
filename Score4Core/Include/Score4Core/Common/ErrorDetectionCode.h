@@ -43,7 +43,7 @@ class  ErrorDetectionCode
 public:
 
     /**   誤り検出符号のデータ型。  **/
-    typedef     unsigned  long      EDCode;
+    typedef     unsigned  int       EDCode;
 
     enum  {
         /**   誤り検出符号のバイト数。  **/
