@@ -16,6 +16,7 @@
 
 #include    "Score4Core/Common/DocumentFile.h"
 
+#include    "Score4Core/Common/DateTimeFormat.h"
 #include    "Score4Core/Common/ScoreDocument.h"
 
 #include    <fcntl.h>
@@ -285,11 +286,15 @@ DocumentFile::saveToTextStream(
 
     outStr  <<  "# Records,"    <<  numRecords
             <<  "\nDate,HomeTeam,Score,VisitorTeam,Status,";
+    DateTimeFormat::TDateTime   dtVal;
     for ( RecordIndex r = 0; r < numRecords; ++ r ) {
         const   ScoreDocument::GameResult
             &grRec  = objDoc.getGameRecord(r);
+        DateTimeFormat::getDateTimeFromSerial(grRec.recordDate,  &dtVal);
         outStr  <<  '\n'
-                <<  (grRec.recordDate)      <<  ','
+                <<  (dtVal.year)    <<  '/'
+                <<  (dtVal.month)   <<  '/'
+                <<  (dtVal.day)     <<  ','
                 <<  objDoc.getTeamInfo(grRec.homeTeam).teamName     <<  ','
                 <<  (grRec.homeScore)       <<  " - "
                 <<  (grRec.visitorScore)    <<  ','
