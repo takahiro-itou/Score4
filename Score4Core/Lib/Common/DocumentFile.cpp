@@ -164,6 +164,7 @@ DocumentFile::readFromBinaryBuffer(
                 <<  std::endl;
 
     ptrDoc->clearDocument();
+    ptrDoc->setLastImportDate(extHead.lastImport);
 
     const  LpcByte  ptrBuf  =  static_cast<LpcByte>(inBuf);
 
@@ -268,7 +269,7 @@ DocumentFile::saveToBinaryBuffer(
     fileHeader.reserved14   = 0;
     fileHeader.reserved15   = 0;
 
-    extHeader.lastImport    = 0;
+    extHeader.lastImport    = objDoc.getLastImportDate();
     ::memset(extHeader.hiReserved, 0, sizeof(extHeader.hiReserved));
 
     retErr  = writeFileHeader(fileHeader, extHeader, cbBuf, outBuf);
@@ -451,15 +452,18 @@ DocumentFile::readRecordBlock(
     ::memcpy(&numRecords,  ptrCur, sizeof(numRecords));
     ptrCur  +=  sizeof(numRecords);
 
-    DateSerial  lastGameDate,  lastRecordDate;
-    ::memcpy(&lastGameDate,    ptrCur, sizeof(lastGameDate)  );
-    ptrCur  +=  sizeof(lastGameDate);
+    DateSerial  lastActiveDate,  lastRecordDate;
+    ::memcpy(&lastActiveDate,  ptrCur, sizeof(lastActiveDate));
+    ptrCur  +=  sizeof(lastActiveDate);
     ::memcpy(&lastRecordDate,  ptrCur, sizeof(lastRecordDate));
     ptrCur  +=  sizeof(lastRecordDate);
 
     HeaderItem  fOptimized  =  BOOL_FALSE;
     ::memcpy(&fOptimized,  ptrCur, sizeof(fOptimized));
     ptrCur  +=  sizeof(fOptimized);
+
+    ptrDoc->setLastActiveDate(lastActiveDate);
+    ptrDoc->setLastRecordDate(lastRecordDate);
 
     ptrCur  +=  (sizeof(HeaderItem) * 12);
 
@@ -618,15 +622,15 @@ DocumentFile::writeRecordBlock(
     ::memcpy(ptrCur,  &numRecords, sizeof(numRecords));
     ptrCur  +=  sizeof(numRecords);
 
-    const   DateSerial  lastGameDate    =  0;
-    const   DateSerial  lastRecordDate  =  0;
+    const   DateSerial  lastActiveDate  =  objDoc.getLastActiveDate();
+    const   DateSerial  lastRecordDate  =  objDoc.getLastRecordDate();
+    const   HeaderItem  fOptimized      =  objDoc.getOptimizedFlag();
 
-    ::memcpy(ptrCur,    &lastGameDate,    sizeof(lastGameDate)  );
-    ptrCur  +=  sizeof(lastGameDate);
-    ::memcpy(ptrCur,    &lastRecordDate,  sizeof(lastRecordDate));
+    ::memcpy(ptrCur,  &lastActiveDate,  sizeof(lastActiveDate));
+    ptrCur  +=  sizeof(lastActiveDate);
+    ::memcpy(ptrCur,  &lastRecordDate,  sizeof(lastRecordDate));
     ptrCur  +=  sizeof(lastRecordDate);
 
-    HeaderItem  fOptimized  =  BOOL_TRUE;
     ::memcpy(ptrCur,  &fOptimized, sizeof(fOptimized));
     ptrCur  +=  sizeof(fOptimized);
 
