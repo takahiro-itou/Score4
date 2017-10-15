@@ -108,7 +108,8 @@ DocumentFile::~DocumentFile()
 
 FileLength
 DocumentFile::computeImageSize(
-        const  ScoreDocument  & objDoc)
+        const  ScoreDocument  & objDoc,
+        BlockSizeInfo  *        bsInfo)
 {
     CONSTEXPR_VAR   FileLength  FILE_HEADER_SIZE    =  sizeof(FileHeader);
     CONSTEXPR_VAR   FileLength  EXTRA_HEADER_SIZE   =  sizeof(ExtraHeader);
@@ -117,21 +118,33 @@ DocumentFile::computeImageSize(
     const  TeamIndex    numTeams    =  objDoc.getNumTeams();
     const  RecordIndex  numRecords  =  objDoc.getNumRecords();
 
-    const  FileLength   sizeLeague  =  numLeagues * 128;
-
     const  FileLength   cbTeamGame  =  sizeof(HeaderItem) * numTeams * 2;
     const  FileLength   cbTeamInfo  =  cbTeamGame + 72;
     const  FileLength   cbTeamReqs  =  (cbTeamInfo + 127) & ~127;
-    const  FileLength   sizeTeams   =  cbTeamReqs * numTeams;
 
-    const  FileLength   cbSettings  =  192 + sizeLeague + sizeTeams;
-    const  FileLength   cbRecords   =  numRecords * RECORD_SIZE;
+    bsInfo->cbLeague    =  128;
+    bsInfo->cbTeamGame  =  cbTeamGame;
+    bsInfo->cbTeamInfo  =  cbTeamInfo;
+    bsInfo->cbTeamRsvd  =  (cbTeamReqs - cbTeamInfo);
+    bsInfo->cbTeamReqs  =  cbTeamReqs;
+    bsInfo->cbRecsHead  =  72;
+    bsInfo->cbRecsBody  =  (RECORD_SIZE * numRecords);
+
+    const  FileLength   sizeLeague  =  (bsInfo->cbLeague) * numLeagues;
+    const  FileLength   sizeTeams   =  (bsInfo->cbTeamReqs) * numTeams;
+
+    bsInfo->bsLeagure   =  sizeLeague;
+    bsInfo->bsTeamInfo  =  sizeTeams ;
 
     FileLength  cbTotal = 0;
-    cbTotal += (FILE_HEADER_SIZE + EXTRA_HEADER_SIZE);
-    cbTotal += cbSettings;
-    cbTotal += cbRecords + 72;
-    cbTotal += ErrorDetectionCode::CRC32_CODE_LENGTH;
+
+    cbTotal +=  bsInfo->bsFileHead  =  FILE_HEADER_SIZE;
+    cbTotal +=  bsInfo->bsExtHead   =  EXTRA_HEADER_SIZE;
+    cbTotal +=  bsInfo->bsSettings  =  192 + (sizeLeague) + (sizeTeams);
+    cbTotal +=  bsInfo->bsRecords
+            =   (bsInfo->cbRecsHead) + (bsInfo->cbRecsBody);
+    cbTotal +=  ErrorDetectionCode::CRC32_CODE_LENGTH;
+    bsInfo->bsFileSize  =  cbTotal;
 
     return ( cbTotal );
 }
@@ -284,19 +297,34 @@ DocumentFile::saveToBinaryBuffer(
                     objDoc,
                     ptrBuf + fileHeader.offsRecord,
                     cbBuf  - fileHeader.offsRecord,
+                    fileHeader.offsRecord,
                     &cbWrite);
     if ( retErr != ERR_SUCCESS ) {
         return ( ERR_SUCCESS );
     }
 
+    const   FileLength  cbRecs
+        =  cbBuf - (fileHeader.offsRecord + cbWrite)
+        -  ErrorDetectionCode::CRC32_CODE_LENGTH;
     retErr  = writeRecordBlock(
                     objDoc,
                     ptrBuf + (fileHeader.offsRecord + cbWrite),
-                    cbBuf  - (fileHeader.offsRecord + cbWrite),
+                    cbRecs,
                     &cbWrite);
     if ( retErr != ERR_SUCCESS ) {
         return ( retErr );
     }
+    if ( cbWrite != cbRecs ) {
+        std::cerr   <<  "Write : "  <<  cbWrite
+                    <<  ", Expected = " <<  cbRecs
+                    <<  std::endl;
+        return ( ERR_INDEX_OUT_OF_RANGE );
+    }
+
+    //  誤り検出符号。  //
+    ErrorDetectionCode  edc;
+    edc.setupGenPoly(FILE_CRC32_GENPOLY);
+    edc.writeCRC32(outBuf,  cbBuf);
 
     return ( ERR_SUCCESS );
 }
@@ -310,9 +338,12 @@ DocumentFile::saveToBinaryFile(
         const  ScoreDocument  & objDoc,
         const  std::string    & fileName)
 {
-    const   FileLength  cbOuts  = computeImageSize(objDoc);
+    BlockSizeInfo       bsInfo;
+    const   FileLength  cbOuts  = computeImageSize(objDoc,  &bsInfo);
     std::vector<BtByte> outBuf(cbOuts, 0);
 
+    std::cerr   <<  "WRITE SIZE = " <<  cbOuts
+            <<  std::endl;
     const  ErrCode
         retErr  = saveToBinaryBuffer(objDoc, &(outBuf[0]), cbOuts);
 
@@ -462,6 +493,7 @@ DocumentFile::readRecordBlock(
     ::memcpy(&fOptimized,  ptrCur, sizeof(fOptimized));
     ptrCur  +=  sizeof(fOptimized);
 
+    ptrDoc->setOptimizedFlag (fOptimized ? BOOL_TRUE : BOOL_FALSE);
     ptrDoc->setLastActiveDate(lastActiveDate);
     ptrDoc->setLastRecordDate(lastRecordDate);
 
@@ -542,10 +574,6 @@ DocumentFile::readSettingBlock(
     const   FileLength  cbTeamReqs
         =  sizeof(tmpTeamName) + cbTeamGame + sizeof(HeaderItem) * 2;
     if ( cbTeamReqs != cbTeamInfo ) {
-        // std::cerr   <<  "# ERROR : Size Mismatch. "
-        //             <<  "Expected = "   <<  cbTeamReqs
-        //             <<  ", Record = "   <<  cbTeamInfo
-        //             <<  std::endl;
         return ( ERR_FAILURE );
     }
 
@@ -665,6 +693,7 @@ DocumentFile::writeSettingBlock(
         const  ScoreDocument  & objDoc,
         LpWriteBuf      const   outBuf,
         const  FileLength       cbBuf,
+        const  FileLength       fStart,
         FileLength  *   const   cbWrite)
 {
     LpByte  const   ptrBuf  =  static_cast<LpByte>(outBuf);
@@ -683,19 +712,23 @@ DocumentFile::writeSettingBlock(
     const   FileLength  cbTeamReqs  =  (cbTeamInfo + 127) & ~127;
     const   FileLength  cbTeamRsvd  =  (cbTeamReqs - cbTeamInfo);
 
-    HeaderItem  blockInfo[8];
-    BtByte      dataTitle[152];
+    HeaderItem  blkInfo [8];
+    BtByte      docTitle[152];
 
-    ::memset(blockInfo, 0, sizeof(blockInfo));
-    ::memset(dataTitle, 0, sizeof(dataTitle));
+    ::memset(blkInfo,  0, sizeof(blkInfo) );
+    ::memset(docTitle, 0, sizeof(docTitle));
 
-    blockInfo[0]    =  cbTeamInfo;
-    blockInfo[1]    =  cbTeamRsvd;
-    ::memcpy(ptrCur, blockInfo, sizeof(blockInfo));
-    ptrCur  +=  sizeof(blockInfo);
+    blkInfo[0]  =  cbTeamInfo;
+    blkInfo[1]  =  cbTeamRsvd;
+    blkInfo[2]  =  cbTeamReqs;
+    blkInfo[3]  =  0;
+    blkInfo[4]  =  192 + numLeagues * 128 + cbTeamReqs * numTeams;
+    blkInfo[5]  =  fStart + blkInfo[4];
+    ::memcpy(ptrCur, blkInfo, sizeof(blkInfo));
+    ptrCur  +=  sizeof(blkInfo);
 
-    ::memcpy(ptrCur, dataTitle, sizeof(dataTitle));
-    ptrCur  +=  sizeof(dataTitle);
+    ::memcpy(ptrCur, docTitle, sizeof(docTitle));
+    ptrCur  +=  sizeof(docTitle);
 
     ::memcpy(ptrCur,  &numLeagues,  sizeof(numLeagues));
     ptrCur  +=  sizeof(numLeagues);

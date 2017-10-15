@@ -38,6 +38,32 @@ class  DocumentFile
 
 //========================================================================
 //
+//    Internal Type Definitions.
+//
+public:
+
+    //  各ブロックのサイズを計算した結果。  //
+    struct  BlockSizeInfo
+    {
+        FileLength  bsFileHead;     /**<  ファイルヘッダ領域。  **/
+        FileLength  bsExtHead;      /**<  拡張ヘッダ領域。      **/
+        FileLength  bsLeagure;      /**<  全リーグ分のサイズ。  **/
+        FileLength  bsTeamInfo;     /**<  全チーム分のサイズ。  **/
+        FileLength  bsSettings;     /**<  設定領域のサイズ。    **/
+        FileLength  bsRecords;      /**<  レコード部のサイズ。  **/
+        FileLength  bsFileSize;     /**<  ファイル全体の長さ。  **/
+
+        FileLength  cbLeague;       /**<  壱リーグ分のサイズ。  **/
+        FileLength  cbTeamGame;     /**<  試合数テーブル領域。  **/
+        FileLength  cbTeamInfo;     /**<  チーム情報のサイズ。  **/
+        FileLength  cbTeamRsvd;     /**<  チーム情報予約領域。  **/
+        FileLength  cbTeamReqs;     /**<  壱チーム分のサイズ。  **/
+        FileLength  cbRecsHead;     /**<  レコード部先頭領域。  **/
+        FileLength  cbRecsBody;     /**<  レコード部本体領域。  **/
+    };
+
+//========================================================================
+//
 //    Constructor(s) and Destructor.
 //
 public:
@@ -86,11 +112,13 @@ public:
     /**   バイナリ形式で保存するのに必要な容量を計算する。
     **
     **  @param [in] objDoc    ドキュメント。
+    **  @param[out] bsInfo    各ブロックのサイズ。
     **  @return     シリアライズに必要なバイト数。
     **/
     static  FileLength
     computeImageSize(
-            const  ScoreDocument  & objDoc);
+            const  ScoreDocument  & objDoc,
+            BlockSizeInfo  *        bsInfo);
 
     //----------------------------------------------------------------
     /**   データをバイナリバッファから読み込む。
@@ -336,6 +364,9 @@ private:
     **  @param [in] objDoc    ドキュメント。
     **  @param[out] outBuf    バッファのアドレス。
     **  @param [in] cbBuf     バッファのバイト数。
+    **  @param [in] fStart    書き込み開始位置。
+    **      ブロック内にレコードの位置を保存する。
+    **      その値を計算するためだけに使う。
     **  @param[out] cbWrtie   書き込んだバイト数。
     **  @return     エラーコードを返す。
     **      -   異常終了の場合は、
@@ -347,6 +378,7 @@ private:
             const  ScoreDocument  & objDoc,
             LpWriteBuf      const   outBuf,
             const  FileLength       cbBuf,
+            const  FileLength       fStart,
             FileLength  *   const   cbWrite);
 
 //========================================================================

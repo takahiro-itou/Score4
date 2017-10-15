@@ -44,7 +44,11 @@ namespace  Common  {
 ScoreDocument::ScoreDocument()
     : m_leagueInfos(),
       m_teamInfos  (),
-      m_gameResults()
+      m_gameResults(),
+      m_fOptimized (BOOL_FALSE),
+      m_lastActiveDate(0),
+      m_lastRecordDate(0),
+      m_lastImportDate(0)
 {
 }
 
@@ -372,6 +376,22 @@ Boolean
 ScoreDocument::getOptimizedFlag()  const
 {
     return ( this->m_fOptimized );
+}
+
+//----------------------------------------------------------------
+//    最適化済みフラグを設定する。
+//
+
+ErrCode
+ScoreDocument::setOptimizedFlag(
+        const  Boolean  fVal)
+{
+    if ( (fVal == BOOL_TRUE) && (getNumRecords() > 1) ) {
+        return ( ERR_FAILURE );
+    }
+
+    this->m_fOptimized  =  fVal;
+    return ( ERR_SUCCESS );
 }
 
 //----------------------------------------------------------------
