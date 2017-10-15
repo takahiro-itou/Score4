@@ -611,6 +611,40 @@ DocumentFile::writeRecordBlock(
         const  FileLength       cbBuf,
         FileLength  *   const   cbWrite)
 {
+    LpByte  const   ptrBuf  =  static_cast<LpByte>(outBuf);
+    LpByte          ptrCur  =  ptrBuf;
+
+    const   GamesCount  numRecords  =  objDoc.getNumRecords();
+    ::memcpy(ptrCur,  &numRecords, sizeof(numRecords));
+    ptrCur  +=  sizeof(numRecords);
+
+    DateSerial  lastGameDate,  lastRecordDate;
+
+    ::memcpy(ptrCur,    &lastGameDate,    sizeof(lastGameDate)  );
+    ptrCur  +=  sizeof(lastGameDate);
+    ::memcpy(ptrCur,    &lastRecordDate,  sizeof(lastRecordDate));
+    ptrCur  +=  sizeof(lastRecordDate);
+
+    HeaderItem  fOptimized  =  BOOL_TRUE;
+    ::memcpy(ptrCur,  &fOptimized, sizeof(fOptimized));
+    ptrCur  +=  sizeof(fOptimized);
+
+    for ( GamesCount t = 0; t < numRecords; ++ t ) {
+        const   ScoreDocument::GameResult  &
+            gameRecord  =  objDoc.getGameRecord(t);
+        unsigned  int  *  const
+                ptrU32  =  pointer_cast<unsigned  int  *>(ptrCur);
+        ptrU32[ 0]  =  gameRecord.eGameFlags;
+        ::memcpy(ptrU32 + 1, &(gameRecord.recordDate), sizeof(DateSerial));
+        ptrU32[ 3]  =  gameRecord.visitorTeam;
+        ptrU32[ 4]  =  gameRecord.homeTeam;
+        ptrU32[ 5]  =  gameRecord.visitorScore;
+        ptrU32[ 6]  =  gameRecord.homeScore;
+
+        ptrCur  +=  RECORD_SIZE;
+    }
+
+    (*cbWrite)  =  static_cast<FileLength>(ptrCur - ptrBuf);
     return ( ERR_SUCCESS );
 }
 
