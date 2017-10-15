@@ -102,7 +102,7 @@ ErrorDetectionCode::setupGenPoly(
 
     //  指定された生成多項式でテーブルを作成する。  //
     for ( EDCode i = 0; i < CRC32_TABLE_SIZE; ++ i ) {
-        EDCode  valCRC  = 0;
+        EDCode  valCRC  = (i << 24);
         for ( int k = 0; k < 8; ++ k ) {
             valCRC  = (valCRC << 1)
                     ^ ((valCRC & CRC32_MASK) ? crcPoly : 0);
@@ -164,15 +164,8 @@ ErrorDetectionCode::computeCRC32(
 
     for ( FileLength i = 0; i < cbBuf; ++ i ) {
         EDCode  valBuf  =  static_cast<EDCode>(inBuf[i]);
-        for ( int k = 0; k < 8; ++ k ) {
-            valCRC  = (valCRC << 1)
-                    ^ ((valCRC & CRC32_MASK) ? crcPoly : 0);
-
-            if ( (valBuf & 0x80) ) {
-                valCRC  ^=  1;
-            }
-            valBuf  <<=  1;
-        }
+        valCRC  =  (tblCRC[( (valCRC >> 24) ) & 0xFF])
+                        ^ (valCRC << 8) ^ (valBuf);
     }
 
     return ( valCRC );
