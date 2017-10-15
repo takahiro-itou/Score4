@@ -120,6 +120,7 @@ DocumentFile::computeImageSize(
     cbTotal += (FILE_HEADER_SIZE + EXTRA_HEADER_SIZE);
     cbTotal += cbSettings;
     cbTotal += cbRecords;
+    cbTotal += ErrorDetectionCode::CRC32_CODE_LENGTH;
 
     return ( cbTotal );
 }
@@ -235,7 +236,57 @@ DocumentFile::saveToBinaryBuffer(
         LpWriteBuf  const       outBuf,
         const   FileLength      cbBuf)
 {
-    return ( ERR_FAILURE );
+    ErrCode         retErr;
+    FileHeader      fileHeader;
+    ExtraHeader     extHeader;
+
+    fileHeader.fSignature   = 0x4C435357;
+    fileHeader.fVersion     = 0x00010000;
+    fileHeader.headerID     = 0x00000000;
+    fileHeader.headerGame   = 0x4C425342;
+    fileHeader.headerSize   = sizeof(FileHeader);
+    fileHeader.offsRecord   = sizeof(FileHeader) + sizeof(ExtraHeader);
+    fileHeader.reserved06   = 0;
+    fileHeader.reserved07   = 0;
+    fileHeader.offsExtHead  = sizeof(FileHeader);
+    fileHeader.sizeExtHead  = sizeof(ExtraHeader);
+    fileHeader.reserved10   = 0;
+    fileHeader.reserved11   = 0;
+    fileHeader.reserved12   = 0;
+    fileHeader.reserved13   = 0;
+    fileHeader.reserved14   = 0;
+    fileHeader.reserved15   = 0;
+
+    extHeader.lastImport    = 0;
+    ::memset(extHeader.hiReserved, 0, sizeof(extHeader.hiReserved));
+
+    retErr  = writeFileHeader(fileHeader, extHeader, cbBuf, outBuf);
+    if ( retErr != ERR_SUCCESS ) {
+        return ( retErr );
+    }
+
+    LpByte  const   ptrBuf  =  static_cast<LpByte>(outBuf);
+    FileLength      cbWrite =  0;
+
+    retErr  = writeSettingBlock(
+                    objDoc,
+                    ptrBuf + fileHeader.offsRecord,
+                    cbBuf  - fileHeader.offsRecord,
+                    &cbWrite);
+    if ( retErr != ERR_SUCCESS ) {
+        return ( ERR_SUCCESS );
+    }
+
+    retErr  = writeRecordBlock(
+                    objDoc,
+                    ptrBuf + (fileHeader.offsRecord + cbWrite),
+                    cbBuf  - (fileHeader.offsRecord + cbWrite),
+                    &cbWrite);
+    if ( retErr != ERR_SUCCESS ) {
+        return ( retErr );
+    }
+
+    return ( ERR_SUCCESS );
 }
 
 //----------------------------------------------------------------
@@ -248,12 +299,25 @@ DocumentFile::saveToBinaryFile(
         const  std::string    & fileName)
 {
     const   FileLength  cbOuts  = computeImageSize(objDoc);
-    std::vector<BtByte> outBuf(cbOuts);
+    std::vector<BtByte> outBuf(cbOuts, 0);
 
     const  ErrCode
         retErr  = saveToBinaryBuffer(objDoc, &(outBuf[0]), cbOuts);
 
-    return ( retErr );
+    if ( retErr != ERR_SUCCESS ) {
+        return ( retErr );
+    }
+
+    FILE *  fp  = fopen(fileName.c_str(), "wb");
+    if ( fp == NULL ) {
+        return ( ERR_FILE_OPEN_ERROR );
+    }
+    if ( fwrite(&(outBuf[0]), 1, cbOuts, fp) != cbOuts ) {
+        return ( ERR_FILE_IO_ERROR );
+    }
+    fclose(fp);
+
+    return ( ERR_SUCCESS );
 }
 
 //----------------------------------------------------------------
@@ -336,7 +400,8 @@ DocumentFile::readFileHeader(
         FileHeader   *  const   fileHead,
         ExtraHeader  *  const   extHead)
 {
-    CONSTEXPR_VAR   FileLength  FILE_HEADER_SIZE    =  sizeof(FileHeader);
+    CONSTEXPR_VAR   FileLength
+            FILE_HEADER_SIZE  =  sizeof(FileHeader);
     if ( cbBuf < FILE_HEADER_SIZE ) {
         return ( ERR_FAILURE );
     }
@@ -490,6 +555,66 @@ DocumentFile::readSettingBlock(
 
     (* cbRead)  =  static_cast<FileLength>(ptrCur - ptrBuf);
     return ( ERR_SUCCESS );
+}
+
+//----------------------------------------------------------------
+//    ファイルヘッダを書き込む。
+//
+
+ErrCode
+DocumentFile::writeFileHeader(
+        const   FileHeader    & fileHead,
+        const   ExtraHeader   & extHead,
+        const   FileLength      cbBuf,
+        LpWriteBuf      const   outBuf)
+{
+    CONSTEXPR_VAR   FileLength
+            FILE_HEADER_SIZE    =  sizeof(FileHeader);
+    if ( cbBuf < FILE_HEADER_SIZE ) {
+        return ( ERR_FAILURE );
+    }
+
+    const   LpByte  ptrBuf  =  static_cast<LpByte>(outBuf);
+
+    ::memcpy(ptrBuf,  &fileHead, sizeof(FileHeader));
+    const   HeaderItem  offsExtHead = fileHead.offsExtHead;
+    const   HeaderItem  sizeExtHead = fileHead.sizeExtHead;
+    if ( (sizeExtHead > 0) && (offsExtHead > 0) ) {
+        if ( cbBuf < (offsExtHead + sizeExtHead) ) {
+            return ( ERR_FAILURE );
+        }
+        ::memcpy(ptrBuf + offsExtHead, &extHead, sizeExtHead);
+    }
+
+    return ( ERR_SUCCESS );
+}
+
+//----------------------------------------------------------------
+//    レコードブロックを書き込む。
+//
+
+ErrCode
+DocumentFile::writeRecordBlock(
+        const  ScoreDocument  & objDoc,
+        LpWriteBuf      const   outBuf,
+        const  FileLength       cbBuf,
+        FileLength  *   const   cbWrite)
+{
+    return ( ERR_FAILURE );
+}
+
+//----------------------------------------------------------------
+//    設定ブロックを書き込む。
+//
+
+ErrCode
+DocumentFile::writeSettingBlock(
+        const  ScoreDocument  & objDoc,
+        LpWriteBuf      const   outBuf,
+        const  FileLength       cbBuf,
+        FileLength  *   const   cbWrite)
+{
+    return ( ERR_FAILURE );
 }
 
 }   //  End of namespace  Common

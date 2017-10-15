@@ -260,6 +260,10 @@ private:
     **  @param [in] cbBuf     バッファのバイト数。
     **  @param[out] ptrDoc    ドキュメントを格納する変数。
     **  @param[out] cbRead    読み込んだバイト数。
+    **  @return     エラーコードを返す。
+    **      -   異常終了の場合は、
+    **          エラーの種類を示す非ゼロ値を返す。
+    **      -   正常終了の場合は、ゼロを返す。
     **/
     static  ErrCode
     readRecordBlock(
@@ -275,6 +279,10 @@ private:
     **  @param [in] cbBuf     バッファのバイト数。
     **  @param[out] ptrDoc    ドキュメントを格納する変数。
     **  @param[out] cbRead    読み込んだバイト数。
+    **  @return     エラーコードを返す。
+    **      -   異常終了の場合は、
+    **          エラーの種類を示す非ゼロ値を返す。
+    **      -   正常終了の場合は、ゼロを返す。
     **/
     static  ErrCode
     readSettingBlock(
@@ -282,6 +290,64 @@ private:
             const   FileLength  cbBuf,
             ScoreDocument  *    ptrDoc,
             FileLength  *       cbRead);
+
+    //----------------------------------------------------------------
+    /**   ファイルヘッダを書き込む。
+    **
+    **  @param [in] fileHead    標準ヘッダを格納する変数。
+    **  @param [in] extHead     拡張ヘッダを格納する変数。
+    **  @param [in] cbBuf       バッファのバイト数。
+    **  @param[out] outBuf      バッファのアドレス。
+    **  @return     エラーコードを返す。
+    **      -   異常終了の場合は、
+    **          エラーの種類を示す非ゼロ値を返す。
+    **      -   正常終了の場合は、ゼロを返す。
+    **/
+    static  ErrCode
+    writeFileHeader(
+            const   FileHeader    & fileHead,
+            const   ExtraHeader   & extHead,
+            const   FileLength      cbBuf,
+            LpWriteBuf      const   outBuf);
+
+    //----------------------------------------------------------------
+    /**   レコードブロックを書き込む。
+    **
+    **  @param [in] objDoc    ドキュメント。
+    **  @param[out] outBuf    バッファのアドレス。
+    **  @param [in] cbBuf     バッファのバイト数。
+    **  @param[out] cbWrtie   書き込んだバイト数。
+    **  @return     エラーコードを返す。
+    **      -   異常終了の場合は、
+    **          エラーの種類を示す非ゼロ値を返す。
+    **      -   正常終了の場合は、ゼロを返す。
+    **/
+    static  ErrCode
+    writeRecordBlock(
+            const  ScoreDocument  & objDoc,
+            LpWriteBuf      const   outBuf,
+            const  FileLength       cbBuf,
+            FileLength  *   const   cbWrite);
+
+
+    //----------------------------------------------------------------
+    /**   設定ブロックを書き込む。
+    **
+    **  @param [in] objDoc    ドキュメント。
+    **  @param[out] outBuf    バッファのアドレス。
+    **  @param [in] cbBuf     バッファのバイト数。
+    **  @param[out] cbWrtie   書き込んだバイト数。
+    **  @return     エラーコードを返す。
+    **      -   異常終了の場合は、
+    **          エラーの種類を示す非ゼロ値を返す。
+    **      -   正常終了の場合は、ゼロを返す。
+    **/
+    static  ErrCode
+    writeSettingBlock(
+            const  ScoreDocument  & objDoc,
+            LpWriteBuf      const   outBuf,
+            const  FileLength       cbBuf,
+            FileLength  *   const   cbWrite);
 
 //========================================================================
 //
