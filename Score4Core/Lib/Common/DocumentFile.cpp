@@ -42,6 +42,11 @@ s_tblRecordFlagName[] = {
     "RESULT"
 };
 
+/**
+**    レコードのサイズ。
+**/
+CONSTEXPR_VAR   FileLength  RECORD_SIZE     =  28;
+
 }   //  End of (Unnamed) namespace.
 
 //========================================================================
@@ -110,16 +115,22 @@ DocumentFile::computeImageSize(
 
     const  LeagueIndex  numLeagues  =  objDoc.getNumLeagues();
     const  TeamIndex    numTeams    =  objDoc.getNumTeams();
+    const  RecordIndex  numRecords  =  objDoc.getNumRecords();
+
     const  FileLength   sizeLeague  =  numLeagues * 128;
-    const  FileLength   sizeTeams   =  numTeams   * 128;
+
+    const  FileLength   cbTeamGame  =  sizeof(HeaderItem) * numTeams * 2;
+    const  FileLength   cbTeamInfo  =  cbTeamGame + 72;
+    const  FileLength   cbTeamReqs  =  (cbTeamInfo + 127) & ~127;
+    const  FileLength   sizeTeams   =  cbTeamReqs * numTeams;
 
     const  FileLength   cbSettings  =  192 + sizeLeague + sizeTeams;
-    const  FileLength   cbRecords   =  0;
+    const  FileLength   cbRecords   =  numRecords * RECORD_SIZE;
 
     FileLength  cbTotal = 0;
     cbTotal += (FILE_HEADER_SIZE + EXTRA_HEADER_SIZE);
     cbTotal += cbSettings;
-    cbTotal += cbRecords;
+    cbTotal += cbRecords + 72;
     cbTotal += ErrorDetectionCode::CRC32_CODE_LENGTH;
 
     return ( cbTotal );
@@ -454,7 +465,6 @@ DocumentFile::readRecordBlock(
 
     ScoreDocument::GameResult   gameRecord;
 
-    const   FileLength  RECORD_SIZE     =  28;
     for ( GamesCount t = 0; t < numRecords; ++ t ) {
         const  unsigned  int  *  const  ptrU32
             =  pointer_cast<const  unsigned  int  *>(ptrCur);
@@ -523,7 +533,8 @@ DocumentFile::readSettingBlock(
     char        tmpTeamName[64];
     HeaderItem  tmpTeamInfo[2];
 
-    const   FileLength  cbTeamGame  =  sizeof(HeaderItem) * gameInfo.size();
+    const   FileLength  cbTeamGame
+        =  sizeof(HeaderItem) * gameInfo.size();
     const   FileLength  cbTeamReqs
         =  sizeof(tmpTeamName) + cbTeamGame + sizeof(HeaderItem) * 2;
     if ( cbTeamReqs != cbTeamInfo ) {
@@ -600,7 +611,7 @@ DocumentFile::writeRecordBlock(
         const  FileLength       cbBuf,
         FileLength  *   const   cbWrite)
 {
-    return ( ERR_FAILURE );
+    return ( ERR_SUCCESS );
 }
 
 //----------------------------------------------------------------
@@ -614,7 +625,89 @@ DocumentFile::writeSettingBlock(
         const  FileLength       cbBuf,
         FileLength  *   const   cbWrite)
 {
-    return ( ERR_FAILURE );
+    LpByte  const   ptrBuf  =  static_cast<LpByte>(outBuf);
+    LpByte          ptrCur  =  ptrBuf;
+
+    const  LeagueIndex  numLeagues  =  objDoc.getNumLeagues();
+    const  TeamIndex    numTeams    =  objDoc.getNumTeams();
+    std::vector<HeaderItem>     gameInfo(numTeams * 2);
+    char        tmpTeamName[64];
+    HeaderItem  tmpTeamInfo[2];
+
+    const   FileLength  cbTeamGame
+        =  sizeof(HeaderItem) * gameInfo.size();
+    const   FileLength  cbTeamInfo
+        =  sizeof(tmpTeamName) + cbTeamGame + sizeof(HeaderItem) * 2;
+    const   FileLength  cbTeamReqs  =  (cbTeamInfo + 127) & ~127;
+    const   FileLength  cbTeamRsvd  =  (cbTeamReqs - cbTeamInfo);
+
+    HeaderItem  blockInfo[8];
+    BtByte      dataTitle[152];
+
+    ::memset(blockInfo, 0, sizeof(blockInfo));
+    ::memset(dataTitle, 0, sizeof(dataTitle));
+
+    blockInfo[0]    =  cbTeamInfo;
+    blockInfo[1]    =  cbTeamRsvd;
+    ::memcpy(ptrCur, blockInfo, sizeof(blockInfo));
+    ptrCur  +=  sizeof(blockInfo);
+
+    ::memcpy(ptrCur, dataTitle, sizeof(dataTitle));
+    ptrCur  +=  sizeof(dataTitle);
+
+    ::memcpy(ptrCur,  &numLeagues,  sizeof(numLeagues));
+    ptrCur  +=  sizeof(numLeagues);
+    ::memcpy(ptrCur,  &numTeams,    sizeof(numTeams)  );
+    ptrCur  +=  sizeof(numTeams);
+
+    //  リーグ情報を書き込む。  //
+    for ( LeagueIndex k = 0; k < numLeagues; ++ k ) {
+        const   ScoreDocument::LeagueInfo  &
+            leagueInfo  =  objDoc.getLeagueInfo(k);
+        char        tmpName[96];
+        HeaderItem  tmpInfo[8];
+        ::memset(tmpName, 0, sizeof(tmpName));
+        ::memset(tmpInfo, 0, sizeof(tmpInfo));
+
+        ::strcpy(tmpName, leagueInfo.leagueName.c_str());
+        ::memcpy(ptrCur,  tmpName, sizeof(tmpName));
+        ptrCur  +=  sizeof(tmpName);
+
+        tmpInfo[0]  =  leagueInfo.numPlayOff;
+        ::memcpy(ptrCur,  tmpInfo, sizeof(tmpInfo));
+        ptrCur  +=  sizeof(tmpInfo);
+    }
+
+    //  チーム情報を書き込む。  //
+    for ( TeamIndex i = 0; i < numTeams; ++ i ) {
+        ::memset(tmpTeamName, 0, sizeof(tmpTeamName));
+        ::memset(tmpTeamInfo, 0, sizeof(tmpTeamInfo));
+
+        const   ScoreDocument::TeamInfo
+            & teamInfo  =  objDoc.getTeamInfo(i);
+
+        ::strcpy(tmpTeamName, teamInfo.teamName.c_str());
+        ::memcpy(ptrCur, tmpTeamName, sizeof(tmpTeamName));
+        ptrCur  +=  sizeof(tmpTeamName);
+
+        tmpTeamInfo[0]  =  cbTeamReqs;
+        tmpTeamInfo[1]  =  teamInfo.leagueID;
+        ::memcpy(ptrCur, tmpTeamInfo, sizeof(tmpTeamInfo));
+        ptrCur  +=  sizeof(tmpTeamInfo);
+
+        for ( int j = 0; j < numTeams; ++ j ) {
+            gameInfo.at(j * 2 + 0)  =  objDoc.getGameCount(i, j);
+            gameInfo.at(j * 2 + 1)  =  objDoc.getGameCount(j, i);
+        }
+        ::memcpy(ptrCur, &(gameInfo[0]), cbTeamGame);
+        ptrCur  +=  cbTeamGame;
+
+        ::memset(ptrCur, 0, cbTeamRsvd);
+        ptrCur  +=  cbTeamRsvd;
+    }
+
+    (*cbWrite)  =  static_cast<FileLength>(ptrCur - ptrBuf);
+    return ( ERR_SUCCESS );
 }
 
 }   //  End of namespace  Common
