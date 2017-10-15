@@ -171,6 +171,7 @@ public:
     /**   データをバイナリバッファに書き込む。
     **
     **  @param [in] objDoc    ドキュメント。
+    **  @param [in] bsInfo    各ブロックのサイズ情報。
     **  @param[out] outBuf    バッファのアドレス。
     **  @param [in] cbBuf     バッファのバイト数。
     **  @return     エラーコードを返す。
@@ -181,6 +182,7 @@ public:
     static  ErrCode
     saveToBinaryBuffer(
             const  ScoreDocument  & objDoc,
+            const  BlockSizeInfo  * bsInfo,
             LpWriteBuf  const       outBuf,
             const   FileLength      cbBuf);
 
@@ -376,6 +378,7 @@ private:
     static  ErrCode
     writeSettingBlock(
             const  ScoreDocument  & objDoc,
+            const  BlockSizeInfo  & bsInfo,
             LpWriteBuf      const   outBuf,
             const  FileLength       cbBuf,
             const  FileLength       fStart,

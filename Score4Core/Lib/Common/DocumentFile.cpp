@@ -258,12 +258,19 @@ DocumentFile::readFromTextStream(
 ErrCode
 DocumentFile::saveToBinaryBuffer(
         const  ScoreDocument  & objDoc,
+        const  BlockSizeInfo  * bsInfo,
         LpWriteBuf  const       outBuf,
         const   FileLength      cbBuf)
 {
+    BlockSizeInfo   tmpBsInfo;
     ErrCode         retErr;
     FileHeader      fileHeader;
     ExtraHeader     extHeader;
+
+    if ( bsInfo == nullptr ) {
+        computeImageSize(objDoc,  &tmpBsInfo);
+        bsInfo  =  &tmpBsInfo;
+    }
 
     fileHeader.fSignature   = 0x4C435357;
     fileHeader.fVersion     = 0x00010000;
@@ -295,6 +302,7 @@ DocumentFile::saveToBinaryBuffer(
 
     retErr  = writeSettingBlock(
                     objDoc,
+                    * bsInfo,
                     ptrBuf + fileHeader.offsRecord,
                     cbBuf  - fileHeader.offsRecord,
                     fileHeader.offsRecord,
@@ -315,9 +323,6 @@ DocumentFile::saveToBinaryBuffer(
         return ( retErr );
     }
     if ( cbWrite != cbRecs ) {
-        std::cerr   <<  "Write : "  <<  cbWrite
-                    <<  ", Expected = " <<  cbRecs
-                    <<  std::endl;
         return ( ERR_INDEX_OUT_OF_RANGE );
     }
 
@@ -342,10 +347,9 @@ DocumentFile::saveToBinaryFile(
     const   FileLength  cbOuts  = computeImageSize(objDoc,  &bsInfo);
     std::vector<BtByte> outBuf(cbOuts, 0);
 
-    std::cerr   <<  "WRITE SIZE = " <<  cbOuts
-            <<  std::endl;
     const  ErrCode
-        retErr  = saveToBinaryBuffer(objDoc, &(outBuf[0]), cbOuts);
+        retErr  = saveToBinaryBuffer(
+                        objDoc, &bsInfo, &(outBuf[0]), cbOuts);
 
     if ( retErr != ERR_SUCCESS ) {
         return ( retErr );
@@ -691,6 +695,7 @@ DocumentFile::writeRecordBlock(
 ErrCode
 DocumentFile::writeSettingBlock(
         const  ScoreDocument  & objDoc,
+        const  BlockSizeInfo  & bsInfo,
         LpWriteBuf      const   outBuf,
         const  FileLength       cbBuf,
         const  FileLength       fStart,
@@ -705,12 +710,12 @@ DocumentFile::writeSettingBlock(
     char        tmpTeamName[64];
     HeaderItem  tmpTeamInfo[2];
 
-    const   FileLength  cbTeamGame
-        =  sizeof(HeaderItem) * gameInfo.size();
-    const   FileLength  cbTeamInfo
-        =  sizeof(tmpTeamName) + cbTeamGame + sizeof(HeaderItem) * 2;
-    const   FileLength  cbTeamReqs  =  (cbTeamInfo + 127) & ~127;
-    const   FileLength  cbTeamRsvd  =  (cbTeamReqs - cbTeamInfo);
+    // const   FileLength  cbTeamGame
+    //     =  sizeof(HeaderItem) * gameInfo.size();
+    // const   FileLength  cbTeamInfo
+    //     =  sizeof(tmpTeamName) + cbTeamGame + sizeof(HeaderItem) * 2;
+    // const   FileLength  cbTeamReqs  =  (cbTeamInfo + 127) & ~127;
+    // const   FileLength  cbTeamRsvd  =  (cbTeamReqs - cbTeamInfo);
 
     HeaderItem  blkInfo [8];
     BtByte      docTitle[152];
@@ -718,11 +723,11 @@ DocumentFile::writeSettingBlock(
     ::memset(blkInfo,  0, sizeof(blkInfo) );
     ::memset(docTitle, 0, sizeof(docTitle));
 
-    blkInfo[0]  =  cbTeamInfo;
-    blkInfo[1]  =  cbTeamRsvd;
-    blkInfo[2]  =  cbTeamReqs;
+    blkInfo[0]  =  bsInfo.cbTeamInfo;
+    blkInfo[1]  =  bsInfo.cbTeamRsvd;
+    blkInfo[2]  =  bsInfo.cbTeamReqs;
     blkInfo[3]  =  0;
-    blkInfo[4]  =  192 + numLeagues * 128 + cbTeamReqs * numTeams;
+    blkInfo[4]  =  bsInfo.bsSettings;
     blkInfo[5]  =  fStart + blkInfo[4];
     ::memcpy(ptrCur, blkInfo, sizeof(blkInfo));
     ptrCur  +=  sizeof(blkInfo);
@@ -765,7 +770,7 @@ DocumentFile::writeSettingBlock(
         ::memcpy(ptrCur, tmpTeamName, sizeof(tmpTeamName));
         ptrCur  +=  sizeof(tmpTeamName);
 
-        tmpTeamInfo[0]  =  cbTeamReqs;
+        tmpTeamInfo[0]  =  bsInfo.cbTeamReqs;
         tmpTeamInfo[1]  =  teamInfo.leagueID;
         ::memcpy(ptrCur, tmpTeamInfo, sizeof(tmpTeamInfo));
         ptrCur  +=  sizeof(tmpTeamInfo);
@@ -774,11 +779,11 @@ DocumentFile::writeSettingBlock(
             gameInfo.at(j * 2 + 0)  =  objDoc.getGameCount(i, j);
             gameInfo.at(j * 2 + 1)  =  objDoc.getGameCount(j, i);
         }
-        ::memcpy(ptrCur, &(gameInfo[0]), cbTeamGame);
-        ptrCur  +=  cbTeamGame;
+        ::memcpy(ptrCur, &(gameInfo[0]), bsInfo.cbTeamGame);
+        ptrCur  +=  (bsInfo.cbTeamGame);
 
-        ::memset(ptrCur, 0, cbTeamRsvd);
-        ptrCur  +=  cbTeamRsvd;
+        ::memset(ptrCur, 0, bsInfo.cbTeamRsvd);
+        ptrCur  +=  (bsInfo.cbTeamRsvd);
     }
 
     (*cbWrite)  =  static_cast<FileLength>(ptrCur - ptrBuf);
