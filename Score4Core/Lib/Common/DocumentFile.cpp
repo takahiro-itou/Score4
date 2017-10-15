@@ -618,7 +618,8 @@ DocumentFile::writeRecordBlock(
     ::memcpy(ptrCur,  &numRecords, sizeof(numRecords));
     ptrCur  +=  sizeof(numRecords);
 
-    DateSerial  lastGameDate,  lastRecordDate;
+    const   DateSerial  lastGameDate    =  0;
+    const   DateSerial  lastRecordDate  =  0;
 
     ::memcpy(ptrCur,    &lastGameDate,    sizeof(lastGameDate)  );
     ptrCur  +=  sizeof(lastGameDate);
@@ -628,6 +629,9 @@ DocumentFile::writeRecordBlock(
     HeaderItem  fOptimized  =  BOOL_TRUE;
     ::memcpy(ptrCur,  &fOptimized, sizeof(fOptimized));
     ptrCur  +=  sizeof(fOptimized);
+
+    ::memset(ptrCur,  0xFF,  sizeof(HeaderItem) * 12);
+    ptrCur  +=  (sizeof(HeaderItem) * 12);
 
     for ( GamesCount t = 0; t < numRecords; ++ t ) {
         const   ScoreDocument::GameResult  &
