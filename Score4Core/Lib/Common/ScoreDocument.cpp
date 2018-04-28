@@ -44,7 +44,11 @@ namespace  Common  {
 ScoreDocument::ScoreDocument()
     : m_leagueInfos(),
       m_teamInfos  (),
-      m_gameResults()
+      m_gameResults(),
+      m_fOptimized (BOOL_FALSE),
+      m_lastActiveDate(0),
+      m_lastRecordDate(0),
+      m_lastImportDate(0)
 {
 }
 
@@ -241,6 +245,72 @@ ScoreDocument::getGameRecord(
 }
 
 //----------------------------------------------------------------
+//    最終試合日付を取得する。
+//
+
+DateSerial
+ScoreDocument::getLastActiveDate()  const
+{
+    return ( this->m_lastActiveDate );
+}
+
+//----------------------------------------------------------------
+//    最終試合日付を設定する。
+//
+
+ErrCode
+ScoreDocument::setLastActiveDate(
+        const   DateSerial  dsVal)
+{
+    this->m_lastActiveDate  =  dsVal;
+    return ( ERR_SUCCESS );
+}
+
+//----------------------------------------------------------------
+//    最終インポート日時を取得する。
+//
+
+DateSerial
+ScoreDocument::getLastImportDate()  const
+{
+    return ( this->m_lastImportDate );
+}
+
+//----------------------------------------------------------------
+//    最終インポート日時を設定する。
+//
+
+ErrCode
+ScoreDocument::setLastImportDate(
+        const   DateSerial  dsVal)
+{
+    this->m_lastImportDate  =  dsVal;
+    return ( ERR_SUCCESS );
+}
+
+//----------------------------------------------------------------
+//    最終レコード日付を取得する。
+//
+
+DateSerial
+ScoreDocument::getLastRecordDate()  const
+{
+    return ( this->m_lastRecordDate );
+}
+
+//----------------------------------------------------------------
+//    最終レコード日付を設定する。
+//
+
+ErrCode
+ScoreDocument::setLastRecordDate(
+        const   DateSerial  dsVal)
+{
+    this->m_lastRecordDate  =  dsVal;
+    return ( ERR_SUCCESS );
+}
+
+//----------------------------------------------------------------
 //    登録されているリーグの情報を取得する。
 //
 
@@ -296,6 +366,32 @@ TeamIndex
 ScoreDocument::getNumTeams()  const
 {
     return ( this->m_teamInfos.size() );
+}
+
+//----------------------------------------------------------------
+//    最適化済みフラグを取得する。
+//
+
+Boolean
+ScoreDocument::getOptimizedFlag()  const
+{
+    return ( this->m_fOptimized );
+}
+
+//----------------------------------------------------------------
+//    最適化済みフラグを設定する。
+//
+
+ErrCode
+ScoreDocument::setOptimizedFlag(
+        const  Boolean  fVal)
+{
+    if ( (fVal == BOOL_TRUE) && (getNumRecords() > 1) ) {
+        return ( ERR_FAILURE );
+    }
+
+    this->m_fOptimized  =  fVal;
+    return ( ERR_SUCCESS );
 }
 
 //----------------------------------------------------------------

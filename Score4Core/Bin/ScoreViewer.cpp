@@ -42,5 +42,10 @@ int  main(int argc, char * argv[])
         return ( retErr );
     }
 
+    retErr  = docFile.saveToBinaryFile(objDoc, "dummy.bin");
+    if ( retErr != Common::ERR_SUCCESS ) {
+        return ( retErr );
+    }
+
     return ( 0 );
 }

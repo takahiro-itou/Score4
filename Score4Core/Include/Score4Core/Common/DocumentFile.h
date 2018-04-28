@@ -38,6 +38,32 @@ class  DocumentFile
 
 //========================================================================
 //
+//    Internal Type Definitions.
+//
+public:
+
+    //  各ブロックのサイズを計算した結果。  //
+    struct  BlockSizeInfo
+    {
+        FileLength  bsFileHead;     /**<  ファイルヘッダ領域。  **/
+        FileLength  bsExtHead;      /**<  拡張ヘッダ領域。      **/
+        FileLength  bsLeagure;      /**<  全リーグ分のサイズ。  **/
+        FileLength  bsTeamInfo;     /**<  全チーム分のサイズ。  **/
+        FileLength  bsSettings;     /**<  設定領域のサイズ。    **/
+        FileLength  bsRecords;      /**<  レコード部のサイズ。  **/
+        FileLength  bsFileSize;     /**<  ファイル全体の長さ。  **/
+
+        FileLength  cbLeague;       /**<  壱リーグ分のサイズ。  **/
+        FileLength  cbTeamGame;     /**<  試合数テーブル領域。  **/
+        FileLength  cbTeamInfo;     /**<  チーム情報のサイズ。  **/
+        FileLength  cbTeamRsvd;     /**<  チーム情報予約領域。  **/
+        FileLength  cbTeamReqs;     /**<  壱チーム分のサイズ。  **/
+        FileLength  cbRecsHead;     /**<  レコード部先頭領域。  **/
+        FileLength  cbRecsBody;     /**<  レコード部本体領域。  **/
+    };
+
+//========================================================================
+//
 //    Constructor(s) and Destructor.
 //
 public:
@@ -86,11 +112,13 @@ public:
     /**   バイナリ形式で保存するのに必要な容量を計算する。
     **
     **  @param [in] objDoc    ドキュメント。
+    **  @param[out] bsInfo    各ブロックのサイズ。
     **  @return     シリアライズに必要なバイト数。
     **/
     static  FileLength
     computeImageSize(
-            const  ScoreDocument  & objDoc);
+            const  ScoreDocument  & objDoc,
+            BlockSizeInfo  *        bsInfo);
 
     //----------------------------------------------------------------
     /**   データをバイナリバッファから読み込む。
@@ -143,6 +171,7 @@ public:
     /**   データをバイナリバッファに書き込む。
     **
     **  @param [in] objDoc    ドキュメント。
+    **  @param [in] bsInfo    各ブロックのサイズ情報。
     **  @param[out] outBuf    バッファのアドレス。
     **  @param [in] cbBuf     バッファのバイト数。
     **  @return     エラーコードを返す。
@@ -153,6 +182,7 @@ public:
     static  ErrCode
     saveToBinaryBuffer(
             const  ScoreDocument  & objDoc,
+            const  BlockSizeInfo  * bsInfo,
             LpWriteBuf  const       outBuf,
             const   FileLength      cbBuf);
 
@@ -225,6 +255,13 @@ private:
         HeaderItem      hiReserved[14];
     };
 
+    enum  {
+        /**
+        **    誤り検出（CRC-32）の計算に使う生成多項式。
+        **/
+        FILE_CRC32_GENPOLY  =  0x04C11DB7
+    };
+
 private:
 
     //----------------------------------------------------------------
@@ -253,6 +290,10 @@ private:
     **  @param [in] cbBuf     バッファのバイト数。
     **  @param[out] ptrDoc    ドキュメントを格納する変数。
     **  @param[out] cbRead    読み込んだバイト数。
+    **  @return     エラーコードを返す。
+    **      -   異常終了の場合は、
+    **          エラーの種類を示す非ゼロ値を返す。
+    **      -   正常終了の場合は、ゼロを返す。
     **/
     static  ErrCode
     readRecordBlock(
@@ -268,6 +309,10 @@ private:
     **  @param [in] cbBuf     バッファのバイト数。
     **  @param[out] ptrDoc    ドキュメントを格納する変数。
     **  @param[out] cbRead    読み込んだバイト数。
+    **  @return     エラーコードを返す。
+    **      -   異常終了の場合は、
+    **          エラーの種類を示す非ゼロ値を返す。
+    **      -   正常終了の場合は、ゼロを返す。
     **/
     static  ErrCode
     readSettingBlock(
@@ -275,6 +320,69 @@ private:
             const   FileLength  cbBuf,
             ScoreDocument  *    ptrDoc,
             FileLength  *       cbRead);
+
+    //----------------------------------------------------------------
+    /**   ファイルヘッダを書き込む。
+    **
+    **  @param [in] fileHead    標準ヘッダを格納する変数。
+    **  @param [in] extHead     拡張ヘッダを格納する変数。
+    **  @param [in] cbBuf       バッファのバイト数。
+    **  @param[out] outBuf      バッファのアドレス。
+    **  @return     エラーコードを返す。
+    **      -   異常終了の場合は、
+    **          エラーの種類を示す非ゼロ値を返す。
+    **      -   正常終了の場合は、ゼロを返す。
+    **/
+    static  ErrCode
+    writeFileHeader(
+            const   FileHeader    & fileHead,
+            const   ExtraHeader   & extHead,
+            const   FileLength      cbBuf,
+            LpWriteBuf      const   outBuf);
+
+    //----------------------------------------------------------------
+    /**   レコードブロックを書き込む。
+    **
+    **  @param [in] objDoc    ドキュメント。
+    **  @param[out] outBuf    バッファのアドレス。
+    **  @param [in] cbBuf     バッファのバイト数。
+    **  @param[out] cbWrtie   書き込んだバイト数。
+    **  @return     エラーコードを返す。
+    **      -   異常終了の場合は、
+    **          エラーの種類を示す非ゼロ値を返す。
+    **      -   正常終了の場合は、ゼロを返す。
+    **/
+    static  ErrCode
+    writeRecordBlock(
+            const  ScoreDocument  & objDoc,
+            LpWriteBuf      const   outBuf,
+            const  FileLength       cbBuf,
+            FileLength  *   const   cbWrite);
+
+
+    //----------------------------------------------------------------
+    /**   設定ブロックを書き込む。
+    **
+    **  @param [in] objDoc    ドキュメント。
+    **  @param[out] outBuf    バッファのアドレス。
+    **  @param [in] cbBuf     バッファのバイト数。
+    **  @param [in] fStart    書き込み開始位置。
+    **      ブロック内にレコードの位置を保存する。
+    **      その値を計算するためだけに使う。
+    **  @param[out] cbWrtie   書き込んだバイト数。
+    **  @return     エラーコードを返す。
+    **      -   異常終了の場合は、
+    **          エラーの種類を示す非ゼロ値を返す。
+    **      -   正常終了の場合は、ゼロを返す。
+    **/
+    static  ErrCode
+    writeSettingBlock(
+            const  ScoreDocument  & objDoc,
+            const  BlockSizeInfo  & bsInfo,
+            LpWriteBuf      const   outBuf,
+            const  FileLength       cbBuf,
+            const  FileLength       fStart,
+            FileLength  *   const   cbWrite);
 
 //========================================================================
 //

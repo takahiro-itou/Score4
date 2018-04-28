@@ -17,6 +17,7 @@
 #include    "Score4Core/Common/DocumentFile.h"
 
 #include    "Score4Core/Common/DateTimeFormat.h"
+#include    "Score4Core/Common/ErrorDetectionCode.h"
 #include    "Score4Core/Common/ScoreDocument.h"
 
 #include    <fcntl.h>
@@ -40,6 +41,11 @@ s_tblRecordFlagName[] = {
     "CANCEL",
     "RESULT"
 };
+
+/**
+**    レコードのサイズ。
+**/
+CONSTEXPR_VAR   FileLength  RECORD_SIZE     =  28;
 
 }   //  End of (Unnamed) namespace.
 
@@ -102,23 +108,43 @@ DocumentFile::~DocumentFile()
 
 FileLength
 DocumentFile::computeImageSize(
-        const  ScoreDocument  & objDoc)
+        const  ScoreDocument  & objDoc,
+        BlockSizeInfo  *        bsInfo)
 {
     CONSTEXPR_VAR   FileLength  FILE_HEADER_SIZE    =  sizeof(FileHeader);
     CONSTEXPR_VAR   FileLength  EXTRA_HEADER_SIZE   =  sizeof(ExtraHeader);
 
     const  LeagueIndex  numLeagues  =  objDoc.getNumLeagues();
     const  TeamIndex    numTeams    =  objDoc.getNumTeams();
-    const  FileLength   sizeLeague  =  numLeagues * 128;
-    const  FileLength   sizeTeams   =  numTeams   * 128;
+    const  RecordIndex  numRecords  =  objDoc.getNumRecords();
 
-    const  FileLength   cbSettings  =  192 + sizeLeague + sizeTeams;
-    const  FileLength   cbRecords   =  0;
+    const  FileLength   cbTeamGame  =  sizeof(HeaderItem) * numTeams * 2;
+    const  FileLength   cbTeamInfo  =  cbTeamGame + 72;
+    const  FileLength   cbTeamReqs  =  (cbTeamInfo + 127) & ~127;
+
+    bsInfo->cbLeague    =  128;
+    bsInfo->cbTeamGame  =  cbTeamGame;
+    bsInfo->cbTeamInfo  =  cbTeamInfo;
+    bsInfo->cbTeamRsvd  =  (cbTeamReqs - cbTeamInfo);
+    bsInfo->cbTeamReqs  =  cbTeamReqs;
+    bsInfo->cbRecsHead  =  72;
+    bsInfo->cbRecsBody  =  (RECORD_SIZE * numRecords);
+
+    const  FileLength   sizeLeague  =  (bsInfo->cbLeague) * numLeagues;
+    const  FileLength   sizeTeams   =  (bsInfo->cbTeamReqs) * numTeams;
+
+    bsInfo->bsLeagure   =  sizeLeague;
+    bsInfo->bsTeamInfo  =  sizeTeams ;
 
     FileLength  cbTotal = 0;
-    cbTotal += (FILE_HEADER_SIZE + EXTRA_HEADER_SIZE);
-    cbTotal += cbSettings;
-    cbTotal += cbRecords;
+
+    cbTotal +=  bsInfo->bsFileHead  =  FILE_HEADER_SIZE;
+    cbTotal +=  bsInfo->bsExtHead   =  EXTRA_HEADER_SIZE;
+    cbTotal +=  bsInfo->bsSettings  =  192 + (sizeLeague) + (sizeTeams);
+    cbTotal +=  bsInfo->bsRecords
+            =   (bsInfo->cbRecsHead) + (bsInfo->cbRecsBody);
+    cbTotal +=  ErrorDetectionCode::CRC32_CODE_LENGTH;
+    bsInfo->bsFileSize  =  cbTotal;
 
     return ( cbTotal );
 }
@@ -142,7 +168,16 @@ DocumentFile::readFromBinaryBuffer(
         return ( retErr );
     }
 
+    ErrorDetectionCode  edc;
+    edc.setupGenPoly(FILE_CRC32_GENPOLY);
+    const  ErrorDetectionCode::EDCode
+        valCRC  =  edc.checkCRC32(inBuf, cbBuf);
+    std::cerr   <<  "FILE CRC = "
+                <<  std::hex    <<  valCRC
+                <<  std::endl;
+
     ptrDoc->clearDocument();
+    ptrDoc->setLastImportDate(extHead.lastImport);
 
     const  LpcByte  ptrBuf  =  static_cast<LpcByte>(inBuf);
 
@@ -223,10 +258,80 @@ DocumentFile::readFromTextStream(
 ErrCode
 DocumentFile::saveToBinaryBuffer(
         const  ScoreDocument  & objDoc,
+        const  BlockSizeInfo  * bsInfo,
         LpWriteBuf  const       outBuf,
         const   FileLength      cbBuf)
 {
-    return ( ERR_FAILURE );
+    BlockSizeInfo   tmpBsInfo;
+    ErrCode         retErr;
+    FileHeader      fileHeader;
+    ExtraHeader     extHeader;
+
+    if ( bsInfo == nullptr ) {
+        computeImageSize(objDoc,  &tmpBsInfo);
+        bsInfo  =  &tmpBsInfo;
+    }
+
+    fileHeader.fSignature   = 0x4C435357;
+    fileHeader.fVersion     = 0x00010000;
+    fileHeader.headerID     = 0x00000000;
+    fileHeader.headerGame   = 0x4C425342;
+    fileHeader.headerSize   = sizeof(FileHeader);
+    fileHeader.offsRecord   = sizeof(FileHeader) + sizeof(ExtraHeader);
+    fileHeader.reserved06   = 0;
+    fileHeader.reserved07   = 0;
+    fileHeader.offsExtHead  = sizeof(FileHeader);
+    fileHeader.sizeExtHead  = sizeof(ExtraHeader);
+    fileHeader.reserved10   = 0;
+    fileHeader.reserved11   = 0;
+    fileHeader.reserved12   = 0;
+    fileHeader.reserved13   = 0;
+    fileHeader.reserved14   = 0;
+    fileHeader.reserved15   = 0;
+
+    extHeader.lastImport    = objDoc.getLastImportDate();
+    ::memset(extHeader.hiReserved, 0, sizeof(extHeader.hiReserved));
+
+    retErr  = writeFileHeader(fileHeader, extHeader, cbBuf, outBuf);
+    if ( retErr != ERR_SUCCESS ) {
+        return ( retErr );
+    }
+
+    LpByte  const   ptrBuf  =  static_cast<LpByte>(outBuf);
+    FileLength      cbWrite =  0;
+
+    retErr  = writeSettingBlock(
+                    objDoc,
+                    * bsInfo,
+                    ptrBuf + fileHeader.offsRecord,
+                    cbBuf  - fileHeader.offsRecord,
+                    fileHeader.offsRecord,
+                    &cbWrite);
+    if ( retErr != ERR_SUCCESS ) {
+        return ( ERR_SUCCESS );
+    }
+
+    const   FileLength  cbRecs
+        =  cbBuf - (fileHeader.offsRecord + cbWrite)
+        -  ErrorDetectionCode::CRC32_CODE_LENGTH;
+    retErr  = writeRecordBlock(
+                    objDoc,
+                    ptrBuf + (fileHeader.offsRecord + cbWrite),
+                    cbRecs,
+                    &cbWrite);
+    if ( retErr != ERR_SUCCESS ) {
+        return ( retErr );
+    }
+    if ( cbWrite != cbRecs ) {
+        return ( ERR_INDEX_OUT_OF_RANGE );
+    }
+
+    //  誤り検出符号。  //
+    ErrorDetectionCode  edc;
+    edc.setupGenPoly(FILE_CRC32_GENPOLY);
+    edc.writeCRC32(outBuf,  cbBuf);
+
+    return ( ERR_SUCCESS );
 }
 
 //----------------------------------------------------------------
@@ -238,13 +343,28 @@ DocumentFile::saveToBinaryFile(
         const  ScoreDocument  & objDoc,
         const  std::string    & fileName)
 {
-    const   FileLength  cbOuts  = computeImageSize(objDoc);
-    std::vector<BtByte> outBuf(cbOuts);
+    BlockSizeInfo       bsInfo;
+    const   FileLength  cbOuts  = computeImageSize(objDoc,  &bsInfo);
+    std::vector<BtByte> outBuf(cbOuts, 0);
 
     const  ErrCode
-        retErr  = saveToBinaryBuffer(objDoc, &(outBuf[0]), cbOuts);
+        retErr  = saveToBinaryBuffer(
+                        objDoc, &bsInfo, &(outBuf[0]), cbOuts);
 
-    return ( retErr );
+    if ( retErr != ERR_SUCCESS ) {
+        return ( retErr );
+    }
+
+    FILE *  fp  = fopen(fileName.c_str(), "wb");
+    if ( fp == NULL ) {
+        return ( ERR_FILE_OPEN_ERROR );
+    }
+    if ( fwrite(&(outBuf[0]), 1, cbOuts, fp) != cbOuts ) {
+        return ( ERR_FILE_IO_ERROR );
+    }
+    fclose(fp);
+
+    return ( ERR_SUCCESS );
 }
 
 //----------------------------------------------------------------
@@ -327,7 +447,8 @@ DocumentFile::readFileHeader(
         FileHeader   *  const   fileHead,
         ExtraHeader  *  const   extHead)
 {
-    CONSTEXPR_VAR   FileLength  FILE_HEADER_SIZE    =  sizeof(FileHeader);
+    CONSTEXPR_VAR   FileLength
+            FILE_HEADER_SIZE  =  sizeof(FileHeader);
     if ( cbBuf < FILE_HEADER_SIZE ) {
         return ( ERR_FAILURE );
     }
@@ -366,9 +487,9 @@ DocumentFile::readRecordBlock(
     ::memcpy(&numRecords,  ptrCur, sizeof(numRecords));
     ptrCur  +=  sizeof(numRecords);
 
-    DateSerial  lastGameDate,  lastRecordDate;
-    ::memcpy(&lastGameDate,    ptrCur, sizeof(lastGameDate)  );
-    ptrCur  +=  sizeof(lastGameDate);
+    DateSerial  lastActiveDate,  lastRecordDate;
+    ::memcpy(&lastActiveDate,  ptrCur, sizeof(lastActiveDate));
+    ptrCur  +=  sizeof(lastActiveDate);
     ::memcpy(&lastRecordDate,  ptrCur, sizeof(lastRecordDate));
     ptrCur  +=  sizeof(lastRecordDate);
 
@@ -376,11 +497,14 @@ DocumentFile::readRecordBlock(
     ::memcpy(&fOptimized,  ptrCur, sizeof(fOptimized));
     ptrCur  +=  sizeof(fOptimized);
 
+    ptrDoc->setOptimizedFlag (fOptimized ? BOOL_TRUE : BOOL_FALSE);
+    ptrDoc->setLastActiveDate(lastActiveDate);
+    ptrDoc->setLastRecordDate(lastRecordDate);
+
     ptrCur  +=  (sizeof(HeaderItem) * 12);
 
     ScoreDocument::GameResult   gameRecord;
 
-    const   FileLength  RECORD_SIZE     =  28;
     for ( GamesCount t = 0; t < numRecords; ++ t ) {
         const  unsigned  int  *  const  ptrU32
             =  pointer_cast<const  unsigned  int  *>(ptrCur);
@@ -449,14 +573,11 @@ DocumentFile::readSettingBlock(
     char        tmpTeamName[64];
     HeaderItem  tmpTeamInfo[2];
 
-    const   FileLength  cbTeamGame  =  sizeof(HeaderItem) * gameInfo.size();
+    const   FileLength  cbTeamGame
+        =  sizeof(HeaderItem) * gameInfo.size();
     const   FileLength  cbTeamReqs
         =  sizeof(tmpTeamName) + cbTeamGame + sizeof(HeaderItem) * 2;
     if ( cbTeamReqs != cbTeamInfo ) {
-        // std::cerr   <<  "# ERROR : Size Mismatch. "
-        //             <<  "Expected = "   <<  cbTeamReqs
-        //             <<  ", Record = "   <<  cbTeamInfo
-        //             <<  std::endl;
         return ( ERR_FAILURE );
     }
 
@@ -480,6 +601,192 @@ DocumentFile::readSettingBlock(
     }
 
     (* cbRead)  =  static_cast<FileLength>(ptrCur - ptrBuf);
+    return ( ERR_SUCCESS );
+}
+
+//----------------------------------------------------------------
+//    ファイルヘッダを書き込む。
+//
+
+ErrCode
+DocumentFile::writeFileHeader(
+        const   FileHeader    & fileHead,
+        const   ExtraHeader   & extHead,
+        const   FileLength      cbBuf,
+        LpWriteBuf      const   outBuf)
+{
+    CONSTEXPR_VAR   FileLength
+            FILE_HEADER_SIZE    =  sizeof(FileHeader);
+    if ( cbBuf < FILE_HEADER_SIZE ) {
+        return ( ERR_FAILURE );
+    }
+
+    const   LpByte  ptrBuf  =  static_cast<LpByte>(outBuf);
+
+    ::memcpy(ptrBuf,  &fileHead, sizeof(FileHeader));
+    const   HeaderItem  offsExtHead = fileHead.offsExtHead;
+    const   HeaderItem  sizeExtHead = fileHead.sizeExtHead;
+    if ( (sizeExtHead > 0) && (offsExtHead > 0) ) {
+        if ( cbBuf < (offsExtHead + sizeExtHead) ) {
+            return ( ERR_FAILURE );
+        }
+        ::memcpy(ptrBuf + offsExtHead, &extHead, sizeExtHead);
+    }
+
+    return ( ERR_SUCCESS );
+}
+
+//----------------------------------------------------------------
+//    レコードブロックを書き込む。
+//
+
+ErrCode
+DocumentFile::writeRecordBlock(
+        const  ScoreDocument  & objDoc,
+        LpWriteBuf      const   outBuf,
+        const  FileLength       cbBuf,
+        FileLength  *   const   cbWrite)
+{
+    LpByte  const   ptrBuf  =  static_cast<LpByte>(outBuf);
+    LpByte          ptrCur  =  ptrBuf;
+
+    const   GamesCount  numRecords  =  objDoc.getNumRecords();
+    ::memcpy(ptrCur,  &numRecords, sizeof(numRecords));
+    ptrCur  +=  sizeof(numRecords);
+
+    const   DateSerial  lastActiveDate  =  objDoc.getLastActiveDate();
+    const   DateSerial  lastRecordDate  =  objDoc.getLastRecordDate();
+    const   HeaderItem  fOptimized      =  objDoc.getOptimizedFlag();
+
+    ::memcpy(ptrCur,  &lastActiveDate,  sizeof(lastActiveDate));
+    ptrCur  +=  sizeof(lastActiveDate);
+    ::memcpy(ptrCur,  &lastRecordDate,  sizeof(lastRecordDate));
+    ptrCur  +=  sizeof(lastRecordDate);
+
+    ::memcpy(ptrCur,  &fOptimized, sizeof(fOptimized));
+    ptrCur  +=  sizeof(fOptimized);
+
+    ::memset(ptrCur,  0xFF,  sizeof(HeaderItem) * 12);
+    ptrCur  +=  (sizeof(HeaderItem) * 12);
+
+    for ( GamesCount t = 0; t < numRecords; ++ t ) {
+        const   ScoreDocument::GameResult  &
+            gameRecord  =  objDoc.getGameRecord(t);
+        unsigned  int  *  const
+                ptrU32  =  pointer_cast<unsigned  int  *>(ptrCur);
+        ptrU32[ 0]  =  gameRecord.eGameFlags;
+        ::memcpy(ptrU32 + 1, &(gameRecord.recordDate), sizeof(DateSerial));
+        ptrU32[ 3]  =  gameRecord.visitorTeam;
+        ptrU32[ 4]  =  gameRecord.homeTeam;
+        ptrU32[ 5]  =  gameRecord.visitorScore;
+        ptrU32[ 6]  =  gameRecord.homeScore;
+
+        ptrCur  +=  RECORD_SIZE;
+    }
+
+    (*cbWrite)  =  static_cast<FileLength>(ptrCur - ptrBuf);
+    return ( ERR_SUCCESS );
+}
+
+//----------------------------------------------------------------
+//    設定ブロックを書き込む。
+//
+
+ErrCode
+DocumentFile::writeSettingBlock(
+        const  ScoreDocument  & objDoc,
+        const  BlockSizeInfo  & bsInfo,
+        LpWriteBuf      const   outBuf,
+        const  FileLength       cbBuf,
+        const  FileLength       fStart,
+        FileLength  *   const   cbWrite)
+{
+    LpByte  const   ptrBuf  =  static_cast<LpByte>(outBuf);
+    LpByte          ptrCur  =  ptrBuf;
+
+    const  LeagueIndex  numLeagues  =  objDoc.getNumLeagues();
+    const  TeamIndex    numTeams    =  objDoc.getNumTeams();
+    std::vector<HeaderItem>     gameInfo(numTeams * 2);
+    char        tmpTeamName[64];
+    HeaderItem  tmpTeamInfo[2];
+
+    // const   FileLength  cbTeamGame
+    //     =  sizeof(HeaderItem) * gameInfo.size();
+    // const   FileLength  cbTeamInfo
+    //     =  sizeof(tmpTeamName) + cbTeamGame + sizeof(HeaderItem) * 2;
+    // const   FileLength  cbTeamReqs  =  (cbTeamInfo + 127) & ~127;
+    // const   FileLength  cbTeamRsvd  =  (cbTeamReqs - cbTeamInfo);
+
+    HeaderItem  blkInfo [8];
+    BtByte      docTitle[152];
+
+    ::memset(blkInfo,  0, sizeof(blkInfo) );
+    ::memset(docTitle, 0, sizeof(docTitle));
+
+    blkInfo[0]  =  bsInfo.cbTeamInfo;
+    blkInfo[1]  =  bsInfo.cbTeamRsvd;
+    blkInfo[2]  =  bsInfo.cbTeamReqs;
+    blkInfo[3]  =  0;
+    blkInfo[4]  =  bsInfo.bsSettings;
+    blkInfo[5]  =  fStart + blkInfo[4];
+    ::memcpy(ptrCur, blkInfo, sizeof(blkInfo));
+    ptrCur  +=  sizeof(blkInfo);
+
+    ::memcpy(ptrCur, docTitle, sizeof(docTitle));
+    ptrCur  +=  sizeof(docTitle);
+
+    ::memcpy(ptrCur,  &numLeagues,  sizeof(numLeagues));
+    ptrCur  +=  sizeof(numLeagues);
+    ::memcpy(ptrCur,  &numTeams,    sizeof(numTeams)  );
+    ptrCur  +=  sizeof(numTeams);
+
+    //  リーグ情報を書き込む。  //
+    for ( LeagueIndex k = 0; k < numLeagues; ++ k ) {
+        const   ScoreDocument::LeagueInfo  &
+            leagueInfo  =  objDoc.getLeagueInfo(k);
+        char        tmpName[96];
+        HeaderItem  tmpInfo[8];
+        ::memset(tmpName, 0, sizeof(tmpName));
+        ::memset(tmpInfo, 0, sizeof(tmpInfo));
+
+        ::strcpy(tmpName, leagueInfo.leagueName.c_str());
+        ::memcpy(ptrCur,  tmpName, sizeof(tmpName));
+        ptrCur  +=  sizeof(tmpName);
+
+        tmpInfo[0]  =  leagueInfo.numPlayOff;
+        ::memcpy(ptrCur,  tmpInfo, sizeof(tmpInfo));
+        ptrCur  +=  sizeof(tmpInfo);
+    }
+
+    //  チーム情報を書き込む。  //
+    for ( TeamIndex i = 0; i < numTeams; ++ i ) {
+        ::memset(tmpTeamName, 0, sizeof(tmpTeamName));
+        ::memset(tmpTeamInfo, 0, sizeof(tmpTeamInfo));
+
+        const   ScoreDocument::TeamInfo
+            & teamInfo  =  objDoc.getTeamInfo(i);
+
+        ::strcpy(tmpTeamName, teamInfo.teamName.c_str());
+        ::memcpy(ptrCur, tmpTeamName, sizeof(tmpTeamName));
+        ptrCur  +=  sizeof(tmpTeamName);
+
+        tmpTeamInfo[0]  =  bsInfo.cbTeamReqs;
+        tmpTeamInfo[1]  =  teamInfo.leagueID;
+        ::memcpy(ptrCur, tmpTeamInfo, sizeof(tmpTeamInfo));
+        ptrCur  +=  sizeof(tmpTeamInfo);
+
+        for ( int j = 0; j < numTeams; ++ j ) {
+            gameInfo.at(j * 2 + 0)  =  objDoc.getGameCount(i, j);
+            gameInfo.at(j * 2 + 1)  =  objDoc.getGameCount(j, i);
+        }
+        ::memcpy(ptrCur, &(gameInfo[0]), bsInfo.cbTeamGame);
+        ptrCur  +=  (bsInfo.cbTeamGame);
+
+        ::memset(ptrCur, 0, bsInfo.cbTeamRsvd);
+        ptrCur  +=  (bsInfo.cbTeamRsvd);
+    }
+
+    (*cbWrite)  =  static_cast<FileLength>(ptrCur - ptrBuf);
     return ( ERR_SUCCESS );
 }
 
