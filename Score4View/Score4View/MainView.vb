@@ -9,6 +9,30 @@
     Private m_currentFontName As String
     Private m_currentFontSize As Integer
 
+    Private m_flagModified As Boolean
+    Private m_lastFileName As String
+
+    ''================================================================================
+    ''    変更点があれば保存するか確認する。
+    ''================================================================================
+    Private Function isModificationClean() As Boolean
+        If (m_flagModified = False) Then
+            Return True
+        End If
+
+        Dim msgAns As System.Windows.Forms.DialogResult
+        msgAns = MessageBox.Show("このデータには変更が加えられています。保存しますか？", "Save", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question)
+        If (msgAns = Windows.Forms.DialogResult.Cancel) Then
+            Return False
+        End If
+
+        If (msgAns = Windows.Forms.DialogResult.Yes) Then
+
+        End If
+
+        Return True
+    End Function
+
     ''================================================================================
     ''    ウィンドウを初期位置に移動する。
     ''================================================================================
@@ -28,13 +52,21 @@
             ' ウィンドウが画面からはみ出す場合は、画面中央に移動させる。 '
             fx = sx + (sc.Bounds.Width - fw) \ 2
         End If
-        If (fy  < sy) Or (fy + fh > sc.Bounds.Bottom) Then
+        If (fy < sy) Or (fy + fh > sc.Bounds.Bottom) Then
             ' ウィンドウが画面からはみ出す場合は、画面中央に移動させる。 '
             fy = sy + (sc.Bounds.Height - fh) \ 2
         End If
 
         Me.Bounds = New Rectangle(fx, fy, fw, fh)
     End Sub
+
+    ''================================================================================
+    ''    ファイルを開いてデータを読み込む。
+    ''================================================================================
+    Private Function processOpenFile(ByVal fileName As String) As Boolean
+        MessageBox.Show(fileName)
+        Return False
+    End Function
 
     ''================================================================================
     ''    ウィンドウの現在位置を保存する。
@@ -64,6 +96,19 @@
     ''    メニュー「ファイル」－「開く」
     ''================================================================================
     Private Sub mnuFileOpen_Click(sender As Object, e As EventArgs) Handles mnuFileOpen.Click
+        If isModificationClean() = False Then Exit Sub
+
+        With dlgOpen
+            .DefaultExt = ".gsr"
+            .FileName = m_lastFileName
+            .Filter = "Game Score Record(*.gsr)|*.gsr|All files(*.*)|*.*"
+            .FilterIndex = 1
+            .InitialDirectory = m_appPath
+
+            If .ShowDialog() = DialogResult.OK Then
+                processOpenFile(.FileName)
+            End If
+        End With
 
     End Sub
 
