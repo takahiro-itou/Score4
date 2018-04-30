@@ -1,5 +1,51 @@
 ﻿Public Class MainView
 
+    Private Const INI_SEC_FONTS As String = "Fonts"
+    Private Const INI_SEC_MAINWINDOW As String = "MainWindow"
+
+    Private m_appPath As String
+    Private m_iniFileName As String
+
+    Private m_currentFontName As String
+    Private m_currentFontSize As Integer
+
+    ''================================================================================
+    ''    ウィンドウを初期位置に移動する。
+    ''================================================================================
+    Private Sub moveWindowToStartPosition()
+        Dim fx As Integer
+        Dim fy As Integer
+        Dim fw As Integer = Me.Width
+        Dim fh As Integer = Me.Height
+
+        Dim sc As System.Windows.Forms.Screen = System.Windows.Forms.Screen.FromControl(Me)
+        Dim sx As Integer = sc.Bounds.Left
+        Dim sy As Integer = sc.Bounds.Top
+
+        fx = GetSettingINI(m_iniFileName, INI_SEC_MAINWINDOW, "Left", -1)
+        fy = GetSettingINI(m_iniFileName, INI_SEC_MAINWINDOW, "Top", -1)
+        If (fx < sx) Or (fx + fw > sc.Bounds.Right) Then
+            ' ウィンドウが画面からはみ出す場合は、画面中央に移動させる。 '
+            fx = sx + (sc.Bounds.Width - fw) \ 2
+        End If
+        If (fy  < sy) Or (fy + fh > sc.Bounds.Bottom) Then
+            ' ウィンドウが画面からはみ出す場合は、画面中央に移動させる。 '
+            fy = sy + (sc.Bounds.Height - fh) \ 2
+        End If
+
+        Me.Bounds = New Rectangle(fx, fy, fw, fh)
+    End Sub
+
+    ''================================================================================
+    ''    ウィンドウの現在位置を保存する。
+    ''================================================================================
+    Private Sub saveWindowPrefs()
+        With Me
+            SaveSettingINI(m_iniFileName, INI_SEC_MAINWINDOW, "Left", .Left)
+            SaveSettingINI(m_iniFileName, INI_SEC_MAINWINDOW, "Top", .Top)
+        End With
+    End Sub
+
     ''================================================================================
     ''    メニュー「ファイル」－「終了」
     ''================================================================================
@@ -105,8 +151,14 @@
 
     End Sub
 
-    Private Sub MainView_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+    Private Sub MainView_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
+        saveWindowPrefs()
+    End Sub
 
+    Private Sub MainView_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        m_appPath = GetAppPath()
+        m_iniFileName = m_appPath & "\Score.ini"
+        moveWindowToStartPosition()
     End Sub
 
 End Class
