@@ -24,9 +24,6 @@ Partial Class MainView
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(MainView))
         Me.mnuMain = New System.Windows.Forms.MenuStrip()
-        Me.dlgOpen = New System.Windows.Forms.OpenFileDialog()
-        Me.dlgSave = New System.Windows.Forms.SaveFileDialog()
-        Me.dlgFont = New System.Windows.Forms.FontDialog()
         Me.mnuFile = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuFileNew = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuFileOpen = New System.Windows.Forms.ToolStripMenuItem()
@@ -36,8 +33,6 @@ Partial Class MainView
         Me.mnuFileSep1 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuFileExit = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuScore = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuMagic = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuOptions = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuScoreEdit = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuScoreDetail = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuScoreImport = New System.Windows.Forms.ToolStripMenuItem()
@@ -45,154 +40,164 @@ Partial Class MainView
         Me.mnuScoreSettings = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuScoreSep1 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuScoreRefresh = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuOptionsFont = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuMagic = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuMagicVictory = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuMagicPlayoff = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItem1 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuMagicEasy = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItem2 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuMagicLine = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuOptions = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuOptionsFont = New System.Windows.Forms.ToolStripMenuItem()
+        Me.dlgOpen = New System.Windows.Forms.OpenFileDialog()
+        Me.dlgSave = New System.Windows.Forms.SaveFileDialog()
+        Me.dlgFont = New System.Windows.Forms.FontDialog()
         Me.mnuMain.SuspendLayout()
         Me.SuspendLayout()
         '
         'mnuMain
         '
-        Me.mnuMain.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuFile, Me.mnuScore, Me.mnuMagic, Me.mnuOptions})
         resources.ApplyResources(Me.mnuMain, "mnuMain")
+        Me.mnuMain.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuFile, Me.mnuScore, Me.mnuMagic, Me.mnuOptions})
         Me.mnuMain.Name = "mnuMain"
+        '
+        'mnuFile
+        '
+        resources.ApplyResources(Me.mnuFile, "mnuFile")
+        Me.mnuFile.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuFileNew, Me.mnuFileOpen, Me.mnuFileSep0, Me.mnuFileSave, Me.mnuFileSaveAs, Me.mnuFileSep1, Me.mnuFileExit})
+        Me.mnuFile.Name = "mnuFile"
+        '
+        'mnuFileNew
+        '
+        resources.ApplyResources(Me.mnuFileNew, "mnuFileNew")
+        Me.mnuFileNew.Name = "mnuFileNew"
+        '
+        'mnuFileOpen
+        '
+        resources.ApplyResources(Me.mnuFileOpen, "mnuFileOpen")
+        Me.mnuFileOpen.Name = "mnuFileOpen"
+        '
+        'mnuFileSep0
+        '
+        resources.ApplyResources(Me.mnuFileSep0, "mnuFileSep0")
+        Me.mnuFileSep0.Name = "mnuFileSep0"
+        '
+        'mnuFileSave
+        '
+        resources.ApplyResources(Me.mnuFileSave, "mnuFileSave")
+        Me.mnuFileSave.Name = "mnuFileSave"
+        '
+        'mnuFileSaveAs
+        '
+        resources.ApplyResources(Me.mnuFileSaveAs, "mnuFileSaveAs")
+        Me.mnuFileSaveAs.Name = "mnuFileSaveAs"
+        '
+        'mnuFileSep1
+        '
+        resources.ApplyResources(Me.mnuFileSep1, "mnuFileSep1")
+        Me.mnuFileSep1.Name = "mnuFileSep1"
+        '
+        'mnuFileExit
+        '
+        resources.ApplyResources(Me.mnuFileExit, "mnuFileExit")
+        Me.mnuFileExit.Name = "mnuFileExit"
+        '
+        'mnuScore
+        '
+        resources.ApplyResources(Me.mnuScore, "mnuScore")
+        Me.mnuScore.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuScoreEdit, Me.mnuScoreDetail, Me.mnuScoreImport, Me.mnuScoreSep0, Me.mnuScoreSettings, Me.mnuScoreSep1, Me.mnuScoreRefresh})
+        Me.mnuScore.Name = "mnuScore"
+        '
+        'mnuScoreEdit
+        '
+        resources.ApplyResources(Me.mnuScoreEdit, "mnuScoreEdit")
+        Me.mnuScoreEdit.Name = "mnuScoreEdit"
+        '
+        'mnuScoreDetail
+        '
+        resources.ApplyResources(Me.mnuScoreDetail, "mnuScoreDetail")
+        Me.mnuScoreDetail.Name = "mnuScoreDetail"
+        '
+        'mnuScoreImport
+        '
+        resources.ApplyResources(Me.mnuScoreImport, "mnuScoreImport")
+        Me.mnuScoreImport.Name = "mnuScoreImport"
+        '
+        'mnuScoreSep0
+        '
+        resources.ApplyResources(Me.mnuScoreSep0, "mnuScoreSep0")
+        Me.mnuScoreSep0.Name = "mnuScoreSep0"
+        '
+        'mnuScoreSettings
+        '
+        resources.ApplyResources(Me.mnuScoreSettings, "mnuScoreSettings")
+        Me.mnuScoreSettings.Name = "mnuScoreSettings"
+        '
+        'mnuScoreSep1
+        '
+        resources.ApplyResources(Me.mnuScoreSep1, "mnuScoreSep1")
+        Me.mnuScoreSep1.Name = "mnuScoreSep1"
+        '
+        'mnuScoreRefresh
+        '
+        resources.ApplyResources(Me.mnuScoreRefresh, "mnuScoreRefresh")
+        Me.mnuScoreRefresh.Name = "mnuScoreRefresh"
+        '
+        'mnuMagic
+        '
+        resources.ApplyResources(Me.mnuMagic, "mnuMagic")
+        Me.mnuMagic.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuMagicVictory, Me.mnuMagicPlayoff, Me.ToolStripMenuItem1, Me.mnuMagicEasy, Me.ToolStripMenuItem2, Me.mnuMagicLine})
+        Me.mnuMagic.Name = "mnuMagic"
+        '
+        'mnuMagicVictory
+        '
+        resources.ApplyResources(Me.mnuMagicVictory, "mnuMagicVictory")
+        Me.mnuMagicVictory.Name = "mnuMagicVictory"
+        '
+        'mnuMagicPlayoff
+        '
+        resources.ApplyResources(Me.mnuMagicPlayoff, "mnuMagicPlayoff")
+        Me.mnuMagicPlayoff.Name = "mnuMagicPlayoff"
+        '
+        'ToolStripMenuItem1
+        '
+        resources.ApplyResources(Me.ToolStripMenuItem1, "ToolStripMenuItem1")
+        Me.ToolStripMenuItem1.Name = "ToolStripMenuItem1"
+        '
+        'mnuMagicEasy
+        '
+        resources.ApplyResources(Me.mnuMagicEasy, "mnuMagicEasy")
+        Me.mnuMagicEasy.Name = "mnuMagicEasy"
+        '
+        'ToolStripMenuItem2
+        '
+        resources.ApplyResources(Me.ToolStripMenuItem2, "ToolStripMenuItem2")
+        Me.ToolStripMenuItem2.Name = "ToolStripMenuItem2"
+        '
+        'mnuMagicLine
+        '
+        resources.ApplyResources(Me.mnuMagicLine, "mnuMagicLine")
+        Me.mnuMagicLine.Name = "mnuMagicLine"
+        '
+        'mnuOptions
+        '
+        resources.ApplyResources(Me.mnuOptions, "mnuOptions")
+        Me.mnuOptions.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuOptionsFont})
+        Me.mnuOptions.Name = "mnuOptions"
+        '
+        'mnuOptionsFont
+        '
+        resources.ApplyResources(Me.mnuOptionsFont, "mnuOptionsFont")
+        Me.mnuOptionsFont.Name = "mnuOptionsFont"
         '
         'dlgOpen
         '
         Me.dlgOpen.FileName = "OpenFileDialog1"
+        resources.ApplyResources(Me.dlgOpen, "dlgOpen")
         '
-        'mnuFile
+        'dlgSave
         '
-        Me.mnuFile.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuFileNew, Me.mnuFileOpen, Me.mnuFileSep0, Me.mnuFileSave, Me.mnuFileSaveAs, Me.mnuFileSep1, Me.mnuFileExit})
-        Me.mnuFile.Name = "mnuFile"
-        resources.ApplyResources(Me.mnuFile, "mnuFile")
-        '
-        'mnuFileNew
-        '
-        Me.mnuFileNew.Name = "mnuFileNew"
-        resources.ApplyResources(Me.mnuFileNew, "mnuFileNew")
-        '
-        'mnuFileOpen
-        '
-        Me.mnuFileOpen.Name = "mnuFileOpen"
-        resources.ApplyResources(Me.mnuFileOpen, "mnuFileOpen")
-        '
-        'mnuFileSep0
-        '
-        Me.mnuFileSep0.Name = "mnuFileSep0"
-        resources.ApplyResources(Me.mnuFileSep0, "mnuFileSep0")
-        '
-        'mnuFileSave
-        '
-        Me.mnuFileSave.Name = "mnuFileSave"
-        resources.ApplyResources(Me.mnuFileSave, "mnuFileSave")
-        '
-        'mnuFileSaveAs
-        '
-        Me.mnuFileSaveAs.Name = "mnuFileSaveAs"
-        resources.ApplyResources(Me.mnuFileSaveAs, "mnuFileSaveAs")
-        '
-        'mnuFileSep1
-        '
-        Me.mnuFileSep1.Name = "mnuFileSep1"
-        resources.ApplyResources(Me.mnuFileSep1, "mnuFileSep1")
-        '
-        'mnuFileExit
-        '
-        Me.mnuFileExit.Name = "mnuFileExit"
-        resources.ApplyResources(Me.mnuFileExit, "mnuFileExit")
-        '
-        'mnuScore
-        '
-        Me.mnuScore.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuScoreEdit, Me.mnuScoreDetail, Me.mnuScoreImport, Me.mnuScoreSep0, Me.mnuScoreSettings, Me.mnuScoreSep1, Me.mnuScoreRefresh})
-        Me.mnuScore.Name = "mnuScore"
-        resources.ApplyResources(Me.mnuScore, "mnuScore")
-        '
-        'mnuMagic
-        '
-        Me.mnuMagic.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuMagicVictory, Me.mnuMagicPlayoff, Me.ToolStripMenuItem1, Me.mnuMagicEasy, Me.ToolStripMenuItem2, Me.mnuMagicLine})
-        Me.mnuMagic.Name = "mnuMagic"
-        resources.ApplyResources(Me.mnuMagic, "mnuMagic")
-        '
-        'mnuOptions
-        '
-        Me.mnuOptions.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuOptionsFont})
-        Me.mnuOptions.Name = "mnuOptions"
-        resources.ApplyResources(Me.mnuOptions, "mnuOptions")
-        '
-        'mnuScoreEdit
-        '
-        Me.mnuScoreEdit.Name = "mnuScoreEdit"
-        resources.ApplyResources(Me.mnuScoreEdit, "mnuScoreEdit")
-        '
-        'mnuScoreDetail
-        '
-        Me.mnuScoreDetail.Name = "mnuScoreDetail"
-        resources.ApplyResources(Me.mnuScoreDetail, "mnuScoreDetail")
-        '
-        'mnuScoreImport
-        '
-        Me.mnuScoreImport.Name = "mnuScoreImport"
-        resources.ApplyResources(Me.mnuScoreImport, "mnuScoreImport")
-        '
-        'mnuScoreSep0
-        '
-        Me.mnuScoreSep0.Name = "mnuScoreSep0"
-        resources.ApplyResources(Me.mnuScoreSep0, "mnuScoreSep0")
-        '
-        'mnuScoreSettings
-        '
-        Me.mnuScoreSettings.Name = "mnuScoreSettings"
-        resources.ApplyResources(Me.mnuScoreSettings, "mnuScoreSettings")
-        '
-        'mnuScoreSep1
-        '
-        Me.mnuScoreSep1.Name = "mnuScoreSep1"
-        resources.ApplyResources(Me.mnuScoreSep1, "mnuScoreSep1")
-        '
-        'mnuScoreRefresh
-        '
-        Me.mnuScoreRefresh.Name = "mnuScoreRefresh"
-        resources.ApplyResources(Me.mnuScoreRefresh, "mnuScoreRefresh")
-        '
-        'mnuOptionsFont
-        '
-        Me.mnuOptionsFont.Name = "mnuOptionsFont"
-        resources.ApplyResources(Me.mnuOptionsFont, "mnuOptionsFont")
-        '
-        'mnuMagicVictory
-        '
-        Me.mnuMagicVictory.Name = "mnuMagicVictory"
-        resources.ApplyResources(Me.mnuMagicVictory, "mnuMagicVictory")
-        '
-        'mnuMagicPlayoff
-        '
-        Me.mnuMagicPlayoff.Name = "mnuMagicPlayoff"
-        resources.ApplyResources(Me.mnuMagicPlayoff, "mnuMagicPlayoff")
-        '
-        'ToolStripMenuItem1
-        '
-        Me.ToolStripMenuItem1.Name = "ToolStripMenuItem1"
-        resources.ApplyResources(Me.ToolStripMenuItem1, "ToolStripMenuItem1")
-        '
-        'mnuMagicEasy
-        '
-        Me.mnuMagicEasy.Name = "mnuMagicEasy"
-        resources.ApplyResources(Me.mnuMagicEasy, "mnuMagicEasy")
-        '
-        'ToolStripMenuItem2
-        '
-        Me.ToolStripMenuItem2.Name = "ToolStripMenuItem2"
-        resources.ApplyResources(Me.ToolStripMenuItem2, "ToolStripMenuItem2")
-        '
-        'mnuMagicLine
-        '
-        Me.mnuMagicLine.Name = "mnuMagicLine"
-        resources.ApplyResources(Me.mnuMagicLine, "mnuMagicLine")
+        resources.ApplyResources(Me.dlgSave, "dlgSave")
         '
         'MainView
         '
