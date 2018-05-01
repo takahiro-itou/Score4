@@ -52,7 +52,11 @@ Partial Class MainView
         Me.dlgOpen = New System.Windows.Forms.OpenFileDialog()
         Me.dlgSave = New System.Windows.Forms.SaveFileDialog()
         Me.dlgFont = New System.Windows.Forms.FontDialog()
+        Me.grpScore = New System.Windows.Forms.GroupBox()
+        Me.tabLeague = New System.Windows.Forms.TabControl()
+        Me.TabPage2 = New System.Windows.Forms.TabPage()
         Me.mnuMain.SuspendLayout()
+        Me.tabLeague.SuspendLayout()
         Me.SuspendLayout()
         '
         'mnuMain
@@ -194,15 +198,37 @@ Partial Class MainView
         '
         Me.dlgOpen.FileName = "OpenFileDialog1"
         '
+        'grpScore
+        '
+        resources.ApplyResources(Me.grpScore, "grpScore")
+        Me.grpScore.Name = "grpScore"
+        Me.grpScore.TabStop = False
+        '
+        'tabLeague
+        '
+        resources.ApplyResources(Me.tabLeague, "tabLeague")
+        Me.tabLeague.Controls.Add(Me.TabPage2)
+        Me.tabLeague.Name = "tabLeague"
+        Me.tabLeague.SelectedIndex = 0
+        '
+        'TabPage2
+        '
+        resources.ApplyResources(Me.TabPage2, "TabPage2")
+        Me.TabPage2.Name = "TabPage2"
+        Me.TabPage2.UseVisualStyleBackColor = True
+        '
         'MainView
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.grpScore)
         Me.Controls.Add(Me.mnuMain)
+        Me.Controls.Add(Me.tabLeague)
         Me.MainMenuStrip = Me.mnuMain
         Me.Name = "MainView"
         Me.mnuMain.ResumeLayout(False)
         Me.mnuMain.PerformLayout()
+        Me.tabLeague.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -236,5 +262,8 @@ Partial Class MainView
     Friend WithEvents mnuMagicEasy As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ToolStripMenuItem2 As System.Windows.Forms.ToolStripSeparator
     Friend WithEvents mnuMagicLine As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents grpScore As System.Windows.Forms.GroupBox
+    Friend WithEvents tabLeague As System.Windows.Forms.TabControl
+    Friend WithEvents TabPage2 As System.Windows.Forms.TabPage
 
 End Class
