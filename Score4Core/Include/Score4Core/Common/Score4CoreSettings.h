@@ -18,7 +18,11 @@
 #    define   SCORE4CORE_COMMON_INCLUDED_SCORE4_CORE_SETTINGS_H
 
 //  スクリプトによる設定値が書き込まれたヘッダを読み込む。  //
-#include    "Score4Core/.Config/ConfiguredScore4Core.h"
+#if defined( SCORE4_USE_PRE_CONFIGURED_MSVC )
+#    include    "Score4Core/.Config/PreConfigScore4Core.msvc.h"
+#else
+#    include    "Score4Core/.Config/ConfiguredScore4Core.h"
+#endif
 
 SCORE4_CORE_NAMESPACE_BEGIN
 
