@@ -1,5 +1,6 @@
 ﻿Public Class MainView
 
+
     Private Const INI_SEC_FONTS As String = "Fonts"
     Private Const INI_SEC_MAINWINDOW As String = "MainWindow"
 
@@ -64,7 +65,13 @@
     ''    ファイルを開いてデータを読み込む。
     ''================================================================================
     Private Function processOpenFile(ByVal fileName As String) As Boolean
-        MessageBox.Show(fileName)
+        Dim objDoc As Score4Wrapper.Common.ScoreDocument
+        Dim retVal As Score4Wrapper.Common.ErrCode
+
+        objDoc = New Score4Wrapper.Common.ScoreDocument
+        retVal = Score4Wrapper.Common.DocumentFile.readFromBinaryFile(fileName, objDoc)
+
+        MessageBox.Show(retVal)
         Return False
     End Function
 
