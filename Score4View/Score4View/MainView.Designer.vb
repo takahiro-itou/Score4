@@ -53,8 +53,18 @@ Partial Class MainView
         Me.dlgSave = New System.Windows.Forms.SaveFileDialog()
         Me.dlgFont = New System.Windows.Forms.FontDialog()
         Me.grpScore = New System.Windows.Forms.GroupBox()
+        Me.DataGridView2 = New System.Windows.Forms.DataGridView()
+        Me.optShowWins = New System.Windows.Forms.RadioButton()
+        Me.optShowMagic = New System.Windows.Forms.RadioButton()
+        Me.optShowRest = New System.Windows.Forms.RadioButton()
+        Me.chkSchedule = New System.Windows.Forms.CheckBox()
+        Me.MonthCalendar1 = New System.Windows.Forms.MonthCalendar()
+        Me.DataGridView1 = New System.Windows.Forms.DataGridView()
         Me.tabLeague = New System.Windows.Forms.TabControl()
         Me.mnuMain.SuspendLayout()
+        Me.grpScore.SuspendLayout()
+        CType(Me.DataGridView2, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'mnuMain
@@ -199,8 +209,65 @@ Partial Class MainView
         'grpScore
         '
         resources.ApplyResources(Me.grpScore, "grpScore")
+        Me.grpScore.Controls.Add(Me.DataGridView2)
+        Me.grpScore.Controls.Add(Me.optShowWins)
+        Me.grpScore.Controls.Add(Me.optShowMagic)
+        Me.grpScore.Controls.Add(Me.optShowRest)
+        Me.grpScore.Controls.Add(Me.chkSchedule)
+        Me.grpScore.Controls.Add(Me.MonthCalendar1)
+        Me.grpScore.Controls.Add(Me.DataGridView1)
         Me.grpScore.Name = "grpScore"
         Me.grpScore.TabStop = False
+        '
+        'DataGridView2
+        '
+        resources.ApplyResources(Me.DataGridView2, "DataGridView2")
+        Me.DataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.DataGridView2.Name = "DataGridView2"
+        Me.DataGridView2.RowTemplate.Height = 21
+        '
+        'optShowWins
+        '
+        Me.optShowWins.BackColor = System.Drawing.SystemColors.Window
+        resources.ApplyResources(Me.optShowWins, "optShowWins")
+        Me.optShowWins.Name = "optShowWins"
+        Me.optShowWins.TabStop = True
+        Me.optShowWins.UseVisualStyleBackColor = False
+        '
+        'optShowMagic
+        '
+        Me.optShowMagic.BackColor = System.Drawing.SystemColors.Window
+        resources.ApplyResources(Me.optShowMagic, "optShowMagic")
+        Me.optShowMagic.Name = "optShowMagic"
+        Me.optShowMagic.TabStop = True
+        Me.optShowMagic.UseVisualStyleBackColor = False
+        '
+        'optShowRest
+        '
+        Me.optShowRest.BackColor = System.Drawing.SystemColors.Window
+        resources.ApplyResources(Me.optShowRest, "optShowRest")
+        Me.optShowRest.Name = "optShowRest"
+        Me.optShowRest.TabStop = True
+        Me.optShowRest.UseVisualStyleBackColor = False
+        '
+        'chkSchedule
+        '
+        Me.chkSchedule.BackColor = System.Drawing.SystemColors.Window
+        resources.ApplyResources(Me.chkSchedule, "chkSchedule")
+        Me.chkSchedule.Name = "chkSchedule"
+        Me.chkSchedule.UseVisualStyleBackColor = False
+        '
+        'MonthCalendar1
+        '
+        resources.ApplyResources(Me.MonthCalendar1, "MonthCalendar1")
+        Me.MonthCalendar1.Name = "MonthCalendar1"
+        '
+        'DataGridView1
+        '
+        Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        resources.ApplyResources(Me.DataGridView1, "DataGridView1")
+        Me.DataGridView1.Name = "DataGridView1"
+        Me.DataGridView1.RowTemplate.Height = 21
         '
         'tabLeague
         '
@@ -219,6 +286,9 @@ Partial Class MainView
         Me.Name = "MainView"
         Me.mnuMain.ResumeLayout(False)
         Me.mnuMain.PerformLayout()
+        Me.grpScore.ResumeLayout(False)
+        CType(Me.DataGridView2, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -254,5 +324,12 @@ Partial Class MainView
     Friend WithEvents mnuMagicLine As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents grpScore As System.Windows.Forms.GroupBox
     Friend WithEvents tabLeague As System.Windows.Forms.TabControl
+    Friend WithEvents MonthCalendar1 As System.Windows.Forms.MonthCalendar
+    Friend WithEvents DataGridView1 As System.Windows.Forms.DataGridView
+    Friend WithEvents DataGridView2 As System.Windows.Forms.DataGridView
+    Friend WithEvents optShowWins As System.Windows.Forms.RadioButton
+    Friend WithEvents optShowMagic As System.Windows.Forms.RadioButton
+    Friend WithEvents optShowRest As System.Windows.Forms.RadioButton
+    Friend WithEvents chkSchedule As System.Windows.Forms.CheckBox
 
 End Class
