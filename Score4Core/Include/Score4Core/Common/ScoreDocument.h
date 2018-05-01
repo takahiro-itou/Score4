@@ -87,8 +87,8 @@ public:
         RecordFlag      eGameFlags;
         DateSerial      recordDate;
         TeamIndex       visitorTeam;
-        ScoreValue      homeTeam;
-        TeamIndex       visitorScore;
+        TeamIndex       homeTeam;
+        ScoreValue      visitorScore;
         ScoreValue      homeScore;
     };
 
