@@ -172,11 +172,26 @@
         End With
     End Sub
 
+    Private Sub updateLeagueTab()
+        Dim numLeagues As Integer = m_scoreData.getNumLeagues()
+
+        With Me.tabLeague
+            .TabPages.Clear()
+            For i = 0 To numLeagues - 1
+                Dim leagueInfo As Score4Wrapper.Common.LeagueInfo = m_scoreData.leagueInfo(i)
+                Dim leagueTab As System.Windows.Forms.TabPage = New System.Windows.Forms.TabPage(leagueInfo.leagueName)
+                .TabPages.Add(leagueTab)
+            Next
+        End With
+    End Sub
+
     ''================================================================================
     ''    ビューの内容を、最新の情報に更新する。
     ''================================================================================
     Private Sub updateScoreView()
         Dim strBuf As String
+
+        updateLeagueTab()
 
         strBuf = m_scoreData.getNumLeagues()
         For i = 0 To m_scoreData.getNumLeagues() - 1
