@@ -43,9 +43,9 @@ Partial Class MainView
         Me.mnuMagic = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuMagicVictory = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuMagicPlayoff = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripMenuItem1 = New System.Windows.Forms.ToolStripSeparator()
+        Me.mnuMagicSep0 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuMagicEasy = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripMenuItem2 = New System.Windows.Forms.ToolStripSeparator()
+        Me.mnuMagicSep1 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuMagicLine = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuOptions = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuOptionsFont = New System.Windows.Forms.ToolStripMenuItem()
@@ -54,9 +54,7 @@ Partial Class MainView
         Me.dlgFont = New System.Windows.Forms.FontDialog()
         Me.grpScore = New System.Windows.Forms.GroupBox()
         Me.tabLeague = New System.Windows.Forms.TabControl()
-        Me.TabPage2 = New System.Windows.Forms.TabPage()
         Me.mnuMain.SuspendLayout()
-        Me.tabLeague.SuspendLayout()
         Me.SuspendLayout()
         '
         'mnuMain
@@ -149,7 +147,7 @@ Partial Class MainView
         '
         'mnuMagic
         '
-        Me.mnuMagic.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuMagicVictory, Me.mnuMagicPlayoff, Me.ToolStripMenuItem1, Me.mnuMagicEasy, Me.ToolStripMenuItem2, Me.mnuMagicLine})
+        Me.mnuMagic.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuMagicVictory, Me.mnuMagicPlayoff, Me.mnuMagicSep0, Me.mnuMagicEasy, Me.mnuMagicSep1, Me.mnuMagicLine})
         Me.mnuMagic.Name = "mnuMagic"
         resources.ApplyResources(Me.mnuMagic, "mnuMagic")
         '
@@ -163,20 +161,20 @@ Partial Class MainView
         Me.mnuMagicPlayoff.Name = "mnuMagicPlayoff"
         resources.ApplyResources(Me.mnuMagicPlayoff, "mnuMagicPlayoff")
         '
-        'ToolStripMenuItem1
+        'mnuMagicSep0
         '
-        Me.ToolStripMenuItem1.Name = "ToolStripMenuItem1"
-        resources.ApplyResources(Me.ToolStripMenuItem1, "ToolStripMenuItem1")
+        Me.mnuMagicSep0.Name = "mnuMagicSep0"
+        resources.ApplyResources(Me.mnuMagicSep0, "mnuMagicSep0")
         '
         'mnuMagicEasy
         '
         Me.mnuMagicEasy.Name = "mnuMagicEasy"
         resources.ApplyResources(Me.mnuMagicEasy, "mnuMagicEasy")
         '
-        'ToolStripMenuItem2
+        'mnuMagicSep1
         '
-        Me.ToolStripMenuItem2.Name = "ToolStripMenuItem2"
-        resources.ApplyResources(Me.ToolStripMenuItem2, "ToolStripMenuItem2")
+        Me.mnuMagicSep1.Name = "mnuMagicSep1"
+        resources.ApplyResources(Me.mnuMagicSep1, "mnuMagicSep1")
         '
         'mnuMagicLine
         '
@@ -207,15 +205,8 @@ Partial Class MainView
         'tabLeague
         '
         resources.ApplyResources(Me.tabLeague, "tabLeague")
-        Me.tabLeague.Controls.Add(Me.TabPage2)
         Me.tabLeague.Name = "tabLeague"
         Me.tabLeague.SelectedIndex = 0
-        '
-        'TabPage2
-        '
-        resources.ApplyResources(Me.TabPage2, "TabPage2")
-        Me.TabPage2.Name = "TabPage2"
-        Me.TabPage2.UseVisualStyleBackColor = True
         '
         'MainView
         '
@@ -228,7 +219,6 @@ Partial Class MainView
         Me.Name = "MainView"
         Me.mnuMain.ResumeLayout(False)
         Me.mnuMain.PerformLayout()
-        Me.tabLeague.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -258,12 +248,11 @@ Partial Class MainView
     Friend WithEvents mnuOptionsFont As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents mnuMagicVictory As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents mnuMagicPlayoff As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents ToolStripMenuItem1 As System.Windows.Forms.ToolStripSeparator
+    Friend WithEvents mnuMagicSep0 As System.Windows.Forms.ToolStripSeparator
     Friend WithEvents mnuMagicEasy As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents ToolStripMenuItem2 As System.Windows.Forms.ToolStripSeparator
+    Friend WithEvents mnuMagicSep1 As System.Windows.Forms.ToolStripSeparator
     Friend WithEvents mnuMagicLine As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents grpScore As System.Windows.Forms.GroupBox
     Friend WithEvents tabLeague As System.Windows.Forms.TabControl
-    Friend WithEvents TabPage2 As System.Windows.Forms.TabPage
 
 End Class

@@ -161,37 +161,37 @@
     <value>ファイル(&amp;F)</value>
   </data>
   <data name="mnuScoreEdit.Size" type="System.Drawing.Size, System.Drawing">
-    <value>161, 22</value>
+    <value>170, 22</value>
   </data>
   <data name="mnuScoreEdit.Text" xml:space="preserve">
     <value>編集(&amp;E) ...</value>
   </data>
   <data name="mnuScoreDetail.Size" type="System.Drawing.Size, System.Drawing">
-    <value>161, 22</value>
+    <value>170, 22</value>
   </data>
   <data name="mnuScoreDetail.Text" xml:space="preserve">
     <value>詳細(&amp;D) ...</value>
   </data>
   <data name="mnuScoreImport.Size" type="System.Drawing.Size, System.Drawing">
-    <value>161, 22</value>
+    <value>170, 22</value>
   </data>
   <data name="mnuScoreImport.Text" xml:space="preserve">
     <value>インポート(&amp;I) ...</value>
   </data>
   <data name="mnuScoreSep0.Size" type="System.Drawing.Size, System.Drawing">
-    <value>158, 6</value>
+    <value>167, 6</value>
   </data>
   <data name="mnuScoreSettings.Size" type="System.Drawing.Size, System.Drawing">
-    <value>161, 22</value>
+    <value>170, 22</value>
   </data>
   <data name="mnuScoreSettings.Text" xml:space="preserve">
     <value>設定の変更(&amp;O) ...</value>
   </data>
   <data name="mnuScoreSep1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>158, 6</value>
+    <value>167, 6</value>
   </data>
   <data name="mnuScoreRefresh.Size" type="System.Drawing.Size, System.Drawing">
-    <value>161, 22</value>
+    <value>170, 22</value>
   </data>
   <data name="mnuScoreRefresh.Text" xml:space="preserve">
     <value>最新の情報に更新</value>
@@ -203,31 +203,31 @@
     <value>スコア(&amp;S)</value>
   </data>
   <data name="mnuMagicVictory.Size" type="System.Drawing.Size, System.Drawing">
-    <value>164, 22</value>
+    <value>185, 22</value>
   </data>
   <data name="mnuMagicVictory.Text" xml:space="preserve">
     <value>優勝マジック(&amp;V)</value>
   </data>
   <data name="mnuMagicPlayoff.Size" type="System.Drawing.Size, System.Drawing">
-    <value>164, 22</value>
+    <value>185, 22</value>
   </data>
   <data name="mnuMagicPlayoff.Text" xml:space="preserve">
     <value>プレーオフマジック(&amp;P)</value>
   </data>
-  <data name="ToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>161, 6</value>
+  <data name="mnuMagicSep0.Size" type="System.Drawing.Size, System.Drawing">
+    <value>182, 6</value>
   </data>
   <data name="mnuMagicEasy.Size" type="System.Drawing.Size, System.Drawing">
-    <value>164, 22</value>
+    <value>185, 22</value>
   </data>
   <data name="mnuMagicEasy.Text" xml:space="preserve">
     <value>簡易計算で行う</value>
   </data>
-  <data name="ToolStripMenuItem2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>161, 6</value>
+  <data name="mnuMagicSep1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>182, 6</value>
   </data>
   <data name="mnuMagicLine.Size" type="System.Drawing.Size, System.Drawing">
-    <value>164, 22</value>
+    <value>185, 22</value>
   </data>
   <data name="mnuMagicLine.Text" xml:space="preserve">
     <value>詳細表示(&amp;L) ...</value>
@@ -239,7 +239,7 @@
     <value>マジック(&amp;M)</value>
   </data>
   <data name="mnuOptionsFont.Size" type="System.Drawing.Size, System.Drawing">
-    <value>152, 22</value>
+    <value>128, 22</value>
   </data>
   <data name="mnuOptionsFont.Text" xml:space="preserve">
     <value>フォント(&amp;F) ...</value>

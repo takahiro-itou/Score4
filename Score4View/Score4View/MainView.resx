@@ -242,7 +242,7 @@
   <data name="mnuMagicPlayoff.Text" xml:space="preserve">
     <value>&amp;Playoff Magic</value>
   </data>
-  <data name="ToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="mnuMagicSep0.Size" type="System.Drawing.Size, System.Drawing">
     <value>187, 6</value>
   </data>
   <data name="mnuMagicEasy.Size" type="System.Drawing.Size, System.Drawing">
@@ -251,7 +251,7 @@
   <data name="mnuMagicEasy.Text" xml:space="preserve">
     <value>&amp;Easy Calc Mode</value>
   </data>
-  <data name="ToolStripMenuItem2.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="mnuMagicSep1.Size" type="System.Drawing.Size, System.Drawing">
     <value>187, 6</value>
   </data>
   <data name="mnuMagicLine.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
@@ -285,7 +285,7 @@
     <value>0, 0</value>
   </data>
   <data name="mnuMain.Size" type="System.Drawing.Size, System.Drawing">
-    <value>970, 24</value>
+    <value>941, 24</value>
   </data>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="mnuMain.TabIndex" type="System.Int32, mscorlib">
@@ -322,7 +322,7 @@
     <value>24, 56</value>
   </data>
   <data name="grpScore.Size" type="System.Drawing.Size, System.Drawing">
-    <value>928, 520</value>
+    <value>899, 520</value>
   </data>
   <data name="grpScore.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -342,32 +342,11 @@
   <data name="tabLeague.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left, Right</value>
   </data>
-  <data name="TabPage2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 22</value>
-  </data>
-  <data name="TabPage2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>942, 532</value>
-  </data>
-  <data name="TabPage2.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;TabPage2.Name" xml:space="preserve">
-    <value>TabPage2</value>
-  </data>
-  <data name="&gt;&gt;TabPage2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;TabPage2.Parent" xml:space="preserve">
-    <value>tabLeague</value>
-  </data>
-  <data name="&gt;&gt;TabPage2.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
   <data name="tabLeague.Location" type="System.Drawing.Point, System.Drawing">
     <value>12, 30</value>
   </data>
   <data name="tabLeague.Size" type="System.Drawing.Size, System.Drawing">
-    <value>950, 558</value>
+    <value>921, 558</value>
   </data>
   <data name="tabLeague.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -391,7 +370,7 @@
     <value>6, 12</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>970, 601</value>
+    <value>941, 601</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Score and Ranking</value>
@@ -510,10 +489,10 @@
   <data name="&gt;&gt;mnuMagicPlayoff.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;ToolStripMenuItem1.Name" xml:space="preserve">
-    <value>ToolStripMenuItem1</value>
+  <data name="&gt;&gt;mnuMagicSep0.Name" xml:space="preserve">
+    <value>mnuMagicSep0</value>
   </data>
-  <data name="&gt;&gt;ToolStripMenuItem1.Type" xml:space="preserve">
+  <data name="&gt;&gt;mnuMagicSep0.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;mnuMagicEasy.Name" xml:space="preserve">
@@ -522,10 +501,10 @@
   <data name="&gt;&gt;mnuMagicEasy.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;ToolStripMenuItem2.Name" xml:space="preserve">
-    <value>ToolStripMenuItem2</value>
+  <data name="&gt;&gt;mnuMagicSep1.Name" xml:space="preserve">
+    <value>mnuMagicSep1</value>
   </data>
-  <data name="&gt;&gt;ToolStripMenuItem2.Type" xml:space="preserve">
+  <data name="&gt;&gt;mnuMagicSep1.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;mnuMagicLine.Name" xml:space="preserve">
