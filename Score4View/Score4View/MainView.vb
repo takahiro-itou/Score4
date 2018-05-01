@@ -24,7 +24,8 @@
         End If
 
         Dim msgAns As System.Windows.Forms.DialogResult
-        msgAns = MessageBox.Show("このデータには変更が加えられています。保存しますか？", "Save", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question)
+        msgAns = MessageBox.Show("このデータには変更が加えられています。保存しますか？", "Save",
+                                 MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question)
         If (msgAns = Windows.Forms.DialogResult.Cancel) Then
             Return False
         End If
@@ -76,7 +77,8 @@
                 Exit Do
             End If
 
-            msgAns = MessageBox.Show("データの読み込みに失敗しました。再試行しますか？", "Error", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation)
+            msgAns = MessageBox.Show("データの読み込みに失敗しました。再試行しますか？", "Error",
+                                     MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation)
             If (msgAns = vbNo) Then
                 Return False
             End If
@@ -86,7 +88,8 @@
         m_flagModified = False
         updateScoreView()
 
-        MessageBox.Show("ロードは正常に完了しました", "Load", MessageBoxButtons.OK, MessageBoxIcon.Information)
+        MessageBox.Show("ロードは正常に完了しました", "Load",
+                        MessageBoxButtons.OK, MessageBoxIcon.Information)
         m_lastFileName = fileName
 
         Dim flagAutoImport As Boolean = False
@@ -142,7 +145,8 @@
                 Exit Do
             End If
 
-            msgAns = MessageBox.Show("データの保存に失敗しました。再試行しますか？", "Error", MessageBoxButtons.YesNo)
+            msgAns = MessageBox.Show("データの保存に失敗しました。再試行しますか？",
+                                     "Error", MessageBoxButtons.YesNo)
             If (msgAns = vbNo) Then
                 Return False
             End If
@@ -151,7 +155,8 @@
         m_flagModified = False
         updateScoreView()
 
-        MessageBox.Show("保存は正常に完了しました。", "Save", MessageBoxButtons.OK, MessageBoxIcon.Information)
+        MessageBox.Show("保存は正常に完了しました。", "Save",
+                        MessageBoxButtons.OK, MessageBoxIcon.Information)
         m_lastFileName = fileName
 
         Return True
@@ -167,7 +172,18 @@
         End With
     End Sub
 
+    ''================================================================================
+    ''    ビューの内容を、最新の情報に更新する。
+    ''================================================================================
     Private Sub updateScoreView()
+        Dim strBuf As String
+
+        strBuf = m_scoreData.getNumLeagues()
+        For i = 0 To m_scoreData.getNumLeagues() - 1
+            Dim leagueInfo As Score4Wrapper.Common.LeagueInfo
+            leagueInfo = m_scoreData.leagueInfo(i)
+            strBuf = strBuf & vbCrLf & leagueInfo.leagueName
+        Next
 
     End Sub
 

@@ -18,9 +18,38 @@
 
 #include    "Score4Core/Common/ScoreDocument.h"
 
+#include    "Score4Types.h"
+
 
 namespace  Score4Wrapper  {
 namespace  Common  {
+
+public ref  class   LeagueInfo
+{
+public:
+    System::String^     leagueName;
+    TeamIndex           numPlayOff;
+};
+
+public ref  class   TeamInfo
+{
+public:
+    LeagueIndex         leagueID;
+    System::String^     teamName;
+
+    array<GamesCount>^  gameCounts;
+};
+
+public ref  class   GameResult
+{
+public:
+    RecordFlag      eGameFlags;
+    DateSerial      recordDate;
+    TeamIndex       visitorTeam;
+    TeamIndex       homeTeam;
+    ScoreValue      visitorScore;
+    ScoreValue      homeScore;
+};
 
 //========================================================================
 //
@@ -103,10 +132,7 @@ public:
     **  @return     アンマネージド型の参照。
     **/
     Score4Core::Common::ScoreDocument  &
-    toNativeInstance()
-    {
-        return ( *(this->m_ptrObj) );
-    }
+    toNativeInstance();
 
     //----------------------------------------------------------------
     /**   ネイティブのインスタンスを取得する。
@@ -114,10 +140,88 @@ public:
     **  @return     アンマネージド型の参照。
     **/
     Score4Core::Common::ScoreDocument  *
-    toNativePointer()
+    toNativePointer();
+
+    //----------------------------------------------------------------
+    /**   登録されているリーグ数を取得する。
+    **
+    **  @return     リーグの数を返す。
+    **/
+    LeagueIndex
+    getNumLeagues();
+
+    //----------------------------------------------------------------
+    /**   記録されているゲームレコード数を取得する。
+    **
+    **  @return     ゲームレコードの数を返す。
+    **/
+    RecordIndex
+    getNumRecords();
+
+    //----------------------------------------------------------------
+    /**   登録されているチーム数を取得する。
+    **
+    **  @return     チームの数を返す。
+    **/
+    TeamIndex
+    getNumTeams();
+
+    //----------------------------------------------------------------
+    /**   最適化済みフラグを取得する。
+    **
+    **  @return     フラグの状態を返す。
+    **/
+    Boolean
+    getOptimizedFlag();
+
+//========================================================================
+//
+//    Properties.
+//
+public:
+
+    property    DateSerial  lastActiveDate
     {
-        return ( (this->m_ptrObj) );
+        DateSerial  get()  {
+            return ( this->m_ptrObj->getLastActiveDate() );
+        }
+        void  set(DateSerial dsVal)  {
+            this->m_ptrObj->setLastActiveDate(dsVal);
+        }
     }
+
+    property    DateSerial  lastImportDate
+    {
+        DateSerial  get()  {
+            return ( this->m_ptrObj->getLastImportDate() );
+        }
+        void  set(DateSerial dsVal)  {
+            this->m_ptrObj->setLastImportDate(dsVal);
+        }
+    }
+
+    property    DateSerial  lastRecordDate
+    {
+        DateSerial  get()  {
+            return ( this->m_ptrObj->getLastRecordDate() );
+        }
+        void  set(DateSerial  dsVal)  {
+            this->m_ptrObj->setLastRecordDate(dsVal);
+        }
+    }
+
+    property    LeagueInfo^     leagueInfo[int]
+    {
+        LeagueInfo^  get(int  idxLeague);
+        void  set(int  idxLeague,  LeagueInfo^  leagueInfo);
+    }
+
+    property    TeamInfo^   teamInfo[int]
+    {
+        TeamInfo^  get(int  idxTeam);
+        void  set(int  idxTeam,  TeamInfo^  teamInfo);
+    }
+
 
 //========================================================================
 //
@@ -135,7 +239,9 @@ public:
 //
 private:
 
-    Score4Core::Common::ScoreDocument  *    m_ptrObj;
+    typedef     Score4Core::Common::ScoreDocument       WrapTarget;
+
+    WrapTarget  *       m_ptrObj;
 
 };
 
