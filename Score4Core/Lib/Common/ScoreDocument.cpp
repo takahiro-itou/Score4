@@ -16,11 +16,8 @@
 
 #include    "Score4Core/Common/ScoreDocument.h"
 
-#include    <fcntl.h>
 #include    <memory.h>
 #include    <stdio.h>
-#include    <sys/stat.h>
-#include    <unistd.h>
 #include    <vector>
 
 SCORE4_CORE_NAMESPACE_BEGIN

@@ -24,7 +24,11 @@
 #include    <memory.h>
 #include    <stdio.h>
 #include    <sys/stat.h>
-#include    <unistd.h>
+#if defined( _MSC_VER )
+#    include    <io.h>
+#else
+#    include    <unistd.h>
+#endif
 #include    <vector>
 
 #include    <iostream>
@@ -210,6 +214,27 @@ DocumentFile::readFromBinaryFile(
         const  std::string  &fileName,
         ScoreDocument  *    ptrDoc)
 {
+#if defined( _MSC_VER )
+    FILE *  fp  = fopen(fileName.c_str(), "rb");
+    if ( fp == NULL ) {
+        return ( ERR_FILE_OPEN_ERROR );
+    }
+
+    ::fseek(fp, 0, SEEK_END);
+    const   FileLength  cbFile  = ::ftell(fp);
+    ::fseek(fp, 0, SEEK_SET);
+
+    std::vector<unsigned char>  buf(cbFile);
+    if ( fread(&(buf[0]), 1, cbFile, fp) != cbFile )
+    {
+        ::fclose(fp);
+        return ( ERR_FILE_IO_ERROR );
+    }
+    ::fclose(fp);
+
+    const  ErrCode
+        retErr  = readFromBinaryBuffer(&(buf[0]), cbFile, ptrDoc);
+#else
     int     fd  =  -1;
 
     fd  = open(fileName.c_str(), O_RDONLY);
@@ -235,7 +260,7 @@ DocumentFile::readFromBinaryFile(
 
     const  ErrCode
         retErr  = readFromBinaryBuffer(&(buf[0]), cbFile, ptrDoc);
-
+#endif
     return ( retErr );
 }
 
