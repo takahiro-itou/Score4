@@ -1,4 +1,4 @@
-﻿//  -*-  coding: utf-8; mode: c++  -*-  //
+﻿//  -*-  coding: utf-8-with-signature;  mode: c++  -*-  //
 /*************************************************************************
 **                                                                      **
 **                  ---  Score4 Wrapper  Library.  ---                  **
@@ -185,7 +185,9 @@ ScoreDocument::leagueInfo::set(
 {
     WrapTarget::LeagueInfo  natvVal;
 
-//    natvVal.leagueName  = marshal_as<std::string>(leagueInfo->leagueName);
+    System::String^     leagueName  = leagueInfo->leagueName;
+
+    natvVal.leagueName  = marshal_as<std::string>(leagueName);
     natvVal.numPlayOff  = leagueInfo->numPlayOff;
 
     this->m_ptrObj->setLeagueInfo(idxLeague, natvVal);
@@ -212,8 +214,10 @@ ScoreDocument::teamInfo::set(
 {
     WrapTarget::TeamInfo    natvVal;
 
+    System::String^     teamName    = teamInfo->teamName;
+
     natvVal.leagueID    = teamInfo->leagueID;
-//    natvVal.teamName    = marshal_as<std::string>(teamInfo->teamName);
+    natvVal.teamName    = marshal_as<std::string>(teamName);
 
     this->m_ptrObj->setTeamInfo(idxTeam, natvVal);
 }
