@@ -13,6 +13,8 @@
     Private m_flagModified As Boolean
     Private m_lastFileName As String
 
+    Private m_scoreData As Score4Wrapper.Common.ScoreDocument
+
     ''================================================================================
     ''    変更点があれば保存するか確認する。
     ''================================================================================
@@ -64,15 +66,95 @@
     ''================================================================================
     ''    ファイルを開いてデータを読み込む。
     ''================================================================================
-    Private Function processOpenFile(ByVal fileName As String) As Boolean
-        Dim objDoc As Score4Wrapper.Common.ScoreDocument
+    Private Function openScoreData(ByVal fileName As String) As Boolean
         Dim retVal As Score4Wrapper.Common.ErrCode
+        Dim msgAns As System.Windows.Forms.DialogResult
 
-        objDoc = New Score4Wrapper.Common.ScoreDocument
-        retVal = Score4Wrapper.Common.DocumentFile.readFromBinaryFile(fileName, objDoc)
+        Do
+            retVal = Score4Wrapper.Common.DocumentFile.readFromBinaryFile(fileName, Me.m_scoreData)
+            If retVal = Score4Wrapper.Common.ErrCode.ERR_SUCCESS Then
+                Exit Do
+            End If
 
-        MessageBox.Show(retVal)
+            msgAns = MessageBox.Show("データの読み込みに失敗しました。再試行しますか？", "Error", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation)
+            If (msgAns = vbNo) Then
+                Return False
+            End If
+        Loop Until (retVal = Score4Wrapper.Common.ErrCode.ERR_SUCCESS)
+
+        ' 表示内容を最新の情報に更新する。
+        m_flagModified = False
+        updateScoreView()
+
+        MessageBox.Show("ロードは正常に完了しました", "Load", MessageBoxButtons.OK, MessageBoxIcon.Information)
+        m_lastFileName = fileName
+
+        Dim flagAutoImport As Boolean = False
+
+        If (flagAutoImport) Then
+            msgAns = MessageBox.Show("データが２日以上前のデータです。今すぐ更新してください。", "Old Data File",
+                                     MessageBoxButtons.OKCancel, MessageBoxIcon.Information)
+            If (msgAns = vbOK) Then
+                processImportData(True)
+            End If
+        End If
+
+        Return True
+    End Function
+
+    ''================================================================================
+    ''    データをインポートする。
+    ''================================================================================
+    Private Function processImportData(ByVal importAutoStart As Boolean) As Boolean
         Return False
+    End Function
+
+    ''================================================================================
+    ''    ファイル名を指定して保存する。
+    ''================================================================================
+    Private Function processSaveAs() As Boolean
+        With dlgSave
+            .DefaultExt = ".gsr"
+            .FileName = m_lastFileName
+            .Filter = "Game Score Record(*.gsr)|*.gsr|All files(*.*)|*.*"
+            .FilterIndex = 1
+            .InitialDirectory = m_appPath
+            .OverwritePrompt = True
+
+            If .ShowDialog() = DialogResult.OK Then
+                Return saveScoreData(.FileName)
+            End If
+        End With
+
+        Return False
+    End Function
+
+    ''================================================================================
+    ''    データをファイルに保存する。
+    ''================================================================================
+    Private Function saveScoreData(ByVal fileName As String) As Boolean
+        Dim retVal As Score4Wrapper.Common.ErrCode
+        Dim msgAns As System.Windows.Forms.DialogResult
+
+        Do
+            retVal = Score4Wrapper.Common.DocumentFile.saveToBinaryFile(Me.m_scoreData, fileName)
+            If retVal = Score4Wrapper.Common.ErrCode.ERR_SUCCESS Then
+                Exit Do
+            End If
+
+            msgAns = MessageBox.Show("データの保存に失敗しました。再試行しますか？", "Error", MessageBoxButtons.YesNo)
+            If (msgAns = vbNo) Then
+                Return False
+            End If
+        Loop Until (retVal = Score4Wrapper.Common.ErrCode.ERR_SUCCESS)
+
+        m_flagModified = False
+        updateScoreView()
+
+        MessageBox.Show("保存は正常に完了しました。", "Save", MessageBoxButtons.OK, MessageBoxIcon.Information)
+        m_lastFileName = fileName
+
+        Return True
     End Function
 
     ''================================================================================
@@ -83,6 +165,10 @@
             SaveSettingINI(m_iniFileName, INI_SEC_MAINWINDOW, "Left", .Left)
             SaveSettingINI(m_iniFileName, INI_SEC_MAINWINDOW, "Top", .Top)
         End With
+    End Sub
+
+    Private Sub updateScoreView()
+
     End Sub
 
     ''================================================================================
@@ -103,6 +189,7 @@
     ''    メニュー「ファイル」－「開く」
     ''================================================================================
     Private Sub mnuFileOpen_Click(sender As Object, e As EventArgs) Handles mnuFileOpen.Click
+
         If isModificationClean() = False Then Exit Sub
 
         With dlgOpen
@@ -113,7 +200,7 @@
             .InitialDirectory = m_appPath
 
             If .ShowDialog() = DialogResult.OK Then
-                processOpenFile(.FileName)
+                openScoreData(.FileName)
             End If
         End With
 
@@ -123,14 +210,18 @@
     ''    メニュー「ファイル」－「上書き保存」
     ''================================================================================
     Private Sub mnuFileSave_Click(sender As Object, e As EventArgs) Handles mnuFileSave.Click
-
+        If (m_lastFileName = "") Then
+            processSaveAs()
+        Else
+            saveScoreData(m_lastFileName)
+        End If
     End Sub
 
     ''================================================================================
     ''    メニュー「ファイル」－「名前をつけて保存」
     ''================================================================================
     Private Sub mnuFileSaveAs_Click(sender As Object, e As EventArgs) Handles mnuFileSaveAs.Click
-
+        processSaveAs()
     End Sub
 
     ''================================================================================
@@ -186,7 +277,7 @@
     ''    メニュー「スコア」－「インポート」
     ''================================================================================
     Private Sub mnuScoreImport_Click(sender As Object, e As EventArgs) Handles mnuScoreImport.Click
-
+        processImportData(False)
     End Sub
 
     ''================================================================================
@@ -208,6 +299,7 @@
     End Sub
 
     Private Sub MainView_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        m_scoreData = New Score4Wrapper.Common.ScoreDocument
         m_appPath = GetAppPath()
         m_iniFileName = m_appPath & "\Score.ini"
         moveWindowToStartPosition()
