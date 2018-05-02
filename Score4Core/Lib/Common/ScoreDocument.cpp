@@ -20,6 +20,7 @@
 #include    <stdio.h>
 #include    <vector>
 
+
 SCORE4_CORE_NAMESPACE_BEGIN
 namespace  Common  {
 
@@ -214,7 +215,7 @@ ScoreDocument::computeCurrentRank(
             - csTrg.numDraw [FILTER_ALL_GAMES];
         const   double  teamPercent = (numGame == 0)
             ? 0.5
-            : (csTrg.numWons[FILTER_ALL_GAMES] / numGame);
+            : (csTrg.numWons[FILTER_ALL_GAMES] * 1.0 / numGame);
 
         //  どの位置に入るか決定する。  //
         TeamIndex   idxIns  = 0;
@@ -246,8 +247,8 @@ ScoreDocument::computeCurrentRank(
         if ( bufPerc[i] == prvPercent ) {
             csData.at(idxTeam).currentRank  = prvRank;
         } else {
-            csData.at(idxTeam).currentRank  = i + 1;
             prvRank     = i + 1;
+            csData.at(idxTeam).currentRank  = prvRank;
             prvPercent  = bufPerc[i];
         }
     }
