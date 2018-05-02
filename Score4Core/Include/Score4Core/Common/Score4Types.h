@@ -106,6 +106,8 @@ enum  GameFilter
 
     FILTER_GAMES_FITST  =  FILTER_HOME_GAMES,
     FILTER_GAMES_END    =  (FILTER_ALL_GAMES + 1)
+    FILTER_SCDL_FIRST   =  FILTER_HOME_GAMES,
+    FILTER_SCDL_END     =  (FILTER_SCDL_ALLS + 1)
 };
 
 //----------------------------------------------------------------
