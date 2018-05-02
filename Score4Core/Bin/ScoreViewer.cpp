@@ -39,7 +39,8 @@ void  writeCountedScores(
             <<  "Draws : "  <<  (cs.numDraw[Common::FILTER_ALL_GAMES])
             <<  " (H: "     <<  (cs.numDraw[Common::FILTER_HOME_GAMES])
             <<  ", A: "     <<  (cs.numDraw[Common::FILTER_AWAY_GAMES])
-            <<  ")\n";
+            <<  ")\n"
+            <<  "Ranks : "  <<  (cs.currentRank);
     outStr  <<  std::endl;
 }
 
@@ -65,12 +66,24 @@ int  main(int argc, char * argv[])
 
     std::vector<Common::CountedScores>  cs;
     retErr  = objDoc.countScores(-1, cs);
-    std::cerr   <<  (cs.size())
-                <<  " Teams Found"  <<  std::endl;
-    for ( size_t i = 0; i < cs.size(); ++ i ) {
-        std::cerr   <<  "Team[" <<  i   <<  "] "
-                    <<  objDoc.getTeamInfo(i).teamName;
-        writeCountedScores(cs[i], std::cerr);
+
+    const  Common::LeagueIndex  numLeagues  = objDoc.getNumLeagues();
+    for ( Common::LeagueIndex i = 0; i < numLeagues; ++ i ) {
+        objDoc.computeCurrentRank(i, cs);
+    }
+    for ( Common::LeagueIndex i = 0; i < numLeagues; ++ i ) {
+        std::vector<Common::TeamIndex>  rank;
+        Common::TeamIndex   numTeam = objDoc.computeRankOrder(cs, i, rank);
+        std::cerr   <<  "League : "
+                    <<  objDoc.getLeagueInfo(i).leagueName
+                    <<  std::endl;
+        for ( Common::TeamIndex j = 0; j < numTeam; ++ j ) {
+            const   Common::TeamIndex   idxTrg  = rank[j];
+            std::cerr   <<  "Team[" <<  idxTrg  <<  "] "
+                        <<  objDoc.getTeamInfo(idxTrg).teamName
+                        <<  std::endl;
+            writeCountedScores(cs[idxTrg], std::cerr);
+        }
     }
 
     retErr  = docFile.saveToBinaryFile(objDoc, "dummy.bin");
