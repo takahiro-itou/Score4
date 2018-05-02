@@ -19,37 +19,10 @@
 #include    "Score4Core/Common/ScoreDocument.h"
 
 #include    "Score4Types.h"
-
+#include    "ScoreInterface.h"
 
 namespace  Score4Wrapper  {
 namespace  Common  {
-
-public ref  class   LeagueInfo
-{
-public:
-    System::String^     leagueName;
-    TeamIndex           numPlayOff;
-};
-
-public ref  class   TeamInfo
-{
-public:
-    LeagueIndex         leagueID;
-    System::String^     teamName;
-
-    array<GamesCount>^  gameCounts;
-};
-
-public ref  class   GameResult
-{
-public:
-    RecordFlag      eGameFlags;
-    DateSerial      recordDate;
-    TeamIndex       visitorTeam;
-    TeamIndex       homeTeam;
-    ScoreValue      visitorScore;
-    ScoreValue      homeScore;
-};
 
 //========================================================================
 //

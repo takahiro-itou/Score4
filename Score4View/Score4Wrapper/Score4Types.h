@@ -1,4 +1,4 @@
-//  -*-  coding: utf-8; mode: c++  -*-  //
+﻿//  -*-  coding: utf-8-with-signature;  mode: c++  -*-  //
 /*************************************************************************
 **                                                                      **
 **                  ---  Score4 Wrapper  Library.  ---                  **
@@ -33,8 +33,43 @@ public enum  class  ErrCode
 
 typedef     Score4Core::Common::Boolean         Boolean;
 
-typedef     Score4Core::Common::RecordFlag      RecordFlag;
-typedef     Score4Core::Common::GameFilter      GameFilter;
+//----------------------------------------------------------------
+/**
+**    レコードフラグ。
+**/
+
+public enum  class  RecordFlag
+{
+    GAME_EMPTY          = Score4Core::Common::GAME_EMPTY,
+    GAME_SCHEDULE       = Score4Core::Common::GAME_SCHEDULE,
+    GAME_CANCEL         = Score4Core::Common::GAME_CANCEL,
+    GAME_RESULT         = Score4Core::Common::GAME_RESULT,
+    GAME_REGULAR        = Score4Core::Common::GAME_REGULAR,
+    GAME_NOT_REGULAR    = Score4Core::Common::GAME_NOT_REGULAR
+};
+
+//----------------------------------------------------------------
+/**
+**    ゲームフィルタフラグ。
+**/
+
+enum  GameFilter
+{
+    FILTER_HOME_GAMES   = Score4Core::Common::FILTER_HOME_GAMES,
+    FILTER_AWAY_GAMES   = Score4Core::Common::FILTER_AWAY_GAMES,
+    FILTER_ALL_GAMES    = Score4Core::Common::FILTER_ALL_GAMES,
+
+    FILTER_SCHEDULE     = Score4Core::Common::FILTER_SCHEDULE,
+    FILTER_SCDL_HOMES   = Score4Core::Common::FILTER_SCDL_HOMES,
+    FILTER_SCDL_AWAYS   = Score4Core::Common::FILTER_SCDL_AWAYS,
+    FILTER_SCDL_ALLS    = Score4Core::Common::FILTER_SCDL_ALLS,
+
+    FILTER_GAMES_FIRST  = Score4Core::Common::FILTER_GAMES_FIRST,
+    FILTER_GAMES_END    = Score4Core::Common::FILTER_GAMES_END,
+    FILTER_SCDL_FIRST   = Score4Core::Common::FILTER_SCDL_FIRST,
+    FILTER_SCDL_END     = Score4Core::Common::FILTER_SCDL_END
+};
+
 
 typedef     Score4Core::Common::DateSerial      DateSerial;
 typedef     Score4Core::Common::TeamIndex       TeamIndex;
