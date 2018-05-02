@@ -92,6 +92,48 @@ public:
 //
 //    Public Member Functions.
 //
+public:
+
+    //----------------------------------------------------------------
+    /**   ドキュメントの内容をクリアする。
+    **
+    **  @return     エラーコードを返す。
+    **      -   異常終了の場合は、
+    **          エラーの種類を示す非ゼロ値を返す。
+    **      -   正常終了の場合は、ゼロを返す。
+    **/
+    ErrCode
+    clearDocument();
+
+    //----------------------------------------------------------------
+    /**   指定したリーグに属するチームを、成績順にソートする。
+    **
+    **  @param [in] csData      集計済みデータ。
+    **  @param [in] idxLeague   リーグ。
+    **  @param[out] bufIndex    チーム番号の配列を返す。
+    **  @return     そのリーグに属するチーム数を返す。
+    **/
+    TeamIndex
+    computeRankOrder(
+            LeagueIndex         idxLeague,
+            array<TeamIndex>^   bufIndex);
+
+    //----------------------------------------------------------------
+    /**   試合結果を集計する。
+    **
+    **    指定した日付（その日付を含む）までの結果を集計する。
+    **
+    **  @param [in] trgLastDate   集計対象の最終日。
+    **  @param[out] bufCounted    結果を格納する変数。
+    **  @return     エラーコードを返す。
+    **      -   異常終了の場合は、
+    **          エラーの種類を示す非ゼロ値を返す。
+    **      -   正常終了の場合は、ゼロを返す。
+    **/
+    ErrCode
+    countScores(
+            DateSerial          trgLastDate,
+            CountedScoreList^   bufCounted);
 
 //========================================================================
 //
@@ -214,7 +256,14 @@ private:
 
     typedef     Score4Core::Common::ScoreDocument       WrapTarget;
 
-    WrapTarget  *       m_ptrObj;
+    typedef     std::vector<Score4Core::Common::CountedScores>
+    WrapCountedScoreList;
+
+    WrapTarget  *               m_ptrObj;
+
+    WrapCountedScoreList  *     m_ptrBuf;
+
+    DateSerial                  m_trgDate;
 
 };
 

@@ -41,7 +41,9 @@ namespace  Common  {
 //
 
 ScoreDocument::ScoreDocument()
-    : m_ptrObj { new Score4Core::Common::ScoreDocument() }
+    : m_ptrObj { new Score4Core::Common::ScoreDocument() },
+      m_ptrBuf { new WrapCountedScoreList() },
+      m_trgDate(0)
 {
 }
 
@@ -65,6 +67,10 @@ ScoreDocument::!ScoreDocument()
     if ( this->m_ptrObj ) {
         delete  this->m_ptrObj;
         this->m_ptrObj  = nullptr;
+    }
+    if ( this->m_ptrBuf ) {
+        delete  this->m_ptrBuf;
+        this->m_ptrBuf  = nullptr;
     }
 }
 
@@ -92,6 +98,54 @@ ScoreDocument::!ScoreDocument()
 //
 //    Public Member Functions.
 //
+
+//----------------------------------------------------------------
+//    ドキュメントの内容をクリアする。
+//
+
+ErrCode
+ScoreDocument::clearDocument()
+{
+    return ( static_cast<ErrCode>(this->m_ptrObj->clearDocument()) );
+}
+
+//----------------------------------------------------------------
+//    指定したリーグに属するチームを、成績順にソートする。
+//
+
+TeamIndex
+ScoreDocument::computeRankOrder(
+        LeagueIndex         idxLeague,
+        array<TeamIndex>^   bufIndex)
+{
+    std::vector<TeamIndex>  bufNatv;
+    const   TeamIndex   retVal  = this->m_ptrObj->computeRankOrder(
+            *(this->m_ptrBuf), idxLeague, bufNatv);
+    copyVectorToManage(bufNatv, bufIndex);
+
+    return ( retVal );
+}
+
+//----------------------------------------------------------------
+//    試合結果を集計する。
+//
+
+ErrCode
+ScoreDocument::countScores(
+        DateSerial          trgLastDate,
+        CountedScoreList^   bufCounted)
+{
+    Score4Core::Common::ErrCode  retVal;
+
+    retVal  = this->m_ptrObj->countScores(trgLastDate, *(this->m_ptrBuf));
+    const  LeagueIndex  numLeagues  = getNumLeagues();
+    for ( LeagueIndex i = 0; i < numLeagues; ++ i ) {
+        this->m_ptrObj->computeCurrentRank(i, *(this->m_ptrBuf));
+    }
+
+    this->m_trgDate = trgLastDate;
+    return ( static_cast<ErrCode>(retVal) );
+}
 
 //========================================================================
 //
