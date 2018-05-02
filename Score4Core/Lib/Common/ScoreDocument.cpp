@@ -621,7 +621,7 @@ ScoreDocument::countTotalScores(
         const  LeagueIndex  idxLeague,
         CountedScores     & trgCS)  const
 {
-    for ( int gt = FILTER_GAMES_FIRST; gt <= FILTER_GAMES_END; ++ gt )
+    for ( int gt = FILTER_GAMES_FIRST; gt < FILTER_GAMES_END; ++ gt )
     {
         trgCS.numWons[gt]   = 0;
         trgCS.numLost[gt]   = 0;
@@ -657,7 +657,7 @@ ScoreDocument::countTotalScores(
                     trgCS.numLeagueRestGames);
         }
 
-        for ( int gt = FILTER_GAMES_FIRST; gt <= FILTER_GAMES_END; ++ gt )
+        for ( int gt = FILTER_GAMES_FIRST; gt < FILTER_GAMES_END; ++ gt )
         {
             trgCS.numWons[gt]   += trgCS.vsWons[idxEnemy][gt];
             trgCS.numLost[gt]   += trgCS.vsLost[idxEnemy][gt];
@@ -667,7 +667,7 @@ ScoreDocument::countTotalScores(
         }
     }   //  End For (idxEnemy)
 
-    for ( int gt = FILTER_GAMES_FIRST; gt <= FILTER_GAMES_END; ++ gt )
+    for ( int gt = FILTER_GAMES_FIRST; gt < FILTER_GAMES_END; ++ gt )
     {
         trgCS.numGames[gt]
                 = trgCS.numWons[gt]

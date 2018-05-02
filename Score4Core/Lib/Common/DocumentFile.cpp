@@ -176,9 +176,9 @@ DocumentFile::readFromBinaryBuffer(
     edc.setupGenPoly(FILE_CRC32_GENPOLY);
     const  ErrorDetectionCode::EDCode
         valCRC  =  edc.checkCRC32(inBuf, cbBuf);
-    std::cerr   <<  "FILE CRC = "
-                <<  std::hex    <<  valCRC
-                <<  std::endl;
+    // std::cerr   <<  "FILE CRC = "
+    //             <<  std::hex    <<  valCRC
+    //             <<  std::endl;
 
     ptrDoc->clearDocument();
     ptrDoc->setLastImportDate(extHead.lastImport);
