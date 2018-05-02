@@ -31,30 +31,31 @@ copyToManageType(
         const  Score4Core::Common::CountedScores  & csSrc,
         Score4Wrapper::Common::CountedScores      ^ csTrg)
 {
-    csTrg->numWons      = copyToManageArray(csSrc.numWons);
-    csTrg->numLost      = copyToManageArray(csSrc.numLost);
-    csTrg->numDraw      = copyToManageArray(csSrc.numDraw);
-    csTrg->numGames     = copyToManageArray(csSrc.numGames);
-    csTrg->vsWons       = copyToManageTable(csSrc.vsWons);
-    csTrg->vsLost       = copyToManageTable(csSrc.vsLost);
-    csTrg->vsDraw       = copyToManageTable(csSrc.vsDraw);
-    csTrg->restGames    = copyToManageTable(csSrc.restGames);
+    csTrg->numWons      = copyArrayToManage(csSrc.numWons);
+    csTrg->numLost      = copyArrayToManage(csSrc.numLost);
+    csTrg->numDraw      = copyArrayToManage(csSrc.numDraw);
+    csTrg->numGames     = copyArrayToManage(csSrc.numGames);
+    csTrg->vsWons       = copyTableToManage(csSrc.vsWons);
+    csTrg->vsLost       = copyTableToManage(csSrc.vsLost);
+    csTrg->vsDraw       = copyTableToManage(csSrc.vsDraw);
+    csTrg->restGames    = copyTableToManage(csSrc.restGames);
 
     csTrg->numLeagueRestGames
-            = copyToManageArray(csSrc.numLeagueRestGames);
+            = copyArrayToManage(csSrc.numLeagueRestGames);
     csTrg->numInterRestGames
-            = copyToManageArray(csSrc.numInterRestGames);
+            = copyArrayToManage(csSrc.numInterRestGames);
     csTrg->numTotalRestGames
-            = copyToManageArray(csSrc.numTotalRestGames);
+            = copyArrayToManage(csSrc.numTotalRestGames);
 
     csTrg->currentRank  = csSrc.currentRank;
 
     csTrg->totalGotScores
-            = copyToManageArray(csSrc.totalGotScores);
+            = copyArrayToManage(csSrc.totalGotScores);
     csTrg->totalLostScores
-            = copyToManageArray(csSrc.totalLostScores);
-    csTrg->vsGotScores  = copyToManageTable(csSrc.vsGotScores);
-    csTrg->vsLostScores = copyToManageTable(csSrc.vsLostScores);
+            = copyArrayToManage(csSrc.totalLostScores);
+    csTrg->vsGotScores  = copyTableToManage(csSrc.vsGotScores);
+    csTrg->vsLostScores = copyTableToManage
+            (csSrc.vsLostScores);
 
     return ( ErrCode::ERR_SUCCESS );
 }
