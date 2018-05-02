@@ -149,6 +149,7 @@
     <ClInclude Include="resource.h" />
     <ClInclude Include="Score4Wrapper.h" />
     <ClInclude Include="ScoreDocument.h" />
+    <ClInclude Include="ScoreInterface.h" />
     <ClInclude Include="Stdafx.h" />
   </ItemGroup>
   <ItemGroup>
@@ -156,6 +157,7 @@
     <ClCompile Include="DocumentFile.cpp" />
     <ClCompile Include="Score4Wrapper.cpp" />
     <ClCompile Include="ScoreDocument.cpp" />
+    <ClCompile Include="ScoreInterface.cpp" />
     <ClCompile Include="Stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
