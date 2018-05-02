@@ -41,6 +41,8 @@ class  ScoreDocument
 //
 private:
 
+    typedef     std::vector<CountedScores>  CountedScoreList;
+
 public:
 
     /**   リーグ情報。  **/
@@ -157,6 +159,23 @@ public:
     **/
     virtual  ErrCode
     clearDocument();
+
+    //----------------------------------------------------------------
+    /**   試合結果を集計する。
+    **
+    **    指定した日付（その日付を含む）までの結果を集計する。
+    **
+    **  @param [in] trgLastDate   集計対象の最終日。
+    **  @param[out] bufCounted    結果を格納する変数。
+    **  @return     エラーコードを返す。
+    **      -   異常終了の場合は、
+    **          エラーの種類を示す非ゼロ値を返す。
+    **      -   正常終了の場合は、ゼロを返す。
+    **/
+    virtual  ErrCode
+    countScores(
+            const   DateSerial  trgLastDate,
+            CountedScoreList    &bufCounted)  const;
 
     //----------------------------------------------------------------
     /**   対戦試合数用の領域を確保し初期化する。
@@ -431,6 +450,34 @@ public:
 //    For Internal Use Only.
 //
 private:
+
+    //----------------------------------------------------------------
+    /**   集計結果を格納する配列をクリアする。
+    **
+    **  @param[out] bufCounted    結果を格納する変数。
+    **  @return     エラーコードを返す。
+    **      -   異常終了の場合は、
+    **          エラーの種類を示す非ゼロ値を返す。
+    **      -   正常終了の場合は、ゼロを返す。
+    **/
+    ErrCode
+    clearCountedScoresList(
+            CountedScoreList  & bufCounted)  const;
+
+    //----------------------------------------------------------------
+    /**   対チーム毎の集計結果から、合計を計算する。
+    **
+    **  @param [in]     idxLeague   所属するリーグ。
+    **  @param [in,out] trgCS      結果を読み書きする変数。
+    **  @return     エラーコードを返す。
+    **      -   異常終了の場合は、
+    **          エラーの種類を示す非ゼロ値を返す。
+    **      -   正常終了の場合は、ゼロを返す。
+    **/
+    ErrCode
+    countTotalScores(
+            const  LeagueIndex  idxLeague,
+            CountedScores     & trgCS)  const;
 
     //----------------------------------------------------------------
     /**   対戦カード毎の試合数を設定する。
