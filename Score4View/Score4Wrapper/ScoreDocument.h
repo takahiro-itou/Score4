@@ -231,6 +231,13 @@ public:
         void  set(int  idxLeague,  LeagueInfo^  leagueInfo);
     }
 
+    property    DateSerial  targetLastDate
+    {
+        DateSerial  get()  {
+            return ( this->m_trgDate );
+        }
+    }
+
     property    TeamInfo^   teamInfo[int]
     {
         TeamInfo^  get(int  idxTeam);
