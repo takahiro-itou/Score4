@@ -53,18 +53,19 @@ Partial Class MainView
         Me.dlgSave = New System.Windows.Forms.SaveFileDialog()
         Me.dlgFont = New System.Windows.Forms.FontDialog()
         Me.grpScore = New System.Windows.Forms.GroupBox()
-        Me.DataGridView2 = New System.Windows.Forms.DataGridView()
+        Me.grdExtra = New System.Windows.Forms.DataGridView()
         Me.optShowWins = New System.Windows.Forms.RadioButton()
         Me.optShowMagic = New System.Windows.Forms.RadioButton()
         Me.optShowRest = New System.Windows.Forms.RadioButton()
         Me.chkSchedule = New System.Windows.Forms.CheckBox()
-        Me.MonthCalendar1 = New System.Windows.Forms.MonthCalendar()
-        Me.DataGridView1 = New System.Windows.Forms.DataGridView()
+        Me.mnvDate = New System.Windows.Forms.MonthCalendar()
+        Me.grdScore = New System.Windows.Forms.DataGridView()
         Me.tabLeague = New System.Windows.Forms.TabControl()
+        Me.lblDate = New System.Windows.Forms.Label()
         Me.mnuMain.SuspendLayout()
         Me.grpScore.SuspendLayout()
-        CType(Me.DataGridView2, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.grdExtra, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.grdScore, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'mnuMain
@@ -209,22 +210,23 @@ Partial Class MainView
         'grpScore
         '
         resources.ApplyResources(Me.grpScore, "grpScore")
-        Me.grpScore.Controls.Add(Me.DataGridView2)
+        Me.grpScore.Controls.Add(Me.lblDate)
+        Me.grpScore.Controls.Add(Me.grdExtra)
         Me.grpScore.Controls.Add(Me.optShowWins)
         Me.grpScore.Controls.Add(Me.optShowMagic)
         Me.grpScore.Controls.Add(Me.optShowRest)
         Me.grpScore.Controls.Add(Me.chkSchedule)
-        Me.grpScore.Controls.Add(Me.MonthCalendar1)
-        Me.grpScore.Controls.Add(Me.DataGridView1)
+        Me.grpScore.Controls.Add(Me.mnvDate)
+        Me.grpScore.Controls.Add(Me.grdScore)
         Me.grpScore.Name = "grpScore"
         Me.grpScore.TabStop = False
         '
-        'DataGridView2
+        'grdExtra
         '
-        resources.ApplyResources(Me.DataGridView2, "DataGridView2")
-        Me.DataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DataGridView2.Name = "DataGridView2"
-        Me.DataGridView2.RowTemplate.Height = 21
+        resources.ApplyResources(Me.grdExtra, "grdExtra")
+        Me.grdExtra.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.grdExtra.Name = "grdExtra"
+        Me.grdExtra.RowTemplate.Height = 21
         '
         'optShowWins
         '
@@ -257,23 +259,30 @@ Partial Class MainView
         Me.chkSchedule.Name = "chkSchedule"
         Me.chkSchedule.UseVisualStyleBackColor = False
         '
-        'MonthCalendar1
+        'mnvDate
         '
-        resources.ApplyResources(Me.MonthCalendar1, "MonthCalendar1")
-        Me.MonthCalendar1.Name = "MonthCalendar1"
+        resources.ApplyResources(Me.mnvDate, "mnvDate")
+        Me.mnvDate.MaxSelectionCount = 1
+        Me.mnvDate.Name = "mnvDate"
         '
-        'DataGridView1
+        'grdScore
         '
-        Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        resources.ApplyResources(Me.DataGridView1, "DataGridView1")
-        Me.DataGridView1.Name = "DataGridView1"
-        Me.DataGridView1.RowTemplate.Height = 21
+        Me.grdScore.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        resources.ApplyResources(Me.grdScore, "grdScore")
+        Me.grdScore.Name = "grdScore"
+        Me.grdScore.RowTemplate.Height = 21
         '
         'tabLeague
         '
         resources.ApplyResources(Me.tabLeague, "tabLeague")
         Me.tabLeague.Name = "tabLeague"
         Me.tabLeague.SelectedIndex = 0
+        '
+        'lblDate
+        '
+        Me.lblDate.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        resources.ApplyResources(Me.lblDate, "lblDate")
+        Me.lblDate.Name = "lblDate"
         '
         'MainView
         '
@@ -287,8 +296,8 @@ Partial Class MainView
         Me.mnuMain.ResumeLayout(False)
         Me.mnuMain.PerformLayout()
         Me.grpScore.ResumeLayout(False)
-        CType(Me.DataGridView2, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.grdExtra, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.grdScore, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -324,12 +333,13 @@ Partial Class MainView
     Friend WithEvents mnuMagicLine As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents grpScore As System.Windows.Forms.GroupBox
     Friend WithEvents tabLeague As System.Windows.Forms.TabControl
-    Friend WithEvents MonthCalendar1 As System.Windows.Forms.MonthCalendar
-    Friend WithEvents DataGridView1 As System.Windows.Forms.DataGridView
-    Friend WithEvents DataGridView2 As System.Windows.Forms.DataGridView
+    Friend WithEvents mnvDate As System.Windows.Forms.MonthCalendar
+    Friend WithEvents grdScore As System.Windows.Forms.DataGridView
+    Friend WithEvents grdExtra As System.Windows.Forms.DataGridView
     Friend WithEvents optShowWins As System.Windows.Forms.RadioButton
     Friend WithEvents optShowMagic As System.Windows.Forms.RadioButton
     Friend WithEvents optShowRest As System.Windows.Forms.RadioButton
     Friend WithEvents chkSchedule As System.Windows.Forms.CheckBox
+    Friend WithEvents lblDate As System.Windows.Forms.Label
 
 End Class

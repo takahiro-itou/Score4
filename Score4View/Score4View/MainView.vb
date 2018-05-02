@@ -190,8 +190,19 @@
     ''================================================================================
     Private Sub updateScoreView()
         Dim strBuf As String
+        Dim strCaption As String
 
         updateLeagueTab()
+
+        ' ウィンドウのキャプション。
+        With Me.m_scoreData
+            strCaption = "成績／順位　: "
+            strCaption = strCaption & .lastActiveDate & "まで (日程は" & .lastRecordDate & "まで)"
+        End With
+        If (m_flagModified) Then
+            strCaption = strCaption & " *変更あり"
+        End If
+        Me.Text = strCaption
 
         strBuf = m_scoreData.getNumLeagues()
         For i = 0 To m_scoreData.getNumLeagues() - 1
@@ -336,4 +347,11 @@
         moveWindowToStartPosition()
     End Sub
 
+    Private Sub tabLeague_SelectedIndexChanged(sender As Object, e As EventArgs) Handles tabLeague.SelectedIndexChanged
+        Dim idxLeague As Integer = tabLeague.SelectedIndex
+    End Sub
+
+    Private Sub mnvDate_DateChanged(sender As Object, e As DateRangeEventArgs) Handles mnvDate.DateChanged
+        lblDate.Text = mnvDate.SelectionStart
+    End Sub
 End Class
