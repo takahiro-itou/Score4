@@ -193,6 +193,41 @@ public:
 **
 **/
 
+template <typename T, size_t N>
+cli::array<T, 1>^
+copyToManageArray(
+        const  std::array<T, N>  &  arySrc)
+{
+    cli::array<T, 1>^   aryDest = gcnew cli::array<T, 1>(N);
+    for ( size_t i = 0; i < N; ++ i ) {
+        aryDest[i]  = arySrc[i];
+    }
+    return ( aryDest );
+}
+
+template <typename T, size_t N>
+cli::array<T, 2>^
+copyToManageTable(
+        const  std::vector< std::array<T, N> >  & tblSrc)
+{
+    const   size_t  num = tblSrc.size();
+
+    cli::array<T, 2>^   tblDest
+                = gcnew cli::array<T, 2>(num, N);
+    for ( size_t i = 0; i < num; ++ i ) {
+        for ( size_t j = 0; j < N; ++ j ) {
+            tblDest[i, j]   = tblSrc[i][j];
+        }
+    }
+
+    return ( tblDest );
+}
+
+//----------------------------------------------------------------
+/**   アンマネージ型をマネージ型に変換する。
+**
+**/
+
 ErrCode
 copyToManageType(
         const  Score4Core::Common::CountedScores  & csSrc,

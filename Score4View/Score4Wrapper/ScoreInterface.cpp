@@ -31,7 +31,32 @@ copyToManageType(
         const  Score4Core::Common::CountedScores  & csSrc,
         Score4Wrapper::Common::CountedScores      ^ csTrg)
 {
-    return ( ErrCode::ERR_FAILURE );
+    csTrg->numWons      = copyToManageArray(csSrc.numWons);
+    csTrg->numLost      = copyToManageArray(csSrc.numLost);
+    csTrg->numDraw      = copyToManageArray(csSrc.numDraw);
+    csTrg->numGames     = copyToManageArray(csSrc.numGames);
+    csTrg->vsWons       = copyToManageTable(csSrc.vsWons);
+    csTrg->vsLost       = copyToManageTable(csSrc.vsLost);
+    csTrg->vsDraw       = copyToManageTable(csSrc.vsDraw);
+    csTrg->restGames    = copyToManageTable(csSrc.restGames);
+
+    csTrg->numLeagueRestGames
+            = copyToManageArray(csSrc.numLeagueRestGames);
+    csTrg->numInterRestGames
+            = copyToManageArray(csSrc.numInterRestGames);
+    csTrg->numTotalRestGames
+            = copyToManageArray(csSrc.numTotalRestGames);
+
+    csTrg->currentRank  = csSrc.currentRank;
+
+    csTrg->totalGotScores
+            = copyToManageArray(csSrc.totalGotScores);
+    csTrg->totalLostScores
+            = copyToManageArray(csSrc.totalLostScores);
+    csTrg->vsGotScores  = copyToManageTable(csSrc.vsGotScores);
+    csTrg->vsLostScores = copyToManageTable(csSrc.vsLostScores);
+
+    return ( ErrCode::ERR_SUCCESS );
 }
 
 
