@@ -19,10 +19,10 @@
 
 #include    "Score4Types.h"
 
-#include    <array>
+#include    "ScoreInterface.h"
+
 #include    <iosfwd>
 #include    <string>
-#include    <vector>
 
 SCORE4_CORE_NAMESPACE_BEGIN
 namespace  Common  {
@@ -41,56 +41,16 @@ class  ScoreDocument
 //
 private:
 
-    //typedef     GamesCount      GameCountArray[2];
-    typedef     std::array<GamesCount, FILTER_GAMES_END>
-    GameCountArray;
-
-    typedef     std::vector<GameCountArray>     GameCountTable;
-
 public:
 
-    /**
-    **    リーグ情報。
-    **/
-    struct  LeagueInfo
-    {
-        /**   リーグ名。    **/
-        std::string     leagueName;
+    /**   リーグ情報。  **/
+    typedef     Common::LeagueInfo      LeagueInfo;
 
-        /**   プレーオフに進出できるチーム数。  **/
-        TeamIndex       numPlayOff;
+    /**   チーム情報。  **/
+    typedef     Common::TeamInfo        TeamInfo;
 
-        LeagueInfo()
-            : leagueName(), numPlayOff(0)
-        { }
-    };
-
-    /**
-    **   　チーム情報。
-    **/
-    struct  TeamInfo
-    {
-        LeagueIndex     leagueID;       /**<  所属リーグ。      **/
-        std::string     teamName;       /**<  チーム名。        **/
-        GameCountTable  gameCounts;     /**<  試合数のリスト。  **/
-
-        TeamInfo()
-            : leagueID(-1), teamName(), gameCounts()
-        { }
-    };
-
-    /**
-    **    ゲーム結果のレコード。
-    **/
-    struct  GameResult
-    {
-        RecordFlag      eGameFlags;
-        DateSerial      recordDate;
-        TeamIndex       visitorTeam;
-        TeamIndex       homeTeam;
-        ScoreValue      visitorScore;
-        ScoreValue      homeScore;
-    };
+    /**   ゲーム結果のレコード。    **/
+    typedef     Common::GameResult      GameResult;
 
 //========================================================================
 //
