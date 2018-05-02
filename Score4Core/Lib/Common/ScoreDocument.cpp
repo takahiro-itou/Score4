@@ -186,6 +186,131 @@ ScoreDocument::clearDocument()
 }
 
 //----------------------------------------------------------------
+//    集計済みの成績表から順位を計算する。
+//
+
+TeamIndex
+ScoreDocument::computeCurrentRank(
+        const  LeagueIndex  idxLeague,
+        CountedScoreList    &csData)  const
+{
+    const   TeamIndex   numTeam = getNumTeams();
+
+    std::vector<TeamIndex>  bufTeam(numTeam, -1);
+    std::vector<double>     bufPerc(numTeam, 0.0);
+
+    TeamIndex   cntIns  = 0;
+
+    for ( TeamIndex i = 0; i < numTeam; ++ i ) {
+        if ( getTeamInfo(i).leagueID != idxLeague ) {
+            continue;       //  違うリーグなので無視。  //
+        }
+
+        CountedScores  & csTrg  = csData.at(i);
+
+        //  現在の勝率を計算する。  //
+        const   GamesCount  numGame
+            = csTrg.numGames[FILTER_ALL_GAMES]
+            - csTrg.numDraw [FILTER_ALL_GAMES];
+        const   double  teamPercent = (numGame == 0)
+            ? 0.5
+            : (csTrg.numWons[FILTER_ALL_GAMES] / numGame);
+
+        //  どの位置に入るか決定する。  //
+        TeamIndex   idxIns  = 0;
+        for ( ; idxIns < cntIns; ++ idxIns ) {
+            if ( bufTeam[idxIns] == -1 ) {
+                break;
+            }
+            if ( bufPerc[idxIns] < teamPercent ) {
+                break;
+            }
+        }   //  End For (idxIns)
+
+        //  勝率リストにデータを挿入する。  //
+        for ( TeamIndex j = cntIns; j > idxIns; -- j ) {
+            bufTeam[j]  = bufTeam[j - 1];
+            bufPerc[j]  = bufPerc[j - 1];
+        }
+        bufTeam[idxIns] = i;
+        bufPerc[idxIns] = teamPercent;
+        ++  cntIns;
+    }   //  End For (i)
+
+    //  同率タイに注意して順位を書き込む。  //
+    double      prvPercent  = 2.0;
+    TeamIndex   prvRank     = 0;
+    for ( TeamIndex i = 0; i < cntIns; ++ i ) {
+        const   TeamIndex   idxTeam = bufTeam[i];
+        if ( idxTeam < 0 ) { continue; }
+        if ( bufPerc[i] == prvPercent ) {
+            csData.at(idxTeam).currentRank  = prvRank;
+        } else {
+            csData.at(idxTeam).currentRank  = i + 1;
+            prvRank     = i + 1;
+            prvPercent  = bufPerc[i];
+        }
+    }
+
+    return ( cntIns );
+}
+
+//----------------------------------------------------------------
+//    指定したリーグに属するチームを、成績順にソートする。
+//
+
+TeamIndex
+ScoreDocument::computeRankOrder(
+        const  CountedScoreList &csData,
+        const  LeagueIndex      idxLeague,
+        std::vector<TeamIndex>  &bufIndex)  const
+{
+    const   TeamIndex   numTeam = getNumTeams();
+
+    bufIndex.clear();
+    bufIndex.resize(numTeam, -1);
+
+    TeamIndex   cntTeam = 0;
+    for ( TeamIndex i = 0; i < numTeam; ++ i ) {
+        if ( getTeamInfo(i).leagueID != idxLeague ) {
+            continue;       //  違うリーグなので無視。  //
+        }
+        TeamIndex  curRank  = csData.at(i).currentRank;
+        if ( curRank <= 0 ) {
+            curRank = 1;
+        }
+
+        //  挿入ソート。    //
+        TeamIndex   idxIns  = 0;
+        for ( ; idxIns < numTeam; ++ idxIns ) {
+            TeamIndex   trgTeam = bufIndex[idxIns];
+            if ( trgTeam == -1 ) {
+                break;
+            }
+            if ( curRank < csData.at(trgTeam).currentRank ) {
+                for ( TeamIndex j = cntTeam; j > idxIns; -- j ) {
+                    bufIndex[j] = bufIndex[j - 1];
+                }
+                break;
+            }
+        }   //  End For (idxIns)
+        bufIndex[idxIns]    = i;
+        ++  cntTeam;
+    }   //  End For (i)
+
+    //  別のリーグに所属するチームも配列の末尾に格納しておく。  //
+    TeamIndex   idxIns  = cntTeam;
+    for ( TeamIndex i = 0; i < numTeam; ++ i ) {
+        if ( getTeamInfo(i).leagueID != idxLeague ) {
+            bufIndex[idxIns]    = i;
+            ++  idxIns;
+        }
+    }
+
+    return ( cntTeam );
+}
+
+//----------------------------------------------------------------
 //    試合結果を集計する。
 //
 

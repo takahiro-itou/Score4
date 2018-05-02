@@ -161,6 +161,32 @@ public:
     clearDocument();
 
     //----------------------------------------------------------------
+    /**   集計済みの成績表から順位を計算する。
+    **
+    **  @param [in]     idxLeague   リーグ。
+    **  @param [in,out] csBuf       集計済みデータ。
+    **  @return     指定したリーグに属するチーム数を返す。
+    **/
+    virtual  TeamIndex
+    computeCurrentRank(
+            const  LeagueIndex  idxLeague,
+            CountedScoreList    &csData)  const;
+
+    //----------------------------------------------------------------
+    /**   指定したリーグに属するチームを、成績順にソートする。
+    **
+    **  @param [in] csData      集計済みデータ。
+    **  @param [in] idxLeague   リーグ。
+    **  @param[out] bufIndex    チーム番号の配列を返す。
+    **  @return     そのリーグに属するチーム数を返す。
+    **/
+    virtual  TeamIndex
+    computeRankOrder(
+            const  CountedScoreList &csData,
+            const  LeagueIndex      idxLeague,
+            std::vector<TeamIndex>  &bufIndex)  const;
+
+    //----------------------------------------------------------------
     /**   試合結果を集計する。
     **
     **    指定した日付（その日付を含む）までの結果を集計する。
