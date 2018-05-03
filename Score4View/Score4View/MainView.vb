@@ -191,25 +191,24 @@
     Private Sub updateScoreView()
         Dim strBuf As String
         Dim strCaption As String
-
+        Dim lastActiveDate As System.DateTime
+        Dim lastRecordDate As System.DateTime
         updateLeagueTab()
 
         ' ウィンドウのキャプション。
+        strCaption = "成績／順位　: "
         With Me.m_scoreData
-            strCaption = "成績／順位　: "
-            strCaption = strCaption & .lastActiveDate & "まで (日程は" & .lastRecordDate & "まで)"
+            lastActiveDate = .lastActiveDate
+            lastRecordDate = .lastRecordDate
         End With
+        strCaption = strCaption &
+                Format(lastActiveDate, "yyyy/MM/dd") &
+                "まで (日程は" &
+                Format(lastRecordDate, "yyyy/MM/dd") & "まで)"
         If (m_flagModified) Then
             strCaption = strCaption & " *変更あり"
         End If
         Me.Text = strCaption
-
-        strBuf = m_scoreData.getNumLeagues()
-        For i = 0 To m_scoreData.getNumLeagues() - 1
-            Dim leagueInfo As Score4Wrapper.Common.LeagueInfo
-            leagueInfo = m_scoreData.leagueInfo(i)
-            strBuf = strBuf & vbCrLf & leagueInfo.leagueName
-        Next
 
     End Sub
 

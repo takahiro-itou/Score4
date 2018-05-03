@@ -53,6 +53,7 @@ Partial Class MainView
         Me.dlgSave = New System.Windows.Forms.SaveFileDialog()
         Me.dlgFont = New System.Windows.Forms.FontDialog()
         Me.grpScore = New System.Windows.Forms.GroupBox()
+        Me.lblDate = New System.Windows.Forms.Label()
         Me.grdExtra = New System.Windows.Forms.DataGridView()
         Me.optShowWins = New System.Windows.Forms.RadioButton()
         Me.optShowMagic = New System.Windows.Forms.RadioButton()
@@ -61,7 +62,15 @@ Partial Class MainView
         Me.mnvDate = New System.Windows.Forms.MonthCalendar()
         Me.grdScore = New System.Windows.Forms.DataGridView()
         Me.tabLeague = New System.Windows.Forms.TabControl()
-        Me.lblDate = New System.Windows.Forms.Label()
+        Me.colTeam = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.colTotal = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.colWon = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.colLost = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.colDraw = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.colDiff = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.colPercent = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.colMagic = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.colRank = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.mnuMain.SuspendLayout()
         Me.grpScore.SuspendLayout()
         CType(Me.grdExtra, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -221,11 +230,20 @@ Partial Class MainView
         Me.grpScore.Name = "grpScore"
         Me.grpScore.TabStop = False
         '
+        'lblDate
+        '
+        resources.ApplyResources(Me.lblDate, "lblDate")
+        Me.lblDate.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.lblDate.Name = "lblDate"
+        '
         'grdExtra
         '
+        Me.grdExtra.AllowUserToAddRows = False
+        Me.grdExtra.AllowUserToDeleteRows = False
         resources.ApplyResources(Me.grdExtra, "grdExtra")
         Me.grdExtra.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.grdExtra.Name = "grdExtra"
+        Me.grdExtra.ReadOnly = True
         Me.grdExtra.RowTemplate.Height = 21
         '
         'optShowWins
@@ -267,9 +285,13 @@ Partial Class MainView
         '
         'grdScore
         '
+        Me.grdScore.AllowUserToAddRows = False
+        Me.grdScore.AllowUserToDeleteRows = False
         Me.grdScore.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.grdScore.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.colTeam, Me.colTotal, Me.colWon, Me.colLost, Me.colDraw, Me.colDiff, Me.colPercent, Me.colMagic, Me.colRank})
         resources.ApplyResources(Me.grdScore, "grdScore")
         Me.grdScore.Name = "grdScore"
+        Me.grdScore.ReadOnly = True
         Me.grdScore.RowTemplate.Height = 21
         '
         'tabLeague
@@ -278,11 +300,60 @@ Partial Class MainView
         Me.tabLeague.Name = "tabLeague"
         Me.tabLeague.SelectedIndex = 0
         '
-        'lblDate
+        'colTeam
         '
-        Me.lblDate.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        resources.ApplyResources(Me.lblDate, "lblDate")
-        Me.lblDate.Name = "lblDate"
+        Me.colTeam.Frozen = True
+        resources.ApplyResources(Me.colTeam, "colTeam")
+        Me.colTeam.Name = "colTeam"
+        Me.colTeam.ReadOnly = True
+        '
+        'colTotal
+        '
+        resources.ApplyResources(Me.colTotal, "colTotal")
+        Me.colTotal.Name = "colTotal"
+        Me.colTotal.ReadOnly = True
+        '
+        'colWon
+        '
+        resources.ApplyResources(Me.colWon, "colWon")
+        Me.colWon.Name = "colWon"
+        Me.colWon.ReadOnly = True
+        '
+        'colLost
+        '
+        resources.ApplyResources(Me.colLost, "colLost")
+        Me.colLost.Name = "colLost"
+        Me.colLost.ReadOnly = True
+        '
+        'colDraw
+        '
+        resources.ApplyResources(Me.colDraw, "colDraw")
+        Me.colDraw.Name = "colDraw"
+        Me.colDraw.ReadOnly = True
+        '
+        'colDiff
+        '
+        resources.ApplyResources(Me.colDiff, "colDiff")
+        Me.colDiff.Name = "colDiff"
+        Me.colDiff.ReadOnly = True
+        '
+        'colPercent
+        '
+        resources.ApplyResources(Me.colPercent, "colPercent")
+        Me.colPercent.Name = "colPercent"
+        Me.colPercent.ReadOnly = True
+        '
+        'colMagic
+        '
+        resources.ApplyResources(Me.colMagic, "colMagic")
+        Me.colMagic.Name = "colMagic"
+        Me.colMagic.ReadOnly = True
+        '
+        'colRank
+        '
+        resources.ApplyResources(Me.colRank, "colRank")
+        Me.colRank.Name = "colRank"
+        Me.colRank.ReadOnly = True
         '
         'MainView
         '
@@ -341,5 +412,14 @@ Partial Class MainView
     Friend WithEvents optShowRest As System.Windows.Forms.RadioButton
     Friend WithEvents chkSchedule As System.Windows.Forms.CheckBox
     Friend WithEvents lblDate As System.Windows.Forms.Label
+    Friend WithEvents colTeam As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents colTotal As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents colWon As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents colLost As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents colDraw As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents colDiff As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents colPercent As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents colMagic As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents colRank As System.Windows.Forms.DataGridViewTextBoxColumn
 
 End Class

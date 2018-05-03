@@ -285,7 +285,7 @@
     <value>0, 0</value>
   </data>
   <data name="mnuMain.Size" type="System.Drawing.Size, System.Drawing">
-    <value>941, 24</value>
+    <value>866, 24</value>
   </data>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="mnuMain.TabIndex" type="System.Int32, mscorlib">
@@ -318,8 +318,11 @@
   <data name="grpScore.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left, Right</value>
   </data>
+  <data name="lblDate.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
   <data name="lblDate.Location" type="System.Drawing.Point, System.Drawing">
-    <value>665, 184</value>
+    <value>590, 184</value>
   </data>
   <data name="lblDate.Size" type="System.Drawing.Size, System.Drawing">
     <value>222, 24</value>
@@ -349,7 +352,7 @@
     <value>15, 306</value>
   </data>
   <data name="grdExtra.Size" type="System.Drawing.Size, System.Drawing">
-    <value>872, 240</value>
+    <value>797, 240</value>
   </data>
   <data name="grdExtra.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
@@ -370,7 +373,7 @@
     <value>NoControl</value>
   </data>
   <data name="optShowWins.Location" type="System.Drawing.Point, System.Drawing">
-    <value>527, 279</value>
+    <value>497, 279</value>
   </data>
   <data name="optShowWins.Size" type="System.Drawing.Size, System.Drawing">
     <value>128, 16</value>
@@ -394,7 +397,7 @@
     <value>2</value>
   </data>
   <data name="optShowMagic.Location" type="System.Drawing.Point, System.Drawing">
-    <value>373, 279</value>
+    <value>363, 279</value>
   </data>
   <data name="optShowMagic.Size" type="System.Drawing.Size, System.Drawing">
     <value>128, 16</value>
@@ -472,7 +475,7 @@
     <value>NoControl</value>
   </data>
   <data name="mnvDate.Location" type="System.Drawing.Point, System.Drawing">
-    <value>667, 18</value>
+    <value>592, 18</value>
   </data>
   <data name="mnvDate.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -489,11 +492,89 @@
   <data name="&gt;&gt;mnvDate.ZOrder" xml:space="preserve">
     <value>6</value>
   </data>
+  <metadata name="colTeam.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="colTeam.HeaderText" xml:space="preserve">
+    <value>Team</value>
+  </data>
+  <metadata name="colTotal.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="colTotal.HeaderText" xml:space="preserve">
+    <value>Total</value>
+  </data>
+  <data name="colTotal.Width" type="System.Int32, mscorlib">
+    <value>48</value>
+  </data>
+  <metadata name="colWon.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="colWon.HeaderText" xml:space="preserve">
+    <value>Won</value>
+  </data>
+  <data name="colWon.Width" type="System.Int32, mscorlib">
+    <value>48</value>
+  </data>
+  <metadata name="colLost.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="colLost.HeaderText" xml:space="preserve">
+    <value>Lost</value>
+  </data>
+  <data name="colLost.Width" type="System.Int32, mscorlib">
+    <value>48</value>
+  </data>
+  <metadata name="colDraw.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="colDraw.HeaderText" xml:space="preserve">
+    <value>Draw</value>
+  </data>
+  <data name="colDraw.Width" type="System.Int32, mscorlib">
+    <value>48</value>
+  </data>
+  <metadata name="colDiff.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="colDiff.HeaderText" xml:space="preserve">
+    <value>Diff</value>
+  </data>
+  <data name="colDiff.Width" type="System.Int32, mscorlib">
+    <value>48</value>
+  </data>
+  <metadata name="colPercent.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="colPercent.HeaderText" xml:space="preserve">
+    <value>%</value>
+  </data>
+  <data name="colPercent.Width" type="System.Int32, mscorlib">
+    <value>48</value>
+  </data>
+  <metadata name="colMagic.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="colMagic.HeaderText" xml:space="preserve">
+    <value>Magic</value>
+  </data>
+  <data name="colMagic.Width" type="System.Int32, mscorlib">
+    <value>48</value>
+  </data>
+  <metadata name="colRank.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="colRank.HeaderText" xml:space="preserve">
+    <value>Rank</value>
+  </data>
+  <data name="colRank.Width" type="System.Int32, mscorlib">
+    <value>60</value>
+  </data>
   <data name="grdScore.Location" type="System.Drawing.Point, System.Drawing">
     <value>15, 18</value>
   </data>
   <data name="grdScore.Size" type="System.Drawing.Size, System.Drawing">
-    <value>640, 240</value>
+    <value>564, 240</value>
   </data>
   <data name="grdScore.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -514,7 +595,7 @@
     <value>24, 56</value>
   </data>
   <data name="grpScore.Size" type="System.Drawing.Size, System.Drawing">
-    <value>899, 557</value>
+    <value>824, 557</value>
   </data>
   <data name="grpScore.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -538,7 +619,7 @@
     <value>12, 30</value>
   </data>
   <data name="tabLeague.Size" type="System.Drawing.Size, System.Drawing">
-    <value>921, 595</value>
+    <value>846, 595</value>
   </data>
   <data name="tabLeague.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -562,7 +643,7 @@
     <value>6, 12</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>941, 638</value>
+    <value>866, 638</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Score and Ranking</value>
@@ -734,6 +815,60 @@
   </data>
   <data name="&gt;&gt;dlgFont.Type" xml:space="preserve">
     <value>System.Windows.Forms.FontDialog, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;colTeam.Name" xml:space="preserve">
+    <value>colTeam</value>
+  </data>
+  <data name="&gt;&gt;colTeam.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;colTotal.Name" xml:space="preserve">
+    <value>colTotal</value>
+  </data>
+  <data name="&gt;&gt;colTotal.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;colWon.Name" xml:space="preserve">
+    <value>colWon</value>
+  </data>
+  <data name="&gt;&gt;colWon.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;colLost.Name" xml:space="preserve">
+    <value>colLost</value>
+  </data>
+  <data name="&gt;&gt;colLost.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;colDraw.Name" xml:space="preserve">
+    <value>colDraw</value>
+  </data>
+  <data name="&gt;&gt;colDraw.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;colDiff.Name" xml:space="preserve">
+    <value>colDiff</value>
+  </data>
+  <data name="&gt;&gt;colDiff.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;colPercent.Name" xml:space="preserve">
+    <value>colPercent</value>
+  </data>
+  <data name="&gt;&gt;colPercent.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;colMagic.Name" xml:space="preserve">
+    <value>colMagic</value>
+  </data>
+  <data name="&gt;&gt;colMagic.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;colRank.Name" xml:space="preserve">
+    <value>colRank</value>
+  </data>
+  <data name="&gt;&gt;colRank.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>MainView</value>
