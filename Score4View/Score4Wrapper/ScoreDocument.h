@@ -132,8 +132,7 @@ public:
     **/
     ErrCode
     countScores(
-            DateSerial          trgLastDate,
-            CountedScoreList^   bufCounted);
+            System::DateTime^   trgLastDate);
 
 //========================================================================
 //

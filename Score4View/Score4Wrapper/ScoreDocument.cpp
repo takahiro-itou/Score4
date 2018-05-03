@@ -158,18 +158,23 @@ ScoreDocument::computeRankOrder(
 
 ErrCode
 ScoreDocument::countScores(
-        DateSerial          trgLastDate,
-        CountedScoreList^   bufCounted)
+        System::DateTime^   trgLastDate)
 {
     Score4Core::Common::ErrCode  retVal;
 
-    retVal  = this->m_ptrObj->countScores(trgLastDate, *(this->m_ptrBuf));
+    DateSerial  dsLast  = getDateSerial(trgLastDate);
+
+    this->m_ptrBuf->clear();
+    this->m_ptrBuf->resize(getNumTeams());
+
+    this->m_trgDate = getDateSerial(trgLastDate);
+    retVal  = this->m_ptrObj->countScores(dsLast, *(this->m_ptrBuf));
     const  LeagueIndex  numLeagues  = getNumLeagues();
     for ( LeagueIndex i = 0; i < numLeagues; ++ i ) {
         this->m_ptrObj->computeCurrentRank(i, *(this->m_ptrBuf));
     }
 
-    this->m_trgDate = trgLastDate;
+    this->m_trgDate = dsLast;
     return ( static_cast<ErrCode>(retVal) );
 }
 
