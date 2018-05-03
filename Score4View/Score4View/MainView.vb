@@ -15,6 +15,12 @@
 
     Private m_scoreData As Score4Wrapper.Common.ScoreDocument
 
+    Private m_currentLeague As Integer
+    Private m_currentDate As System.DateTime
+    Private m_flagMagicMode As Integer
+    Private m_flagExtraView As Integer
+    Private m_flagSchedule As Integer
+
     ''================================================================================
     ''    変更点があれば保存するか確認する。
     ''================================================================================
@@ -102,6 +108,7 @@
             End If
         End If
 
+        mnvDate.SelectionStart = m_scoreData.lastActiveDate
         Return True
     End Function
 
@@ -189,7 +196,6 @@
     ''    ビューの内容を、最新の情報に更新する。
     ''================================================================================
     Private Sub updateScoreView()
-        Dim strBuf As String
         Dim strCaption As String
         Dim lastActiveDate As System.DateTime
         Dim lastRecordDate As System.DateTime
@@ -209,16 +215,28 @@
             strCaption = strCaption & " *変更あり"
         End If
         Me.Text = strCaption
+    End Sub
 
-        Me.m_scoreData.countScores(lastRecordDate)
-        ScoreView.displayScoreTableToGrid(0, 0, Me.m_scoreData, Me.grdScore)
+    Private Sub updateTables(
+                ByVal idxLeague As Integer, ByVal trgLastDate As System.DateTime,
+                ByVal modeMagic As Integer, ByVal modeExtra As Integer, ByVal modeSchedule As Integer)
+        m_currentLeague = idxLeague
+        m_currentDate = trgLastDate
+        m_flagMagicMode = modeMagic
+        m_flagExtraView = modeExtra
+        m_flagSchedule = modeSchedule
+
+        Me.m_scoreData.countScores(trgLastDate)
+        ScoreView.displayScoreTableToGrid(idxLeague, modeMagic, Me.m_scoreData, Me.grdScore)
+
+        lblDate.Text = trgLastDate
     End Sub
 
     ''================================================================================
     ''    メニュー「ファイル」－「終了」
     ''================================================================================
     Private Sub mnuFileExit_Click(sender As Object, e As EventArgs) Handles mnuFileExit.Click
-
+        Application.Exit()
     End Sub
 
     ''================================================================================
@@ -350,9 +368,10 @@
 
     Private Sub tabLeague_SelectedIndexChanged(sender As Object, e As EventArgs) Handles tabLeague.SelectedIndexChanged
         Dim idxLeague As Integer = tabLeague.SelectedIndex
+        updateTables(idxLeague, m_currentDate, m_flagMagicMode, m_flagExtraView, m_flagSchedule)
     End Sub
 
     Private Sub mnvDate_DateChanged(sender As Object, e As DateRangeEventArgs) Handles mnvDate.DateChanged
-        lblDate.Text = mnvDate.SelectionStart
+        updateTables(m_currentLeague, mnvDate.SelectionStart, m_flagMagicMode, m_flagExtraView, m_flagSchedule)
     End Sub
 End Class
