@@ -716,7 +716,7 @@ ScoreDocument::clearCountedScoresList(
 
         for ( TeamIndex j = 0; j < numTeam; ++ j ) {
             for ( int gt = FILTER_GAMES_FIRST;
-                    gt <= FILTER_GAMES_END; ++ gt )
+                    gt < FILTER_GAMES_END; ++ gt )
             {
                 trgCS.vsWons.at(j)[gt]  = 0;
                 trgCS.vsLost.at(j)[gt]  = 0;
