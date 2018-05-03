@@ -218,6 +218,13 @@ public:
         void  set(int  idxLeague,  LeagueInfo^  leagueInfo);
     }
 
+    property    CountedScores^  scoreInfo[int]
+    {
+        CountedScores^  get(int  idxTeam)  {
+            return ( this->m_csiBuf[idxTeam] );
+        }
+    }
+
     property    DateSerial  targetLastDate
     {
         DateSerial  get()  {
@@ -253,12 +260,13 @@ private:
     typedef     std::vector<Score4Core::Common::CountedScores>
     WrapCountedScoreList;
 
-    WrapTarget  *               m_ptrObj;
+    WrapTarget  *                   m_ptrObj;
 
-    WrapCountedScoreList  *     m_ptrBuf;
+    WrapCountedScoreList  *         m_ptrBuf;
 
-    DateSerial                  m_trgDate;
+    DateSerial                      m_trgDate;
 
+    cli::array<CountedScores^>^     m_csiBuf;
 };
 
 }   //  End of namespace  Common

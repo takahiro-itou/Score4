@@ -169,9 +169,18 @@ ScoreDocument::countScores(
 
     this->m_trgDate = getDateSerial(trgLastDate);
     retVal  = this->m_ptrObj->countScores(dsLast, *(this->m_ptrBuf));
+
     const  LeagueIndex  numLeagues  = getNumLeagues();
+    const  TeamIndex    numTeams    = getNumTeams();
+
     for ( LeagueIndex i = 0; i < numLeagues; ++ i ) {
         this->m_ptrObj->computeCurrentRank(i, *(this->m_ptrBuf));
+    }
+
+    this->m_csiBuf  = gcnew cli::array<CountedScores^, 1>(numTeams);
+    for ( TeamIndex i = 0; i < numTeams; ++ i ) {
+        this->m_csiBuf[i]   = gcnew  CountedScores;
+        copyToManageType(this->m_ptrBuf->at(i), this->m_csiBuf[i]);
     }
 
     this->m_trgDate = dsLast;
@@ -329,6 +338,10 @@ ScoreDocument::leagueInfo::set(
 
     this->m_ptrObj->setLeagueInfo(idxLeague, natvVal);
 }
+
+//----------------------------------------------------------------
+//    プロパティ  lastRecordDate
+//
 
 //----------------------------------------------------------------
 
