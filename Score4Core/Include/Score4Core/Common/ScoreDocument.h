@@ -1,9 +1,9 @@
-//  -*-  coding: utf-8; mode: c++  -*-  //
+﻿//  -*-  coding: utf-8-with-signature;  mode: c++  -*-  //
 /*************************************************************************
 **                                                                      **
 **                  ---  The Score4 Core Library.  ---                  **
 **                                                                      **
-**          Copyright (C), 2017-2017, Takahiro Itou                     **
+**          Copyright (C), 2017-2018, Takahiro Itou                     **
 **          All Rights Reserved.                                        **
 **                                                                      **
 *************************************************************************/
@@ -19,10 +19,10 @@
 
 #include    "Score4Types.h"
 
-#include    <array>
+#include    "ScoreInterface.h"
+
 #include    <iosfwd>
 #include    <string>
-#include    <vector>
 
 SCORE4_CORE_NAMESPACE_BEGIN
 namespace  Common  {
@@ -41,56 +41,18 @@ class  ScoreDocument
 //
 private:
 
-    //typedef     GamesCount      GameCountArray[2];
-    typedef     std::array<GamesCount, FILTER_GAMES_END>
-    GameCountArray;
-
-    typedef     std::vector<GameCountArray>     GameCountTable;
+    typedef     std::vector<CountedScores>  CountedScoreList;
 
 public:
 
-    /**
-    **    リーグ情報。
-    **/
-    struct  LeagueInfo
-    {
-        /**   リーグ名。    **/
-        std::string     leagueName;
+    /**   リーグ情報。  **/
+    typedef     Common::LeagueInfo      LeagueInfo;
 
-        /**   プレーオフに進出できるチーム数。  **/
-        TeamIndex       numPlayOff;
+    /**   チーム情報。  **/
+    typedef     Common::TeamInfo        TeamInfo;
 
-        LeagueInfo()
-            : leagueName(), numPlayOff(0)
-        { }
-    };
-
-    /**
-    **   　チーム情報。
-    **/
-    struct  TeamInfo
-    {
-        LeagueIndex     leagueID;       /**<  所属リーグ。      **/
-        std::string     teamName;       /**<  チーム名。        **/
-        GameCountTable  gameCounts;     /**<  試合数のリスト。  **/
-
-        TeamInfo()
-            : leagueID(-1), teamName(), gameCounts()
-        { }
-    };
-
-    /**
-    **    ゲーム結果のレコード。
-    **/
-    struct  GameResult
-    {
-        RecordFlag      eGameFlags;
-        DateSerial      recordDate;
-        TeamIndex       visitorTeam;
-        ScoreValue      homeTeam;
-        TeamIndex       visitorScore;
-        ScoreValue      homeScore;
-    };
+    /**   ゲーム結果のレコード。    **/
+    typedef     Common::GameResult      GameResult;
 
 //========================================================================
 //
@@ -197,6 +159,49 @@ public:
     **/
     virtual  ErrCode
     clearDocument();
+
+    //----------------------------------------------------------------
+    /**   集計済みの成績表から順位を計算する。
+    **
+    **  @param [in]     idxLeague   リーグ。
+    **  @param [in,out] csBuf       集計済みデータ。
+    **  @return     指定したリーグに属するチーム数を返す。
+    **/
+    virtual  TeamIndex
+    computeCurrentRank(
+            const  LeagueIndex  idxLeague,
+            CountedScoreList    &csData)  const;
+
+    //----------------------------------------------------------------
+    /**   指定したリーグに属するチームを、成績順にソートする。
+    **
+    **  @param [in] csData      集計済みデータ。
+    **  @param [in] idxLeague   リーグ。
+    **  @param[out] bufIndex    チーム番号の配列を返す。
+    **  @return     そのリーグに属するチーム数を返す。
+    **/
+    virtual  TeamIndex
+    computeRankOrder(
+            const  CountedScoreList &csData,
+            const  LeagueIndex      idxLeague,
+            std::vector<TeamIndex>  &bufIndex)  const;
+
+    //----------------------------------------------------------------
+    /**   試合結果を集計する。
+    **
+    **    指定した日付（その日付を含む）までの結果を集計する。
+    **
+    **  @param [in] trgLastDate   集計対象の最終日。
+    **  @param[out] bufCounted    結果を格納する変数。
+    **  @return     エラーコードを返す。
+    **      -   異常終了の場合は、
+    **          エラーの種類を示す非ゼロ値を返す。
+    **      -   正常終了の場合は、ゼロを返す。
+    **/
+    virtual  ErrCode
+    countScores(
+            const   DateSerial  trgLastDate,
+            CountedScoreList    &bufCounted)  const;
 
     //----------------------------------------------------------------
     /**   対戦試合数用の領域を確保し初期化する。
@@ -471,6 +476,34 @@ public:
 //    For Internal Use Only.
 //
 private:
+
+    //----------------------------------------------------------------
+    /**   集計結果を格納する配列をクリアする。
+    **
+    **  @param[out] bufCounted    結果を格納する変数。
+    **  @return     エラーコードを返す。
+    **      -   異常終了の場合は、
+    **          エラーの種類を示す非ゼロ値を返す。
+    **      -   正常終了の場合は、ゼロを返す。
+    **/
+    ErrCode
+    clearCountedScoresList(
+            CountedScoreList  & bufCounted)  const;
+
+    //----------------------------------------------------------------
+    /**   対チーム毎の集計結果から、合計を計算する。
+    **
+    **  @param [in]     idxLeague   所属するリーグ。
+    **  @param [in,out] trgCS      結果を読み書きする変数。
+    **  @return     エラーコードを返す。
+    **      -   異常終了の場合は、
+    **          エラーの種類を示す非ゼロ値を返す。
+    **      -   正常終了の場合は、ゼロを返す。
+    **/
+    ErrCode
+    countTotalScores(
+            const  LeagueIndex  idxLeague,
+            CountedScores     & trgCS)  const;
 
     //----------------------------------------------------------------
     /**   対戦カード毎の試合数を設定する。

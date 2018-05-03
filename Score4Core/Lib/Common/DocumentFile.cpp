@@ -1,9 +1,9 @@
-//  -*-  coding: utf-8; mode: c++  -*-  //
+﻿//  -*-  coding: utf-8-with-signature;  mode: c++  -*-  //
 /*************************************************************************
 **                                                                      **
 **                  ---  The Score4 Core Library.  ---                  **
 **                                                                      **
-**          Copyright (C), 2017-2017, Takahiro Itou                     **
+**          Copyright (C), 2017-2018, Takahiro Itou                     **
 **          All Rights Reserved.                                        **
 **                                                                      **
 *************************************************************************/
@@ -24,7 +24,11 @@
 #include    <memory.h>
 #include    <stdio.h>
 #include    <sys/stat.h>
-#include    <unistd.h>
+#if defined( _MSC_VER )
+#    include    <io.h>
+#else
+#    include    <unistd.h>
+#endif
 #include    <vector>
 
 #include    <iostream>
@@ -172,9 +176,9 @@ DocumentFile::readFromBinaryBuffer(
     edc.setupGenPoly(FILE_CRC32_GENPOLY);
     const  ErrorDetectionCode::EDCode
         valCRC  =  edc.checkCRC32(inBuf, cbBuf);
-    std::cerr   <<  "FILE CRC = "
-                <<  std::hex    <<  valCRC
-                <<  std::endl;
+    // std::cerr   <<  "FILE CRC = "
+    //             <<  std::hex    <<  valCRC
+    //             <<  std::endl;
 
     ptrDoc->clearDocument();
     ptrDoc->setLastImportDate(extHead.lastImport);
@@ -210,6 +214,27 @@ DocumentFile::readFromBinaryFile(
         const  std::string  &fileName,
         ScoreDocument  *    ptrDoc)
 {
+#if defined( _MSC_VER )
+    FILE *  fp  = fopen(fileName.c_str(), "rb");
+    if ( fp == NULL ) {
+        return ( ERR_FILE_OPEN_ERROR );
+    }
+
+    ::fseek(fp, 0, SEEK_END);
+    const   FileLength  cbFile  = ::ftell(fp);
+    ::fseek(fp, 0, SEEK_SET);
+
+    std::vector<unsigned char>  buf(cbFile);
+    if ( fread(&(buf[0]), 1, cbFile, fp) != cbFile )
+    {
+        ::fclose(fp);
+        return ( ERR_FILE_IO_ERROR );
+    }
+    ::fclose(fp);
+
+    const  ErrCode
+        retErr  = readFromBinaryBuffer(&(buf[0]), cbFile, ptrDoc);
+#else
     int     fd  =  -1;
 
     fd  = open(fileName.c_str(), O_RDONLY);
@@ -235,7 +260,7 @@ DocumentFile::readFromBinaryFile(
 
     const  ErrCode
         retErr  = readFromBinaryBuffer(&(buf[0]), cbFile, ptrDoc);
-
+#endif
     return ( retErr );
 }
 

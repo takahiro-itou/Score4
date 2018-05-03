@@ -1,9 +1,9 @@
-//  -*-  coding: utf-8; mode: c++  -*-  //
+﻿//  -*-  coding: utf-8-with-signature;  mode: c++  -*-  //
 /*************************************************************************
 **                                                                      **
 **                  ---  The Score4 Core Library.  ---                  **
 **                                                                      **
-**          Copyright (C), 2017-2017, Takahiro Itou                     **
+**          Copyright (C), 2017-2018, Takahiro Itou                     **
 **          All Rights Reserved.                                        **
 **                                                                      **
 *************************************************************************/
@@ -104,8 +104,10 @@ enum  GameFilter
     FILTER_SCDL_AWAYS   =  (FILTER_AWAY_GAMES | FILTER_SCHEDULE),
     FILTER_SCDL_ALLS    =  (FILTER_ALL_GAMES  | FILTER_SCHEDULE),
 
-    FILTER_GAMES_FITST  =  FILTER_HOME_GAMES,
-    FILTER_GAMES_END    =  (FILTER_ALL_GAMES + 1)
+    FILTER_GAMES_FIRST  =  FILTER_HOME_GAMES,
+    FILTER_GAMES_END    =  (FILTER_ALL_GAMES + 1),
+    FILTER_SCDL_FIRST   =  FILTER_HOME_GAMES,
+    FILTER_SCDL_END     =  (FILTER_SCDL_ALLS + 1)
 };
 
 //----------------------------------------------------------------
