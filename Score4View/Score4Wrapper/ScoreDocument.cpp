@@ -17,13 +17,39 @@
 #include    "StdAfx.h"
 
 #include    "ScoreDocument.h"
+#include    "Score4Core/Common/DateTimeFormat.h"
 
 #include    <msclr/marshal_cppstd.h>
 using       namespace   msclr::interop;
 
-
 namespace  Score4Wrapper  {
 namespace  Common  {
+
+namespace  {
+
+using       Score4Core::Common::DateTimeFormat;
+
+inline  System::DateTime^
+getDateTime(
+        const   DateSerial  dsVal)
+{
+    DateTimeFormat::TDateTime   dtBuf;
+    DateTimeFormat::getDateTimeFromSerial(dsVal, &dtBuf);
+
+    System::DateTime^   dtWork  = gcnew  System::DateTime(
+            dtBuf.year,  dtBuf.month,  dtBuf.day);
+    return ( dtWork );
+}
+
+inline  DateSerial
+getDateSerial(
+        System::DateTime^   dtVal)
+{
+    return ( DateTimeFormat::getSerialFromDate(
+                     dtVal->Year, dtVal->Month, dtVal->Day) );
+}
+
+}   //  End of (Unnamed) namespace
 
 //========================================================================
 //
@@ -217,6 +243,58 @@ ScoreDocument::getOptimizedFlag()
 //    Properties.
 //
 
+//----------------------------------------------------------------
+//    プロパティ  lastActiveDate
+//
+
+System::DateTime^
+ScoreDocument::lastActiveDate::get()
+{
+    return ( getDateTime(this->m_ptrObj->getLastActiveDate()) );
+}
+
+void
+ScoreDocument::lastActiveDate::set(
+        System::DateTime^  dtVal)
+{
+    this->m_ptrObj->setLastActiveDate(getDateSerial(dtVal));
+}
+
+//----------------------------------------------------------------
+//    プロパティ  lastImportDate
+//
+
+System::DateTime^
+ScoreDocument::lastImportDate::get()
+{
+    return ( getDateTime(this->m_ptrObj->getLastImportDate()) );
+}
+
+void
+ScoreDocument::lastImportDate::set(
+        System::DateTime^  dtVal)
+{
+    this->m_ptrObj->setLastImportDate(getDateSerial(dtVal));
+}
+
+//----------------------------------------------------------------
+//    プロパティ  lastRecordDate
+//
+
+System::DateTime^
+ScoreDocument::lastRecordDate::get()
+{
+    return ( getDateTime(this->m_ptrObj->getLastRecordDate()) );
+}
+
+void
+ScoreDocument::lastRecordDate::set(
+        System::DateTime^  dtVal)
+{
+    this->m_ptrObj->setLastRecordDate(getDateSerial(dtVal));
+}
+
+//----------------------------------------------------------------
 
 LeagueInfo^
 ScoreDocument::leagueInfo::get(
@@ -246,6 +324,8 @@ ScoreDocument::leagueInfo::set(
 
     this->m_ptrObj->setLeagueInfo(idxLeague, natvVal);
 }
+
+//----------------------------------------------------------------
 
 TeamInfo^
 ScoreDocument::teamInfo::get(

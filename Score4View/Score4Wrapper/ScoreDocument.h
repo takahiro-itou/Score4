@@ -195,34 +195,22 @@ public:
 //
 public:
 
-    property    DateSerial  lastActiveDate
+    property    System::DateTime^   lastActiveDate
     {
-        DateSerial  get()  {
-            return ( this->m_ptrObj->getLastActiveDate() );
-        }
-        void  set(DateSerial dsVal)  {
-            this->m_ptrObj->setLastActiveDate(dsVal);
-        }
+        System::DateTime^   get();
+        void  set(System::DateTime^  dtVal);
     }
 
-    property    DateSerial  lastImportDate
+    property    System::DateTime^   lastImportDate
     {
-        DateSerial  get()  {
-            return ( this->m_ptrObj->getLastImportDate() );
-        }
-        void  set(DateSerial dsVal)  {
-            this->m_ptrObj->setLastImportDate(dsVal);
-        }
+        System::DateTime^  get();
+        void  set(System::DateTime^  dtVal);
     }
 
-    property    DateSerial  lastRecordDate
+    property    System::DateTime^   lastRecordDate
     {
-        DateSerial  get()  {
-            return ( this->m_ptrObj->getLastRecordDate() );
-        }
-        void  set(DateSerial  dsVal)  {
-            this->m_ptrObj->setLastRecordDate(dsVal);
-        }
+        System::DateTime^  get();
+        void  set(System::DateTime^  dtVal);
     }
 
     property    LeagueInfo^     leagueInfo[int]
