@@ -132,6 +132,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="ScoreView.vb" />
     <Compile Include="WinAPI.vb" />
   </ItemGroup>
   <ItemGroup>
