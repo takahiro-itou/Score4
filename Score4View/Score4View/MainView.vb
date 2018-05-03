@@ -210,6 +210,9 @@
         End If
         Me.Text = strCaption
 
+        Dim buffer() As Score4Wrapper.Common.CountedScores
+        Me.m_scoreData.countScores(-1, buffer)
+        ScoreView.displayScoreTableToGrid(0, 0, Me.m_scoreData, Me.grdScore)
     End Sub
 
     ''================================================================================
