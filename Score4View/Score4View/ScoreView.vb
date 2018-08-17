@@ -45,19 +45,20 @@
                 End If
 
                 ' 勝率
-                Dim numGame As Integer = scoreInfo.numGames(2) - numDraw
-                If (numGame = 0) Then
+                Dim numGame As Integer = scoreInfo.numGames(2)
+                Dim wpDenom As Integer = numGame - numDraw
+                If (wpDenom = 0) Then
                     strPerc = "---"
                 Else
-                    strPerc = Format(numWons / numGame, "#.000")
+                    strPerc = Format(numWons / wpDenom, "#.000")
                 End If
 
                 .Rows.Add(
                     teamInfo.teamName,
-                    scoreInfo.numGames(2),
+                    numGame,
                     numWons,
                     numLost,
-                    scoreInfo.numDraw(2),
+                    numDraw,
                     strDiff,
                     strPerc
                 )
