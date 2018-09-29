@@ -277,6 +277,18 @@ DocumentFile::readFromTextStream(
 }
 
 //----------------------------------------------------------------
+//    レコード部をテキストストリームから読み込む。
+//
+
+ErrCode
+DocumentFile::readRecordFromTextStream(
+        std::istream     &  inStr,
+        GameResultList   &  outRec)
+{
+    return ( ERR_FAILURE );
+}
+
+//----------------------------------------------------------------
 //    データをバイナリバッファに書き込む。
 //
 

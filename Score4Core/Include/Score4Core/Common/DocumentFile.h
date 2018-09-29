@@ -19,6 +19,8 @@
 
 #include    "Score4Types.h"
 
+#include    "ScoreInterface.h"
+
 #include    <iosfwd>
 #include    <string>
 
@@ -61,6 +63,11 @@ public:
         FileLength  cbRecsHead;     /**<  レコード部先頭領域。  **/
         FileLength  cbRecsBody;     /**<  レコード部本体領域。  **/
     };
+
+    /**   ゲーム結果のレコード。    **/
+    typedef     Common::GameResult          GameResult;
+
+    typedef     std::vector<GameResult>     GameResultList;
 
 //========================================================================
 //
@@ -166,6 +173,21 @@ public:
     readFromTextStream(
             std::istream     &  inStr,
             ScoreDocument  *    ptrDoc);
+
+    //----------------------------------------------------------------
+    /**   レコード部をテキストストリームから読み込む。
+    **
+    **  @param [in,out] inStr     入力ストリーム。
+    **  @param    [out] outRec    内容を格納する変数。
+    **  @return     エラーコードを返す。
+    **      -   異常終了の場合は、
+    **          エラーの種類を示す非ゼロ値を返す。
+    **      -   正常終了の場合は、ゼロを返す。
+    **/
+    static  ErrCode
+    readRecordFromTextStream(
+            std::istream     &  inStr,
+            GameResultList   &  outRec);
 
     //----------------------------------------------------------------
     /**   データをバイナリバッファに書き込む。
