@@ -30,6 +30,9 @@
     <ClCompile Include="..\..\Score4Core\Lib\Common\ScoreDocument.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Score4Core\Lib\Common\TextParser.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Score4Core\Include\Score4Core\Common\DateTimeFormat.h">
