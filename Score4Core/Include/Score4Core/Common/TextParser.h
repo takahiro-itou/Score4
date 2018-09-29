@@ -17,6 +17,8 @@
 #if !defined( SCORE4CORE_COMMON_INCLUDED_TEXT_PARSER_H )
 #    define   SCORE4CORE_COMMON_INCLUDED_TEXT_PARSER_H
 
+#include    "Score4Types.h"
+
 SCORE4_CORE_NAMESPACE_BEGIN
 namespace  Common  {
 
