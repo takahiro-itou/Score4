@@ -307,7 +307,10 @@ DocumentFile::readFromTextStream(
 
         vTokens.clear();
         TextParser::splitText(strLine, ",", bufText, vTokens);
-        if ( strLine == std::string("# Records") ) {
+        if ( strLine == std::string("# Settings") )  {
+            continue;
+        }
+        if ( vTokens[0] == std::string("# Records") ) {
             break;
         }
 
@@ -359,7 +362,7 @@ DocumentFile::readRecordFromTextStream(
         std::istream     &  inStr,
         GameResultList   &  outRec)
 {
-    return ( ERR_FAILURE );
+    return ( ERR_SUCCESS );
 }
 
 //----------------------------------------------------------------
