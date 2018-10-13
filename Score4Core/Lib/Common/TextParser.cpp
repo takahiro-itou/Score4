@@ -16,6 +16,8 @@
 
 #include    "Score4Core/Common/TextParser.h"
 
+#include    <string.h>
+
 
 SCORE4_CORE_NAMESPACE_BEGIN
 namespace  Common  {
@@ -54,6 +56,52 @@ namespace  Common  {
 //
 //    Public Member Functions.
 //
+
+
+//----------------------------------------------------------------
+//    文字列を指定した文字で分割する。
+//
+
+TextParser::TokenArray
+TextParser::splitText(
+        const  std::string  &inText,
+        const  char  *      sepChrs,
+        TextBuffer   *      bufText)
+{
+    if ( bufText == nullptr ) {
+        bufText = &(this->m_bufText);
+    }
+
+    const   size_t  szText  = inText.size();
+    bufText->clear();
+    bufText->resize(szText + 1);
+    char  *  const  ptrBuf  = &(bufText->operator[])(0);
+
+    ::memcpy(ptrBuf, inText.c_str(), szText);
+    ptrBuf[szText]  = '\0';
+
+    char  *         pSaved  = nullptr;
+    const  char  *  pToken  = nullptr;
+
+    TokenArray  result;
+
+#if defined( _WIN32 )
+    pToken  = strtok_s(ptrBuf, sepChrs, &pSaved);
+#else
+    pToken  = strtok_r(ptrBuf, sepChrs, &pSaved);
+#endif
+
+    while ( pToken != nullptr ) {
+        result.push_back(pToken);
+#if defined( _WIN32 )
+        pToken  = strtok_s(ptrBuf, sepChrs, &pSaved);
+#else
+        pToken  = strtok_r(ptrBuf, sepChrs, &pSaved);
+#endif
+    }
+
+    return  std::move(result);
+}
 
 //========================================================================
 //

@@ -19,6 +19,10 @@
 
 #include    "Score4Types.h"
 
+#include    <string>
+#include    <vector>
+
+
 SCORE4_CORE_NAMESPACE_BEGIN
 namespace  Common  {
 
@@ -29,6 +33,16 @@ namespace  Common  {
 
 class  TextParser
 {
+
+//========================================================================
+//
+//    Internal Type Definitions.
+//
+private:
+
+    typedef     std::vector<char>           TextBuffer;
+
+    typedef     std::vector<const char *>   TokenArray;
 
 //========================================================================
 //
@@ -59,6 +73,21 @@ class  TextParser
 //
 //    Public Member Functions.
 //
+public:
+
+    //----------------------------------------------------------------
+    /**   文字列を指定した文字で分割する。
+    **
+    **  @param [in] inText    入力テキスト。
+    **  @param [in] sepChar   区切り文字。
+    **  @param[out] bufText   テキストバッファ。
+    **  @return     トークンの配列。
+    **/
+    TokenArray
+    splitText(
+            const  std::string  &inText,
+            const  char  *      sepChrs,
+            TextBuffer   *      bufText);
 
 //========================================================================
 //
@@ -79,6 +108,9 @@ class  TextParser
 //
 //    Member Variables.
 //
+private:
+
+    TextBuffer      m_bufText;
 
 //========================================================================
 //
@@ -93,5 +125,3 @@ public:
 SCORE4_CORE_NAMESPACE_END
 
 #endif
-
-
