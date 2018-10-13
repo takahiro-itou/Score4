@@ -19,19 +19,27 @@
 #include    "Score4Core/Common/DateTimeFormat.h"
 #include    "Score4Core/Common/ErrorDetectionCode.h"
 #include    "Score4Core/Common/ScoreDocument.h"
+#include    "Score4Core/Common/TextParser.h"
 
 #include    <fcntl.h>
 #include    <memory.h>
+#include    <stdexcept>
 #include    <stdio.h>
+#include    <stdlib.h>
 #include    <sys/stat.h>
+
 #if defined( _MSC_VER )
 #    include    <io.h>
 #else
 #    include    <unistd.h>
 #endif
+
 #include    <vector>
 
 #include    <iostream>
+
+
+#define     HELPER_UNUSED_VARIABLE(var)     (void)(var)
 
 SCORE4_CORE_NAMESPACE_BEGIN
 namespace  Common  {
@@ -176,6 +184,7 @@ DocumentFile::readFromBinaryBuffer(
     edc.setupGenPoly(FILE_CRC32_GENPOLY);
     const  ErrorDetectionCode::EDCode
         valCRC  =  edc.checkCRC32(inBuf, cbBuf);
+    HELPER_UNUSED_VARIABLE(valCRC);
     // std::cerr   <<  "FILE CRC = "
     //             <<  std::hex    <<  valCRC
     //             <<  std::endl;
@@ -273,7 +282,72 @@ DocumentFile::readFromTextStream(
         std::istream     &  inStr,
         ScoreDocument  *    ptrDoc)
 {
-    return ( ERR_FAILURE );
+    typedef     std::vector<GameCountList>      GameCountBuffer;
+
+
+    std::string             strLine;
+    TextParser::TextBuffer  bufText;
+    TextParser::TokenArray  vTokens;
+    GameCountBuffer         bufCnts;
+    ErrCode                 retErr;
+
+    bufCnts.clear();
+    vTokens.reserve(32);
+
+    for (;;) {
+        if ( !inStr ) {
+            break;
+        }
+        std::getline(inStr, strLine);
+
+        if ( strLine.empty() ) {
+            //  空行スキップ。  //
+            continue;
+        }
+
+        vTokens.clear();
+        TextParser::splitText(strLine, ",", bufText, vTokens);
+        if ( strLine == std::string("# Records") ) {
+            break;
+        }
+
+        if ( vTokens[0] == std::string("League") ) {
+            ScoreDocument::LeagueInfo   leagueInfo;
+            leagueInfo.leagueName   = std::string(vTokens[2]);
+            leagueInfo.numPlayOff   = atoi(vTokens[3]);
+            ptrDoc->appendLeagueInfo(leagueInfo);
+        } else if ( vTokens[0] == std::string("Team") ) {
+            ScoreDocument::TeamInfo     teamInfo;
+            TeamIndex   teamID  = atoi(vTokens[1]);
+            teamInfo.leagueID   = atoi(vTokens[2]);
+            teamInfo.teamName   = std::string(vTokens[3]);
+            if ( static_cast<TeamIndex>(bufCnts.size()) <= teamID ) {
+                bufCnts.resize(teamID + 1);
+            }
+            GameCountList & gcInfo  = bufCnts[teamID];
+            const   size_t  numCol  = vTokens.size() - 4;
+            gcInfo.resize(numCol);
+            for ( size_t idx = 0; idx < numCol; ++ idx ) {
+                gcInfo[idx] = atoi(vTokens[idx + 4]);
+            }
+            ptrDoc->appendTeamInfo(teamInfo);
+        } else {
+            throw  std::runtime_error("Invalid Format.");
+        }
+    }
+
+    const  TeamIndex   numTeams = ptrDoc->getNumTeams();
+    ptrDoc->initializeGameCountTable();
+    for ( TeamIndex i = 0; i < numTeams; ++ i ) {
+        for ( TeamIndex j = 0; j < numTeams; ++ j ) {
+            ptrDoc->setGameCount(i, j, bufCnts[i][j]);
+        }
+    }
+
+    GameResultList  gameResults;
+    retErr  = readRecordFromTextStream(inStr, gameResults);
+
+    return ( retErr );
 }
 
 //----------------------------------------------------------------

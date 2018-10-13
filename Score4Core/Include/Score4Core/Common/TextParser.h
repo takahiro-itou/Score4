@@ -38,7 +38,7 @@ class  TextParser
 //
 //    Internal Type Definitions.
 //
-private:
+public:
 
     typedef     std::vector<char>           TextBuffer;
 
