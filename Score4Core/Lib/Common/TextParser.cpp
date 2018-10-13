@@ -89,9 +89,9 @@ TextParser::splitText(
     while ( pToken != nullptr ) {
         vTokens.push_back(pToken);
 #if defined( _WIN32 )
-        pToken  = strtok_s(ptrBuf, sepChrs, &pSaved);
+        pToken  = strtok_s(nullptr, sepChrs, &pSaved);
 #else
-        pToken  = strtok_r(ptrBuf, sepChrs, &pSaved);
+        pToken  = strtok_r(nullptr, sepChrs, &pSaved);
 #endif
     }
 

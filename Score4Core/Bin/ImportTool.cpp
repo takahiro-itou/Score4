@@ -20,6 +20,7 @@
 #include    "Score4Core/Common/ScoreDocument.h"
 #include    "Score4Core/Common/ScoreInterface.h"
 
+#include    <fstream>
 #include    <iostream>
 
 using   namespace   SCORE4_CORE_NAMESPACE;
@@ -47,15 +48,16 @@ void  writeCountedScores(
 
 int  main(int argc, char * argv[])
 {
-    if ( argc <= 1 ) {
-        return ( 1 );
-    }
-
     Common::DocumentFile    docFile;
     Common::ScoreDocument   objDoc;
     Common::ErrCode         retErr;
 
-    retErr  = docFile.readFromTextStream(std::cin, &objDoc);
+    if ( argc > 1 ) {
+        std::ifstream   ifs(argv[1]);
+        retErr  = docFile.readFromTextStream(ifs, &objDoc);
+    } else {
+        retErr  = docFile.readFromTextStream(std::cin, &objDoc);
+    }
     if ( retErr != Common::ERR_SUCCESS ) {
         return ( retErr );
     }
