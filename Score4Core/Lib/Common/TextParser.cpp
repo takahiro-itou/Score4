@@ -62,28 +62,23 @@ namespace  Common  {
 //    文字列を指定した文字で分割する。
 //
 
-TextParser::TokenArray
+ErrCode
 TextParser::splitText(
         const  std::string  &inText,
         const  char  *      sepChrs,
-        TextBuffer   *      bufText)
+        TextBuffer          &bufText,
+        TokenArray          &vTokens)
 {
-    if ( bufText == nullptr ) {
-        bufText = &(this->m_bufText);
-    }
-
     const   size_t  szText  = inText.size();
-    bufText->clear();
-    bufText->resize(szText + 1);
-    char  *  const  ptrBuf  = &(bufText->operator[])(0);
+    bufText.clear();
+    bufText.resize(szText + 1);
+    char  *  const  ptrBuf  = &(bufText[0]);
 
     ::memcpy(ptrBuf, inText.c_str(), szText);
     ptrBuf[szText]  = '\0';
 
     char  *         pSaved  = nullptr;
     const  char  *  pToken  = nullptr;
-
-    TokenArray  result;
 
 #if defined( _WIN32 )
     pToken  = strtok_s(ptrBuf, sepChrs, &pSaved);
@@ -92,7 +87,7 @@ TextParser::splitText(
 #endif
 
     while ( pToken != nullptr ) {
-        result.push_back(pToken);
+        vTokens.push_back(pToken);
 #if defined( _WIN32 )
         pToken  = strtok_s(ptrBuf, sepChrs, &pSaved);
 #else
@@ -100,7 +95,7 @@ TextParser::splitText(
 #endif
     }
 
-    return  std::move(result);
+    return ( ERR_SUCCESS );
 }
 
 //========================================================================
