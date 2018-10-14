@@ -48,8 +48,9 @@ public:
         int     month;
         int     day;
         int     hour;
-        int     minite;
+        int     minute;
         int     second;
+        double  remsec;
     };
 
 //========================================================================
