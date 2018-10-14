@@ -415,8 +415,8 @@ DocumentFile::readRecordFromTextStream(
         }
 
         gameRecord.recordDate   = DateSerial(0);
-        gameRecord.visitorTeam  = 0;    //  vTokens[1]
-        gameRecord.homeTeam     = 0;    //  vTokens[4]
+        gameRecord.visitorTeam  = objDoc.findTeamInfo(vTokens[4]);
+        gameRecord.homeTeam     = objDoc.findTeamInfo(vTokens[1]);
         gameRecord.visitorScore = atoi(vTokens[3]);
         gameRecord.homeScore    = atoi(vTokens[2]);
 
