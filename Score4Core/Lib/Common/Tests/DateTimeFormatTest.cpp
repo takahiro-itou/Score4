@@ -216,6 +216,14 @@ void  DateTimeFormatTest::testGetSerialFromDate()
             DateSerial(42454),
             DateTimeFormat::getSerialFromDate(2016,  3, 25) );
 
+    CPPUNIT_ASSERT_EQUAL(
+            DateSerial(42454.5),
+            DateTimeFormat::getSerialFromDate(2016,  3, 25, 12, 0, 0) );
+
+    CPPUNIT_ASSERT_EQUAL(
+            DateSerial(42454.109375),
+            DateTimeFormat::getSerialFromDate(2016,  3, 25, 2, 37, 30) );
+
     return;
 }
 
