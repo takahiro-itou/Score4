@@ -376,6 +376,7 @@ DocumentFile::readRecordFromTextStream(
     std::string             strLine;
     TextParser::TextBuffer  bufText;
     TextParser::TokenArray  vTokens;
+    ErrCode                 retErr;
 
     vTokens.reserve(16);
 
@@ -414,7 +415,19 @@ DocumentFile::readRecordFromTextStream(
             gameRecord.eGameFlags   = GAME_RESULT;
         }
 
-        gameRecord.recordDate   = DateSerial(0);
+        int     dtYear  = 0;
+        int     dtMonth = 0;
+        int     dtDay   = 0;
+        retErr  = TextParser::parseDateString(
+                        std::string(vTokens[0]),
+                        &dtYear, &dtMonth, &dtDay);
+        if ( retErr != ERR_SUCCESS ) {
+            return ( retErr );
+        }
+
+        gameRecord.recordDate   = DateTimeFormat::getSerialFromDate(
+                dtYear, dtMonth, dtDay);
+
         gameRecord.visitorTeam  = objDoc.findTeamInfo(vTokens[4]);
         gameRecord.homeTeam     = objDoc.findTeamInfo(vTokens[1]);
         gameRecord.visitorScore = atoi(vTokens[3]);
