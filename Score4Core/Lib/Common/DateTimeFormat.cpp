@@ -138,6 +138,21 @@ DateTimeFormat::getDateTimeFromSerial(
     }
     ptrBuf->day     = wdsRem + 1;
 
+    DateSerial  dtTime  = dtSerial - static_cast<int>(dtSerial);
+    ptrBuf->remsec  = dtTime;
+
+    dtTime  *= 24;
+    ptrBuf->hour    = static_cast<int>(dtTime);
+    dtTime  -= (ptrBuf->hour);
+
+    dtTime  *= 60;
+    ptrBuf->minute  = static_cast<int>(dtTime);
+    dtTime  -= (ptrBuf->minute);
+
+    dtTime  *= 60;
+    ptrBuf->second  = static_cast<int>(dtTime);
+    dtTime  -= (ptrBuf->second);
+
     return ( ERR_SUCCESS );
 }
 
