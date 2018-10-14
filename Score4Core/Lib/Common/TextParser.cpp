@@ -16,6 +16,7 @@
 
 #include    "Score4Core/Common/TextParser.h"
 
+#include    <stdlib.h>
 #include    <string.h>
 
 
@@ -57,6 +58,52 @@ namespace  Common  {
 //    Public Member Functions.
 //
 
+//----------------------------------------------------------------
+//    文字列を日付（年月日）に分解する。
+//
+
+ErrCode
+TextParser::parseDateString(
+        const  std::string  &dtText,
+        int  *  const       dtYear,
+        int  *  const       dtMonth,
+        int  *  const       dtDay)
+{
+    TextBuffer  bufText;
+    TokenArray  vTokens;
+
+    int     wdYear  = 0;
+    int     wdMonth = 0;
+    int     wdDay   = 0;
+
+    vTokens.reserve(4);
+    vTokens.clear();
+
+    splitText(dtText, "/", bufText, vTokens);
+    if ( vTokens.size() == 3 ) {
+        wdYear  = atoi(vTokens[0]);
+        wdMonth = atoi(vTokens[1]);
+        wdDay   = atoi(vTokens[2]);
+    } else if ( vTokens.size() == 2 ) {
+        wdYear  = 0;
+        wdMonth = atoi(vTokens[1]);
+        wdDay   = atoi(vTokens[2]);
+    }
+    if ( wdMonth != 0 ) {
+        if ( dtYear != nullptr ) {
+            (* dtYear ) = wdYear;
+        }
+        if ( dtMonth != nullptr ) {
+            (* dtMonth) = wdMonth;
+        }
+        if ( dtDay != nullptr ) {
+            (* dtDay  ) = wdDay;
+        }
+        return ( ERR_SUCCESS );
+    }
+
+    return ( ERR_FAILURE );
+}
 
 //----------------------------------------------------------------
 //    文字列を指定した文字で分割する。

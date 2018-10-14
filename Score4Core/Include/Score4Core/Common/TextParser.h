@@ -76,6 +76,25 @@ public:
 public:
 
     //----------------------------------------------------------------
+    /**   文字列を日付（年月日）に分解する。
+    **
+    **  @param [in] dtText     日付を表す文字列。
+    **  @param[out] dtYear     年を受け取る変数。
+    **  @param[out] dtMonth    月を受け取る変数。
+    **  @param[out] dtDay      日を受け取る変数。
+    **  @return     エラーコードを返す。
+    **      -   異常終了の場合は、
+    **          エラーの種類を示す非ゼロ値を返す。
+    **      -   正常終了の場合は、ゼロを返す。
+    **/
+    static  ErrCode
+    parseDateString(
+            const  std::string  &dtText,
+            int  *  const       dtYear,
+            int  *  const       dtMonth,
+            int  *  const       dtDay);
+
+    //----------------------------------------------------------------
     /**   文字列を指定した文字で分割する。
     **
     **  @param [in] inText    入力テキスト。
