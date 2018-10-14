@@ -196,8 +196,8 @@ DateTimeFormat::getSerialFromDate(
             const   int         second,
             const   DateSerial  remsec)
 {
-    DateSerial  dsRems  = (hour * 24 + minute) * 60 + second + remsec;
-    return ( getSerialFromDate(year, month, day) + dsRems );
+    DateSerial  dsRems  = (hour * 60 + minute) * 60 + second + remsec;
+    return ( getSerialFromDate(year, month, day) + dsRems / 86400 );
 }
 
 //----------------------------------------------------------------
