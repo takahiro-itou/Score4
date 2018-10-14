@@ -284,7 +284,6 @@ DocumentFile::readFromTextStream(
 {
     typedef     std::vector<GameCountList>      GameCountBuffer;
 
-
     std::string             strLine;
     TextParser::TextBuffer  bufText;
     TextParser::TokenArray  vTokens;
@@ -348,7 +347,18 @@ DocumentFile::readFromTextStream(
     }
 
     GameResultList  gameResults;
+    gameResults.clear();
     retErr  = readRecordFromTextStream(inStr, gameResults);
+    if ( retErr != ERR_SUCCESS ) {
+        return ( retErr );
+    }
+
+    GameResultList::const_iterator  itrEnd  = gameResults.end();
+    for ( GameResultList::const_iterator
+            itr = gameResults.begin(); itr != itrEnd; ++ itr )
+    {
+        ptrDoc->appendGameRecord(*itr);
+    }
 
     return ( retErr );
 }
@@ -362,6 +372,52 @@ DocumentFile::readRecordFromTextStream(
         std::istream     &  inStr,
         GameResultList   &  outRec)
 {
+    std::string             strLine;
+    TextParser::TextBuffer  bufText;
+    TextParser::TokenArray  vTokens;
+
+    vTokens.reserve(16);
+
+    ScoreDocument::GameResult   gameRecord;
+
+    for (;;) {
+        if ( !inStr ) {
+            break;
+        }
+
+        std::getline(inStr, strLine);
+        if ( strLine.empty() ) {
+            //  空行スキップ。  //
+            continue;
+        }
+
+        vTokens.clear();
+        TextParser::splitText(strLine, ",-", bufText, vTokens);
+
+        std::string     tsState = std::string(vTokens[5]);
+        if ( (tsState == std::string("SCHEDULE"))
+                || tsState.empty() )
+        {
+            gameRecord.eGameFlags   = GAME_SCHEDULE;
+        } else if ( (tsState == std::string("CANCEL"))
+                || (tsState == std::string("中止")) )
+        {
+            gameRecord.eGameFlags   = GAME_CANCEL;
+        } else if ( (tsState == std::string("RESULT"))
+                || (tsState == std::string("結果")) )
+        {
+            gameRecord.eGameFlags   = GAME_RESULT;
+        }
+
+        gameRecord.recordDate   = DateSerial(0);
+        gameRecord.visitorTeam  = 0;    //  vTokens[1]
+        gameRecord.homeTeam     = 0;    //  vTokens[4]
+        gameRecord.visitorScore = atoi(vTokens[3]);
+        gameRecord.homeScore    = atoi(vTokens[2]);
+
+        outRec.push_back(gameRecord);
+    }
+
     return ( ERR_SUCCESS );
 }
 
