@@ -592,6 +592,15 @@ DocumentFile::saveToTextStream(
     }
     outStr  <<  std::endl;
 
+    outStr  <<  "# LastImportDate,"
+            <<  objDoc.getLastImportDate()  <<  "\n"
+            <<  "# LastActiveDate,"
+            <<  objDoc.getLastActiveDate()  <<  "\n"
+            <<  "# LastRecordDate,"
+            <<  objDoc.getLastRecordDate()  <<  "\n"
+            <<  "# OptimizedFlag,"
+            <<  objDoc.getOptimizedFlag ()  <<  std::endl;
+
     outStr  <<  "# Records,"    <<  numRecords
             <<  "\nDate,HomeTeam,Score,VisitorTeam,Status,";
     DateTimeFormat::TDateTime   dtVal;
