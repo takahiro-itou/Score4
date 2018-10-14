@@ -348,7 +348,7 @@ DocumentFile::readFromTextStream(
 
     GameResultList  gameResults;
     gameResults.clear();
-    retErr  = readRecordFromTextStream(inStr, gameResults);
+    retErr  = readRecordFromTextStream(* ptrDoc, inStr, gameResults);
     if ( retErr != ERR_SUCCESS ) {
         return ( retErr );
     }
@@ -369,8 +369,9 @@ DocumentFile::readFromTextStream(
 
 ErrCode
 DocumentFile::readRecordFromTextStream(
-        std::istream     &  inStr,
-        GameResultList   &  outRec)
+        const  ScoreDocument  & objDoc,
+        std::istream          & inStr,
+        GameResultList        & outRec)
 {
     std::string             strLine;
     TextParser::TextBuffer  bufText;

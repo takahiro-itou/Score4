@@ -177,6 +177,7 @@ public:
     //----------------------------------------------------------------
     /**   レコード部をテキストストリームから読み込む。
     **
+    **  @param [in]     objDoc    ドキュメント。
     **  @param [in,out] inStr     入力ストリーム。
     **  @param    [out] outRec    内容を格納する変数。
     **  @return     エラーコードを返す。
@@ -186,8 +187,9 @@ public:
     **/
     static  ErrCode
     readRecordFromTextStream(
-            std::istream     &  inStr,
-            GameResultList   &  outRec);
+            const  ScoreDocument  & objDoc,
+            std::istream          & inStr,
+            GameResultList        & outRec);
 
     //----------------------------------------------------------------
     /**   データをバイナリバッファに書き込む。
