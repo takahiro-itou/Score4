@@ -47,6 +47,8 @@ public:
         int     year;
         int     month;
         int     day;
+
+        double  rems;
         int     hour;
         int     minute;
         int     second;
@@ -127,6 +129,41 @@ public:
             const  int  year,
             const  int  month,
             const  int  day);
+
+    //----------------------------------------------------------------
+    /**   指定した日付をシリアル値に変換する。
+    **
+    **  @param [in] year
+    **  @param [in] month
+    **  @param [in] day
+    **  @param [in] rems
+    **  @return     指定した日付の午前零時に対するシリアル値。
+    **/
+    static  DateSerial
+    getSerialFromDate(
+            const   int         year,
+            const   int         month,
+            const   int         day,
+            const   int         hour,
+            const   int         minute,
+            const   int         second,
+            const   DateSerial  remsec = 0.0);
+
+    //----------------------------------------------------------------
+    /**   指定した日付をシリアル値に変換する。
+    **
+    **  @param [in] year
+    **  @param [in] month
+    **  @param [in] day
+    **  @param [in] rems
+    **  @return     指定した日付の午前零時に対するシリアル値。
+    **/
+    static  DateSerial
+    getSerialFromDate(
+            const   int         year,
+            const   int         month,
+            const   int         day,
+            const   DateSerial  rems);
 
 //========================================================================
 //

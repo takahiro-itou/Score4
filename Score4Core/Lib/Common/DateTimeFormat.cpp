@@ -182,6 +182,38 @@ DateTimeFormat::getSerialFromDate(
     return ( dsYear + SUM_DAYS_OF_MONTH[wMonth] + day );
 }
 
+//----------------------------------------------------------------
+//    指定した日付をシリアル値に変換する。
+//
+
+DateSerial
+DateTimeFormat::getSerialFromDate(
+            const   int         year,
+            const   int         month,
+            const   int         day,
+            const   int         hour,
+            const   int         minute,
+            const   int         second,
+            const   DateSerial  remsec)
+{
+    DateSerial  dsRems  = (hour * 24 + minute) * 60 + second + remsec;
+    return ( getSerialFromDate(year, month, day) + dsRems );
+}
+
+//----------------------------------------------------------------
+//    指定した日付をシリアル値に変換する。
+//
+
+DateSerial
+DateTimeFormat::getSerialFromDate(
+        const   int         year,
+        const   int         month,
+        const   int         day,
+        const   DateSerial  rems)
+{
+    return ( getSerialFromDate(year, month, day) + rems );
+}
+
 //========================================================================
 //
 //    Protected Member Functions.
