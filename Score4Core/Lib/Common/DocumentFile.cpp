@@ -394,17 +394,21 @@ DocumentFile::readRecordFromTextStream(
         vTokens.clear();
         TextParser::splitText(strLine, ",-", bufText, vTokens);
 
-        std::string     tsState = std::string(vTokens[5]);
-        if ( (tsState == std::string("SCHEDULE"))
-                || tsState.empty() )
+        if ( strcmp(vTokens[0], "Date") == 0 ) {
+            //  ヘッダ行。  //
+            continue;
+        }
+
+        if ( (strcmp(vTokens[5], "SCHEDULE") == 0)
+                || (vTokens[5][0] == '\0') )
         {
             gameRecord.eGameFlags   = GAME_SCHEDULE;
-        } else if ( (tsState == std::string("CANCEL"))
-                || (tsState == std::string("中止")) )
+        } else if ( (strcmp(vTokens[5], "CANCEL") == 0)
+                || (strcmp(vTokens[5], "中止") == 0) )
         {
             gameRecord.eGameFlags   = GAME_CANCEL;
-        } else if ( (tsState == std::string("RESULT"))
-                || (tsState == std::string("結果")) )
+        } else if ( (strcmp(vTokens[5], "RESULT") == 0)
+                || (strcmp(vTokens[5], "結果") == 0) )
         {
             gameRecord.eGameFlags   = GAME_RESULT;
         }
