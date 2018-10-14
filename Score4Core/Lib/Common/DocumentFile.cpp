@@ -289,6 +289,7 @@ DocumentFile::readFromTextStream(
     TextParser::TokenArray  vTokens;
     GameCountBuffer         bufCnts;
     ErrCode                 retErr;
+    DateSerial              serDate;
 
     bufCnts.clear();
     vTokens.reserve(32);
@@ -311,6 +312,28 @@ DocumentFile::readFromTextStream(
         }
         if ( vTokens[0] == std::string("# Records") ) {
             break;
+        }
+
+        if ( strcmp(vTokens[0], "# LastImportDate") == 0 ) {
+            serDate = ::atof(vTokens[1]);
+            ptrDoc->setLastImportDate(serDate);
+            continue;
+        }
+        if ( strcmp(vTokens[0], "# LastActiveDate") == 0 ) {
+            serDate = ::atof(vTokens[1]);
+            ptrDoc->setLastActiveDate(serDate);
+            continue;
+        }
+        if ( strcmp(vTokens[0], "# LastRecordDate") == 0 ) {
+            serDate = ::atof(vTokens[1]);
+            ptrDoc->setLastRecordDate(serDate);
+            continue;
+        }
+        if ( strcmp(vTokens[0], "# OptimizedFlag" ) == 0 ) {
+            ptrDoc->setOptimizedFlag(
+                    atoi(vTokens[1]) != 0 ? BOOL_TRUE : BOOL_FALSE
+            );
+            continue;
         }
 
         if ( vTokens[0] == std::string("League") ) {
