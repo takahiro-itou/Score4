@@ -241,7 +241,7 @@ DateTimeFormat::toString(
     std::stringstream   ss;
 
     ss  <<  std::uppercase  <<  std::hex
-        <<  std::setw(8)    <<  std::setfill('0')
+        <<  std::setw(16)   <<  std::setfill('0')
         <<  val;
     return  ( ss.str() );
 }

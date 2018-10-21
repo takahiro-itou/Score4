@@ -34,6 +34,8 @@ class  DateTimeFormatTest : public  TestFixture
     CPPUNIT_TEST(testDateTimeFormat);
     CPPUNIT_TEST(testGetDateTimeFromSerial);
     CPPUNIT_TEST(testGetSerialFromDate);
+    CPPUNIT_TEST(testGetSerialFromString);
+    CPPUNIT_TEST(testToString);
     CPPUNIT_TEST_SUITE_END();
 
 public:
@@ -45,6 +47,8 @@ private:
 
     void  testGetDateTimeFromSerial();
     void  testGetSerialFromDate();
+    void  testGetSerialFromString();
+    void  testToString();
 };
 
 CPPUNIT_TEST_SUITE_REGISTRATION( DateTimeFormatTest );
@@ -226,6 +230,131 @@ void  DateTimeFormatTest::testGetSerialFromDate()
 
     return;
 }
+
+void  DateTimeFormatTest::testGetSerialFromString()
+{
+
+    CPPUNIT_ASSERT_EQUAL(
+            DateSerial(2),
+            DateTimeFormat::getSerialFromString("4000000000000000"));
+
+    CPPUNIT_ASSERT_EQUAL(
+            DateSerial(60),
+            DateTimeFormat::getSerialFromString("404E000000000000"));
+
+    CPPUNIT_ASSERT_EQUAL(
+            DateSerial(61),
+            DateTimeFormat::getSerialFromString("404E800000000000"));
+
+    CPPUNIT_ASSERT_EQUAL(
+            DateSerial(42369),
+            DateTimeFormat::getSerialFromString("40E4B02000000000"));
+
+    CPPUNIT_ASSERT_EQUAL(
+            DateSerial(42370),
+            DateTimeFormat::getSerialFromString("40E4B04000000000"));
+
+    CPPUNIT_ASSERT_EQUAL(
+            DateSerial(42400),
+            DateTimeFormat::getSerialFromString("40E4B40000000000"));
+
+    CPPUNIT_ASSERT_EQUAL(
+            DateSerial(42428),
+            DateTimeFormat::getSerialFromString("40E4B78000000000"));
+
+    CPPUNIT_ASSERT_EQUAL(
+            DateSerial(42429),
+            DateTimeFormat::getSerialFromString("40E4B7A000000000"));
+
+    CPPUNIT_ASSERT_EQUAL(
+            DateSerial(42430),
+            DateTimeFormat::getSerialFromString("40E4B7C000000000"));
+
+    CPPUNIT_ASSERT_EQUAL(
+            DateSerial(42454),
+            DateTimeFormat::getSerialFromString("40E4BAC000000000"));
+
+    CPPUNIT_ASSERT_EQUAL(
+            DateSerial(42454.5),
+            DateTimeFormat::getSerialFromString("40E4BAD000000000"));
+
+    CPPUNIT_ASSERT_EQUAL(
+            DateSerial(42454.109375),
+            DateTimeFormat::getSerialFromString("40E4BAC380000000"));
+
+    return;
+}
+
+void  DateTimeFormatTest::testToString()
+{
+
+    CPPUNIT_ASSERT_EQUAL(
+            std::string("4000000000000000"),
+            DateTimeFormat::toString(DateSerial(2)) );
+
+    CPPUNIT_ASSERT_EQUAL(
+            std::string("4000000000000000"),
+            DateTimeFormat::toString(
+                    DateTimeFormat::getSerialFromDate(1900,  1,  1)) );
+
+    CPPUNIT_ASSERT_EQUAL(
+            std::string("404E000000000000"),
+            DateTimeFormat::toString(
+                    DateTimeFormat::getSerialFromDate(1900,  2, 28)) );
+
+    CPPUNIT_ASSERT_EQUAL(
+            std::string("404E800000000000"),
+            DateTimeFormat::toString(
+                    DateTimeFormat::getSerialFromDate(1900,  3,  1)) );
+
+    CPPUNIT_ASSERT_EQUAL(
+            std::string("40E4B02000000000"),
+            DateTimeFormat::toString(
+                    DateTimeFormat::getSerialFromDate(2015, 12, 31)) );
+
+    CPPUNIT_ASSERT_EQUAL(
+            std::string("40E4B04000000000"),
+            DateTimeFormat::toString(
+                    DateTimeFormat::getSerialFromDate(2016,  1,  1)) );
+
+    CPPUNIT_ASSERT_EQUAL(
+            std::string("40E4B40000000000"),
+            DateTimeFormat::toString(
+                    DateTimeFormat::getSerialFromDate(2016,  1, 31)) );
+
+    CPPUNIT_ASSERT_EQUAL(
+            std::string("40E4B78000000000"),
+            DateTimeFormat::toString(
+                    DateTimeFormat::getSerialFromDate(2016,  2, 28)) );
+
+    CPPUNIT_ASSERT_EQUAL(
+            std::string("40E4B7A000000000"),
+            DateTimeFormat::toString(
+                    DateTimeFormat::getSerialFromDate(2016,  2, 29)) );
+
+    CPPUNIT_ASSERT_EQUAL(
+            std::string("40E4B7C000000000"),
+            DateTimeFormat::toString(
+                    DateTimeFormat::getSerialFromDate(2016,  3,  1)) );
+
+    CPPUNIT_ASSERT_EQUAL(
+            std::string("40E4BAC000000000"),
+            DateTimeFormat::toString(
+                    DateTimeFormat::getSerialFromDate(2016,  3, 25)) );
+
+    CPPUNIT_ASSERT_EQUAL(
+            std::string("40E4BAD000000000"),
+            DateTimeFormat::toString(
+            DateTimeFormat::getSerialFromDate(2016,  3, 25, 12, 0, 0)) );
+
+    CPPUNIT_ASSERT_EQUAL(
+            std::string("40E4BAC380000000"),
+            DateTimeFormat::toString(
+            DateTimeFormat::getSerialFromDate(2016,  3, 25, 2, 37, 30)) );
+
+    return;
+}
+
 
 }   //  End of namespace  Common
 SCORE4_CORE_NAMESPACE_END
