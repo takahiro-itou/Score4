@@ -214,6 +214,34 @@ DateTimeFormat::getSerialFromDate(
     return ( getSerialFromDate(year, month, day) + rems );
 }
 
+//----------------------------------------------------------------
+//    ダンプした文字列からシリアル値を復元する。
+//
+
+DateSerial
+DateTimeFormat::getSerialFromString(
+        const  std::string  &hexDump)
+{
+    return ( 0 );
+}
+
+//----------------------------------------------------------------
+//    指定したシリアル値を文字列に変換する。
+//
+
+std::string
+DateTimeFormat::toString(
+        const   DateSerial  dtSerial)
+{
+    const uint64_t  val = *(pointer_cast<const uint64_t *>(&dtSerial));
+    std::stringstream   ss;
+
+    ss  <<  std::uppercase  <<  std::hex
+        <<  std::setw(8)    <<  std::setfill('0')
+        <<  val;
+    return  ( ss.str() );
+}
+
 //========================================================================
 //
 //    Protected Member Functions.

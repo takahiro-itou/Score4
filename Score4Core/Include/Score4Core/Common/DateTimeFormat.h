@@ -165,6 +165,26 @@ public:
             const   int         day,
             const   DateSerial  rems);
 
+    //----------------------------------------------------------------
+    /**   ダンプした文字列からシリアル値を復元する。
+    **
+    **  @param [in] hexDump   ダンプした 16 進文字列。
+    **  @return     シリアル値。
+    **/
+    static  DateSerial
+    getSerialFromString(
+            const  std::string  &hexDump);
+
+    //----------------------------------------------------------------
+    /**   指定したシリアル値を文字列に変換する。
+    **
+    **  @param [in] dtSerial    シリアル値。
+    **  @return     シリアル値を 16 進ダンプした文字列。
+    **/
+    static  std::string
+    toString(
+            const   DateSerial  dtSerial);
+
 //========================================================================
 //
 //    Protected Member Functions.
