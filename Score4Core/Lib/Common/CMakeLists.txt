@@ -21,6 +21,7 @@ Set (LIBRARY_SOURCE_FILES
         DocumentFile.cpp
         ErrorDetectionCode.cpp
         ScoreDocument.cpp
+        TextParser.cpp
 )
 
 Set (INCLIB_HEADER_FILES
@@ -30,6 +31,7 @@ Set (INCLIB_HEADER_FILES
         ${INCLIB_SOURCE_DIR}/Score4CoreSettings.h
         ${INCLIB_SOURCE_DIR}/Score4Types.h
         ${INCLIB_SOURCE_DIR}/ScoreDocument.h
+        ${INCLIB_SOURCE_DIR}/TextParser.h
 )
 
 ##----------------------------------------------------------------

@@ -384,6 +384,24 @@ ScoreDocument::countScores(
 }
 
 //----------------------------------------------------------------
+//    チーム情報を検索する。
+//
+
+TeamIndex
+ScoreDocument::findTeamInfo(
+        const  std::string  &teamName)  const
+{
+    const   TeamIndex  numTeam  = getNumTeams();
+    for ( TeamIndex i = 0; i < numTeam; ++ i ) {
+        if ( this->m_teamInfos.at(i).teamName == teamName ) {
+            return ( i );
+        }
+    }
+
+    return ( -1 );
+}
+
+//----------------------------------------------------------------
 //    対戦試合数用の領域を確保し初期化する。
 //
 

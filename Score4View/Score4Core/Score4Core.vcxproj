@@ -146,6 +146,7 @@
     <ClCompile Include="..\..\Score4Core\Lib\Common\DocumentFile.cpp" />
     <ClCompile Include="..\..\Score4Core\Lib\Common\ErrorDetectionCode.cpp" />
     <ClCompile Include="..\..\Score4Core\Lib\Common\ScoreDocument.cpp" />
+    <ClCompile Include="..\..\Score4Core\Lib\Common\TextParser.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Score4Core\Include\Score4Core\Common\DateTimeFormat.h" />

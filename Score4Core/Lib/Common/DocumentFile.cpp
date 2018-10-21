@@ -19,19 +19,27 @@
 #include    "Score4Core/Common/DateTimeFormat.h"
 #include    "Score4Core/Common/ErrorDetectionCode.h"
 #include    "Score4Core/Common/ScoreDocument.h"
+#include    "Score4Core/Common/TextParser.h"
 
 #include    <fcntl.h>
 #include    <memory.h>
+#include    <stdexcept>
 #include    <stdio.h>
+#include    <stdlib.h>
 #include    <sys/stat.h>
+
 #if defined( _MSC_VER )
 #    include    <io.h>
 #else
 #    include    <unistd.h>
 #endif
+
 #include    <vector>
 
 #include    <iostream>
+
+
+#define     HELPER_UNUSED_VARIABLE(var)     (void)(var)
 
 SCORE4_CORE_NAMESPACE_BEGIN
 namespace  Common  {
@@ -176,6 +184,7 @@ DocumentFile::readFromBinaryBuffer(
     edc.setupGenPoly(FILE_CRC32_GENPOLY);
     const  ErrorDetectionCode::EDCode
         valCRC  =  edc.checkCRC32(inBuf, cbBuf);
+    HELPER_UNUSED_VARIABLE(valCRC);
     // std::cerr   <<  "FILE CRC = "
     //             <<  std::hex    <<  valCRC
     //             <<  std::endl;
@@ -273,7 +282,184 @@ DocumentFile::readFromTextStream(
         std::istream     &  inStr,
         ScoreDocument  *    ptrDoc)
 {
-    return ( ERR_FAILURE );
+    typedef     std::vector<GameCountList>      GameCountBuffer;
+
+    std::string             strLine;
+    TextParser::TextBuffer  bufText;
+    TextParser::TokenArray  vTokens;
+    GameCountBuffer         bufCnts;
+    ErrCode                 retErr;
+    DateSerial              serDate;
+
+    bufCnts.clear();
+    vTokens.reserve(32);
+
+    for (;;) {
+        if ( !inStr ) {
+            break;
+        }
+        std::getline(inStr, strLine);
+
+        if ( strLine.empty() ) {
+            //  空行スキップ。  //
+            continue;
+        }
+
+        vTokens.clear();
+        TextParser::splitText(strLine, ",", bufText, vTokens);
+        if ( strLine == std::string("# Settings") )  {
+            continue;
+        }
+        if ( vTokens[0] == std::string("# Records") ) {
+            break;
+        }
+
+        if ( strcmp(vTokens[0], "# LastImportDate") == 0 ) {
+            serDate = DateTimeFormat::getSerialFromString(vTokens[1]);
+            ptrDoc->setLastImportDate(serDate);
+            continue;
+        }
+        if ( strcmp(vTokens[0], "# LastActiveDate") == 0 ) {
+            serDate = DateTimeFormat::getSerialFromString(vTokens[1]);
+            ptrDoc->setLastActiveDate(serDate);
+            continue;
+        }
+        if ( strcmp(vTokens[0], "# LastRecordDate") == 0 ) {
+            serDate = DateTimeFormat::getSerialFromString(vTokens[1]);
+            ptrDoc->setLastRecordDate(serDate);
+            continue;
+        }
+        if ( strcmp(vTokens[0], "# OptimizedFlag" ) == 0 ) {
+            ptrDoc->setOptimizedFlag(
+                    atoi(vTokens[1]) != 0 ? BOOL_TRUE : BOOL_FALSE
+            );
+            continue;
+        }
+
+        if ( vTokens[0] == std::string("League") ) {
+            ScoreDocument::LeagueInfo   leagueInfo;
+            leagueInfo.leagueName   = std::string(vTokens[2]);
+            leagueInfo.numPlayOff   = atoi(vTokens[3]);
+            ptrDoc->appendLeagueInfo(leagueInfo);
+        } else if ( vTokens[0] == std::string("Team") ) {
+            ScoreDocument::TeamInfo     teamInfo;
+            TeamIndex   teamID  = atoi(vTokens[1]);
+            teamInfo.leagueID   = atoi(vTokens[2]);
+            teamInfo.teamName   = std::string(vTokens[3]);
+            if ( static_cast<TeamIndex>(bufCnts.size()) <= teamID ) {
+                bufCnts.resize(teamID + 1);
+            }
+            GameCountList & gcInfo  = bufCnts[teamID];
+            const   size_t  numCol  = vTokens.size() - 4;
+            gcInfo.resize(numCol);
+            for ( size_t idx = 0; idx < numCol; ++ idx ) {
+                gcInfo[idx] = atoi(vTokens[idx + 4]);
+            }
+            ptrDoc->appendTeamInfo(teamInfo);
+        } else {
+            throw  std::runtime_error("Invalid Format.");
+        }
+    }
+
+    const  TeamIndex   numTeams = ptrDoc->getNumTeams();
+    ptrDoc->initializeGameCountTable();
+    for ( TeamIndex i = 0; i < numTeams; ++ i ) {
+        for ( TeamIndex j = 0; j < numTeams; ++ j ) {
+            ptrDoc->setGameCount(i, j, bufCnts[i][j]);
+        }
+    }
+
+    GameResultList  gameResults;
+    gameResults.clear();
+    retErr  = readRecordFromTextStream(* ptrDoc, inStr, gameResults);
+    if ( retErr != ERR_SUCCESS ) {
+        return ( retErr );
+    }
+
+    GameResultList::const_iterator  itrEnd  = gameResults.end();
+    for ( GameResultList::const_iterator
+            itr = gameResults.begin(); itr != itrEnd; ++ itr )
+    {
+        ptrDoc->appendGameRecord(*itr);
+    }
+
+    return ( retErr );
+}
+
+//----------------------------------------------------------------
+//    レコード部をテキストストリームから読み込む。
+//
+
+ErrCode
+DocumentFile::readRecordFromTextStream(
+        const  ScoreDocument  & objDoc,
+        std::istream          & inStr,
+        GameResultList        & outRec)
+{
+    std::string             strLine;
+    TextParser::TextBuffer  bufText;
+    TextParser::TokenArray  vTokens;
+    ErrCode                 retErr;
+
+    vTokens.reserve(16);
+
+    ScoreDocument::GameResult   gameRecord;
+
+    for (;;) {
+        if ( !inStr ) {
+            break;
+        }
+
+        std::getline(inStr, strLine);
+        if ( strLine.empty() ) {
+            //  空行スキップ。  //
+            continue;
+        }
+
+        vTokens.clear();
+        TextParser::splitText(strLine, ",-", bufText, vTokens);
+
+        if ( strcmp(vTokens[0], "Date") == 0 ) {
+            //  ヘッダ行。  //
+            continue;
+        }
+
+        if ( (strcmp(vTokens[5], "SCHEDULE") == 0)
+                || (vTokens[5][0] == '\0') )
+        {
+            gameRecord.eGameFlags   = GAME_SCHEDULE;
+        } else if ( (strcmp(vTokens[5], "CANCEL") == 0)
+                || (strcmp(vTokens[5], "中止") == 0) )
+        {
+            gameRecord.eGameFlags   = GAME_CANCEL;
+        } else if ( (strcmp(vTokens[5], "RESULT") == 0)
+                || (strcmp(vTokens[5], "結果") == 0) )
+        {
+            gameRecord.eGameFlags   = GAME_RESULT;
+        }
+
+        int     dtYear  = 0;
+        int     dtMonth = 0;
+        int     dtDay   = 0;
+        retErr  = TextParser::parseDateString(
+                        std::string(vTokens[0]),
+                        &dtYear, &dtMonth, &dtDay);
+        if ( retErr != ERR_SUCCESS ) {
+            return ( retErr );
+        }
+
+        gameRecord.recordDate   = DateTimeFormat::getSerialFromDate(
+                dtYear, dtMonth, dtDay);
+
+        gameRecord.visitorTeam  = objDoc.findTeamInfo(vTokens[4]);
+        gameRecord.homeTeam     = objDoc.findTeamInfo(vTokens[1]);
+        gameRecord.visitorScore = atoi(vTokens[3]);
+        gameRecord.homeScore    = atoi(vTokens[2]);
+
+        outRec.push_back(gameRecord);
+    }
+
+    return ( ERR_SUCCESS );
 }
 
 //----------------------------------------------------------------
@@ -428,6 +614,24 @@ DocumentFile::saveToTextStream(
         }
     }
     outStr  <<  std::endl;
+
+    outStr  <<  "# LastImportDate,"
+            <<  DateTimeFormat::toString(objDoc.getLastImportDate())
+            <<  ","
+            <<  objDoc.getLastImportDate()  <<  "\n"
+
+            <<  "# LastActiveDate,"
+            <<  DateTimeFormat::toString(objDoc.getLastActiveDate())
+            <<  ","
+            <<  objDoc.getLastActiveDate()  <<  "\n"
+
+            <<  "# LastRecordDate,"
+            <<  DateTimeFormat::toString(objDoc.getLastRecordDate())
+            <<  ","
+            <<  objDoc.getLastRecordDate()  <<  "\n"
+
+            <<  "# OptimizedFlag,"
+            <<  objDoc.getOptimizedFlag ()  <<  std::endl;
 
     outStr  <<  "# Records,"    <<  numRecords
             <<  "\nDate,HomeTeam,Score,VisitorTeam,Status,";

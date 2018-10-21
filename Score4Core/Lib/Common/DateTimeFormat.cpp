@@ -16,6 +16,11 @@
 
 #include    "Score4Core/Common/DateTimeFormat.h"
 
+#include    <cstdlib>
+#include    <iomanip>
+#include    <sstream>
+
+
 SCORE4_CORE_NAMESPACE_BEGIN
 namespace  Common  {
 
@@ -138,6 +143,21 @@ DateTimeFormat::getDateTimeFromSerial(
     }
     ptrBuf->day     = wdsRem + 1;
 
+    DateSerial  dtTime  = dtSerial - static_cast<int>(dtSerial);
+    ptrBuf->remsec  = dtTime;
+
+    dtTime  *= 24;
+    ptrBuf->hour    = static_cast<int>(dtTime);
+    dtTime  -= (ptrBuf->hour);
+
+    dtTime  *= 60;
+    ptrBuf->minute  = static_cast<int>(dtTime);
+    dtTime  -= (ptrBuf->minute);
+
+    dtTime  *= 60;
+    ptrBuf->second  = static_cast<int>(dtTime);
+    dtTime  -= (ptrBuf->second);
+
     return ( ERR_SUCCESS );
 }
 
@@ -165,6 +185,71 @@ DateTimeFormat::getSerialFromDate(
     const  int  dsYear  = ((wYear - 1899) * 365) + (numLeap - 460)
                                 - BASE_DATE_SERIAL_VALUE;
     return ( dsYear + SUM_DAYS_OF_MONTH[wMonth] + day );
+}
+
+//----------------------------------------------------------------
+//    指定した日付をシリアル値に変換する。
+//
+
+DateSerial
+DateTimeFormat::getSerialFromDate(
+            const   int         year,
+            const   int         month,
+            const   int         day,
+            const   int         hour,
+            const   int         minute,
+            const   int         second,
+            const   DateSerial  remsec)
+{
+    DateSerial  dsRems  = (hour * 60 + minute) * 60 + second + remsec;
+    return ( getSerialFromDate(year, month, day) + dsRems / 86400 );
+}
+
+//----------------------------------------------------------------
+//    指定した日付をシリアル値に変換する。
+//
+
+DateSerial
+DateTimeFormat::getSerialFromDate(
+        const   int         year,
+        const   int         month,
+        const   int         day,
+        const   DateSerial  rems)
+{
+    return ( getSerialFromDate(year, month, day) + rems );
+}
+
+//----------------------------------------------------------------
+//    ダンプした文字列からシリアル値を復元する。
+//
+
+DateSerial
+DateTimeFormat::getSerialFromString(
+        const  std::string  &hexDump)
+{
+    // size_t          idx = 0;
+    // const uint64_t  val = std::stol(hexDump, &idx, 16);
+    char  *         ptr = nullptr;
+    const  uint64_t val = std::strtol(hexDump.c_str(), &ptr, 16);
+
+    return ( *(pointer_cast<const DateSerial *>(&val)) );
+}
+
+//----------------------------------------------------------------
+//    指定したシリアル値を文字列に変換する。
+//
+
+std::string
+DateTimeFormat::toString(
+        const   DateSerial  dtSerial)
+{
+    const uint64_t  val = *(pointer_cast<const uint64_t *>(&dtSerial));
+    std::stringstream   ss;
+
+    ss  <<  std::uppercase  <<  std::hex
+        <<  std::setw(16)   <<  std::setfill('0')
+        <<  val;
+    return  ( ss.str() );
 }
 
 //========================================================================

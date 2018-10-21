@@ -47,9 +47,12 @@ public:
         int     year;
         int     month;
         int     day;
+
+        double  rems;
         int     hour;
-        int     minite;
+        int     minute;
         int     second;
+        double  remsec;
     };
 
 //========================================================================
@@ -126,6 +129,61 @@ public:
             const  int  year,
             const  int  month,
             const  int  day);
+
+    //----------------------------------------------------------------
+    /**   指定した日付をシリアル値に変換する。
+    **
+    **  @param [in] year
+    **  @param [in] month
+    **  @param [in] day
+    **  @param [in] rems
+    **  @return     指定した日付の午前零時に対するシリアル値。
+    **/
+    static  DateSerial
+    getSerialFromDate(
+            const   int         year,
+            const   int         month,
+            const   int         day,
+            const   int         hour,
+            const   int         minute,
+            const   int         second,
+            const   DateSerial  remsec = 0.0);
+
+    //----------------------------------------------------------------
+    /**   指定した日付をシリアル値に変換する。
+    **
+    **  @param [in] year
+    **  @param [in] month
+    **  @param [in] day
+    **  @param [in] rems
+    **  @return     指定した日付の午前零時に対するシリアル値。
+    **/
+    static  DateSerial
+    getSerialFromDate(
+            const   int         year,
+            const   int         month,
+            const   int         day,
+            const   DateSerial  rems);
+
+    //----------------------------------------------------------------
+    /**   ダンプした文字列からシリアル値を復元する。
+    **
+    **  @param [in] hexDump   ダンプした 16 進文字列。
+    **  @return     シリアル値。
+    **/
+    static  DateSerial
+    getSerialFromString(
+            const  std::string  &hexDump);
+
+    //----------------------------------------------------------------
+    /**   指定したシリアル値を文字列に変換する。
+    **
+    **  @param [in] dtSerial    シリアル値。
+    **  @return     シリアル値を 16 進ダンプした文字列。
+    **/
+    static  std::string
+    toString(
+            const   DateSerial  dtSerial);
 
 //========================================================================
 //

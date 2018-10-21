@@ -26,6 +26,7 @@ LIBRARY_SOURCE_FILES        =  \
         DocumentFile.cpp               \
         ErrorDetectionCode.cpp         \
         ScoreDocument.cpp              \
+        TextParser.cpp                 \
         ${EXTRA_LIBRARY_SOURCE_FILES}
 
 LIBRARY_INSTANTIATIONS      =
@@ -45,6 +46,7 @@ INCLIB_HEADER_FILES         =  \
         ${INCLIB_SOURCE_DIR}/Score4CoreSettings.h  \
         ${INCLIB_SOURCE_DIR}/Score4Types.h         \
         ${INCLIB_SOURCE_DIR}/ScoreDocument.h       \
+        ${INCLIB_SOURCE_DIR}/TextParser.h          \
         ${EXTRA_LIBRARY_HEADER_FILES}
 
 INCLIB_NODIST_HEADER_FILES  =

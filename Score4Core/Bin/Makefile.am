@@ -35,6 +35,7 @@ AM_LDFLAGS              =  -L${LIBTOP_BINARY_DIR}
 ##
 
 bin_PROGRAMS            =  \
+        ImportTool         \
         ScoreViewer
 
 dist_noinst_DATA        =  \
@@ -43,6 +44,9 @@ dist_noinst_DATA        =  \
 ##
 ##    Build Executables.
 ##
+
+ImportTool_SOURCES      =  ImportTool.cpp
+ImportTool_LDADD        =  ../Lib/Common/libscore4Common.a
 
 ScoreViewer_SOURCES     =  ScoreViewer.cpp
 ScoreViewer_LDADD       =  ../Lib/Common/libscore4Common.a

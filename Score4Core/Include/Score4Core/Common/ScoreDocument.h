@@ -204,6 +204,16 @@ public:
             CountedScoreList    &bufCounted)  const;
 
     //----------------------------------------------------------------
+    /**   チーム情報を検索する。
+    **
+    **  @param [in] teamName    チーム名。
+    **  @return     チーム番号を返す。
+    **/
+    virtual  TeamIndex
+    findTeamInfo(
+            const  std::string  &teamName)  const;
+
+    //----------------------------------------------------------------
     /**   対戦試合数用の領域を確保し初期化する。
     **
     **  @return     エラーコードを返す。
