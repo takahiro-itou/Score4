@@ -16,6 +16,10 @@
 
 #include    "Score4Core/Common/DateTimeFormat.h"
 
+#include    <iomanip>
+#include    <sstream>
+
+
 SCORE4_CORE_NAMESPACE_BEGIN
 namespace  Common  {
 
