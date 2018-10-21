@@ -315,17 +315,17 @@ DocumentFile::readFromTextStream(
         }
 
         if ( strcmp(vTokens[0], "# LastImportDate") == 0 ) {
-            serDate = ::atof(vTokens[1]);
+            serDate = DateTimeFormat::getSerialFromString(vTokens[1]);
             ptrDoc->setLastImportDate(serDate);
             continue;
         }
         if ( strcmp(vTokens[0], "# LastActiveDate") == 0 ) {
-            serDate = ::atof(vTokens[1]);
+            serDate = DateTimeFormat::getSerialFromString(vTokens[1]);
             ptrDoc->setLastActiveDate(serDate);
             continue;
         }
         if ( strcmp(vTokens[0], "# LastRecordDate") == 0 ) {
-            serDate = ::atof(vTokens[1]);
+            serDate = DateTimeFormat::getSerialFromString(vTokens[1]);
             ptrDoc->setLastRecordDate(serDate);
             continue;
         }
@@ -616,11 +616,20 @@ DocumentFile::saveToTextStream(
     outStr  <<  std::endl;
 
     outStr  <<  "# LastImportDate,"
+            <<  DateTimeFormat::toString(objDoc.getLastImportDate())
+            <<  ","
             <<  objDoc.getLastImportDate()  <<  "\n"
+
             <<  "# LastActiveDate,"
+            <<  DateTimeFormat::toString(objDoc.getLastActiveDate())
+            <<  ","
             <<  objDoc.getLastActiveDate()  <<  "\n"
+
             <<  "# LastRecordDate,"
+            <<  DateTimeFormat::toString(objDoc.getLastRecordDate())
+            <<  ","
             <<  objDoc.getLastRecordDate()  <<  "\n"
+
             <<  "# OptimizedFlag,"
             <<  objDoc.getOptimizedFlag ()  <<  std::endl;
 
