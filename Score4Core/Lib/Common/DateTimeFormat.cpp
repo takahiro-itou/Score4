@@ -16,6 +16,7 @@
 
 #include    "Score4Core/Common/DateTimeFormat.h"
 
+#include    <cstdlib>
 #include    <iomanip>
 #include    <sstream>
 
@@ -226,7 +227,12 @@ DateSerial
 DateTimeFormat::getSerialFromString(
         const  std::string  &hexDump)
 {
-    return ( 0 );
+    // size_t          idx = 0;
+    // const uint64_t  val = std::stol(hexDump, &idx, 16);
+    char  *         ptr = nullptr;
+    const  uint64_t val = std::strtol(hexDump.c_str(), &ptr, 16);
+
+    return ( *(pointer_cast<const DateSerial *>(&val)) );
 }
 
 //----------------------------------------------------------------
