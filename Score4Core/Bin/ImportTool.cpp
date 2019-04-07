@@ -52,7 +52,20 @@ int  main(int argc, char * argv[])
     Common::ScoreDocument   objDoc;
     Common::ErrCode         retErr;
 
-    if ( argc > 1 ) {
+    if ( argc > 2 ) {
+        retErr  = docFile.readFromBinaryFile(argv[1], &objDoc);
+        if ( retErr != Common::ERR_SUCCESS ) {
+            return ( retErr );
+        }
+        std::cerr   <<  "Loading Base Binary .OK"   <<  std::endl;
+        for ( int i = 2; i < argc; ++ i ) {
+            std::ifstream   ifs(argv[i]);
+            retErr  = docFile.importRecordFromTextStream(ifs, &objDoc);
+            if ( retErr != Common::ERR_SUCCESS ) {
+                return ( retErr );
+            }
+        }
+    } else if ( argc == 2 ) {
         std::ifstream   ifs(argv[1]);
         retErr  = docFile.readFromTextStream(ifs, &objDoc);
     } else {
