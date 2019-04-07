@@ -162,6 +162,34 @@ DocumentFile::computeImageSize(
 }
 
 //----------------------------------------------------------------
+//    レコードをテキストストリームからインポートする。
+//
+
+ErrCode
+DocumentFile::importRecordFromTextStream(
+        std::istream     &  inStr,
+        ScoreDocument  *    ptrDoc)
+{
+    ErrCode         retErr;
+    GameResultList  gameResults;
+
+    gameResults.clear();
+    retErr  = readRecordFromTextStream(* ptrDoc, inStr, gameResults);
+    if ( retErr != ERR_SUCCESS ) {
+        return ( retErr );
+    }
+
+    const   GameResultList::const_iterator  itrEnd  = gameResults.end();
+    for ( GameResultList::const_iterator
+            itr = gameResults.begin(); itr != itrEnd; ++ itr )
+    {
+        ptrDoc->appendGameRecord(*itr);
+    }
+
+    return ( retErr );
+}
+
+//----------------------------------------------------------------
 //    データをバイナリバッファから読み込む。
 //
 
@@ -376,7 +404,7 @@ DocumentFile::readFromTextStream(
         return ( retErr );
     }
 
-    GameResultList::const_iterator  itrEnd  = gameResults.end();
+    const   GameResultList::const_iterator  itrEnd  = gameResults.end();
     for ( GameResultList::const_iterator
             itr = gameResults.begin(); itr != itrEnd; ++ itr )
     {

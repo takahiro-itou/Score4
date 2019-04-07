@@ -128,6 +128,21 @@ public:
             BlockSizeInfo  *        bsInfo);
 
     //----------------------------------------------------------------
+    /**   レコードをテキストストリームからインポートする。
+    **
+    **  @param [in,out] inStr     入力ストリーム。
+    **  @param [in,out] ptrDoc    内容を格納する変数。
+    **  @return     エラーコードを返す。
+    **      -   異常終了の場合は、
+    **          エラーの種類を示す非ゼロ値を返す。
+    **      -   正常終了の場合は、ゼロを返す。
+    **/
+    static  ErrCode
+    importRecordFromTextStream(
+            std::istream     &  inStr,
+            ScoreDocument  *    ptrDoc);
+
+    //----------------------------------------------------------------
     /**   データをバイナリバッファから読み込む。
     **
     **  @param [in] inBuf    バッファのアドレス。
