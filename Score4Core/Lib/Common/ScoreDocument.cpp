@@ -182,6 +182,12 @@ ScoreDocument::clearDocument()
 {
     this->m_teamInfos.clear();
     this->m_leagueInfos.clear();
+    this->m_gameResults.clear();
+
+    this->m_fOptimized      = BOOL_FALSE;
+    this->m_lastActiveDate  = 0;
+    this->m_lastRecordDate  = 0;
+    this->m_lastImportDate  = 0;
 
     return ( ERR_SUCCESS );
 }
