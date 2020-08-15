@@ -19,7 +19,7 @@
 #include    <cstdlib>
 #include    <iomanip>
 #include    <sstream>
-
+#include    <stdint.h>
 
 SCORE4_CORE_NAMESPACE_BEGIN
 namespace  Common  {
