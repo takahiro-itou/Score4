@@ -18,39 +18,39 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\Score4Core\Lib\Common\DateTimeFormat.cpp">
+    <ClCompile Include="..\..\Core\Lib\Common\DateTimeFormat.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Score4Core\Lib\Common\DocumentFile.cpp">
+    <ClCompile Include="..\..\Core\Lib\Common\DocumentFile.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Score4Core\Lib\Common\ErrorDetectionCode.cpp">
+    <ClCompile Include="..\..\Core\Lib\Common\ErrorDetectionCode.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Score4Core\Lib\Common\ScoreDocument.cpp">
+    <ClCompile Include="..\..\Core\Lib\Common\ScoreDocument.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Score4Core\Lib\Common\TextParser.cpp">
+    <ClCompile Include="..\..\Core\Lib\Common\TextParser.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\Score4Core\Include\Score4Core\Common\DateTimeFormat.h">
+    <ClInclude Include="..\..\Core\Include\Score4Core\Common\DateTimeFormat.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Score4Core\Include\Score4Core\Common\DocumentFile.h">
+    <ClInclude Include="..\..\Core\Include\Score4Core\Common\DocumentFile.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Score4Core\Include\Score4Core\Common\ErrorDetectionCode.h">
+    <ClInclude Include="..\..\Core\Include\Score4Core\Common\ErrorDetectionCode.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Score4Core\Include\Score4Core\Common\Score4CoreSettings.h">
+    <ClInclude Include="..\..\Core\Include\Score4Core\Common\Score4CoreSettings.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Score4Core\Include\Score4Core\Common\Score4Types.h">
+    <ClInclude Include="..\..\Core\Include\Score4Core\Common\Score4Types.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Score4Core\Include\Score4Core\Common\ScoreDocument.h">
+    <ClInclude Include="..\..\Core\Include\Score4Core\Common\ScoreDocument.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -6,9 +6,9 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{59DB3E37-6DFD-4269-AAD5-678BDCBAE057}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <StartupObject>Score4View.My.MyApplication</StartupObject>
-    <RootNamespace>Score4View</RootNamespace>
-    <AssemblyName>Score4View</AssemblyName>
+    <StartupObject>View.My.MyApplication</StartupObject>
+    <RootNamespace>View</RootNamespace>
+    <AssemblyName>View</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <MyType>WindowsForms</MyType>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
@@ -35,7 +35,7 @@
     <DefineDebug>true</DefineDebug>
     <DefineTrace>true</DefineTrace>
     <OutputPath>Bin\AnyCPU\Debug\</OutputPath>
-    <DocumentationFile>Score4View.xml</DocumentationFile>
+    <DocumentationFile>View.xml</DocumentationFile>
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
@@ -45,7 +45,7 @@
     <DefineTrace>true</DefineTrace>
     <Optimize>true</Optimize>
     <OutputPath>Bin\AnyCPU\Release\</OutputPath>
-    <DocumentationFile>Score4View.xml</DocumentationFile>
+    <DocumentationFile>View.xml</DocumentationFile>
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
   </PropertyGroup>
   <PropertyGroup>
@@ -65,7 +65,7 @@
     <DefineDebug>true</DefineDebug>
     <DefineTrace>true</DefineTrace>
     <OutputPath>Bin\x64\Debug\</OutputPath>
-    <DocumentationFile>Score4View.xml</DocumentationFile>
+    <DocumentationFile>View.xml</DocumentationFile>
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
     <DebugType>full</DebugType>
     <PlatformTarget>x64</PlatformTarget>
@@ -75,7 +75,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
     <DefineTrace>true</DefineTrace>
     <OutputPath>Bin\x64\Release\</OutputPath>
-    <DocumentationFile>Score4View.xml</DocumentationFile>
+    <DocumentationFile>View.xml</DocumentationFile>
     <Optimize>true</Optimize>
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
     <DebugType>pdbonly</DebugType>
@@ -180,9 +180,9 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Score4Wrapper\Score4Wrapper.vcxproj">
+    <ProjectReference Include="..\Wrapper\Wrapper.vcxproj">
       <Project>{1fd21e47-2268-4eca-8e53-668640b0a7b9}</Project>
-      <Name>Score4Wrapper</Name>
+      <Name>Wrapper</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
