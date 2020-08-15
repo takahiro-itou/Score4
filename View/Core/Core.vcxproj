@@ -21,7 +21,7 @@
   <PropertyGroup Label="Globals">
     <ProjectGuid>{86230C49-191D-4DE3-ACBF-9F48E054E583}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>Score4Core</RootNamespace>
+    <RootNamespace>Core</RootNamespace>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -81,7 +81,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;SCORE4_USE_PRE_CONFIGURED_MSVC;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\..\Score4Core\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\Core\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -95,7 +95,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;SCORE4_USE_PRE_CONFIGURED_MSVC;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\..\Score4Core\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\Core\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -111,7 +111,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;SCORE4_USE_PRE_CONFIGURED_MSVC;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\..\Score4Core\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\Core\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -129,7 +129,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;SCORE4_USE_PRE_CONFIGURED_MSVC;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\..\Score4Core\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\Core\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -142,19 +142,19 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\Score4Core\Lib\Common\DateTimeFormat.cpp" />
-    <ClCompile Include="..\..\Score4Core\Lib\Common\DocumentFile.cpp" />
-    <ClCompile Include="..\..\Score4Core\Lib\Common\ErrorDetectionCode.cpp" />
-    <ClCompile Include="..\..\Score4Core\Lib\Common\ScoreDocument.cpp" />
-    <ClCompile Include="..\..\Score4Core\Lib\Common\TextParser.cpp" />
+    <ClCompile Include="..\..\Core\Lib\Common\DateTimeFormat.cpp" />
+    <ClCompile Include="..\..\Core\Lib\Common\DocumentFile.cpp" />
+    <ClCompile Include="..\..\Core\Lib\Common\ErrorDetectionCode.cpp" />
+    <ClCompile Include="..\..\Core\Lib\Common\ScoreDocument.cpp" />
+    <ClCompile Include="..\..\Core\Lib\Common\TextParser.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\Score4Core\Include\Score4Core\Common\DateTimeFormat.h" />
-    <ClInclude Include="..\..\Score4Core\Include\Score4Core\Common\DocumentFile.h" />
-    <ClInclude Include="..\..\Score4Core\Include\Score4Core\Common\ErrorDetectionCode.h" />
-    <ClInclude Include="..\..\Score4Core\Include\Score4Core\Common\Score4CoreSettings.h" />
-    <ClInclude Include="..\..\Score4Core\Include\Score4Core\Common\Score4Types.h" />
-    <ClInclude Include="..\..\Score4Core\Include\Score4Core\Common\ScoreDocument.h" />
+    <ClInclude Include="..\..\Core\Include\Score4Core\Common\DateTimeFormat.h" />
+    <ClInclude Include="..\..\Core\Include\Score4Core\Common\DocumentFile.h" />
+    <ClInclude Include="..\..\Core\Include\Score4Core\Common\ErrorDetectionCode.h" />
+    <ClInclude Include="..\..\Core\Include\Score4Core\Common\Score4CoreSettings.h" />
+    <ClInclude Include="..\..\Core\Include\Score4Core\Common\Score4Types.h" />
+    <ClInclude Include="..\..\Core\Include\Score4Core\Common\ScoreDocument.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
