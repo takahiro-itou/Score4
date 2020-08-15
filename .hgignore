@@ -4,6 +4,6 @@ syntax: glob
 syntax: regexp
 ^\.git/
 
-subinclude:Score4Core/.hgignore
-subinclude:Score4View/.hgignore
+subinclude:Core/.hgignore
+subinclude:View/.hgignore
 
