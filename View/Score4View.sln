@@ -3,14 +3,14 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
 VisualStudioVersion = 12.0.40629.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Score4Wrapper", "Score4Wrapper\Score4Wrapper.vcxproj", "{1FD21E47-2268-4ECA-8E53-668640B0A7B9}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Wrapper", "Wrapper\Wrapper.vcxproj", "{1FD21E47-2268-4ECA-8E53-668640B0A7B9}"
 	ProjectSection(ProjectDependencies) = postProject
 		{86230C49-191D-4DE3-ACBF-9F48E054E583} = {86230C49-191D-4DE3-ACBF-9F48E054E583}
 	EndProjectSection
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Score4Core", "Score4Core\Score4Core.vcxproj", "{86230C49-191D-4DE3-ACBF-9F48E054E583}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Core", "Core\Core.vcxproj", "{86230C49-191D-4DE3-ACBF-9F48E054E583}"
 EndProject
-Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "Score4View", "Score4View\Score4View.vbproj", "{59DB3E37-6DFD-4269-AAD5-678BDCBAE057}"
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "View", "View\View.vbproj", "{59DB3E37-6DFD-4269-AAD5-678BDCBAE057}"
 	ProjectSection(ProjectDependencies) = postProject
 		{1FD21E47-2268-4ECA-8E53-668640B0A7B9} = {1FD21E47-2268-4ECA-8E53-668640B0A7B9}
 		{86230C49-191D-4DE3-ACBF-9F48E054E583} = {86230C49-191D-4DE3-ACBF-9F48E054E583}
