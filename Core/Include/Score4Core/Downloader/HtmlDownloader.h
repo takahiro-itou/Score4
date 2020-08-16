@@ -21,7 +21,7 @@
 #if !defined( SCORE4CORE_DOWNLOADER_INCLUDED_HTML_DOWNLOADER_H )
 #    define   SCORE4CORE_DOWNLOADER_INCLUDED_HTML_DOWNLOADER_H
 
-#include    "Score4Types.h"
+#include    "Score4Core/Common/Score4Types.h"
 
 SCORE4_CORE_NAMESPACE_BEGIN
 namespace  Downloader  {
