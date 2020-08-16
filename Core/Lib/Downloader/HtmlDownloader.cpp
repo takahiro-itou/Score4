@@ -13,51 +13,47 @@
 *************************************************************************/
 
 /**
-**      An Interface of HtmlDownloader class.
+**      An Implementation of HtmlDownloader class.
 **
-**      @file       Downloader/HtmlDownloader.h
+**      @file       Downloader/HtmlDownloader.cpp
 **/
 
-#if !defined( SCORE4CORE_DOWNLOADER_INCLUDED_HTML_DOWNLOADER_H )
-#    define   SCORE4CORE_DOWNLOADER_INCLUDED_HTML_DOWNLOADER_H
-
-#include    "Score4Types.h"
+#include    "Score4Core/Downloader/HtmlDownloader.h"
 
 SCORE4_CORE_NAMESPACE_BEGIN
 namespace  Downloader  {
+
+namespace  {
+
+}   //  End of (Unnamed) namespace.
 
 //========================================================================
 //
 //    HtmlDownloader  class.
 //
 
-class  HtmlDownloader
-{
-
-//========================================================================
-//
-//    Internal Type Definitions.
-//
-
 //========================================================================
 //
 //    Constructor(s) and Destructor.
 //
-public:
 
-    //----------------------------------------------------------------
-    /**   インスタンスを初期化する
-    **  （デフォルトコンストラクタ）。
-    **
-    **/
-    HtmlDownloader();
+//----------------------------------------------------------------
+//    インスタンスを初期化する
+//  （デフォルトコンストラクタ）。
+//
 
-    //----------------------------------------------------------------
-    /**   インスタンスを破棄する
-    **  （デストラクタ）。
-    **
-    **/
-    virtual  ~HtmlDownloader();
+HtmlDownloader::HtmlDownloader()
+{
+}
+
+//----------------------------------------------------------------
+//    インスタンスを破棄する
+//  （デストラクタ）。
+//
+
+HtmlDownloader::~HtmlDownloader()
+{
+}
 
 //========================================================================
 //
@@ -94,21 +90,5 @@ public:
 //    For Internal Use Only.
 //
 
-//========================================================================
-//
-//    Member Variables.
-//
-
-//========================================================================
-//
-//    Other Features.
-//
-public:
-    //  テストクラス。  //
-    friend  class   HtmlDownloaderTest;
-};
-
 }   //  End of namespace  Downloader
 SCORE4_CORE_NAMESPACE_END
-
-#endif
