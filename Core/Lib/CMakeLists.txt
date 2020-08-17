@@ -14,6 +14,7 @@ Set (LIBRARIES_TARGET_PREFIX)
 Add_SubDirectory (Tests)
 Add_SubDirectory (.Config)
 
-Add_SubDirectory (Downloader)
 Add_SubDirectory (Common)
+Add_SubDirectory (Downloader)
+Add_SubDirectory (Document)
 
