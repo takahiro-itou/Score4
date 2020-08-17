@@ -15,7 +15,7 @@ TESTS                   =  \
 ##    Test Configurations.
 ##
 
-TARGET_TESTEE_LIBRARY       +=  ../libscore4Common.a
+TARGET_TESTEE_LIBRARY       +=  -lscore4Common
 
 DIST_NOINST_DATA_FILES      +=
 DIST_NOINST_HEADER_FILES    +=
