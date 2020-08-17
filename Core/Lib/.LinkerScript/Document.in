@@ -1,0 +1,6 @@
+
+/*  Linker Script.  */
+/*  INPUT( AS_NEEDED(Document/libscore4Document.staticd.a) )  */
+
+INPUT( AS_NEEDED(-lscore4Downloader) )
+
