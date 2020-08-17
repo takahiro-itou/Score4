@@ -62,7 +62,7 @@ LIBRARY_COMPILE_SRCFILES    =  \
 ##    List of Libraries.
 ##
 
-STATIC_LIBRARIES_LIST   =  libscore4Common.a
+STATIC_LIBRARIES_LIST   =  libscore4Common.static.a
 SHARED_LIBRARIES_LIST   =
 
 ##
@@ -88,5 +88,5 @@ include  $(top_srcdir)/.M4/Makefile.Install.inc
 ##    Build Libraries.
 ##
 
-libscore4Common_a_SOURCES   =  ${LIBRARY_SOURCE_FILES}
+libscore4Common_static_a_SOURCES    =  ${LIBRARY_SOURCE_FILES}
 

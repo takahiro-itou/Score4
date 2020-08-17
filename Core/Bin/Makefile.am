@@ -46,8 +46,8 @@ dist_noinst_DATA        =  \
 ##
 
 ImportTool_SOURCES      =  ImportTool.cpp
-ImportTool_LDADD        =  ../Lib/Common/libscore4Common.a
+ImportTool_LDADD        =  ../Lib/libscore4Common.a
 
 ScoreViewer_SOURCES     =  ScoreViewer.cpp
-ScoreViewer_LDADD       =  ../Lib/Common/libscore4Common.a
+ScoreViewer_LDADD       =  ../Lib/libscore4Common.a
 
