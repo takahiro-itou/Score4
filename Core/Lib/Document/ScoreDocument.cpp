@@ -18,7 +18,7 @@
 **      @file       Document/ScoreDocument.cpp
 **/
 
-#include    "Score4Core/Common/ScoreDocument.h"
+#include    "Score4Core/Document/ScoreDocument.h"
 
 #include    <memory.h>
 #include    <stdio.h>
