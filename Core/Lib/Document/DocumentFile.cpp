@@ -18,11 +18,12 @@
 **      @file       Document/DocumentFile.cpp
 **/
 
-#include    "Score4Core/Common/DocumentFile.h"
+#include    "Score4Core/Document/DocumentFile.h"
+
+#include    "Score4Core/Document/ScoreDocument.h"
 
 #include    "Score4Core/Common/DateTimeFormat.h"
 #include    "Score4Core/Common/ErrorDetectionCode.h"
-#include    "Score4Core/Common/ScoreDocument.h"
 #include    "Score4Core/Common/TextParser.h"
 
 #include    <fcntl.h>

@@ -21,9 +21,8 @@
 #if !defined( SCORE4CORE_DOCUMENT_INCLUDED_SCORE_DOCUMENT_H )
 #    define   SCORE4CORE_DOCUMENT_INCLUDED_SCORE_DOCUMENT_H
 
-#include    "Score4Types.h"
-
-#include    "ScoreInterface.h"
+#include    "Score4Core/Common/Score4Types.h"
+#include    "Score4Core/Common/ScoreInterface.h"
 
 #include    <iosfwd>
 #include    <string>
