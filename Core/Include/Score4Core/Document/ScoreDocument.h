@@ -3,19 +3,23 @@
 **                                                                      **
 **                  ---  The Score4 Core Library.  ---                  **
 **                                                                      **
-**          Copyright (C), 2017-2018, Takahiro Itou                     **
+**          Copyright (C), 2017-2020, Takahiro Itou                     **
 **          All Rights Reserved.                                        **
+**                                                                      **
+**          License: (See COPYING and LICENSE files)                    **
+**          GNU General Public License (GPL) version 3,                 **
+**          or (at your option) any later version.                      **
 **                                                                      **
 *************************************************************************/
 
 /**
 **      An Interface of ScoreDocument class.
 **
-**      @file       Common/ScoreDocument.h
+**      @file       Document/ScoreDocument.h
 **/
 
-#if !defined( SCORE4CORE_COMMON_INCLUDED_SCORE_DOCUMENT_H )
-#    define   SCORE4CORE_COMMON_INCLUDED_SCORE_DOCUMENT_H
+#if !defined( SCORE4CORE_DOCUMENT_INCLUDED_SCORE_DOCUMENT_H )
+#    define   SCORE4CORE_DOCUMENT_INCLUDED_SCORE_DOCUMENT_H
 
 #include    "Score4Types.h"
 
