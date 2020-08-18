@@ -8,10 +8,6 @@ Add_Test (NAME  DateTimeFormatTest
     COMMAND  $<TARGET_FILE:DateTimeFormatTest>
 )
 
-Add_Test (NAME  DocumentFileTest
-    COMMAND  $<TARGET_FILE:DocumentFileTest>
-)
-
 Add_Test (NAME  ErrorDetectionCodeTest
     COMMAND  $<TARGET_FILE:ErrorDetectionCodeTest>
 )
@@ -30,7 +26,6 @@ Add_Test (NAME  ScoreDocumentTest
 ##
 
 Add_Executable (DateTimeFormatTest      DateTimeFormatTest.cpp)
-Add_Executable (DocumentFileTest        DocumentFileTest.cpp)
 Add_Executable (ErrorDetectionCodeTest  ErrorDetectionCodeTest.cpp)
 Add_Executable (Score4CoreSettingsTest  Score4CoreSettingsTest.cpp)
 Add_Executable (ScoreDocumentTest       ScoreDocumentTest.cpp)

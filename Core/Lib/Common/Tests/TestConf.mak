@@ -6,7 +6,6 @@
 EXTRATESTS              =
 TESTS                   =  \
         DateTimeFormatTest      \
-        DocumentFileTest        \
         ErrorDetectionCodeTest  \
         Score4CoreSettingsTest  \
         ScoreDocumentTest       \
@@ -35,7 +34,6 @@ TEST_LDFLAGS_COMMON         +=
 ##
 
 DateTimeFormatTest_SOURCES      =  DateTimeFormatTest.cpp
-DocumentFileTest_SOURCES        =  DocumentFileTest.cpp
 ErrorDetectionCodeTest_SOURCES  =  ErrorDetectionCodeTest.cpp
 Score4CoreSettingsTest_SOURCES  =  Score4CoreSettingsTest.cpp
 ScoreDocumentTest_SOURCES       =  ScoreDocumentTest.cpp
