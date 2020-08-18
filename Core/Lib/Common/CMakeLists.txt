@@ -34,6 +34,9 @@ Set (INCLIB_HEADER_FILES
         ${INCLIB_SOURCE_DIR}/TextParser.h
 )
 
+Set (MODULE_NEEDS_LIBRARIES
+)
+
 ##----------------------------------------------------------------
 ##
 ##    ビルドとインストールの設定。

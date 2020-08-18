@@ -24,6 +24,10 @@ Set (INCLIB_HEADER_FILES
         ${INCLIB_SOURCE_DIR}/HtmlDownloader.h
 )
 
+Set (MODULE_NEEDS_LIBRARIES
+        ${PROJECT_NAME}-${LIBRARIES_TARGET_PREFIX}Common
+)
+
 ##----------------------------------------------------------------
 ##
 ##    ビルドとインストールの設定。
