@@ -37,6 +37,8 @@ DIST_NOINST_HEADER_FILES    =  \
         ${EXTRA_NOINST_HEADER_FILES}
 
 INCLIB_HEADER_FILES         =  \
+        ${INCLIB_SOURCE_DIR}/DocumentFile.h        \
+        ${INCLIB_SOURCE_DIR}/ScoreDocument.h       \
         ${EXTRA_LIBRARY_HEADER_FILES}
 
 INCLIB_NODIST_HEADER_FILES  =

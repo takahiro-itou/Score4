@@ -22,6 +22,8 @@ Set (LIBRARY_SOURCE_FILES
 )
 
 Set (INCLIB_HEADER_FILES
+        ${INCLIB_SOURCE_DIR}/DocumentFile.h
+        ${INCLIB_SOURCE_DIR}/ScoreDocument.h
 )
 
 Set (MODULE_NEEDS_LIBRARIES

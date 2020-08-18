@@ -39,11 +39,10 @@ DIST_NOINST_HEADER_FILES    =  \
 
 INCLIB_HEADER_FILES         =  \
         ${INCLIB_SOURCE_DIR}/DateTimeFormat.h      \
-        ${INCLIB_SOURCE_DIR}/DocumentFile.h        \
         ${INCLIB_SOURCE_DIR}/ErrorDetectionCode.h  \
         ${INCLIB_SOURCE_DIR}/Score4CoreSettings.h  \
         ${INCLIB_SOURCE_DIR}/Score4Types.h         \
-        ${INCLIB_SOURCE_DIR}/ScoreDocument.h       \
+        ${INCLIB_SOURCE_DIR}/ScoreInterface.h      \
         ${INCLIB_SOURCE_DIR}/TextParser.h          \
         ${EXTRA_LIBRARY_HEADER_FILES}
 
