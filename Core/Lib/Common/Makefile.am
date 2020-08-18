@@ -23,7 +23,6 @@ EXTRA_NOINST_HEADER_FILES   =
 
 LIBRARY_SOURCE_FILES        =  \
         DateTimeFormat.cpp             \
-        DocumentFile.cpp               \
         ErrorDetectionCode.cpp         \
         ScoreDocument.cpp              \
         TextParser.cpp                 \
