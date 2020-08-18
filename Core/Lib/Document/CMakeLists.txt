@@ -18,6 +18,7 @@ Set (INCLIB_BINARY_DIR     "${INCLUDE_BINARY_DIR}/${MODULE_DIR_NAME}")
 
 Set (LIBRARY_SOURCE_FILES
         DocumentFile.cpp
+        ScoreDocument.cpp
 )
 
 Set (INCLIB_HEADER_FILES

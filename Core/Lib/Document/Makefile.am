@@ -23,6 +23,7 @@ EXTRA_NOINST_HEADER_FILES   =
 
 LIBRARY_SOURCE_FILES        =  \
         DocumentFile.cpp               \
+        ScoreDocument.cpp              \
         ${EXTRA_LIBRARY_SOURCE_FILES}
 
 LIBRARY_INSTANTIATIONS      =

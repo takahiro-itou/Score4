@@ -19,7 +19,6 @@ Set (INCLIB_BINARY_DIR     "${INCLUDE_BINARY_DIR}/${MODULE_DIR_NAME}")
 Set (LIBRARY_SOURCE_FILES
         DateTimeFormat.cpp
         ErrorDetectionCode.cpp
-        ScoreDocument.cpp
         TextParser.cpp
 )
 
