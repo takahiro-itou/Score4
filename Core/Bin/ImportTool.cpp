@@ -1,10 +1,14 @@
-//  -*-  coding: utf-8; mode: c++  -*-  //
+﻿//  -*-  coding: utf-8-with-signature;  mode: c++  -*-  //
 /*************************************************************************
 **                                                                      **
 **                  ---  The Score4 Core Library.  ---                  **
 **                                                                      **
-**          Copyright (C), 2017-2018, Takahiro Itou                     **
+**          Copyright (C), 2017-2020, Takahiro Itou                     **
 **          All Rights Reserved.                                        **
+**                                                                      **
+**          License: (See COPYING and LICENSE files)                    **
+**          GNU General Public License (GPL) version 3,                 **
+**          or (at your option) any later version.                      **
 **                                                                      **
 *************************************************************************/
 
@@ -16,9 +20,10 @@
 
 #include    "Score4Core/Common/Score4CoreSettings.h"
 
-#include    "Score4Core/Common/DocumentFile.h"
-#include    "Score4Core/Common/ScoreDocument.h"
 #include    "Score4Core/Common/ScoreInterface.h"
+
+#include    "Score4Core/Document/DocumentFile.h"
+#include    "Score4Core/Document/ScoreDocument.h"
 
 #include    <fstream>
 #include    <iostream>

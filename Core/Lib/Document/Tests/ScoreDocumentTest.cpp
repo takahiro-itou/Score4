@@ -19,7 +19,7 @@
 **/
 
 #include    "TestDriver.h"
-#include    "Score4Core/Common/ScoreDocument.h"
+#include    "Score4Core/Document/ScoreDocument.h"
 
 #include    <fstream>
 #include    <sstream>
