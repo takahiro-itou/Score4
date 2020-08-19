@@ -56,8 +56,8 @@ int  main(int argc, char * argv[])
         return ( 1 );
     }
 
-    Common::DocumentFile    docFile;
-    Common::ScoreDocument   objDoc;
+    Document::DocumentFile  docFile;
+    Document::ScoreDocument objDoc;
     ErrCode                 retErr;
     retErr  = docFile.readFromBinaryFile(argv[1], &objDoc);
     if ( retErr != ERR_SUCCESS ) {

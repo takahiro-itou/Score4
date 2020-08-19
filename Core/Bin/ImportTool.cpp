@@ -53,8 +53,8 @@ void  writeCountedScores(
 
 int  main(int argc, char * argv[])
 {
-    Common::DocumentFile    docFile;
-    Common::ScoreDocument   objDoc;
+    Document::DocumentFile  docFile;
+    Document::ScoreDocument objDoc;
     ErrCode                 retErr;
 
     if ( argc > 2 ) {
