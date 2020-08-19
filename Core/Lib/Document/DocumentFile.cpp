@@ -160,7 +160,7 @@ DocumentFile::computeImageSize(
     cbTotal +=  bsInfo->bsSettings  =  192 + (sizeLeague) + (sizeTeams);
     cbTotal +=  bsInfo->bsRecords
             =   (bsInfo->cbRecsHead) + (bsInfo->cbRecsBody);
-    cbTotal +=  ErrorDetectionCode::CRC32_CODE_LENGTH;
+    cbTotal +=  Common::ErrorDetectionCode::CRC32_CODE_LENGTH;
     bsInfo->bsFileSize  =  cbTotal;
 
     return ( cbTotal );
@@ -204,6 +204,8 @@ DocumentFile::readFromBinaryBuffer(
         const   FileLength  cbBuf,
         ScoreDocument  *    ptrDoc)
 {
+    typedef     Common::ErrorDetectionCode      ErrorDetectionCode;
+
     ErrCode         retErr;
     FileHeader      fileHead;
     ExtraHeader     extHead;
@@ -315,6 +317,8 @@ DocumentFile::readFromTextStream(
         std::istream     &  inStr,
         ScoreDocument  *    ptrDoc)
 {
+    typedef     Common::DateTimeFormat          DateTimeFormat;
+    typedef     Common::TextParser              TextParser;
     typedef     std::vector<GameCountList>      GameCountBuffer;
 
     std::string             strLine;
@@ -430,6 +434,8 @@ DocumentFile::readRecordFromTextStream(
         std::istream          & inStr,
         GameResultList        & outRec)
 {
+    typedef     Common::TextParser      TextParser;
+
     std::string             strLine;
     TextParser::TextBuffer  bufText;
     TextParser::TokenArray  vTokens;
@@ -487,7 +493,7 @@ DocumentFile::readRecordFromTextStream(
             return ( retErr );
         }
 
-        gameRecord.recordDate   = DateTimeFormat::getSerialFromDate(
+        gameRecord.recordDate   = Common::DateTimeFormat::getSerialFromDate(
                 dtYear, dtMonth, dtDay);
 
         gameRecord.visitorTeam  = objDoc.findTeamInfo(vTokens[4]);
@@ -512,6 +518,8 @@ DocumentFile::saveToBinaryBuffer(
         LpWriteBuf  const       outBuf,
         const   FileLength      cbBuf)
 {
+    typedef     Common::ErrorDetectionCode      ErrorDetectionCode;
+
     BlockSizeInfo   tmpBsInfo;
     ErrCode         retErr;
     FileHeader      fileHeader;
@@ -626,6 +634,8 @@ DocumentFile::saveToTextStream(
         const  ScoreDocument  & objDoc,
         std::ostream          & outStr)
 {
+    typedef     Common::DateTimeFormat      DateTimeFormat;
+
     const  LeagueIndex  numLeagues  =  objDoc.getNumLeagues();
     const  TeamIndex    numTeams    =  objDoc.getNumTeams();
     const  RecordIndex  numRecords  =  objDoc.getNumRecords();
