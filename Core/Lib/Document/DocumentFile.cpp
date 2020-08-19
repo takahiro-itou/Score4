@@ -647,9 +647,9 @@ DocumentFile::saveToTextStream(
         outStr  <<  "\nTeam,"   <<  i   <<  ','
                 <<  teamInfo.leagueID   <<  ','
                 <<  teamInfo.teamName;
-        for ( Common::TeamIndex j = 0; j < numTeams; ++ j ) {
+        for ( TeamIndex j = 0; j < numTeams; ++ j ) {
             outStr  <<  ','
-                    <<  objDoc.getGameCount(i, j, Common::FILTER_HOME_GAMES);
+                    <<  objDoc.getGameCount(i, j, FILTER_HOME_GAMES);
         }
     }
     outStr  <<  std::endl;
