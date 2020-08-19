@@ -44,6 +44,7 @@ class  ScoreDocument
 //
 private:
 
+    typedef     Common::CountedScores       CountedScores;
     typedef     std::vector<CountedScores>  CountedScoreList;
 
 public:
