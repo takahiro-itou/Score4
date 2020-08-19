@@ -33,17 +33,17 @@ void  writeCountedScores(
         const   Common::CountedScores & cs,
         std::ostream                  & outStr)
 {
-    outStr  <<  "Wons  : "  <<  (cs.numWons[Common::FILTER_ALL_GAMES])
-            <<  " (H: "     <<  (cs.numWons[Common::FILTER_HOME_GAMES])
-            <<  ", A: "     <<  (cs.numWons[Common::FILTER_AWAY_GAMES])
+    outStr  <<  "Wons  : "  <<  (cs.numWons[FILTER_ALL_GAMES])
+            <<  " (H: "     <<  (cs.numWons[FILTER_HOME_GAMES])
+            <<  ", A: "     <<  (cs.numWons[FILTER_AWAY_GAMES])
             <<  ")\n"
-            <<  "Losts : "  <<  (cs.numLost[Common::FILTER_ALL_GAMES])
-            <<  " (H: "     <<  (cs.numLost[Common::FILTER_HOME_GAMES])
-            <<  ", A: "     <<  (cs.numLost[Common::FILTER_AWAY_GAMES])
+            <<  "Losts : "  <<  (cs.numLost[FILTER_ALL_GAMES])
+            <<  " (H: "     <<  (cs.numLost[FILTER_HOME_GAMES])
+            <<  ", A: "     <<  (cs.numLost[FILTER_AWAY_GAMES])
             <<  ")\n"
-            <<  "Draws : "  <<  (cs.numDraw[Common::FILTER_ALL_GAMES])
-            <<  " (H: "     <<  (cs.numDraw[Common::FILTER_HOME_GAMES])
-            <<  ", A: "     <<  (cs.numDraw[Common::FILTER_AWAY_GAMES])
+            <<  "Draws : "  <<  (cs.numDraw[FILTER_ALL_GAMES])
+            <<  " (H: "     <<  (cs.numDraw[FILTER_HOME_GAMES])
+            <<  ", A: "     <<  (cs.numDraw[FILTER_AWAY_GAMES])
             <<  ")\n"
             <<  "Ranks : "  <<  (cs.currentRank);
     outStr  <<  std::endl;
@@ -58,32 +58,32 @@ int  main(int argc, char * argv[])
 
     Common::DocumentFile    docFile;
     Common::ScoreDocument   objDoc;
-    Common::ErrCode         retErr;
+    ErrCode                 retErr;
     retErr  = docFile.readFromBinaryFile(argv[1], &objDoc);
-    if ( retErr != Common::ERR_SUCCESS ) {
+    if ( retErr != ERR_SUCCESS ) {
         return ( retErr );
     }
 
     retErr  = docFile.saveToTextStream(objDoc, std::cout);
-    if ( retErr != Common::ERR_SUCCESS ) {
+    if ( retErr != ERR_SUCCESS ) {
         return ( retErr );
     }
 
     std::vector<Common::CountedScores>  cs;
     retErr  = objDoc.countScores(-1, cs);
 
-    const  Common::LeagueIndex  numLeagues  = objDoc.getNumLeagues();
-    for ( Common::LeagueIndex i = 0; i < numLeagues; ++ i ) {
+    const  LeagueIndex  numLeagues  = objDoc.getNumLeagues();
+    for ( LeagueIndex i = 0; i < numLeagues; ++ i ) {
         objDoc.computeCurrentRank(i, cs);
     }
-    for ( Common::LeagueIndex i = 0; i < numLeagues; ++ i ) {
-        std::vector<Common::TeamIndex>  rank;
-        Common::TeamIndex   numTeam = objDoc.computeRankOrder(cs, i, rank);
+    for ( LeagueIndex i = 0; i < numLeagues; ++ i ) {
+        std::vector<TeamIndex>  rank;
+        TeamIndex   numTeam = objDoc.computeRankOrder(cs, i, rank);
         std::cerr   <<  "League : "
                     <<  objDoc.getLeagueInfo(i).leagueName
                     <<  std::endl;
-        for ( Common::TeamIndex j = 0; j < numTeam; ++ j ) {
-            const   Common::TeamIndex   idxTrg  = rank[j];
+        for ( TeamIndex j = 0; j < numTeam; ++ j ) {
+            const   TeamIndex   idxTrg  = rank[j];
             std::cerr   <<  "Team[" <<  idxTrg  <<  "] "
                         <<  objDoc.getTeamInfo(idxTrg).teamName
                         <<  std::endl;
@@ -92,7 +92,7 @@ int  main(int argc, char * argv[])
     }
 
     retErr  = docFile.saveToBinaryFile(objDoc, "dummy.bin");
-    if ( retErr != Common::ERR_SUCCESS ) {
+    if ( retErr != ERR_SUCCESS ) {
         return ( retErr );
     }
 

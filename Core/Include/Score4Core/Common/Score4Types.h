@@ -22,7 +22,6 @@
 #include    <stddef.h>
 
 SCORE4_CORE_NAMESPACE_BEGIN
-namespace  Common  {
 
 //========================================================================
 //
@@ -205,7 +204,6 @@ T  pointer_cast(const  void  *  p)
     return ( static_cast<T>(p) );
 }
 
-}   //  End of namespace  Common
 SCORE4_CORE_NAMESPACE_END
 
 #endif
