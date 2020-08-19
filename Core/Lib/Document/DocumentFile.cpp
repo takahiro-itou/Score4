@@ -47,7 +47,7 @@
 #define     HELPER_UNUSED_VARIABLE(var)     (void)(var)
 
 SCORE4_CORE_NAMESPACE_BEGIN
-namespace  Common  {
+namespace  Document  {
 
 namespace  {
 
@@ -1068,5 +1068,5 @@ DocumentFile::writeSettingBlock(
     return ( ERR_SUCCESS );
 }
 
-}   //  End of namespace  Common
+}   //  End of namespace  Document
 SCORE4_CORE_NAMESPACE_END

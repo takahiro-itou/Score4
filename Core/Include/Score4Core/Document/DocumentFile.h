@@ -33,6 +33,12 @@ namespace  Common  {
 //  クラスの前方宣言。  //
 class   ScoreDocument;
 
+}
+
+namespace  Document  {
+
+typedef     Common::ScoreDocument   ScoreDocument;
+
 //========================================================================
 //
 //    DocumentFile  class.
@@ -45,6 +51,10 @@ class  DocumentFile
 //
 //    Internal Type Definitions.
 //
+private:
+
+    typedef     Common::GameCountList       GameCountList;
+
 public:
 
     //  各ブロックのサイズを計算した結果。  //
@@ -440,7 +450,7 @@ public:
     friend  class   DocumentFileTest;
 };
 
-}   //  End of namespace  Common
+}   //  End of namespace  Document
 SCORE4_CORE_NAMESPACE_END
 
 #endif

@@ -27,7 +27,7 @@
 #include    <sstream>
 
 SCORE4_CORE_NAMESPACE_BEGIN
-namespace  Common  {
+namespace  Document  {
 
 //========================================================================
 //
@@ -113,7 +113,7 @@ void  DocumentFileTest::testSaveToTextStream()
     return;
 }
 
-}   //  End of namespace  Common
+}   //  End of namespace  Document
 SCORE4_CORE_NAMESPACE_END
 
 //========================================================================
