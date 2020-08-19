@@ -26,17 +26,17 @@
 
 
 SCORE4_CORE_NAMESPACE_BEGIN
-namespace  Common  {
+namespace  Document  {
 
 namespace  {
 
 inline  void
 aggregateGotLostScoreValues(
-        const   TeamIndex   idxEnemy,
-        const   ScoreValue  svGot,
-        const   ScoreValue  svLost,
-        const   GameFilter  gType,
-        CountedScores     & trgCS)
+        const   TeamIndex       idxEnemy,
+        const   ScoreValue      svGot,
+        const   ScoreValue      svLost,
+        const   GameFilter      gType,
+        Common::CountedScores   & trgCS)
 {
     trgCS.vsGotScores .at(idxEnemy)[gType]  += svGot;
     trgCS.vsLostScores.at(idxEnemy)[gType]  += svLost;
@@ -54,8 +54,8 @@ aggregateHomeAway(
 
 inline  void
 aggregateRestGames(
-        const   RestGamesArray  & src,
-        RestGamesArray          & trg)
+        const   Common::RestGamesArray  & src,
+        Common::RestGamesArray          & trg)
 {
     trg[FILTER_HOME_GAMES]  += src[FILTER_HOME_GAMES];
     trg[FILTER_AWAY_GAMES]  += src[FILTER_AWAY_GAMES];
@@ -866,5 +866,5 @@ ScoreDocument::setGameCount(
     return ( ERR_SUCCESS );
 }
 
-}   //  End of namespace  Common
+}   //  End of namespace  Document
 SCORE4_CORE_NAMESPACE_END

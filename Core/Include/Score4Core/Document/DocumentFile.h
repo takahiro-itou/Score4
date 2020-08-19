@@ -28,16 +28,10 @@
 #include    <string>
 
 SCORE4_CORE_NAMESPACE_BEGIN
-namespace  Common  {
+namespace  Document  {
 
 //  クラスの前方宣言。  //
 class   ScoreDocument;
-
-}
-
-namespace  Document  {
-
-typedef     Common::ScoreDocument   ScoreDocument;
 
 //========================================================================
 //

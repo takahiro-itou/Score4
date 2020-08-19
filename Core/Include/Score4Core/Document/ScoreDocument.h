@@ -28,7 +28,7 @@
 #include    <string>
 
 SCORE4_CORE_NAMESPACE_BEGIN
-namespace  Common  {
+namespace  Document  {
 
 //========================================================================
 //
@@ -46,6 +46,8 @@ private:
 
     typedef     Common::CountedScores       CountedScores;
     typedef     std::vector<CountedScores>  CountedScoreList;
+
+    typedef     Common::GameCountTable      GameCountTable;
 
 public:
 
@@ -590,7 +592,7 @@ public:
     friend  class   ScoreDocumentTest;
 };
 
-}   //  End of namespace  Common
+}   //  End of namespace  Document
 SCORE4_CORE_NAMESPACE_END
 
 #endif
