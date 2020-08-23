@@ -74,12 +74,12 @@
     ''    ファイルを開いてデータを読み込む。
     ''================================================================================
     Private Function openScoreData(ByVal fileName As String) As Boolean
-        Dim retVal As Score4Wrapper.Common.ErrCode
+        Dim retVal As Score4Wrapper.ErrCode
         Dim msgAns As System.Windows.Forms.DialogResult
 
         Do
             retVal = Score4Wrapper.Common.DocumentFile.readFromBinaryFile(fileName, Me.m_scoreData)
-            If retVal = Score4Wrapper.Common.ErrCode.ERR_SUCCESS Then
+            If retVal = Score4Wrapper.ErrCode.ERR_SUCCESS Then
                 Exit Do
             End If
 
@@ -88,7 +88,7 @@
             If (msgAns = vbNo) Then
                 Return False
             End If
-        Loop Until (retVal = Score4Wrapper.Common.ErrCode.ERR_SUCCESS)
+        Loop Until (retVal = Score4Wrapper.ErrCode.ERR_SUCCESS)
 
         ' 表示内容を最新の情報に更新する。
         m_flagModified = False
@@ -143,12 +143,12 @@
     ''    データをファイルに保存する。
     ''================================================================================
     Private Function saveScoreData(ByVal fileName As String) As Boolean
-        Dim retVal As Score4Wrapper.Common.ErrCode
+        Dim retVal As Score4Wrapper.ErrCode
         Dim msgAns As System.Windows.Forms.DialogResult
 
         Do
             retVal = Score4Wrapper.Common.DocumentFile.saveToBinaryFile(Me.m_scoreData, fileName)
-            If retVal = Score4Wrapper.Common.ErrCode.ERR_SUCCESS Then
+            If retVal = Score4Wrapper.ErrCode.ERR_SUCCESS Then
                 Exit Do
             End If
 
@@ -157,7 +157,7 @@
             If (msgAns = vbNo) Then
                 Return False
             End If
-        Loop Until (retVal = Score4Wrapper.Common.ErrCode.ERR_SUCCESS)
+        Loop Until (retVal = Score4Wrapper.ErrCode.ERR_SUCCESS)
 
         m_flagModified = False
         updateScoreView()
