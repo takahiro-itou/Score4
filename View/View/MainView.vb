@@ -13,7 +13,7 @@
     Private m_flagModified As Boolean
     Private m_lastFileName As String
 
-    Private m_scoreData As Score4Wrapper.Common.ScoreDocument
+    Private m_scoreData As Score4Wrapper.Document.ScoreDocument
 
     Private m_currentLeague As Integer
     Private m_currentDate As System.DateTime
@@ -78,7 +78,7 @@
         Dim msgAns As System.Windows.Forms.DialogResult
 
         Do
-            retVal = Score4Wrapper.Common.DocumentFile.readFromBinaryFile(fileName, Me.m_scoreData)
+            retVal = Score4Wrapper.Document.DocumentFile.readFromBinaryFile(fileName, Me.m_scoreData)
             If retVal = Score4Wrapper.ErrCode.ERR_SUCCESS Then
                 Exit Do
             End If
@@ -147,7 +147,7 @@
         Dim msgAns As System.Windows.Forms.DialogResult
 
         Do
-            retVal = Score4Wrapper.Common.DocumentFile.saveToBinaryFile(Me.m_scoreData, fileName)
+            retVal = Score4Wrapper.Document.DocumentFile.saveToBinaryFile(Me.m_scoreData, fileName)
             If retVal = Score4Wrapper.ErrCode.ERR_SUCCESS Then
                 Exit Do
             End If
@@ -360,7 +360,7 @@
     End Sub
 
     Private Sub MainView_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        m_scoreData = New Score4Wrapper.Common.ScoreDocument
+        m_scoreData = New Score4Wrapper.Document.ScoreDocument
         m_appPath = GetAppPath()
         m_iniFileName = m_appPath & "\Score.ini"
         moveWindowToStartPosition()
