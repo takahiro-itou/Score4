@@ -206,6 +206,11 @@ public:
 //
 //    Member Variables.
 //
+private:
+
+    FnCallback      m_fnCallback;       /**<  コールバック。    **/
+
+    void  *         m_extParams;        /**<  追加パラメータ。  **/
 
 //========================================================================
 //

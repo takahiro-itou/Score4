@@ -39,6 +39,8 @@ namespace  Common  {
 //
 
 ProgressCallback::ProgressCallback()
+    : m_fnCallback(nullptr),
+      m_extParams (nullptr)
 {
 }
 
@@ -50,6 +52,8 @@ ProgressCallback::ProgressCallback()
 ProgressCallback::ProgressCallback(
         FnCallback  fnCallback,
         void  *     extParams)
+    : m_fnCallback(fnCallback),
+      m_extParams (extParams)
 {
 }
 
@@ -99,6 +103,7 @@ ProgressCallback::~ProgressCallback()
 ProgressCallback::FnCallback
 ProgressCallback::getCallbackFunction()  const
 {
+    return ( this->m_fnCallback );
 }
 
 //----------------------------------------------------------------
@@ -109,7 +114,8 @@ ErrCode
 ProgressCallback::setCallbackFunction(
         FnCallback  fnCallback)
 {
-    return ( ERR_FAILURE );
+    this->m_fnCallback  = fnCallback;
+    return ( ERR_SUCCESS );
 }
 
 //----------------------------------------------------------------
@@ -119,6 +125,7 @@ ProgressCallback::setCallbackFunction(
 void  *
 ProgressCallback::getCallbackParameter()  const
 {
+    return ( this->m_extParams );
 }
 
 //----------------------------------------------------------------
@@ -129,6 +136,8 @@ ErrCode
 ProgressCallback::setCallbackParameter(
         void  *     extParams)
 {
+    this->m_extParams   = extParams;
+    return ( ERR_SUCCESS );
 }
 
 //========================================================================
