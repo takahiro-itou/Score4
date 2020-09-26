@@ -89,6 +89,50 @@ ProgressCallback::~ProgressCallback()
 
 //========================================================================
 //
+//    Accessors.
+//
+
+//----------------------------------------------------------------
+//    現在のコールバック関数を取得する。
+//
+
+ProgressCallback::FnCallback
+ProgressCallback::getCallbackFunction()  const
+{
+}
+
+//----------------------------------------------------------------
+//    コールバック関数を設定する。
+//
+
+ErrCode
+ProgressCallback::setCallbackFunction(
+        FnCallback  fnCallback)
+{
+    return ( ERR_FAILURE );
+}
+
+//----------------------------------------------------------------
+//    コールバック関数に渡す追加パラメータを取得する。
+//
+
+void  *
+ProgressCallback::getCallbackParameter()  const
+{
+}
+
+//----------------------------------------------------------------
+//    コールバック関数に渡す追加パラメータを設定する。
+//
+
+ErrCode
+ProgressCallback::setCallbackParameter(
+        void  *     extParams)
+{
+}
+
+//========================================================================
+//
 //    Protected Member Functions.
 //
 
