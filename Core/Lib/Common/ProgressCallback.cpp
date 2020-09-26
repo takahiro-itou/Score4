@@ -48,7 +48,8 @@ ProgressCallback::ProgressCallback()
 //
 
 ProgressCallback::ProgressCallback(
-        FnCallback  fnCallback)
+        FnCallback  fnCallback,
+        void  *     extParams)
 {
 }
 

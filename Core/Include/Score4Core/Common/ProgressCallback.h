@@ -41,6 +41,15 @@ class  ProgressCallback
 public:
 
     /**
+    **    コールバック関数のパラメータ型。
+    **/
+    struct  ProgParams
+    {
+        const  char  *  titleText;      /**<  タイトル文字列。  **/
+        void  *         extPrams;       /**<  追加パラメータ。  **/
+    };
+
+    /**
     **    コールバック関数型。
     **
     **  @param [in] curVal    現在の値。
@@ -52,10 +61,10 @@ public:
     **/
     typedef     Boolean
     (* FnCallback)(
-            int     curVal,
-            int     minVal,
-            int     maxVal,
-            void  * extArgs);
+            const  int  curVal,
+            const  int  minVal,
+            const  int  maxVal,
+            ProgParams  extArgs);
 
 //========================================================================
 //
@@ -75,9 +84,12 @@ public:
     **  （コンストラクタ）。
     **
     **  @param [in] fnCallback    コールバック関数。
+    **  @param [in] extParams     追加のパラメータ。
+
     **/
     ProgressCallback(
-            FnCallback  fnCallback);
+            FnCallback  fnCallback,
+            void  *     extParams);
 
     //----------------------------------------------------------------
     /**   インスタンスを破棄する
@@ -124,10 +136,10 @@ public:
     **/
     inline  Boolean
     operator ()(
-            int     curVal,
-            int     minVal,
-            int     maxVal,
-            void  * extArgs)  const
+            const  int  curVal,
+            const  int  minVal,
+            const  int  maxVal,
+            ProgParams  extArgs)  const
     {
         return ( BOOL_TRUE );
     }
