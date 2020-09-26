@@ -46,7 +46,7 @@ public:
     struct  ProgParams
     {
         const  char  *  titleText;      /**<  タイトル文字列。  **/
-        void  *         extPrams;       /**<  追加パラメータ。  **/
+        void  *         extParams;      /**<  追加パラメータ。  **/
     };
 
     /**

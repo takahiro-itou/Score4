@@ -35,7 +35,7 @@ namespace  Common  {
 class  ProgressCallbackTest : public  TestFixture
 {
     CPPUNIT_TEST_SUITE(ProgressCallbackTest);
-    CPPUNIT_TEST(testProgressCallback);
+    CPPUNIT_TEST(testProgressCallback1);
     CPPUNIT_TEST_SUITE_END();
 
 public:
@@ -43,7 +43,22 @@ public:
     virtual  void   tearDown()  override    { }
 
 private:
-    void  testProgressCallback();
+    void  testProgressCallback1();
+
+private:
+    enum  {
+        BUFFER_SIZE = 1024
+    };
+
+    typedef     ProgressCallback::ProgParams    ProgParams;
+
+    static  Boolean
+    callbackSampleProgress(
+            const  int  curVal,
+            const  int  minVal,
+            const  int  maxVal,
+            ProgParams  extArgs);
+
 };
 
 CPPUNIT_TEST_SUITE_REGISTRATION( ProgressCallbackTest );
@@ -53,11 +68,50 @@ CPPUNIT_TEST_SUITE_REGISTRATION( ProgressCallbackTest );
 //    Tests.
 //
 
-void  ProgressCallbackTest::testProgressCallback()
+void  ProgressCallbackTest::testProgressCallback1()
 {
-    ProgressCallback    cbProgress;
+    char    buf[BUFFER_SIZE];
+    ProgressCallback    cbProgress(&callbackSampleProgress, buf);
+    ProgParams          extParams;
+
+    extParams.titleText = "description";
+
+    buf[0]  = '\0';
+    CPPUNIT_ASSERT_EQUAL(
+            BOOL_TRUE,
+            cbProgress(1, 0, 100, extParams));
+    CPPUNIT_ASSERT_EQUAL(
+            std::string("description: 1/100"),
+            std::string(buf));
+
+    buf[0]  = '\0';
+    CPPUNIT_ASSERT_EQUAL(
+            BOOL_TRUE,
+            cbProgress(10, 1, 100, extParams));
+    CPPUNIT_ASSERT_EQUAL(
+            std::string("description: 9/99"),
+            std::string(buf));
 
     return;
+}
+
+Boolean
+ProgressCallbackTest::callbackSampleProgress(
+        const  int  curVal,
+        const  int  minVal,
+        const  int  maxVal,
+        ProgParams  extArgs)
+{
+    char *  const   buf = static_cast<char *>(extArgs.extParams);
+    snprintf(
+            buf, BUFFER_SIZE,
+            "%s: %d/%d",
+            (extArgs.titleText),
+            (curVal - minVal),
+            (maxVal - minVal)
+    );
+
+    return ( BOOL_TRUE );
 }
 
 }   //  End of namespace  Common
