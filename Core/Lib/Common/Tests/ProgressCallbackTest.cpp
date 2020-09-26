@@ -36,6 +36,7 @@ class  ProgressCallbackTest : public  TestFixture
 {
     CPPUNIT_TEST_SUITE(ProgressCallbackTest);
     CPPUNIT_TEST(testProgressCallback1);
+    CPPUNIT_TEST(testProgressCallback2);
     CPPUNIT_TEST_SUITE_END();
 
 public:
@@ -44,12 +45,14 @@ public:
 
 private:
     void  testProgressCallback1();
+    void  testProgressCallback2();
 
 private:
     enum  {
         BUFFER_SIZE = 1024
     };
 
+    typedef     ProgressCallback::FnCallback    FnCallback;
     typedef     ProgressCallback::ProgParams    ProgParams;
 
     static  Boolean
@@ -74,6 +77,13 @@ void  ProgressCallbackTest::testProgressCallback1()
     ProgressCallback    cbProgress(&callbackSampleProgress, buf);
     ProgParams          extParams;
 
+    CPPUNIT_ASSERT_EQUAL(
+            &callbackSampleProgress,
+            cbProgress.getCallbackFunction() );
+    CPPUNIT_ASSERT_EQUAL(
+            static_cast<void *>(buf),
+            cbProgress.getCallbackParameter() );
+
     extParams.titleText = "description";
 
     buf[0]  = '\0';
@@ -91,6 +101,50 @@ void  ProgressCallbackTest::testProgressCallback1()
     CPPUNIT_ASSERT_EQUAL(
             std::string("description: 9/99"),
             std::string(buf));
+
+    return;
+}
+
+void  ProgressCallbackTest::testProgressCallback2()
+{
+    char    buf[BUFFER_SIZE];
+    ProgressCallback    cbProgress;
+    ProgParams          extParams;
+
+    CPPUNIT_ASSERT_EQUAL(
+            static_cast<FnCallback>(nullptr),
+            cbProgress.getCallbackFunction() );
+    CPPUNIT_ASSERT_EQUAL(
+            static_cast<void *>(nullptr),
+            cbProgress.getCallbackParameter() );
+
+    cbProgress.setCallbackFunction(&callbackSampleProgress);
+    cbProgress.setCallbackParameter(buf);
+
+    extParams.titleText = "description";
+
+    buf[0]  = '\0';
+    CPPUNIT_ASSERT_EQUAL(
+            BOOL_TRUE,
+            cbProgress(1, 0, 100, extParams));
+    CPPUNIT_ASSERT_EQUAL(
+            std::string("description: 1/100"),
+            std::string(buf));
+
+    buf[0]  = '\0';
+    CPPUNIT_ASSERT_EQUAL(
+            BOOL_TRUE,
+            cbProgress(10, 1, 100, extParams));
+    CPPUNIT_ASSERT_EQUAL(
+            std::string("description: 9/99"),
+            std::string(buf));
+
+    CPPUNIT_ASSERT_EQUAL(
+            &callbackSampleProgress,
+            cbProgress.getCallbackFunction() );
+    CPPUNIT_ASSERT_EQUAL(
+            static_cast<void *>(buf),
+            cbProgress.getCallbackParameter() );
 
     return;
 }
