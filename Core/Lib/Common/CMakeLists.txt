@@ -19,12 +19,14 @@ Set (INCLIB_BINARY_DIR     "${INCLUDE_BINARY_DIR}/${MODULE_DIR_NAME}")
 Set (LIBRARY_SOURCE_FILES
         DateTimeFormat.cpp
         ErrorDetectionCode.cpp
+        ProgressCallback.cpp
         TextParser.cpp
 )
 
 Set (INCLIB_HEADER_FILES
         ${INCLIB_SOURCE_DIR}/DateTimeFormat.h
         ${INCLIB_SOURCE_DIR}/ErrorDetectionCode.h
+        ${INCLIB_SOURCE_DIR}/ProgressCallback.h
         ${INCLIB_SOURCE_DIR}/Score4CoreSettings.h
         ${INCLIB_SOURCE_DIR}/Score4Types.h
         ${INCLIB_SOURCE_DIR}/ScoreInterface.h

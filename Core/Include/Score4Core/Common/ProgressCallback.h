@@ -49,7 +49,7 @@ public:
     **  @retval     BOOL_TRUE  : 処理を継続する。
     **  @retval     BOOL_FALSE : 処理をキャンセルする。
     **/
-    typedef     Booelan
+    typedef     Boolean
     (* FnCallback)(int curVal, int minVal, int maxVal);
 
 //========================================================================
