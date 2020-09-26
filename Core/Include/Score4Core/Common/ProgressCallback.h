@@ -43,14 +43,19 @@ public:
     /**
     **    コールバック関数型。
     **
-    **  @param [in] curVal
-    **  @param [in] minVal
-    **  @param [in] maxVal
+    **  @param [in] curVal    現在の値。
+    **  @param [in] minVal    初期値。
+    **  @param [in] maxVal    最大値。
+    **  @param [in] extArgs   追加の引数。
     **  @retval     BOOL_TRUE  : 処理を継続する。
     **  @retval     BOOL_FALSE : 処理をキャンセルする。
     **/
     typedef     Boolean
-    (* FnCallback)(int curVal, int minVal, int maxVal);
+    (* FnCallback)(
+            int     curVal,
+            int     minVal,
+            int     maxVal,
+            void  * extArgs);
 
 //========================================================================
 //
@@ -107,11 +112,22 @@ public:
 //
 public:
 
+    //----------------------------------------------------------------
+    /**   コールバック関数を呼び出す。
+    **
+    **  @param [in] curVal    現在の値。
+    **  @param [in] minVal    初期値。
+    **  @param [in] maxVal    最大値。
+    **  @param [in] extArgs   追加の引数。
+    **  @retval     BOOL_TRUE  : 処理を継続する。
+    **  @retval     BOOL_FALSE : 処理をキャンセルする。
+    **/
     inline  Boolean
     operator ()(
-            const  int  curVal,
-            const  int  minVal,
-            const  int  maxVal)  const
+            int     curVal,
+            int     minVal,
+            int     maxVal,
+            void  * extArgs)  const
     {
         return ( BOOL_TRUE );
     }
