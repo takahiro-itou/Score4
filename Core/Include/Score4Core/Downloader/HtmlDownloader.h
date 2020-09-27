@@ -24,6 +24,12 @@
 #include    "Score4Core/Common/Score4Types.h"
 
 SCORE4_CORE_NAMESPACE_BEGIN
+
+//  クラスの前方宣言。  //
+namespace  Common  {
+class   ProgressCallback;
+}   //  End of namespace  Common
+
 namespace  Downloader  {
 
 //========================================================================
@@ -38,6 +44,9 @@ class  HtmlDownloader
 //
 //    Internal Type Definitions.
 //
+private:
+
+    typedef     Common::ProgressCallback    Callback;
 
 //========================================================================
 //
@@ -98,6 +107,9 @@ public:
 //
 //    Member Variables.
 //
+private:
+
+    Callback  *     m_lpCallback;
 
 //========================================================================
 //
