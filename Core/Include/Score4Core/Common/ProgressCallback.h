@@ -141,6 +141,9 @@ public:
             const  int  maxVal,
             ProgParams  extArgs)  const
     {
+        if ( FnCallback fn = (this->m_fnCallback) ) {
+            return (* fn)(curVal, minVal, maxVal, extArgs);
+        }
         return ( BOOL_TRUE );
     }
 
