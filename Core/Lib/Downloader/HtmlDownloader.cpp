@@ -75,10 +75,60 @@ HtmlDownloader::~HtmlDownloader()
 //    Public Member Functions (Virtual Functions).
 //
 
+//----------------------------------------------------------------
+//    指定したリソースをダウンロードする。
+//
+
+ErrCode
+HtmlDownloader::downloadResource(
+        const  char  *  strURI,
+        LpWriteBuf      outBuf)  const
+{
+    return ( ERR_FAILURE );
+}
+
+//----------------------------------------------------------------
+//    指定したリソースをダウンロードする。
+//
+
+ErrCode
+HtmlDownloader::downloadResource(
+        const  char  *  strURI,
+        const  char  *  outPath)  const
+{
+    return ( ERR_FAILURE );
+}
+
 //========================================================================
 //
 //    Public Member Functions.
 //
+
+//========================================================================
+//
+//    Accessors.
+//
+
+//----------------------------------------------------------------
+//    コールバックを取得する。
+//
+
+const  HtmlDownloader::Callback  &
+HtmlDownloader::getCallback()  const
+{
+    return ( *(this->m_lpCallback) );
+}
+
+//----------------------------------------------------------------
+//    コールバックを設定する。
+//
+
+ErrCode
+HtmlDownloader::setCallback(
+        Callback  & callback)
+{
+    return ( ERR_FAILURE );
+}
 
 //========================================================================
 //

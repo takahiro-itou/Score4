@@ -87,11 +87,69 @@ public:
 //
 //    Public Member Functions (Virtual Functions).
 //
+public:
+
+    //----------------------------------------------------------------
+    /**   指定したリソースをダウンロードする。
+    **
+    **  @param [in] strURI    Uniform Resource Identifier.
+    **  @param[out] outBuf    出力バッファ。
+    **  @return     エラーコードを返す。
+    **      -   異常終了の場合は、
+    **          エラーの種類を示す非ゼロ値を返す。
+    **      -   正常終了の場合は、ゼロを返す。
+    **/
+    virtual  ErrCode
+    downloadResource(
+            const  char  *  strURI,
+            LpWriteBuf      outBuf)  const;
+
+    //----------------------------------------------------------------
+    /**   指定したリソースをダウンロードする。
+    **
+    **  @param [in] strURI    Uniform Resource Identifier.
+    **  @param[out] outPath   内容を保存するファイル名。
+    **  @return     エラーコードを返す。
+    **      -   異常終了の場合は、
+    **          エラーの種類を示す非ゼロ値を返す。
+    **      -   正常終了の場合は、ゼロを返す。
+    **/
+    virtual  ErrCode
+    downloadResource(
+            const  char  *  strURI,
+            const  char  *  outPath)  const;
 
 //========================================================================
 //
 //    Public Member Functions.
 //
+
+//========================================================================
+//
+//    Accessors.
+//
+public:
+
+    //----------------------------------------------------------------
+    /**   コールバックを取得する。
+    **
+    **  @return     現在の設定値を返す。
+    **/
+    const  Callback  &
+    getCallback()  const;
+
+    //----------------------------------------------------------------
+    /**   コールバックを設定する。
+    **
+    **  @param [in] callback    コールバック。
+    **  @return     エラーコードを返す。
+    **      -   異常終了の場合は、
+    **          エラーの種類を示す非ゼロ値を返す。
+    **      -   正常終了の場合は、ゼロを返す。
+    **/
+    ErrCode
+    setCallback(
+            Callback  & callback);
 
 //========================================================================
 //
