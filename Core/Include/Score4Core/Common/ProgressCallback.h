@@ -142,6 +142,7 @@ public:
             ProgParams  extArgs)  const
     {
         if ( FnCallback fn = (this->m_fnCallback) ) {
+            extArgs.extParams   = (this->m_extParams);
             return (* fn)(curVal, minVal, maxVal, extArgs);
         }
         return ( BOOL_TRUE );
