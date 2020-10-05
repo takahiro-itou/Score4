@@ -7,6 +7,7 @@ EXTRATESTS              =
 TESTS                   =  \
         DateTimeFormatTest      \
         ErrorDetectionCodeTest  \
+        ProcessManagerTest      \
         ProgressCallbackTest    \
         Score4CoreSettingsTest  \
         ${EXTRATESTS}
@@ -35,6 +36,7 @@ TEST_LDFLAGS_COMMON         +=
 
 DateTimeFormatTest_SOURCES      =  DateTimeFormatTest.cpp
 ErrorDetectionCodeTest_SOURCES  =  ErrorDetectionCodeTest.cpp
+ProcessManagerTest_SOURCES      =  ProcessManagerTest.cpp
 ProgressCallbackTest_SOURCES    =  ProgressCallbackTest.cpp
 Score4CoreSettingsTest_SOURCES  =  Score4CoreSettingsTest.cpp
 
