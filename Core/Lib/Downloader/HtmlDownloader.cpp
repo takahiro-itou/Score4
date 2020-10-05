@@ -43,6 +43,7 @@ namespace  {
 //
 
 HtmlDownloader::HtmlDownloader()
+    : m_lpCallback(nullptr)
 {
 }
 

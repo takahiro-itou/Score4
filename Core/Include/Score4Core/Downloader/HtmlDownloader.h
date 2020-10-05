@@ -173,6 +173,10 @@ private:
 //
 //    Other Features.
 //
+private:
+    typedef     HtmlDownloader      This;
+    HtmlDownloader      (const  This  &);
+    This &  operator =  (const  This  &);
 public:
     //  テストクラス。  //
     friend  class   HtmlDownloaderTest;
