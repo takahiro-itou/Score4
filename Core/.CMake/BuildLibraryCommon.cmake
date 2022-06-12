@@ -128,8 +128,7 @@ install(EXPORT          ${PROJECT_NAME}-${MODULE_TITLE}-Export
 
 ##  ビルドツリー向けのエクスポート。
 
-export( TARGETS        ${PROJECT_NAME}-${MODULE_TARGET_NAME}
-        EXPORT         ${PROJECT_NAME}-${MODULE_TITLE}-BuildTree-Export
-        FILE           ${PROJECT_NAME}-${MODULE_TITLE}-Export.cmake
-        EXPORT_LINK_INTERFACE_LIBRARIES
+export(
+    TARGETS     ${PROJECT_NAME}-${MODULE_TARGET_NAME}
+    FILE        ${PROJECT_NAME}-${MODULE_TITLE}-BuildTree-Export.cmake
 )
