@@ -476,6 +476,23 @@ ScoreDocument::resizeTeamInfos(
     return ( ERR_SUCCESS );
 }
 
+//----------------------------------------------------------------
+//    試合結果のレコードを比較する。
+//
+
+Boolean
+ScoreDocument::verifyRecord(
+        const  RecordIndex  recordIndex,
+        const  RecordFlag   flags,
+        const  DateSerial   gameDate,
+        const  TeamIndex    visitorTeam,
+        const  TeamIndex    homeTeam,
+        const  ScoreValue   visitorScore,
+        const  ScoreValue   homeScore)  const
+{
+    return ( BOOL_FALSE );
+}
+
 //========================================================================
 //
 //    Public Member Functions.
