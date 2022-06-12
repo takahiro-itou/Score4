@@ -3,7 +3,7 @@
 **                                                                      **
 **                  ---  The Score4 Core Library.  ---                  **
 **                                                                      **
-**          Copyright (C), 2017-2020, Takahiro Itou                     **
+**          Copyright (C), 2017-2022, Takahiro Itou                     **
 **          All Rights Reserved.                                        **
 **                                                                      **
 **          License: (See COPYING and LICENSE files)                    **
@@ -208,6 +208,25 @@ public:
     countScores(
             const   DateSerial  trgLastDate,
             CountedScoreList    &bufCounted)  const;
+
+    //----------------------------------------------------------------
+    /**   指定した日付の特定の対戦カードを検索する。
+    **
+    **  @param [in] gameDate      試合日。
+    **  @param [in] homeTeam      ホームチームの番号。
+    **  @param [in] visitorTeam   ビジタチームの番号。
+    **  @param [in] multiGame     ダブルヘッダーなどで、
+    **      同一条件のゲームが複数ある場合、
+    **      ゼロから始まるインデックスで特定する。
+    **  @return     見つかったレコードのインデックスを返す。
+    **              見つからない場合は負の整数を返す。
+    **/
+    virtual  RecordIndex
+    findGameRecord(
+            const  DateSerial   gameDate,
+            const  TeamIndex    homeTeam,
+            const  TeamIndex    visitorTeam,
+            const  RecordIndex  multiGame)  const;
 
     //----------------------------------------------------------------
     /**   チーム情報を検索する。

@@ -3,7 +3,7 @@
 **                                                                      **
 **                  ---  The Score4 Core Library.  ---                  **
 **                                                                      **
-**          Copyright (C), 2017-2020, Takahiro Itou                     **
+**          Copyright (C), 2017-2022, Takahiro Itou                     **
 **          All Rights Reserved.                                        **
 **                                                                      **
 **          License: (See COPYING and LICENSE files)                    **
@@ -245,7 +245,7 @@ ScoreDocument::computeCurrentRank(
         }
         bufTeam[idxIns] = i;
         bufPerc[idxIns] = teamPercent;
-        ++  cntIns;
+        ++ cntIns;
     }   //  End For (i)
 
     //  同率タイに注意して順位を書き込む。  //
@@ -306,7 +306,7 @@ ScoreDocument::computeRankOrder(
             }
         }   //  End For (idxIns)
         bufIndex[idxIns]    = i;
-        ++  cntTeam;
+        ++ cntTeam;
     }   //  End For (i)
 
     //  別のリーグに所属するチームも配列の末尾に格納しておく。  //
@@ -314,7 +314,7 @@ ScoreDocument::computeRankOrder(
     for ( TeamIndex i = 0; i < numTeam; ++ i ) {
         if ( getTeamInfo(i).leagueID != idxLeague ) {
             bufIndex[idxIns]    = i;
-            ++  idxIns;
+            ++ idxIns;
         }
     }
 
@@ -360,25 +360,25 @@ ScoreDocument::countScores(
 
             //  得点を比較して勝敗を記録する。  //
             if ( src.homeScore < src.visitorScore ) {
-                ++  csHome.vsLost.at(idxAway)[FILTER_HOME_GAMES];
-                ++  csAway.vsWons.at(idxHome)[FILTER_AWAY_GAMES];
+                ++ csHome.vsLost.at(idxAway)[FILTER_HOME_GAMES];
+                ++ csAway.vsWons.at(idxHome)[FILTER_AWAY_GAMES];
             } else if ( src.homeScore > src.visitorScore ) {
-                ++  csHome.vsWons.at(idxAway)[FILTER_HOME_GAMES];
-                ++  csAway.vsLost.at(idxHome)[FILTER_AWAY_GAMES];
+                ++ csHome.vsWons.at(idxAway)[FILTER_HOME_GAMES];
+                ++ csAway.vsLost.at(idxHome)[FILTER_AWAY_GAMES];
             } else {
-                ++  csHome.vsDraw.at(idxAway)[FILTER_HOME_GAMES];
-                ++  csAway.vsDraw.at(idxHome)[FILTER_AWAY_GAMES];
+                ++ csHome.vsDraw.at(idxAway)[FILTER_HOME_GAMES];
+                ++ csAway.vsDraw.at(idxHome)[FILTER_AWAY_GAMES];
             }
 
             //  試合数を引く。  //
-            --  csHome.restGames.at(idxAway)[FILTER_HOME_GAMES];
-            --  csHome.restGames   [idxAway][FILTER_SCDL_HOMES];
-            --  csAway.restGames.at(idxHome)[FILTER_AWAY_GAMES];
-            --  csAway.restGames   [idxHome][FILTER_SCDL_AWAYS];
+            -- csHome.restGames.at(idxAway)[FILTER_HOME_GAMES];
+            -- csHome.restGames   [idxAway][FILTER_SCDL_HOMES];
+            -- csAway.restGames.at(idxHome)[FILTER_AWAY_GAMES];
+            -- csAway.restGames   [idxHome][FILTER_SCDL_AWAYS];
         } else if ( src.eGameFlags == GAME_SCHEDULE ) {
             //  スケジュール上のデータを集計する。  //
-            --  csHome.restGames.at(idxAway)[FILTER_SCDL_HOMES];
-            --  csAway.restGames.at(idxHome)[FILTER_SCDL_AWAYS];
+            -- csHome.restGames.at(idxAway)[FILTER_SCDL_HOMES];
+            -- csAway.restGames.at(idxHome)[FILTER_SCDL_AWAYS];
         }
     }
 
@@ -391,6 +391,39 @@ ScoreDocument::countScores(
     }
 
     return ( ERR_SUCCESS );
+}
+
+//----------------------------------------------------------------
+//    指定した日付の特定の対戦カードを検索する。
+//
+
+RecordIndex
+ScoreDocument::findGameRecord(
+        const  DateSerial   gameDate,
+        const  TeamIndex    homeTeam,
+        const  TeamIndex    visitorTeam,
+        const  RecordIndex  multiGame)  const
+{
+    RecordIndex     multiIndex  = 0;
+    const  RecordIndex  numRecords  = this->m_gameResults.size();
+    for ( RecordIndex i = 0; i < numRecords; ++ i ) {
+        const   GameResult  &gr = this->m_gameResults.at(i);
+        if ( gr.eGameFlags == GAME_EMPTY ) {
+            continue;
+        }
+        if ( gr.recordDate != gameDate ) {
+            continue;
+        }
+        if ( (gr.homeTeam == homeTeam) && (gr.visitorTeam == visitorTeam) ) {
+            if ( multiIndex >= multiGame ) {
+                return ( i );
+            }
+            ++ multiIndex;
+        }
+    }
+
+    //  見つからなかった。  //
+    return ( -1 );
 }
 
 //----------------------------------------------------------------
