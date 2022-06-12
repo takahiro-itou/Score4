@@ -3,6 +3,9 @@
 ##    List of Directories.
 ##
 
+SUBDIRS         =  Modules
+DIST_SUBDIRS    =  $(SUBDIRS)
+
 ##
 ##    List of Installs.
 ##
