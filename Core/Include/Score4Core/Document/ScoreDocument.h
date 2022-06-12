@@ -266,7 +266,7 @@ public:
     /**   試合結果のレコードを比較する。
     **
     **  @param [in] recordIndex     比較するレコードのインデックス。
-    **  @param [in] flags           フラグ。
+    **  @param [in] eGameFlags      フラグ。
     **  @param [in] gameDate        試合が行われた日。
     **  @param [in] visitorTeam     ビジタチームの番号。
     **  @param [in] homeTeam        ホームチームの番号。
@@ -276,7 +276,7 @@ public:
     virtual  Boolean
     verifyRecord(
             const  RecordIndex  recordIndex,
-            const  RecordFlag   flags,
+            const  RecordFlag   eGameFlags,
             const  DateSerial   gameDate,
             const  TeamIndex    visitorTeam,
             const  TeamIndex    homeTeam,
