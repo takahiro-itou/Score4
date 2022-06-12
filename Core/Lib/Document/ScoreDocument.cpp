@@ -483,14 +483,31 @@ ScoreDocument::resizeTeamInfos(
 Boolean
 ScoreDocument::verifyRecord(
         const  RecordIndex  recordIndex,
-        const  RecordFlag   flags,
+        const  RecordFlag   eGameFlags,
         const  DateSerial   gameDate,
         const  TeamIndex    visitorTeam,
         const  TeamIndex    homeTeam,
         const  ScoreValue   visitorScore,
         const  ScoreValue   homeScore)  const
 {
-    return ( BOOL_FALSE );
+    const   GameResult  &gr = this->m_gameResults.at(recordIndex);
+
+    if ( gr.eGameFlags != eGameFlags )  {
+        return ( BOOL_FALSE );
+    }
+    if ( gr.recordDate != gameDate ) {
+        return ( BOOL_FALSE );
+    }
+    if ( (gr.visitorTeam != visitorTeam) || (gr.homeTeam != homeTeam) )
+    {
+        return ( BOOL_FALSE );
+    }
+    if ( (gr.visitorScore != visitorScore) || (gr.homeScore != homeScore) )
+    {
+        return ( BOOL_FALSE );
+    }
+
+    return ( BOOL_TRUE );
 }
 
 //========================================================================
