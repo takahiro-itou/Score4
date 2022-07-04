@@ -3,29 +3,32 @@
 **                                                                      **
 **                  ---  The Score4 Core Library.  ---                  **
 **                                                                      **
-**          Copyright (C), 2017-2018, Takahiro Itou                     **
+**          Copyright (C), 2017-2020, Takahiro Itou                     **
 **          All Rights Reserved.                                        **
+**                                                                      **
+**          License: (See COPYING and LICENSE files)                    **
+**          GNU General Public License (GPL) version 3,                 **
+**          or (at your option) any later version.                      **
 **                                                                      **
 *************************************************************************/
 
 /**
 **      An Interface of DocumentFile class.
 **
-**      @file       Common/DocumentFile.h
+**      @file       Document/DocumentFile.h
 **/
 
-#if !defined( SCORE4CORE_COMMON_INCLUDED_DOCUMENT_FILE_H )
-#    define   SCORE4CORE_COMMON_INCLUDED_DOCUMENT_FILE_H
+#if !defined( SCORE4CORE_DOCUMENT_INCLUDED_DOCUMENT_FILE_H )
+#    define   SCORE4CORE_DOCUMENT_INCLUDED_DOCUMENT_FILE_H
 
-#include    "Score4Types.h"
-
-#include    "ScoreInterface.h"
+#include    "Score4Core/Common/Score4Types.h"
+#include    "Score4Core/Common/ScoreInterface.h"
 
 #include    <iosfwd>
 #include    <string>
 
 SCORE4_CORE_NAMESPACE_BEGIN
-namespace  Common  {
+namespace  Document  {
 
 //  クラスの前方宣言。  //
 class   ScoreDocument;
@@ -42,6 +45,10 @@ class  DocumentFile
 //
 //    Internal Type Definitions.
 //
+private:
+
+    typedef     Common::GameCountList       GameCountList;
+
 public:
 
     //  各ブロックのサイズを計算した結果。  //
@@ -437,7 +444,7 @@ public:
     friend  class   DocumentFileTest;
 };
 
-}   //  End of namespace  Common
+}   //  End of namespace  Document
 SCORE4_CORE_NAMESPACE_END
 
 #endif

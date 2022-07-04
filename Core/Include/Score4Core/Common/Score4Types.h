@@ -3,8 +3,12 @@
 **                                                                      **
 **                  ---  The Score4 Core Library.  ---                  **
 **                                                                      **
-**          Copyright (C), 2017-2018, Takahiro Itou                     **
+**          Copyright (C), 2017-2020, Takahiro Itou                     **
 **          All Rights Reserved.                                        **
+**                                                                      **
+**          License: (See COPYING and LICENSE files)                    **
+**          GNU General Public License (GPL) version 3,                 **
+**          or (at your option) any later version.                      **
 **                                                                      **
 *************************************************************************/
 
@@ -22,7 +26,6 @@
 #include    <stddef.h>
 
 SCORE4_CORE_NAMESPACE_BEGIN
-namespace  Common  {
 
 //========================================================================
 //
@@ -205,7 +208,6 @@ T  pointer_cast(const  void  *  p)
     return ( static_cast<T>(p) );
 }
 
-}   //  End of namespace  Common
 SCORE4_CORE_NAMESPACE_END
 
 #endif

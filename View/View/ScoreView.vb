@@ -6,7 +6,7 @@
     Public Sub displayScoreTableToGrid(
                 ByVal leagueIndex As Integer,
                 ByVal magicMode As Integer,
-                ByRef scoreData As Score4Wrapper.Common.ScoreDocument,
+                ByRef scoreData As Score4Wrapper.Document.ScoreDocument,
                 ByRef objTable As System.Windows.Forms.DataGridView)
 
         Dim i As Integer

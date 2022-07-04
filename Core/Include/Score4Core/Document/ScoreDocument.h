@@ -3,29 +3,32 @@
 **                                                                      **
 **                  ---  The Score4 Core Library.  ---                  **
 **                                                                      **
-**          Copyright (C), 2017-2018, Takahiro Itou                     **
+**          Copyright (C), 2017-2022, Takahiro Itou                     **
 **          All Rights Reserved.                                        **
+**                                                                      **
+**          License: (See COPYING and LICENSE files)                    **
+**          GNU General Public License (GPL) version 3,                 **
+**          or (at your option) any later version.                      **
 **                                                                      **
 *************************************************************************/
 
 /**
 **      An Interface of ScoreDocument class.
 **
-**      @file       Common/ScoreDocument.h
+**      @file       Document/ScoreDocument.h
 **/
 
-#if !defined( SCORE4CORE_COMMON_INCLUDED_SCORE_DOCUMENT_H )
-#    define   SCORE4CORE_COMMON_INCLUDED_SCORE_DOCUMENT_H
+#if !defined( SCORE4CORE_DOCUMENT_INCLUDED_SCORE_DOCUMENT_H )
+#    define   SCORE4CORE_DOCUMENT_INCLUDED_SCORE_DOCUMENT_H
 
-#include    "Score4Types.h"
-
-#include    "ScoreInterface.h"
+#include    "Score4Core/Common/Score4Types.h"
+#include    "Score4Core/Common/ScoreInterface.h"
 
 #include    <iosfwd>
 #include    <string>
 
 SCORE4_CORE_NAMESPACE_BEGIN
-namespace  Common  {
+namespace  Document  {
 
 //========================================================================
 //
@@ -41,7 +44,10 @@ class  ScoreDocument
 //
 private:
 
+    typedef     Common::CountedScores       CountedScores;
     typedef     std::vector<CountedScores>  CountedScoreList;
+
+    typedef     Common::GameCountTable      GameCountTable;
 
 public:
 
@@ -204,6 +210,25 @@ public:
             CountedScoreList    &bufCounted)  const;
 
     //----------------------------------------------------------------
+    /**   指定した日付の特定の対戦カードを検索する。
+    **
+    **  @param [in] gameDate      試合日。
+    **  @param [in] homeTeam      ホームチームの番号。
+    **  @param [in] visitorTeam   ビジタチームの番号。
+    **  @param [in] multiGame     ダブルヘッダーなどで、
+    **      同一条件のゲームが複数ある場合、
+    **      ゼロから始まるインデックスで特定する。
+    **  @return     見つかったレコードのインデックスを返す。
+    **              見つからない場合は負の整数を返す。
+    **/
+    virtual  RecordIndex
+    findGameRecord(
+            const  DateSerial   gameDate,
+            const  TeamIndex    homeTeam,
+            const  TeamIndex    visitorTeam,
+            const  RecordIndex  multiGame)  const;
+
+    //----------------------------------------------------------------
     /**   チーム情報を検索する。
     **
     **  @param [in] teamName    チーム名。
@@ -236,6 +261,27 @@ public:
     virtual  ErrCode
     resizeTeamInfos(
             const   TeamIndex   numTeam);
+
+    //----------------------------------------------------------------
+    /**   試合結果のレコードを比較する。
+    **
+    **  @param [in] recordIndex     比較するレコードのインデックス。
+    **  @param [in] eGameFlags      フラグ。
+    **  @param [in] gameDate        試合が行われた日。
+    **  @param [in] visitorTeam     ビジタチームの番号。
+    **  @param [in] homeTeam        ホームチームの番号。
+    **  @param [in] visitorScore    ビジタチームの得点。
+    **  @param [in] homeScore       ホームチームの得点。
+    **/
+    virtual  Boolean
+    verifyRecord(
+            const  RecordIndex  recordIndex,
+            const  RecordFlag   eGameFlags,
+            const  DateSerial   gameDate,
+            const  TeamIndex    visitorTeam,
+            const  TeamIndex    homeTeam,
+            const  ScoreValue   visitorScore,
+            const  ScoreValue   homeScore)  const;
 
 //========================================================================
 //
@@ -586,7 +632,7 @@ public:
     friend  class   ScoreDocumentTest;
 };
 
-}   //  End of namespace  Common
+}   //  End of namespace  Document
 SCORE4_CORE_NAMESPACE_END
 
 #endif

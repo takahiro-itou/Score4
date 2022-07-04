@@ -21,24 +21,24 @@
     <ClCompile Include="..\..\Core\Lib\Common\DateTimeFormat.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Core\Lib\Common\DocumentFile.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\Core\Lib\Common\ErrorDetectionCode.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Core\Lib\Common\ScoreDocument.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Core\Lib\Common\TextParser.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Core\Lib\Document\DocumentFile.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Core\Lib\Document\ScoreDocument.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Core\Lib\Downloader\HtmlDownloader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Core\Include\Score4Core\Common\DateTimeFormat.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Core\Include\Score4Core\Common\DocumentFile.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Core\Include\Score4Core\Common\ErrorDetectionCode.h">
@@ -50,7 +50,13 @@
     <ClInclude Include="..\..\Core\Include\Score4Core\Common\Score4Types.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Core\Include\Score4Core\Common\ScoreDocument.h">
+    <ClInclude Include="..\..\Core\Include\Score4Core\Document\DocumentFile.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Core\Include\Score4Core\Document\ScoreDocument.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Core\Include\Score4Core\Downloader\HtmlDownloader.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

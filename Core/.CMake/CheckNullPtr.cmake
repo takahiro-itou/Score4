@@ -1,7 +1,7 @@
 
 Include (CheckCXXSourceCompiles)
 
-Check_CXX_Source_Compiles (
+check_cxx_source_compiles(
    "int main () {
         void * p = nullptr;
         return ( 0 );
@@ -9,8 +9,8 @@ Check_CXX_Source_Compiles (
     CMAKE_CHECK_CXX_NULLPTR_ENABLED
 )
 If ( CMAKE_CHECK_CXX_NULLPTR_ENABLED )
-    Set (CONFIG_CHECK_CXX_NULLPTR_ENABLED  1)
+    set(CONFIG_CHECK_CXX_NULLPTR_ENABLED  1)
 Else()
-    Set (CONFIG_CHECK_CXX_NULLPTR_ENABLED  0)
+    set(CONFIG_CHECK_CXX_NULLPTR_ENABLED  0)
 EndIf()
 

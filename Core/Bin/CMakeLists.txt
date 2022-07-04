@@ -1,6 +1,6 @@
 
 Set (COMMONLIBS
-        ${PROJECT_NAME}-${LIBRARIES_TARGET_PREFIX}Common
+        ${PROJECT_NAME}-${LIBRARIES_TARGET_PREFIX}Document
 )
 
 Add_Executable        (ImportTool   ImportTool.cpp)

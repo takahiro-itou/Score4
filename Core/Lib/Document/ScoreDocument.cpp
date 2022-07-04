@@ -3,18 +3,22 @@
 **                                                                      **
 **                  ---  The Score4 Core Library.  ---                  **
 **                                                                      **
-**          Copyright (C), 2017-2018, Takahiro Itou                     **
+**          Copyright (C), 2017-2022, Takahiro Itou                     **
 **          All Rights Reserved.                                        **
+**                                                                      **
+**          License: (See COPYING and LICENSE files)                    **
+**          GNU General Public License (GPL) version 3,                 **
+**          or (at your option) any later version.                      **
 **                                                                      **
 *************************************************************************/
 
 /**
 **      An Implementation of ScoreDocument class.
 **
-**      @file       Common/ScoreDocument.cpp
+**      @file       Document/ScoreDocument.cpp
 **/
 
-#include    "Score4Core/Common/ScoreDocument.h"
+#include    "Score4Core/Document/ScoreDocument.h"
 
 #include    <memory.h>
 #include    <stdio.h>
@@ -22,17 +26,17 @@
 
 
 SCORE4_CORE_NAMESPACE_BEGIN
-namespace  Common  {
+namespace  Document  {
 
 namespace  {
 
 inline  void
 aggregateGotLostScoreValues(
-        const   TeamIndex   idxEnemy,
-        const   ScoreValue  svGot,
-        const   ScoreValue  svLost,
-        const   GameFilter  gType,
-        CountedScores     & trgCS)
+        const   TeamIndex       idxEnemy,
+        const   ScoreValue      svGot,
+        const   ScoreValue      svLost,
+        const   GameFilter      gType,
+        Common::CountedScores   & trgCS)
 {
     trgCS.vsGotScores .at(idxEnemy)[gType]  += svGot;
     trgCS.vsLostScores.at(idxEnemy)[gType]  += svLost;
@@ -50,8 +54,8 @@ aggregateHomeAway(
 
 inline  void
 aggregateRestGames(
-        const   RestGamesArray  & src,
-        RestGamesArray          & trg)
+        const   Common::RestGamesArray  & src,
+        Common::RestGamesArray          & trg)
 {
     trg[FILTER_HOME_GAMES]  += src[FILTER_HOME_GAMES];
     trg[FILTER_AWAY_GAMES]  += src[FILTER_AWAY_GAMES];
@@ -241,7 +245,7 @@ ScoreDocument::computeCurrentRank(
         }
         bufTeam[idxIns] = i;
         bufPerc[idxIns] = teamPercent;
-        ++  cntIns;
+        ++ cntIns;
     }   //  End For (i)
 
     //  同率タイに注意して順位を書き込む。  //
@@ -302,7 +306,7 @@ ScoreDocument::computeRankOrder(
             }
         }   //  End For (idxIns)
         bufIndex[idxIns]    = i;
-        ++  cntTeam;
+        ++ cntTeam;
     }   //  End For (i)
 
     //  別のリーグに所属するチームも配列の末尾に格納しておく。  //
@@ -310,7 +314,7 @@ ScoreDocument::computeRankOrder(
     for ( TeamIndex i = 0; i < numTeam; ++ i ) {
         if ( getTeamInfo(i).leagueID != idxLeague ) {
             bufIndex[idxIns]    = i;
-            ++  idxIns;
+            ++ idxIns;
         }
     }
 
@@ -356,25 +360,25 @@ ScoreDocument::countScores(
 
             //  得点を比較して勝敗を記録する。  //
             if ( src.homeScore < src.visitorScore ) {
-                ++  csHome.vsLost.at(idxAway)[FILTER_HOME_GAMES];
-                ++  csAway.vsWons.at(idxHome)[FILTER_AWAY_GAMES];
+                ++ csHome.vsLost.at(idxAway)[FILTER_HOME_GAMES];
+                ++ csAway.vsWons.at(idxHome)[FILTER_AWAY_GAMES];
             } else if ( src.homeScore > src.visitorScore ) {
-                ++  csHome.vsWons.at(idxAway)[FILTER_HOME_GAMES];
-                ++  csAway.vsLost.at(idxHome)[FILTER_AWAY_GAMES];
+                ++ csHome.vsWons.at(idxAway)[FILTER_HOME_GAMES];
+                ++ csAway.vsLost.at(idxHome)[FILTER_AWAY_GAMES];
             } else {
-                ++  csHome.vsDraw.at(idxAway)[FILTER_HOME_GAMES];
-                ++  csAway.vsDraw.at(idxHome)[FILTER_AWAY_GAMES];
+                ++ csHome.vsDraw.at(idxAway)[FILTER_HOME_GAMES];
+                ++ csAway.vsDraw.at(idxHome)[FILTER_AWAY_GAMES];
             }
 
             //  試合数を引く。  //
-            --  csHome.restGames.at(idxAway)[FILTER_HOME_GAMES];
-            --  csHome.restGames   [idxAway][FILTER_SCDL_HOMES];
-            --  csAway.restGames.at(idxHome)[FILTER_AWAY_GAMES];
-            --  csAway.restGames   [idxHome][FILTER_SCDL_AWAYS];
+            -- csHome.restGames.at(idxAway)[FILTER_HOME_GAMES];
+            -- csHome.restGames   [idxAway][FILTER_SCDL_HOMES];
+            -- csAway.restGames.at(idxHome)[FILTER_AWAY_GAMES];
+            -- csAway.restGames   [idxHome][FILTER_SCDL_AWAYS];
         } else if ( src.eGameFlags == GAME_SCHEDULE ) {
             //  スケジュール上のデータを集計する。  //
-            --  csHome.restGames.at(idxAway)[FILTER_SCDL_HOMES];
-            --  csAway.restGames.at(idxHome)[FILTER_SCDL_AWAYS];
+            -- csHome.restGames.at(idxAway)[FILTER_SCDL_HOMES];
+            -- csAway.restGames.at(idxHome)[FILTER_SCDL_AWAYS];
         }
     }
 
@@ -387,6 +391,39 @@ ScoreDocument::countScores(
     }
 
     return ( ERR_SUCCESS );
+}
+
+//----------------------------------------------------------------
+//    指定した日付の特定の対戦カードを検索する。
+//
+
+RecordIndex
+ScoreDocument::findGameRecord(
+        const  DateSerial   gameDate,
+        const  TeamIndex    homeTeam,
+        const  TeamIndex    visitorTeam,
+        const  RecordIndex  multiGame)  const
+{
+    RecordIndex     multiIndex  = 0;
+    const  RecordIndex  numRecords  = this->m_gameResults.size();
+    for ( RecordIndex i = 0; i < numRecords; ++ i ) {
+        const   GameResult  &gr = this->m_gameResults.at(i);
+        if ( gr.eGameFlags == GAME_EMPTY ) {
+            continue;
+        }
+        if ( gr.recordDate != gameDate ) {
+            continue;
+        }
+        if ( (gr.homeTeam == homeTeam) && (gr.visitorTeam == visitorTeam) ) {
+            if ( multiIndex >= multiGame ) {
+                return ( i );
+            }
+            ++ multiIndex;
+        }
+    }
+
+    //  見つからなかった。  //
+    return ( -1 );
 }
 
 //----------------------------------------------------------------
@@ -437,6 +474,40 @@ ScoreDocument::resizeTeamInfos(
 {
     this->m_teamInfos.resize(numTeam);
     return ( ERR_SUCCESS );
+}
+
+//----------------------------------------------------------------
+//    試合結果のレコードを比較する。
+//
+
+Boolean
+ScoreDocument::verifyRecord(
+        const  RecordIndex  recordIndex,
+        const  RecordFlag   eGameFlags,
+        const  DateSerial   gameDate,
+        const  TeamIndex    visitorTeam,
+        const  TeamIndex    homeTeam,
+        const  ScoreValue   visitorScore,
+        const  ScoreValue   homeScore)  const
+{
+    const   GameResult  &gr = this->m_gameResults.at(recordIndex);
+
+    if ( gr.eGameFlags != eGameFlags )  {
+        return ( BOOL_FALSE );
+    }
+    if ( gr.recordDate != gameDate ) {
+        return ( BOOL_FALSE );
+    }
+    if ( (gr.visitorTeam != visitorTeam) || (gr.homeTeam != homeTeam) )
+    {
+        return ( BOOL_FALSE );
+    }
+    if ( (gr.visitorScore != visitorScore) || (gr.homeScore != homeScore) )
+    {
+        return ( BOOL_FALSE );
+    }
+
+    return ( BOOL_TRUE );
 }
 
 //========================================================================
@@ -862,5 +933,5 @@ ScoreDocument::setGameCount(
     return ( ERR_SUCCESS );
 }
 
-}   //  End of namespace  Common
+}   //  End of namespace  Document
 SCORE4_CORE_NAMESPACE_END

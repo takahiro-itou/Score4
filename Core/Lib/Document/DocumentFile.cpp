@@ -3,22 +3,27 @@
 **                                                                      **
 **                  ---  The Score4 Core Library.  ---                  **
 **                                                                      **
-**          Copyright (C), 2017-2018, Takahiro Itou                     **
+**          Copyright (C), 2017-2020, Takahiro Itou                     **
 **          All Rights Reserved.                                        **
+**                                                                      **
+**          License: (See COPYING and LICENSE files)                    **
+**          GNU General Public License (GPL) version 3,                 **
+**          or (at your option) any later version.                      **
 **                                                                      **
 *************************************************************************/
 
 /**
 **      An Implementation of DocumentFile class.
 **
-**      @file       Common/DocumentFile.cpp
+**      @file       Document/DocumentFile.cpp
 **/
 
-#include    "Score4Core/Common/DocumentFile.h"
+#include    "Score4Core/Document/DocumentFile.h"
+
+#include    "Score4Core/Document/ScoreDocument.h"
 
 #include    "Score4Core/Common/DateTimeFormat.h"
 #include    "Score4Core/Common/ErrorDetectionCode.h"
-#include    "Score4Core/Common/ScoreDocument.h"
 #include    "Score4Core/Common/TextParser.h"
 
 #include    <fcntl.h>
@@ -42,7 +47,7 @@
 #define     HELPER_UNUSED_VARIABLE(var)     (void)(var)
 
 SCORE4_CORE_NAMESPACE_BEGIN
-namespace  Common  {
+namespace  Document  {
 
 namespace  {
 
@@ -155,7 +160,7 @@ DocumentFile::computeImageSize(
     cbTotal +=  bsInfo->bsSettings  =  192 + (sizeLeague) + (sizeTeams);
     cbTotal +=  bsInfo->bsRecords
             =   (bsInfo->cbRecsHead) + (bsInfo->cbRecsBody);
-    cbTotal +=  ErrorDetectionCode::CRC32_CODE_LENGTH;
+    cbTotal +=  Common::ErrorDetectionCode::CRC32_CODE_LENGTH;
     bsInfo->bsFileSize  =  cbTotal;
 
     return ( cbTotal );
@@ -199,6 +204,8 @@ DocumentFile::readFromBinaryBuffer(
         const   FileLength  cbBuf,
         ScoreDocument  *    ptrDoc)
 {
+    typedef     Common::ErrorDetectionCode      ErrorDetectionCode;
+
     ErrCode         retErr;
     FileHeader      fileHead;
     ExtraHeader     extHead;
@@ -310,6 +317,8 @@ DocumentFile::readFromTextStream(
         std::istream     &  inStr,
         ScoreDocument  *    ptrDoc)
 {
+    typedef     Common::DateTimeFormat          DateTimeFormat;
+    typedef     Common::TextParser              TextParser;
     typedef     std::vector<GameCountList>      GameCountBuffer;
 
     std::string             strLine;
@@ -425,6 +434,8 @@ DocumentFile::readRecordFromTextStream(
         std::istream          & inStr,
         GameResultList        & outRec)
 {
+    typedef     Common::TextParser      TextParser;
+
     std::string             strLine;
     TextParser::TextBuffer  bufText;
     TextParser::TokenArray  vTokens;
@@ -482,7 +493,7 @@ DocumentFile::readRecordFromTextStream(
             return ( retErr );
         }
 
-        gameRecord.recordDate   = DateTimeFormat::getSerialFromDate(
+        gameRecord.recordDate   = Common::DateTimeFormat::getSerialFromDate(
                 dtYear, dtMonth, dtDay);
 
         gameRecord.visitorTeam  = objDoc.findTeamInfo(vTokens[4]);
@@ -507,6 +518,8 @@ DocumentFile::saveToBinaryBuffer(
         LpWriteBuf  const       outBuf,
         const   FileLength      cbBuf)
 {
+    typedef     Common::ErrorDetectionCode      ErrorDetectionCode;
+
     BlockSizeInfo   tmpBsInfo;
     ErrCode         retErr;
     FileHeader      fileHeader;
@@ -621,6 +634,8 @@ DocumentFile::saveToTextStream(
         const  ScoreDocument  & objDoc,
         std::ostream          & outStr)
 {
+    typedef     Common::DateTimeFormat      DateTimeFormat;
+
     const  LeagueIndex  numLeagues  =  objDoc.getNumLeagues();
     const  TeamIndex    numTeams    =  objDoc.getNumTeams();
     const  RecordIndex  numRecords  =  objDoc.getNumRecords();
@@ -642,9 +657,9 @@ DocumentFile::saveToTextStream(
         outStr  <<  "\nTeam,"   <<  i   <<  ','
                 <<  teamInfo.leagueID   <<  ','
                 <<  teamInfo.teamName;
-        for ( Common::TeamIndex j = 0; j < numTeams; ++ j ) {
+        for ( TeamIndex j = 0; j < numTeams; ++ j ) {
             outStr  <<  ','
-                    <<  objDoc.getGameCount(i, j, Common::FILTER_HOME_GAMES);
+                    <<  objDoc.getGameCount(i, j, FILTER_HOME_GAMES);
         }
     }
     outStr  <<  std::endl;
@@ -1053,5 +1068,5 @@ DocumentFile::writeSettingBlock(
     return ( ERR_SUCCESS );
 }
 
-}   //  End of namespace  Common
+}   //  End of namespace  Document
 SCORE4_CORE_NAMESPACE_END

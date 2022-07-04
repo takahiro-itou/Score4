@@ -9,37 +9,38 @@
 ##    要求するツールのバージョンを指定する。
 ##
 
-CMake_Minimum_Required (VERSION  3.0.2)
+cmake_minimum_required(VERSION  3.0.2)
 
 ##
 ##    パッケージの情報を指定する。
 ##
 
-Set     (PROJECT_NAME      Score4Core)
-Set     (serial            "0.0.0")
+set(PROJECT_NAME        Score4Core)
+set(serial              "0.0.0")
 
-Project (${PROJECT_NAME}   VERSION  1.0.0)
+project(${PROJECT_NAME}     VERSION  1.0.0)
 
 ##----------------------------------------------------------------
 ##
 ##    プロジェクトの基本設定。
 ##
 
-Enable_Testing ()
+enable_testing ()
 
-Set (COMMON_CMAKE_DIR      "${PROJECT_SOURCE_DIR}/.CMake")
-Set (INCTOP_DIR_NAME       "Include")
-Set (LIBTOP_DIR_NAME       "Lib")
-Set (INCPKG_DIR_NAME       "${PROJECT_NAME}")
-Set (PACKAGE_INCLUDE_DIR   "${INCTOP_DIR_NAME}/${INCPKG_DIR_NAME}")
+set(COMMON_CMAKE_DIR        "${PROJECT_SOURCE_DIR}/.CMake")
+set(INCTOP_DIR_NAME         "Include")
+set(BINTOP_DIR_NAME         "Bin")
+set(LIBTOP_DIR_NAME         "Lib")
+set(INCPKG_DIR_NAME         "${PROJECT_NAME}")
+set(PACKAGE_INCLUDE_DIR     "${INCTOP_DIR_NAME}/${INCPKG_DIR_NAME}")
 
-Set (INCTOP_SOURCE_DIR     "${PROJECT_SOURCE_DIR}/${INCTOP_DIR_NAME}")
-Set (INCTOP_BINARY_DIR     "${PROJECT_BINARY_DIR}/${INCTOP_DIR_NAME}")
-Set (LIBTOP_SOURCE_DIR     "${PROJECT_SOURCE_DIR}/${LIBTOP_DIR_NAME}")
-Set (LIBTOP_BINARY_DIR     "${PROJECT_BINARY_DIR}/${LIBTOP_DIR_NAME}")
+set(INCTOP_SOURCE_DIR       "${PROJECT_SOURCE_DIR}/${INCTOP_DIR_NAME}")
+set(INCTOP_BINARY_DIR       "${PROJECT_BINARY_DIR}/${INCTOP_DIR_NAME}")
+set(LIBTOP_SOURCE_DIR       "${PROJECT_SOURCE_DIR}/${LIBTOP_DIR_NAME}")
+set(LIBTOP_BINARY_DIR       "${PROJECT_BINARY_DIR}/${LIBTOP_DIR_NAME}")
 
-Set (INCLUDE_SOURCE_DIR    "${INCTOP_SOURCE_DIR}/${INCPKG_DIR_NAME}")
-Set (INCLUDE_BINARY_DIR    "${INCTOP_BINARY_DIR}/${INCPKG_DIR_NAME}")
+set(INCLUDE_SOURCE_DIR      "${INCTOP_SOURCE_DIR}/${INCPKG_DIR_NAME}")
+set(INCLUDE_BINARY_DIR      "${INCTOP_BINARY_DIR}/${INCPKG_DIR_NAME}")
 
 ##----------------------------------------------------------------
 ##
@@ -56,15 +57,15 @@ Include (${COMMON_CMAKE_DIR}/CheckOverride.cmake)
 ##    Project Name Space.
 ##
 
-Set (SCORE4CORE_CNF_NAMESPACE   Score4Core)
+set(SCORE4CORE_CNF_NAMESPACE    Score4Core)
 
 ##----------------------------------------------------------------
 ##
 ##    インクルードパスの設定。
 ##
 
-Include_Directories ("${PROJECT_SOURCE_DIR}/Include")
-Include_Directories ("${PROJECT_BINARY_DIR}/Include")
+include_directories("${PROJECT_SOURCE_DIR}/Include")
+include_directories("${PROJECT_BINARY_DIR}/Include")
 
 ##----------------------------------------------------------------
 ##
@@ -72,19 +73,23 @@ Include_Directories ("${PROJECT_BINARY_DIR}/Include")
 ##    外部ライブラリ。
 ##
 
-Include (${COMMON_CMAKE_DIR}/FindCppUnit.cmake)
+set(CMAKE_MODULE_PATH
+    ${CMAKE_MODULE_PATH}  ${COMMON_CMAKE_DIR}/Modules
+)
+
+Find_Package (CppUnit)
 
 ##----------------------------------------------------------------
 ##
 ##    設定を書き込んだファイルを生成。
 ##
 
-Configure_File (
+configure_file(
     "${INCLUDE_SOURCE_DIR}/.Config/ConfiguredScore4Core.h.in"
     "${INCLUDE_BINARY_DIR}/.Config/ConfiguredScore4Core.h"
 )
 
-Configure_File (
+configure_file(
     "${INCLUDE_SOURCE_DIR}/.Config/Config.h.cmake.in"
     "${INCLUDE_BINARY_DIR}/.Config/.${PROJECT_NAME}.Config.h"
 )
@@ -94,13 +99,13 @@ Configure_File (
 ##    パッケージコンフィグレーション。
 ##
 
-Configure_File (
+configure_file(
     "${CMAKE_CURRENT_SOURCE_DIR}/${PROJECT_NAME}Config.cmake.in"
     "${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}Config.cmake"
     @ONLY
 )
 
-Install (FILES  "${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}Config.cmake"
+install(FILES   "${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}Config.cmake"
         DESTINATION  .
 )
 
@@ -109,6 +114,5 @@ Install (FILES  "${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}Config.cmake"
 ##    サブディレクトリの追加。
 ##
 
-Add_SubDirectory (Lib)
-Add_SubDirectory (Bin)
-
+add_subdirectory(Lib)
+add_subdirectory(Bin)

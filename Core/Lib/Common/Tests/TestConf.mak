@@ -6,16 +6,16 @@
 EXTRATESTS              =
 TESTS                   =  \
         DateTimeFormatTest      \
-        DocumentFileTest        \
         ErrorDetectionCodeTest  \
+        ProcessManagerTest      \
+        ProgressCallbackTest    \
         Score4CoreSettingsTest  \
-        ScoreDocumentTest       \
         ${EXTRATESTS}
 ##
 ##    Test Configurations.
 ##
 
-TARGET_TESTEE_LIBRARY       +=  ../libscore4Common.a
+TARGET_TESTEE_LIBRARY       +=  -lscore4Common
 
 DIST_NOINST_DATA_FILES      +=
 DIST_NOINST_HEADER_FILES    +=
@@ -35,8 +35,8 @@ TEST_LDFLAGS_COMMON         +=
 ##
 
 DateTimeFormatTest_SOURCES      =  DateTimeFormatTest.cpp
-DocumentFileTest_SOURCES        =  DocumentFileTest.cpp
 ErrorDetectionCodeTest_SOURCES  =  ErrorDetectionCodeTest.cpp
+ProcessManagerTest_SOURCES      =  ProcessManagerTest.cpp
+ProgressCallbackTest_SOURCES    =  ProgressCallbackTest.cpp
 Score4CoreSettingsTest_SOURCES  =  Score4CoreSettingsTest.cpp
-ScoreDocumentTest_SOURCES       =  ScoreDocumentTest.cpp
 

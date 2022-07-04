@@ -13,7 +13,7 @@
     Private m_flagModified As Boolean
     Private m_lastFileName As String
 
-    Private m_scoreData As Score4Wrapper.Common.ScoreDocument
+    Private m_scoreData As Score4Wrapper.Document.ScoreDocument
 
     Private m_currentLeague As Integer
     Private m_currentDate As System.DateTime
@@ -74,12 +74,12 @@
     ''    ファイルを開いてデータを読み込む。
     ''================================================================================
     Private Function openScoreData(ByVal fileName As String) As Boolean
-        Dim retVal As Score4Wrapper.Common.ErrCode
+        Dim retVal As Score4Wrapper.ErrCode
         Dim msgAns As System.Windows.Forms.DialogResult
 
         Do
-            retVal = Score4Wrapper.Common.DocumentFile.readFromBinaryFile(fileName, Me.m_scoreData)
-            If retVal = Score4Wrapper.Common.ErrCode.ERR_SUCCESS Then
+            retVal = Score4Wrapper.Document.DocumentFile.readFromBinaryFile(fileName, Me.m_scoreData)
+            If retVal = Score4Wrapper.ErrCode.ERR_SUCCESS Then
                 Exit Do
             End If
 
@@ -88,7 +88,7 @@
             If (msgAns = vbNo) Then
                 Return False
             End If
-        Loop Until (retVal = Score4Wrapper.Common.ErrCode.ERR_SUCCESS)
+        Loop Until (retVal = Score4Wrapper.ErrCode.ERR_SUCCESS)
 
         ' 表示内容を最新の情報に更新する。
         m_flagModified = False
@@ -143,12 +143,12 @@
     ''    データをファイルに保存する。
     ''================================================================================
     Private Function saveScoreData(ByVal fileName As String) As Boolean
-        Dim retVal As Score4Wrapper.Common.ErrCode
+        Dim retVal As Score4Wrapper.ErrCode
         Dim msgAns As System.Windows.Forms.DialogResult
 
         Do
-            retVal = Score4Wrapper.Common.DocumentFile.saveToBinaryFile(Me.m_scoreData, fileName)
-            If retVal = Score4Wrapper.Common.ErrCode.ERR_SUCCESS Then
+            retVal = Score4Wrapper.Document.DocumentFile.saveToBinaryFile(Me.m_scoreData, fileName)
+            If retVal = Score4Wrapper.ErrCode.ERR_SUCCESS Then
                 Exit Do
             End If
 
@@ -157,7 +157,7 @@
             If (msgAns = vbNo) Then
                 Return False
             End If
-        Loop Until (retVal = Score4Wrapper.Common.ErrCode.ERR_SUCCESS)
+        Loop Until (retVal = Score4Wrapper.ErrCode.ERR_SUCCESS)
 
         m_flagModified = False
         updateScoreView()
@@ -360,7 +360,7 @@
     End Sub
 
     Private Sub MainView_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        m_scoreData = New Score4Wrapper.Common.ScoreDocument
+        m_scoreData = New Score4Wrapper.Document.ScoreDocument
         m_appPath = GetAppPath()
         m_iniFileName = m_appPath & "\Score.ini"
         moveWindowToStartPosition()

@@ -3,7 +3,7 @@
 ##    List of Directories.
 ##
 
-SUBLIBS                 =  Common
+SUBLIBS                 =  Common  Downloader  Document
 
 SUBDIRS                 =  Tests  .Config  $(SUBLIBS)  .
 
