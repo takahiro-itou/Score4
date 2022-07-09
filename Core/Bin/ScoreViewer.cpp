@@ -49,6 +49,30 @@ void  writeCountedScores(
     outStr  <<  std::endl;
 }
 
+void  writeGameCountTable(
+        const  Document::ScoreDocument  & scoreData,
+        std::ostream                    & outStr)
+{
+    const   TeamIndex  numTeam  = scoreData.getNumTeams();
+    for ( int i = 0; i < numTeam; ++ i ) {
+        const   Document::ScoreDocument::TeamInfo   &
+            teamInfo    = scoreData.getTeamInfo(i);
+        outStr  <<  "Team[" <<  i   <<  "] "
+                <<  teamInfo.teamName   <<  "\t:";
+        for ( int j = 0; j < numTeam; ++ j ) {
+            outStr  <<  teamInfo.gameCounts.at(j)[FILTER_AWAY_GAMES]
+                    <<  ", ";
+        }
+        outStr  <<  std::endl;
+    }
+}
+
+void  writeRestGameTable(
+        const   TeamIndex               numTeam,
+        const   Common::CountedScores   & cs,
+        std::ostream                    & outStr)
+{
+}
 
 int  main(int argc, char * argv[])
 {
@@ -90,6 +114,8 @@ int  main(int argc, char * argv[])
             writeCountedScores(cs[idxTrg], std::cerr);
         }
     }
+
+    writeGameCountTable(objDoc, std::cerr);
 
     retErr  = docFile.saveToBinaryFile(objDoc, "dummy.bin");
     if ( retErr != ERR_SUCCESS ) {
