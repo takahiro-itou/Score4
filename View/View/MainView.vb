@@ -231,6 +231,7 @@ Private Sub updateTables(
 
     Me.m_scoreData.countScores(trgLastDate)
     ScoreView.displayScoreTableToGrid(idxLeague, modeMagic, Me.m_scoreData, Me.grdScore)
+    ScoreView.displayRestGameTableToGrid(idxLeague, Me.m_scoreData, Me.grdExtra)
 
     lblDate.Text = trgLastDate
 End Sub

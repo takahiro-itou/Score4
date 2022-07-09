@@ -15,6 +15,7 @@ Public Sub displayRestGameTableToGrid(
     ReDim bufShowIndex(0 To scoreData.getNumTeams() - 1)
     numShowCount = scoreData.computeRankOrder(leagueIndex, bufShowIndex)
 
+    makeTeamListOnGridViewHeader(numShowCount, bufShowIndex, scoreData, objTable)
 End Sub
 
 ''========================================================================
@@ -80,6 +81,79 @@ Public Sub displayScoreTableToGrid(
                 strPerc
             )
         Next
+    End With
+
+End Sub
+
+''========================================================================
+''    指定されたグリッドビューに残り試合のテーブルを表示する
+''========================================================================
+
+Private Function makeGridViewColumn(
+        ByVal colName As String,
+        ByVal colText As String) As System.Windows.Forms.DataGridViewColumn
+
+
+    Dim textColumn As DataGridViewTextBoxColumn = New DataGridViewTextBoxColumn()
+    With textColumn
+        .AutoSizeMode = False
+        .Name = colName
+        .HeaderText = colText
+        .Visible = True
+        .Width = 64
+        .ReadOnly = True
+        .Resizable = DataGridViewTriState.False
+    End With
+    makeGridViewColumn = textColumn
+
+End Function
+
+''========================================================================
+''    グリッドビューのヘッダ列にチーム名のリストをセットする。
+''========================================================================
+Private Sub makeTeamListOnGridViewHeader(
+        ByVal numShowCount As Integer,
+        ByRef bufShowIndex() As Integer,
+        ByRef scoreData As Score4Wrapper.Document.ScoreDocument,
+        ByRef objTable As System.Windows.Forms.DataGridView)
+
+    Dim i As Integer
+    Dim idxTeam As Integer
+    Dim colName As String
+    Dim colText As String
+    Dim textColumn As DataGridViewTextBoxColumn
+
+    Dim numTeams As Integer = scoreData.getNumTeams()
+
+    With objTable
+        With .Columns
+            .Clear()
+
+            textColumn = makeGridViewColumn("total", "Total")
+            .Add(textColumn)
+
+            For i = 0 To numShowCount - 1
+                idxTeam = bufShowIndex(i)
+                colName = "team" & idxTeam
+                colText = scoreData.teamInfo(idxTeam).teamName
+                textColumn = makeGridViewColumn(colName, colText)
+                .Add(textColumn)
+            Next i
+
+            textColumn = makeGridViewColumn("league", "League")
+            .Add(textColumn)
+
+            For i = numShowCount To numTeams - 1
+                idxTeam = bufShowIndex(i)
+                colName = "team" & idxTeam
+                colText = scoreData.teamInfo(idxTeam).teamName
+                textColumn = makeGridViewColumn(colName, colText)
+                .Add(textColumn)
+            Next i
+
+            textColumn = makeGridViewColumn("inter", "Inter.")
+            .Add(textColumn)
+        End With
     End With
 
 End Sub
