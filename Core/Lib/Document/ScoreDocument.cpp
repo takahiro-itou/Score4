@@ -826,7 +826,7 @@ ScoreDocument::clearCountedScoresList(
             }   //  End For (gt)
 
             trgCS.restGames.at(j)[FILTER_ALL_GAMES] = 0;
-            trgCS.restGames.at(j)[FILTER_SCHEDULE]  = 0;
+            trgCS.restGames.at(j)[FILTER_SCDL_ALLS] = 0;
         }   //  End For (j)
     }
 
