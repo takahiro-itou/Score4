@@ -5,17 +5,77 @@
 ''========================================================================
 Public Sub displayRestGameTableToGrid(
         ByVal leagueIndex As Integer,
+        ByVal scheduleFilter As Score4Wrapper.GameFilter,
+        ByVal gameType As Score4Wrapper.GameFilter,
         ByRef scoreData As Score4Wrapper.Document.ScoreDocument,
         ByRef objTable As System.Windows.Forms.DataGridView)
 
     Dim i As Integer
     Dim bufShowIndex() As Integer
     Dim numShowCount As Integer
+    Dim numTeams As Integer
 
-    ReDim bufShowIndex(0 To scoreData.getNumTeams() - 1)
+    ' 引数をマスクする
+    Dim gameFilter As Score4Wrapper.GameFilter
+    gameFilter = (scheduleFilter And Score4Wrapper.GameFilter.FILTER_SCHEDULE)
+    gameFilter = (gameType Or gameFilter)
+
+    numTeams = scoreData.getNumTeams()
+    ReDim bufShowIndex(0 To numTeams - 1)
     numShowCount = scoreData.computeRankOrder(leagueIndex, bufShowIndex)
 
     makeTeamListOnGridViewHeader(numShowCount, bufShowIndex, scoreData, objTable)
+
+    Dim colLeagueTotal As Integer = numShowCount + 2
+    Dim colInterTotal As Integer = numTeams + 3
+
+    With objTable
+        .Rows.Clear()
+        For i = 0 To numShowCount - 1
+            Dim idxTeam As Integer = bufShowIndex(i)
+            Dim teamInfo As Score4Wrapper.Common.TeamInfo
+            Dim scoreInfo As Score4Wrapper.Common.CountedScores
+
+            teamInfo = scoreData.teamInfo(idxTeam)
+            scoreInfo = scoreData.scoreInfo(idxTeam)
+
+            Dim restTotal As Integer
+            Dim restLeague As Integer
+            Dim restInter As Integer
+            Dim targetTeam As Integer
+
+            With scoreInfo
+                restTotal = .numTotalRestGames(gameFilter)
+                restLeague = .numLeagueRestGames(gameFilter)
+                restInter = .numInterRestGames(gameFilter)
+            End With
+
+            .Rows.Add(
+                teamInfo.teamName,
+                restTotal
+            )
+            With .Rows(i)
+                ' 所属リーグ内の残り試合。対戦相手毎の試合数
+                For j = 0 To numShowCount - 1
+                    targetTeam = bufShowIndex(j)
+                    .Cells(j + 2).Value = scoreInfo.restGames(j, gameFilter)
+                Next j
+
+                ' 所属リーグ内の残り試合の合計
+                .Cells(colLeagueTotal).Value = restLeague
+
+                ' 交流戦の残り試合。対戦相手毎の試合数
+                For j = numShowCount To numTeams - 1
+                    targetTeam = bufShowIndex(j)
+                    .Cells(j + 3).Value = scoreInfo.restGames(j, gameFilter)
+                Next j
+
+                ' 交流戦の残り試合の合計
+                .Cells(colInterTotal).Value = restInter
+            End With
+
+        Next
+    End With
 End Sub
 
 ''========================================================================
@@ -128,6 +188,9 @@ Private Sub makeTeamListOnGridViewHeader(
     With objTable
         With .Columns
             .Clear()
+
+            textColumn = makeGridViewColumn("team", "Team")
+            .Add(textColumn)
 
             textColumn = makeGridViewColumn("total", "Total")
             .Add(textColumn)

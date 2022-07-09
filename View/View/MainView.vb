@@ -230,8 +230,13 @@ Private Sub updateTables(
     m_flagSchedule = modeSchedule
 
     Me.m_scoreData.countScores(trgLastDate)
-    ScoreView.displayScoreTableToGrid(idxLeague, modeMagic, Me.m_scoreData, Me.grdScore)
-    ScoreView.displayRestGameTableToGrid(idxLeague, Me.m_scoreData, Me.grdExtra)
+    ScoreView.displayScoreTableToGrid(
+            idxLeague, modeMagic, Me.m_scoreData, Me.grdScore)
+    ScoreView.displayRestGameTableToGrid(idxLeague,
+            Score4Wrapper.GameFilter.FILTER_ALL_GAMES,
+            Score4Wrapper.GameFilter.FILTER_SCHEDULE,
+            Me.m_scoreData, Me.grdExtra
+    )
 
     lblDate.Text = trgLastDate
 End Sub
