@@ -232,9 +232,10 @@ Private Sub updateTables(
     Me.m_scoreData.countScores(trgLastDate)
     ScoreView.displayScoreTableToGrid(
             idxLeague, modeMagic, Me.m_scoreData, Me.grdScore)
-    ScoreView.displayRestGameTableToGrid(idxLeague,
-            Score4Wrapper.GameFilter.FILTER_ALL_GAMES,
+    ScoreView.displayRestGameTableToGrid(
+            idxLeague,
             Score4Wrapper.GameFilter.FILTER_SCHEDULE,
+            Score4Wrapper.GameFilter.FILTER_ALL_GAMES,
             Me.m_scoreData, Me.grdExtra
     )
 
