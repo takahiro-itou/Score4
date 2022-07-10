@@ -49,6 +49,37 @@ void  writeCountedScores(
     outStr  <<  std::endl;
 }
 
+void  writeGameCountTable(
+        const  Document::ScoreDocument  & scoreData,
+        std::ostream                    & outStr)
+{
+    const   TeamIndex  numTeam  = scoreData.getNumTeams();
+    for ( int i = 0; i < numTeam; ++ i ) {
+        const   Document::ScoreDocument::TeamInfo   &
+            teamInfo    = scoreData.getTeamInfo(i);
+        outStr  <<  "Team[" <<  i   <<  "] "
+                <<  teamInfo.teamName   <<  "\t:";
+        for ( int j = 0; j < numTeam; ++ j ) {
+            outStr  <<  teamInfo.gameCounts.at(j)[FILTER_ALL_GAMES]
+                    <<  ", ";
+        }
+        outStr  <<  std::endl;
+    }
+}
+
+void  writeRestGameTable(
+        const   TeamIndex               numTeam,
+        const   Common::CountedScores   & cs,
+        std::ostream                    & outStr)
+{
+    for ( int j = 0; j < numTeam; ++ j ) {
+        outStr  <<  (cs.restGames.at(j)[FILTER_ALL_GAMES])
+                <<  " (H: " <<  (cs.restGames[j][FILTER_HOME_GAMES])
+                <<  ", A: " <<  (cs.restGames[j][FILTER_AWAY_GAMES])
+                <<  "), ";
+    }
+    outStr  <<  std::endl;
+}
 
 int  main(int argc, char * argv[])
 {
@@ -88,8 +119,12 @@ int  main(int argc, char * argv[])
                         <<  objDoc.getTeamInfo(idxTrg).teamName
                         <<  std::endl;
             writeCountedScores(cs[idxTrg], std::cerr);
+            writeRestGameTable(
+                    objDoc.getNumTeams(), cs[idxTrg], std::cerr);
         }
     }
+
+    writeGameCountTable(objDoc, std::cerr);
 
     retErr  = docFile.saveToBinaryFile(objDoc, "dummy.bin");
     if ( retErr != ERR_SUCCESS ) {

@@ -1,68 +1,237 @@
 ﻿Module ScoreView
 
-    ''================================================================================
-    ''    データの内容をグリッドビューに表示する。
-    ''================================================================================
-    Public Sub displayScoreTableToGrid(
-                ByVal leagueIndex As Integer,
-                ByVal magicMode As Integer,
-                ByRef scoreData As Score4Wrapper.Document.ScoreDocument,
-                ByRef objTable As System.Windows.Forms.DataGridView)
+''========================================================================
+''    指定されたグリッドビューに残り試合のテーブルを表示する
+''========================================================================
+Public Sub displayRestGameTableToGrid(
+        ByVal leagueIndex As Integer,
+        ByVal scheduleFilter As Score4Wrapper.GameFilter,
+        ByVal gameType As Score4Wrapper.GameFilter,
+        ByRef scoreData As Score4Wrapper.Document.ScoreDocument,
+        ByRef objTable As System.Windows.Forms.DataGridView)
 
-        Dim i As Integer
-        Dim bufShowIndex() As Integer
-        Dim numShowCount As Integer
-        Dim topDiff As Integer
+    Dim i As Integer
+    Dim bufShowIndex() As Integer
+    Dim numShowCount As Integer
+    Dim numTeams As Integer
 
-        ReDim bufShowIndex(0 To scoreData.getNumTeams() - 1)
-        numShowCount = scoreData.computeRankOrder(leagueIndex, bufShowIndex)
+    ' 引数をマスクする
+    Dim gameFilter As Score4Wrapper.GameFilter
+    gameFilter = (scheduleFilter And Score4Wrapper.GameFilter.FILTER_SCHEDULE)
+    gameFilter = (gameType Or gameFilter)
 
-        With objTable
-            .Rows.Clear()
+    numTeams = scoreData.getNumTeams()
+    ReDim bufShowIndex(0 To numTeams - 1)
+    numShowCount = scoreData.computeRankOrder(leagueIndex, bufShowIndex)
+
+    makeTeamListOnGridViewHeader(numShowCount, bufShowIndex, scoreData, objTable)
+
+    Const colTotalAll As Integer = 1
+    Dim colLeagueTotal As Integer = numShowCount + 2
+    Dim colInterTotal As Integer = numTeams + 3
+
+    With objTable
+        .Rows.Clear()
+        For i = 0 To numShowCount - 1
+            Dim idxTeam As Integer = bufShowIndex(i)
+            Dim teamInfo As Score4Wrapper.Common.TeamInfo
+            Dim scoreInfo As Score4Wrapper.Common.CountedScores
+
+            teamInfo = scoreData.teamInfo(idxTeam)
+            scoreInfo = scoreData.scoreInfo(idxTeam)
+
+            Dim restTotal As Integer
+            Dim restLeague As Integer
+            Dim restInter As Integer
+            Dim targetTeam As Integer
+
+            With scoreInfo
+                restTotal = .numTotalRestGames(gameFilter)
+                restLeague = .numLeagueRestGames(gameFilter)
+                restInter = .numInterRestGames(gameFilter)
+            End With
+
+            .Rows.Add(
+                teamInfo.teamName,
+                restTotal
+            )
+
+            With .Rows(i)
+                .Cells(colTotalAll).Style.BackColor = Color.FromArgb(0, 255, 0)
+
+                ' 所属リーグ内の残り試合。対戦相手毎の試合数
+                For j = 0 To numShowCount - 1
+                    targetTeam = bufShowIndex(j)
+                    .Cells(j + 2).Value = scoreInfo.restGames(targetTeam, gameFilter)
+                Next j
+
+                ' 所属リーグ内の残り試合の合計
+                .Cells(colLeagueTotal).Value = restLeague
+                .Cells(colLeagueTotal).Style.BackColor = Color.FromArgb(0, 255, 0)
+
+                ' 交流戦の残り試合。対戦相手毎の試合数
+                For j = numShowCount To numTeams - 1
+                    targetTeam = bufShowIndex(j)
+                    .Cells(j + 3).Value = scoreInfo.restGames(targetTeam, gameFilter)
+                Next j
+
+                ' 交流戦の残り試合の合計
+                .Cells(colInterTotal).Value = restInter
+                .Cells(colInterTotal).Style.BackColor = Color.FromArgb(0, 255, 0)
+            End With
+
+        Next
+    End With
+End Sub
+
+''========================================================================
+''    データの内容をグリッドビューに表示する。
+''========================================================================
+Public Sub displayScoreTableToGrid(
+        ByVal leagueIndex As Integer,
+        ByVal magicMode As Integer,
+        ByRef scoreData As Score4Wrapper.Document.ScoreDocument,
+        ByRef objTable As System.Windows.Forms.DataGridView)
+
+    Dim i As Integer
+    Dim bufShowIndex() As Integer
+    Dim numShowCount As Integer
+    Dim topDiff As Integer
+
+    ReDim bufShowIndex(0 To scoreData.getNumTeams() - 1)
+    numShowCount = scoreData.computeRankOrder(leagueIndex, bufShowIndex)
+
+    With objTable
+        .Rows.Clear()
+        For i = 0 To numShowCount - 1
+            Dim idxTeam As Integer = bufShowIndex(i)
+            Dim teamInfo As Score4Wrapper.Common.TeamInfo
+            Dim scoreInfo As Score4Wrapper.Common.CountedScores
+
+            teamInfo = scoreData.teamInfo(idxTeam)
+            scoreInfo = scoreData.scoreInfo(idxTeam)
+
+            Dim numWons As Integer = scoreInfo.numWons(2)
+            Dim numLost As Integer = scoreInfo.numLost(2)
+            Dim numDraw As Integer = scoreInfo.numDraw(2)
+            Dim strDiff As String
+            Dim strPerc As String
+
+            ' ゲーム差
+            Dim curDiff As Integer = numWons - numLost
+            If (i = 0) Then
+                topDiff = curDiff
+                strDiff = "---"
+            ElseIf (curDiff = topDiff) Then
+                strDiff = "---"
+            Else
+                strDiff = Format((topDiff - curDiff) / 2, "#0.0")
+            End If
+
+            ' 勝率
+            Dim numGame As Integer = scoreInfo.numGames(2)
+            Dim wpDenom As Integer = numGame - numDraw
+            If (wpDenom = 0) Then
+                strPerc = "---"
+            Else
+                strPerc = Format(numWons / wpDenom, "#.000")
+            End If
+
+            .Rows.Add(
+                teamInfo.teamName,
+                numGame,
+                numWons,
+                numLost,
+                numDraw,
+                strDiff,
+                strPerc
+            )
+        Next
+    End With
+
+End Sub
+
+''========================================================================
+''    指定されたグリッドビューに残り試合のテーブルを表示する
+''========================================================================
+
+Private Function makeGridViewColumn(
+        ByVal colName As String,
+        ByVal colText As String) As System.Windows.Forms.DataGridViewColumn
+
+
+    Dim textColumn As DataGridViewTextBoxColumn = New DataGridViewTextBoxColumn()
+    With textColumn
+        .AutoSizeMode = False
+        .HeaderText = colText
+        .Name = colName
+        .ReadOnly = True
+        .Resizable = DataGridViewTriState.False
+        .SortMode = DataGridViewColumnSortMode.NotSortable
+        .Visible = True
+        .Width = 64
+    End With
+    makeGridViewColumn = textColumn
+
+End Function
+
+''========================================================================
+''    グリッドビューのヘッダ列にチーム名のリストをセットする。
+''========================================================================
+Private Sub makeTeamListOnGridViewHeader(
+        ByVal numShowCount As Integer,
+        ByRef bufShowIndex() As Integer,
+        ByRef scoreData As Score4Wrapper.Document.ScoreDocument,
+        ByRef objTable As System.Windows.Forms.DataGridView)
+
+    Dim i As Integer
+    Dim idxTeam As Integer
+    Dim colName As String
+    Dim colText As String
+    Dim textColumn As DataGridViewTextBoxColumn
+
+    Dim numTeams As Integer = scoreData.getNumTeams()
+
+    With objTable
+        With .Columns
+            .Clear()
+
+            textColumn = makeGridViewColumn("team", "Team")
+            .Add(textColumn)
+
+            textColumn = makeGridViewColumn("total", "Total")
+            textColumn.DefaultCellStyle.BackColor = Color.FromArgb(0, 255, 0)
+            textColumn.HeaderCell.Style.BackColor = Color.FromArgb(0, 255, 0)
+            .Add(textColumn)
+
             For i = 0 To numShowCount - 1
-                Dim idxTeam As Integer = bufShowIndex(i)
-                Dim teamInfo As Score4Wrapper.Common.TeamInfo
-                Dim scoreInfo As Score4Wrapper.Common.CountedScores
+                idxTeam = bufShowIndex(i)
+                colName = "team" & idxTeam
+                colText = scoreData.teamInfo(idxTeam).teamName
+                textColumn = makeGridViewColumn(colName, colText)
+                .Add(textColumn)
+            Next i
 
-                teamInfo = scoreData.teamInfo(idxTeam)
-                scoreInfo = scoreData.scoreInfo(idxTeam)
+            textColumn = makeGridViewColumn("league", "League")
+            textColumn.DefaultCellStyle.BackColor = Color.FromArgb(0, 255, 0)
+            textColumn.HeaderCell.Style.BackColor = Color.FromArgb(0, 255, 0)
+            .Add(textColumn)
 
-                Dim numWons As Integer = scoreInfo.numWons(2)
-                Dim numLost As Integer = scoreInfo.numLost(2)
-                Dim numDraw As Integer = scoreInfo.numDraw(2)
-                Dim strDiff As String
-                Dim strPerc As String
+            For i = numShowCount To numTeams - 1
+                idxTeam = bufShowIndex(i)
+                colName = "team" & idxTeam
+                colText = scoreData.teamInfo(idxTeam).teamName
+                textColumn = makeGridViewColumn(colName, colText)
+                .Add(textColumn)
+            Next i
 
-                ' ゲーム差
-                Dim curDiff As Integer = numWons - numLost
-                If (i = 0) Then
-                    topDiff = curDiff
-                    strDiff = "---"
-                ElseIf (curDiff = topDiff) Then
-                    strDiff = "---"
-                Else
-                    strDiff = Format((topDiff - curDiff) / 2, "#0.0")
-                End If
-
-                ' 勝率
-                Dim numGame As Integer = scoreInfo.numGames(2)
-                Dim wpDenom As Integer = numGame - numDraw
-                If (wpDenom = 0) Then
-                    strPerc = "---"
-                Else
-                    strPerc = Format(numWons / wpDenom, "#.000")
-                End If
-
-                .Rows.Add(
-                    teamInfo.teamName,
-                    numGame,
-                    numWons,
-                    numLost,
-                    numDraw,
-                    strDiff,
-                    strPerc
-                )
-            Next
+            textColumn = makeGridViewColumn("inter", "Inter.")
+            textColumn.DefaultCellStyle.BackColor = Color.FromArgb(0, 255, 0)
+            textColumn.HeaderCell.Style.BackColor = Color.FromArgb(0, 255, 0)
+            .Add(textColumn)
         End With
-    End Sub
+    End With
+
+End Sub
+
 End Module

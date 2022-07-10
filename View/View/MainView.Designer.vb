@@ -249,10 +249,14 @@ Partial Class MainView
         '
         Me.grdExtra.AllowUserToAddRows = False
         Me.grdExtra.AllowUserToDeleteRows = False
+        Me.grdScore.AllowUserToResizeColumns = False
+        Me.grdScore.AllowUserToResizeRows = False
         resources.ApplyResources(Me.grdExtra, "grdExtra")
         Me.grdExtra.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.grdExtra.MultiSelect = False
         Me.grdExtra.Name = "grdExtra"
         Me.grdExtra.ReadOnly = True
+        Me.grdExtra.RowHeadersVisible = False
         Me.grdExtra.RowTemplate.Height = 21
         '
         'optShowWins
@@ -296,11 +300,15 @@ Partial Class MainView
         '
         Me.grdScore.AllowUserToAddRows = False
         Me.grdScore.AllowUserToDeleteRows = False
+        Me.grdExtra.AllowUserToResizeColumns = False
+        Me.grdExtra.AllowUserToResizeRows = False
         Me.grdScore.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.grdScore.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.colTeam, Me.colTotal, Me.colWon, Me.colLost, Me.colDraw, Me.colDiff, Me.colPercent, Me.colMagic, Me.colRank})
         resources.ApplyResources(Me.grdScore, "grdScore")
+        Me.grdScore.MultiSelect = False
         Me.grdScore.Name = "grdScore"
         Me.grdScore.ReadOnly = True
+        Me.grdScore.RowHeadersVisible = False
         Me.grdScore.RowTemplate.Height = 21
         '
         'tabLeague

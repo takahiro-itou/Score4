@@ -818,7 +818,7 @@ ScoreDocument::clearCountedScoresList(
                 trgCS.vsDraw.at(j)[gt]  = 0;
 
                 const   GamesCount  nTotalGames
-                    = getGameCount(idxTeam, j, FILTER_ALL_GAMES);
+                    = getGameCount(idxTeam, j, static_cast<GameFilter>(gt));
                 trgCS.restGames.at(j)[gt] = nTotalGames;
                 trgCS.restGames[j][gt | FILTER_SCHEDULE] = nTotalGames;
                 trgCS.vsGotScores.at(j)[gt]     = 0;
@@ -826,7 +826,7 @@ ScoreDocument::clearCountedScoresList(
             }   //  End For (gt)
 
             trgCS.restGames.at(j)[FILTER_ALL_GAMES] = 0;
-            trgCS.restGames.at(j)[FILTER_SCHEDULE]  = 0;
+            trgCS.restGames.at(j)[FILTER_SCDL_ALLS] = 0;
         }   //  End For (j)
     }
 
