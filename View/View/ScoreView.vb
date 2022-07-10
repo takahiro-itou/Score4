@@ -58,7 +58,7 @@ Public Sub displayRestGameTableToGrid(
                 ' 所属リーグ内の残り試合。対戦相手毎の試合数
                 For j = 0 To numShowCount - 1
                     targetTeam = bufShowIndex(j)
-                    .Cells(j + 2).Value = scoreInfo.restGames(j, gameFilter)
+                    .Cells(j + 2).Value = scoreInfo.restGames(targetTeam, gameFilter)
                 Next j
 
                 ' 所属リーグ内の残り試合の合計
@@ -67,7 +67,7 @@ Public Sub displayRestGameTableToGrid(
                 ' 交流戦の残り試合。対戦相手毎の試合数
                 For j = numShowCount To numTeams - 1
                     targetTeam = bufShowIndex(j)
-                    .Cells(j + 3).Value = scoreInfo.restGames(j, gameFilter)
+                    .Cells(j + 3).Value = scoreInfo.restGames(targetTeam, gameFilter)
                 Next j
 
                 ' 交流戦の残り試合の合計
