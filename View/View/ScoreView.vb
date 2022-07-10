@@ -163,12 +163,13 @@ Private Function makeGridViewColumn(
     Dim textColumn As DataGridViewTextBoxColumn = New DataGridViewTextBoxColumn()
     With textColumn
         .AutoSizeMode = False
-        .Name = colName
         .HeaderText = colText
-        .Visible = True
-        .Width = 64
+        .Name = colName
         .ReadOnly = True
         .Resizable = DataGridViewTriState.False
+        .SortMode = DataGridViewColumnSortMode.NotSortable
+        .Visible = True
+        .Width = 64
     End With
     makeGridViewColumn = textColumn
 
