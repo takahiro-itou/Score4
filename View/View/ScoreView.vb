@@ -26,6 +26,7 @@ Public Sub displayRestGameTableToGrid(
 
     makeTeamListOnGridViewHeader(numShowCount, bufShowIndex, scoreData, objTable)
 
+    Const colTotalAll As Integer = 1
     Dim colLeagueTotal As Integer = numShowCount + 2
     Dim colInterTotal As Integer = numTeams + 3
 
@@ -54,7 +55,10 @@ Public Sub displayRestGameTableToGrid(
                 teamInfo.teamName,
                 restTotal
             )
+
             With .Rows(i)
+                .Cells(colTotalAll).Style.BackColor = Color.FromArgb(0, 255, 0)
+
                 ' 所属リーグ内の残り試合。対戦相手毎の試合数
                 For j = 0 To numShowCount - 1
                     targetTeam = bufShowIndex(j)
@@ -63,6 +67,7 @@ Public Sub displayRestGameTableToGrid(
 
                 ' 所属リーグ内の残り試合の合計
                 .Cells(colLeagueTotal).Value = restLeague
+                .Cells(colLeagueTotal).Style.BackColor = Color.FromArgb(0, 255, 0)
 
                 ' 交流戦の残り試合。対戦相手毎の試合数
                 For j = numShowCount To numTeams - 1
@@ -72,6 +77,7 @@ Public Sub displayRestGameTableToGrid(
 
                 ' 交流戦の残り試合の合計
                 .Cells(colInterTotal).Value = restInter
+                .Cells(colInterTotal).Style.BackColor = Color.FromArgb(0, 255, 0)
             End With
 
         Next
@@ -193,6 +199,8 @@ Private Sub makeTeamListOnGridViewHeader(
             .Add(textColumn)
 
             textColumn = makeGridViewColumn("total", "Total")
+            textColumn.DefaultCellStyle.BackColor = Color.FromArgb(0, 255, 0)
+            textColumn.HeaderCell.Style.BackColor = Color.FromArgb(0, 255, 0)
             .Add(textColumn)
 
             For i = 0 To numShowCount - 1
@@ -204,6 +212,8 @@ Private Sub makeTeamListOnGridViewHeader(
             Next i
 
             textColumn = makeGridViewColumn("league", "League")
+            textColumn.DefaultCellStyle.BackColor = Color.FromArgb(0, 255, 0)
+            textColumn.HeaderCell.Style.BackColor = Color.FromArgb(0, 255, 0)
             .Add(textColumn)
 
             For i = numShowCount To numTeams - 1
@@ -215,6 +225,8 @@ Private Sub makeTeamListOnGridViewHeader(
             Next i
 
             textColumn = makeGridViewColumn("inter", "Inter.")
+            textColumn.DefaultCellStyle.BackColor = Color.FromArgb(0, 255, 0)
+            textColumn.HeaderCell.Style.BackColor = Color.FromArgb(0, 255, 0)
             .Add(textColumn)
         End With
     End With
