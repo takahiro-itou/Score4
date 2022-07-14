@@ -385,8 +385,43 @@ Private Sub tabLeague_SelectedIndexChanged(sender As Object, e As EventArgs) Han
     updateTables(idxLeague, m_currentDate, m_flagMagicMode, m_flagExtraView, m_flagSchedule)
 End Sub
 
+''========================================================================
+''========================================================================
 Private Sub mnvDate_DateChanged(sender As Object, e As DateRangeEventArgs) Handles mnvDate.DateChanged
     updateTables(m_currentLeague, mnvDate.SelectionStart, m_flagMagicMode, m_flagExtraView, m_flagSchedule)
+End Sub
+
+''========================================================================
+''    チェックボックスの状態によって、残り試合数の表示に
+''  日程上の「予定」試合を集計するか決定する
+''========================================================================
+Private Sub chkSchedule_CheckedChanged(sender As Object, e As EventArgs) Handles chkSchedule.CheckedChanged
+Dim flagSchedule As Score4Wrapper.GameFilter
+
+    If (chkSchedule.CheckState = CheckState.Checked) Then
+        flagSchedule = Score4Wrapper.GameFilter.FILTER_SCHEDULE
+    Else
+        flagSchedule = 0
+    End If
+
+    updateTables(m_currentLeague, m_currentDate, m_flagMagicMode, m_flagExtraView, flagSchedule)
+End Sub
+
+Private Sub optShowExtra_CheckedChanged(sender As Object, e As EventArgs) Handles _
+                    optShowRest.CheckedChanged, optShowMagic.CheckedChanged, optShowWins.CheckedChanged
+    Dim modeExtra As ExtraViewMode
+
+    If optShowRest.Checked Then
+        modeExtra = ExtraViewMode.EXTRA_VIEW_REST_GAMES
+    ElseIf optShowMagic.Checked Then
+        modeExtra = ExtraViewMode.EXTRA_VIEW_MAGIC_NUMBERS
+    ElseIf optShowWins.Checked Then
+        modeExtra = ExtraViewMode.EXTRA_VIEW_WIN_FOR_MATCH
+    Else
+        modeExtra = ExtraViewMode.EXTRA_VIEW_REST_GAMES
+    End If
+
+    updateTables(m_currentLeague, m_currentDate, m_flagMagicMode, modeExtra, m_flagSchedule)
 End Sub
 
 End Class
