@@ -1,5 +1,16 @@
 ﻿Module ScoreView
 
+Public Enum ExtraViewMode As Integer
+    EXTRA_VIEW_REST_GAMES = 0
+    EXTRA_VIEW_MAGIC_NUMBERS = 1
+    EXTRA_VIEW_WIN_FOR_MATCH = 2
+End Enum
+
+Public Enum MagicMode As Integer
+    MAGIC_MODE_VICTORY = 0      ' 優勝マジック
+    MAGIC_MODE_PLAYOFF = 1      ' プレーオフ進出マジック
+End Enum
+
 ''========================================================================
 ''    指定されたグリッドビューに残り試合のテーブルを表示する
 ''========================================================================
@@ -89,7 +100,7 @@ End Sub
 ''========================================================================
 Public Sub displayScoreTableToGrid(
         ByVal leagueIndex As Integer,
-        ByVal magicMode As Integer,
+        ByVal magicMode As MagicMode,
         ByRef scoreData As Score4Wrapper.Document.ScoreDocument,
         ByRef objView As System.Windows.Forms.DataGridView)
 
@@ -154,9 +165,9 @@ End Sub
 ''========================================================================
 ''    指定されたグリッドビューに対チームごとのマジックを表示する。
 ''========================================================================
-Public Sub displayMagicTableToGrid(
+Public Sub displayTeamMagicTableToGrid(
         ByVal leagueIndex As Integer,
-        ByVal magicMode As Integer,
+        ByVal magicMode As MagicMode,
         ByRef scoreData As Score4Wrapper.Document.ScoreDocument,
         ByRef objView As System.Windows.Forms.DataGridView)
 
@@ -172,6 +183,8 @@ Public Sub displayMagicTableToGrid(
         objView.Visible = False
         Exit Sub
     End If
+
+    makeTeamListOnGridViewHeader(numShowCount, bufShowIndex, numShowCount, False, scoreData, objView)
 
     With objView
 

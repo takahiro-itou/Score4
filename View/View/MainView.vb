@@ -16,8 +16,8 @@ Private m_scoreData As Score4Wrapper.Document.ScoreDocument
 
 Private m_currentLeague As Integer
 Private m_currentDate As System.DateTime
-Private m_flagMagicMode As Integer
-Private m_flagExtraView As Integer
+Private m_flagMagicMode As MagicMode
+Private m_flagExtraView As ExtraViewMode
 Private m_flagSchedule As Integer
 
 ''========================================================================
@@ -222,7 +222,10 @@ End Sub
 
 Private Sub updateTables(
             ByVal idxLeague As Integer, ByVal trgLastDate As System.DateTime,
-            ByVal modeMagic As Integer, ByVal modeExtra As Integer, ByVal modeSchedule As Integer)
+            ByVal modeMagic As ExtraViewMode,
+            ByVal modeExtra As ExtraViewMode,
+            ByVal modeSchedule As Integer)
+
     m_currentLeague = idxLeague
     m_currentDate = trgLastDate
     m_flagMagicMode = modeMagic
@@ -232,6 +235,7 @@ Private Sub updateTables(
     Me.m_scoreData.countScores(trgLastDate)
     ScoreView.displayScoreTableToGrid(
             idxLeague, modeMagic, Me.m_scoreData, Me.grdScore)
+
     ScoreView.displayRestGameTableToGrid(
             idxLeague,
             Score4Wrapper.GameFilter.FILTER_SCHEDULE,
