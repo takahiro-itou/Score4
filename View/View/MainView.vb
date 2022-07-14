@@ -223,7 +223,7 @@ End Sub
 Private Sub updateTables(
             ByVal idxLeague As Integer,
             ByVal trgLastDate As System.DateTime,
-            ByVal modeMagic As ExtraViewMode,
+            ByVal modeMagic As MagicMode,
             ByVal modeExtra As ExtraViewMode,
             ByVal modeSchedule As Score4Wrapper.GameFilter)
 
@@ -237,11 +237,20 @@ Private Sub updateTables(
     ScoreView.displayScoreTableToGrid(
             idxLeague, modeMagic, Me.m_scoreData, Me.grdScore)
 
-    ScoreView.displayRestGameTableToGrid(
-            idxLeague, modeSchedule,
-            Score4Wrapper.GameFilter.FILTER_ALL_GAMES,
-            Me.m_scoreData, Me.grdExtra
-    )
+    Select Case modeExtra
+    Case ExtraViewMode.EXTRA_VIEW_MAGIC_NUMBERS
+        ScoreView.displayTeamMagicTableToGrid(
+                idxLeague, modeMagic,
+                Me.m_scoreData, Me.grdExtra
+        )
+    Case ExtraViewMode.EXTRA_VIEW_WIN_FOR_MATCH
+    Case Else
+        ScoreView.displayRestGameTableToGrid(
+                idxLeague, modeSchedule,
+                Score4Wrapper.GameFilter.FILTER_ALL_GAMES,
+                Me.m_scoreData, Me.grdExtra
+        )
+    End Select
 
     lblDate.Text = trgLastDate
 End Sub
