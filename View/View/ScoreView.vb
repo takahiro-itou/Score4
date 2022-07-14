@@ -24,7 +24,7 @@ Public Sub displayRestGameTableToGrid(
     ReDim bufShowIndex(0 To numTeams - 1)
     numShowCount = scoreData.computeRankOrder(leagueIndex, bufShowIndex)
 
-    makeTeamListOnGridViewHeader(numShowCount, bufShowIndex, scoreData, objView)
+    makeTeamListOnGridViewHeader(numShowCount, bufShowIndex, numTeams, True, scoreData, objView)
 
     Const colTotalAll As Integer = 1
     Dim colLeagueTotal As Integer = numShowCount + 2
@@ -207,6 +207,8 @@ End Function
 Private Sub makeTeamListOnGridViewHeader(
         ByVal numShowCount As Integer,
         ByRef bufShowIndex() As Integer,
+        ByVal numTeams As Integer,
+        ByVal flagShowTotal As Boolean,
         ByRef scoreData As Score4Wrapper.Document.ScoreDocument,
         ByRef objView As System.Windows.Forms.DataGridView)
 
@@ -216,7 +218,9 @@ Private Sub makeTeamListOnGridViewHeader(
     Dim colText As String
     Dim textColumn As DataGridViewTextBoxColumn
 
-    Dim numTeams As Integer = scoreData.getNumTeams()
+    If (numTeams = -1) Then
+        numTeams = scoreData.getNumTeams()
+    End If
 
     With objView
         With .Columns
@@ -225,10 +229,12 @@ Private Sub makeTeamListOnGridViewHeader(
             textColumn = makeGridViewColumn("team", "Team")
             .Add(textColumn)
 
-            textColumn = makeGridViewColumn("total", "Total")
-            textColumn.DefaultCellStyle.BackColor = Color.FromArgb(0, 255, 0)
-            textColumn.HeaderCell.Style.BackColor = Color.FromArgb(0, 255, 0)
-            .Add(textColumn)
+            If (flagShowTotal) Then
+                textColumn = makeGridViewColumn("total", "Total")
+                textColumn.DefaultCellStyle.BackColor = Color.FromArgb(0, 255, 0)
+                textColumn.HeaderCell.Style.BackColor = Color.FromArgb(0, 255, 0)
+                .Add(textColumn)
+            End If
 
             For i = 0 To numShowCount - 1
                 idxTeam = bufShowIndex(i)
@@ -238,10 +244,12 @@ Private Sub makeTeamListOnGridViewHeader(
                 .Add(textColumn)
             Next i
 
-            textColumn = makeGridViewColumn("league", "League")
-            textColumn.DefaultCellStyle.BackColor = Color.FromArgb(0, 255, 0)
-            textColumn.HeaderCell.Style.BackColor = Color.FromArgb(0, 255, 0)
-            .Add(textColumn)
+            If (flagShowTotal) Then
+                textColumn = makeGridViewColumn("league", "League")
+                textColumn.DefaultCellStyle.BackColor = Color.FromArgb(0, 255, 0)
+                textColumn.HeaderCell.Style.BackColor = Color.FromArgb(0, 255, 0)
+                .Add(textColumn)
+            End If
 
             For i = numShowCount To numTeams - 1
                 idxTeam = bufShowIndex(i)
@@ -251,10 +259,13 @@ Private Sub makeTeamListOnGridViewHeader(
                 .Add(textColumn)
             Next i
 
-            textColumn = makeGridViewColumn("inter", "Inter.")
-            textColumn.DefaultCellStyle.BackColor = Color.FromArgb(0, 255, 0)
-            textColumn.HeaderCell.Style.BackColor = Color.FromArgb(0, 255, 0)
-            .Add(textColumn)
+            If (flagShowTotal) Then
+                textColumn = makeGridViewColumn("inter", "Inter.")
+                textColumn.DefaultCellStyle.BackColor = Color.FromArgb(0, 255, 0)
+                textColumn.HeaderCell.Style.BackColor = Color.FromArgb(0, 255, 0)
+                .Add(textColumn)
+            End If
+
         End With
     End With
 
