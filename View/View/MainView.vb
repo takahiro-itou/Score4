@@ -18,7 +18,7 @@ Private m_currentLeague As Integer
 Private m_currentDate As System.DateTime
 Private m_flagMagicMode As MagicMode
 Private m_flagExtraView As ExtraViewMode
-Private m_flagSchedule As Integer
+Private m_flagSchedule As Score4Wrapper.GameFilter
 
 ''========================================================================
 ''    変更点があれば保存するか確認する。
@@ -221,10 +221,11 @@ Private Sub updateScoreView()
 End Sub
 
 Private Sub updateTables(
-            ByVal idxLeague As Integer, ByVal trgLastDate As System.DateTime,
+            ByVal idxLeague As Integer,
+            ByVal trgLastDate As System.DateTime,
             ByVal modeMagic As ExtraViewMode,
             ByVal modeExtra As ExtraViewMode,
-            ByVal modeSchedule As Integer)
+            ByVal modeSchedule As Score4Wrapper.GameFilter)
 
     m_currentLeague = idxLeague
     m_currentDate = trgLastDate
@@ -237,8 +238,7 @@ Private Sub updateTables(
             idxLeague, modeMagic, Me.m_scoreData, Me.grdScore)
 
     ScoreView.displayRestGameTableToGrid(
-            idxLeague,
-            Score4Wrapper.GameFilter.FILTER_SCHEDULE,
+            idxLeague, modeSchedule,
             Score4Wrapper.GameFilter.FILTER_ALL_GAMES,
             Me.m_scoreData, Me.grdExtra
     )
