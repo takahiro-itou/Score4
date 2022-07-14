@@ -244,6 +244,10 @@ Private Sub updateTables(
                 Me.m_scoreData, Me.grdExtra
         )
     Case ExtraViewMode.EXTRA_VIEW_WIN_FOR_MATCH
+        ScoreView.displayWinsForBeatTableToGrid(
+                idxLeague,
+                Me.m_scoreData, Me.grdExtra
+        )
     Case Else
         ScoreView.displayRestGameTableToGrid(
                 idxLeague, modeSchedule,
