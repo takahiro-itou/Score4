@@ -7,7 +7,7 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Core", "Core\Core.vcxproj", "{86230C49-191D-4DE3-ACBF-9F48E054E583}"
 EndProject
 
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Wrapper.Net48", "Wrapper\Wrapper.vcxproj", "{1FD21E47-2268-4ECA-8E53-668640B0A7B9}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Wrapper.Net48", "Cli.Net4.8\Wrapper.Net48.vcxproj", "{1FD21E47-2268-4ECA-8E53-668640B0A7B9}"
     ProjectSection(ProjectDependencies) = postProject
         {86230C49-191D-4DE3-ACBF-9F48E054E583} = {86230C49-191D-4DE3-ACBF-9F48E054E583}
     EndProjectSection

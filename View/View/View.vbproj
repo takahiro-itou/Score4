@@ -180,7 +180,7 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Wrapper\Wrapper.vcxproj">
+    <ProjectReference Include="..\Cli.Net4.8\Wrapper.Net48.vcxproj">
       <Project>{1fd21e47-2268-4eca-8e53-668640b0a7b9}</Project>
       <Name>Wrapper</Name>
     </ProjectReference>
