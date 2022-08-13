@@ -16,9 +16,9 @@ Private m_scoreData As Score4Wrapper.Document.ScoreDocument
 
 Private m_currentLeague As Integer
 Private m_currentDate As System.DateTime
-Private m_flagMagicMode As Integer
-Private m_flagExtraView As Integer
-Private m_flagSchedule As Integer
+Private m_flagMagicMode As MagicMode
+Private m_flagExtraView As ExtraViewMode
+Private m_flagSchedule As Score4Wrapper.GameFilter
 
 ''========================================================================
 ''    変更点があれば保存するか確認する。
@@ -221,8 +221,12 @@ Private Sub updateScoreView()
 End Sub
 
 Private Sub updateTables(
-            ByVal idxLeague As Integer, ByVal trgLastDate As System.DateTime,
-            ByVal modeMagic As Integer, ByVal modeExtra As Integer, ByVal modeSchedule As Integer)
+            ByVal idxLeague As Integer,
+            ByVal trgLastDate As System.DateTime,
+            ByVal modeMagic As MagicMode,
+            ByVal modeExtra As ExtraViewMode,
+            ByVal modeSchedule As Score4Wrapper.GameFilter)
+
     m_currentLeague = idxLeague
     m_currentDate = trgLastDate
     m_flagMagicMode = modeMagic
@@ -232,12 +236,25 @@ Private Sub updateTables(
     Me.m_scoreData.countScores(trgLastDate)
     ScoreView.displayScoreTableToGrid(
             idxLeague, modeMagic, Me.m_scoreData, Me.grdScore)
-    ScoreView.displayRestGameTableToGrid(
-            idxLeague,
-            Score4Wrapper.GameFilter.FILTER_SCHEDULE,
-            Score4Wrapper.GameFilter.FILTER_ALL_GAMES,
-            Me.m_scoreData, Me.grdExtra
-    )
+
+    Select Case modeExtra
+    Case ExtraViewMode.EXTRA_VIEW_MAGIC_NUMBERS
+        ScoreView.displayTeamMagicTableToGrid(
+                idxLeague, modeMagic,
+                Me.m_scoreData, Me.grdExtra
+        )
+    Case ExtraViewMode.EXTRA_VIEW_WIN_FOR_MATCH
+        ScoreView.displayWinsForBeatTableToGrid(
+                idxLeague,
+                Me.m_scoreData, Me.grdExtra
+        )
+    Case Else
+        ScoreView.displayRestGameTableToGrid(
+                idxLeague, modeSchedule,
+                Score4Wrapper.GameFilter.FILTER_ALL_GAMES,
+                Me.m_scoreData, Me.grdExtra
+        )
+    End Select
 
     lblDate.Text = trgLastDate
 End Sub
@@ -381,8 +398,43 @@ Private Sub tabLeague_SelectedIndexChanged(sender As Object, e As EventArgs) Han
     updateTables(idxLeague, m_currentDate, m_flagMagicMode, m_flagExtraView, m_flagSchedule)
 End Sub
 
+''========================================================================
+''========================================================================
 Private Sub mnvDate_DateChanged(sender As Object, e As DateRangeEventArgs) Handles mnvDate.DateChanged
     updateTables(m_currentLeague, mnvDate.SelectionStart, m_flagMagicMode, m_flagExtraView, m_flagSchedule)
+End Sub
+
+''========================================================================
+''    チェックボックスの状態によって、残り試合数の表示に
+''  日程上の「予定」試合を集計するか決定する
+''========================================================================
+Private Sub chkSchedule_CheckedChanged(sender As Object, e As EventArgs) Handles chkSchedule.CheckedChanged
+Dim flagSchedule As Score4Wrapper.GameFilter
+
+    If (chkSchedule.CheckState = CheckState.Checked) Then
+        flagSchedule = Score4Wrapper.GameFilter.FILTER_SCHEDULE
+    Else
+        flagSchedule = 0
+    End If
+
+    updateTables(m_currentLeague, m_currentDate, m_flagMagicMode, m_flagExtraView, flagSchedule)
+End Sub
+
+Private Sub optShowExtra_CheckedChanged(sender As Object, e As EventArgs) Handles _
+                    optShowRest.CheckedChanged, optShowMagic.CheckedChanged, optShowWins.CheckedChanged
+    Dim modeExtra As ExtraViewMode
+
+    If optShowRest.Checked Then
+        modeExtra = ExtraViewMode.EXTRA_VIEW_REST_GAMES
+    ElseIf optShowMagic.Checked Then
+        modeExtra = ExtraViewMode.EXTRA_VIEW_MAGIC_NUMBERS
+    ElseIf optShowWins.Checked Then
+        modeExtra = ExtraViewMode.EXTRA_VIEW_WIN_FOR_MATCH
+    Else
+        modeExtra = ExtraViewMode.EXTRA_VIEW_REST_GAMES
+    End If
+
+    updateTables(m_currentLeague, m_currentDate, m_flagMagicMode, modeExtra, m_flagSchedule)
 End Sub
 
 End Class

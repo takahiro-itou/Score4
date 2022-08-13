@@ -1,5 +1,16 @@
 ﻿Module ScoreView
 
+Public Enum ExtraViewMode As Integer
+    EXTRA_VIEW_REST_GAMES = 0
+    EXTRA_VIEW_MAGIC_NUMBERS = 1
+    EXTRA_VIEW_WIN_FOR_MATCH = 2
+End Enum
+
+Public Enum MagicMode As Integer
+    MAGIC_MODE_VICTORY = 0      ' 優勝マジック
+    MAGIC_MODE_PLAYOFF = 1      ' プレーオフ進出マジック
+End Enum
+
 ''========================================================================
 ''    指定されたグリッドビューに残り試合のテーブルを表示する
 ''========================================================================
@@ -8,7 +19,7 @@ Public Sub displayRestGameTableToGrid(
         ByVal scheduleFilter As Score4Wrapper.GameFilter,
         ByVal gameType As Score4Wrapper.GameFilter,
         ByRef scoreData As Score4Wrapper.Document.ScoreDocument,
-        ByRef objTable As System.Windows.Forms.DataGridView)
+        ByRef objView As System.Windows.Forms.DataGridView)
 
     Dim i As Integer
     Dim bufShowIndex() As Integer
@@ -24,13 +35,13 @@ Public Sub displayRestGameTableToGrid(
     ReDim bufShowIndex(0 To numTeams - 1)
     numShowCount = scoreData.computeRankOrder(leagueIndex, bufShowIndex)
 
-    makeTeamListOnGridViewHeader(numShowCount, bufShowIndex, scoreData, objTable)
+    makeTeamListOnGridViewHeader(numShowCount, bufShowIndex, numTeams, True, scoreData, objView)
 
     Const colTotalAll As Integer = 1
     Dim colLeagueTotal As Integer = numShowCount + 2
     Dim colInterTotal As Integer = numTeams + 3
 
-    With objTable
+    With objView
         .Rows.Clear()
         For i = 0 To numShowCount - 1
             Dim idxTeam As Integer = bufShowIndex(i)
@@ -89,9 +100,9 @@ End Sub
 ''========================================================================
 Public Sub displayScoreTableToGrid(
         ByVal leagueIndex As Integer,
-        ByVal magicMode As Integer,
+        ByVal magicMode As MagicMode,
         ByRef scoreData As Score4Wrapper.Document.ScoreDocument,
-        ByRef objTable As System.Windows.Forms.DataGridView)
+        ByRef objView As System.Windows.Forms.DataGridView)
 
     Dim i As Integer
     Dim bufShowIndex() As Integer
@@ -101,7 +112,7 @@ Public Sub displayScoreTableToGrid(
     ReDim bufShowIndex(0 To scoreData.getNumTeams() - 1)
     numShowCount = scoreData.computeRankOrder(leagueIndex, bufShowIndex)
 
-    With objTable
+    With objView
         .Rows.Clear()
         For i = 0 To numShowCount - 1
             Dim idxTeam As Integer = bufShowIndex(i)
@@ -152,13 +163,73 @@ Public Sub displayScoreTableToGrid(
 End Sub
 
 ''========================================================================
+''    指定されたグリッドビューに対チームごとのマジックを表示する。
+''========================================================================
+Public Sub displayTeamMagicTableToGrid(
+        ByVal leagueIndex As Integer,
+        ByVal magicMode As MagicMode,
+        ByRef scoreData As Score4Wrapper.Document.ScoreDocument,
+        ByRef objView As System.Windows.Forms.DataGridView)
+
+    Dim i As Integer
+    Dim bufShowIndex() As Integer
+    Dim numTeams As Integer
+    Dim numShowCount As Integer
+
+    numTeams = scoreData.getNumTeams()
+    ReDim bufShowIndex(0 To numTeams - 1)
+    numShowCount = scoreData.computeRankOrder(leagueIndex, bufShowIndex)
+    If (numShowCount = 0) Then
+        objView.Visible = False
+        Exit Sub
+    End If
+
+    makeTeamListOnGridViewHeader(numShowCount, bufShowIndex, numShowCount, False, scoreData, objView)
+
+    With objView
+
+    End With
+
+End Sub
+
+''========================================================================
+''    指定されたグリッドビューに下記テーブルの内容を表示する。
+''
+''    各対戦相手毎に、その相手より (確実に) 上位になるために、
+''  最低限勝利しなければならない試合数。
+''========================================================================
+Public Sub displayWinsForBeatTableToGrid(
+        ByVal leagueIndex As Integer,
+        ByRef scoreData As Score4Wrapper.Document.ScoreDocument,
+        ByRef objView As System.Windows.Forms.DataGridView)
+
+    Dim i As Integer
+    Dim bufShowIndex() As Integer
+    Dim numTeams As Integer
+    Dim numShowCount As Integer
+
+    numTeams = scoreData.getNumTeams()
+    ReDim bufShowIndex(0 To numTeams - 1)
+    numShowCount = scoreData.computeRankOrder(leagueIndex, bufShowIndex)
+    If (numShowCount = 0) Then
+        objView.Visible = False
+        Exit Sub
+    End If
+
+    makeTeamListOnGridViewHeader(numShowCount, bufShowIndex, numShowCount, False, scoreData, objView)
+
+    With objView
+
+    End With
+
+End Sub
+
+''========================================================================
 ''    指定されたグリッドビューに残り試合のテーブルを表示する
 ''========================================================================
-
 Private Function makeGridViewColumn(
         ByVal colName As String,
         ByVal colText As String) As System.Windows.Forms.DataGridViewColumn
-
 
     Dim textColumn As DataGridViewTextBoxColumn = New DataGridViewTextBoxColumn()
     With textColumn
@@ -181,8 +252,10 @@ End Function
 Private Sub makeTeamListOnGridViewHeader(
         ByVal numShowCount As Integer,
         ByRef bufShowIndex() As Integer,
+        ByVal numTeams As Integer,
+        ByVal flagShowTotal As Boolean,
         ByRef scoreData As Score4Wrapper.Document.ScoreDocument,
-        ByRef objTable As System.Windows.Forms.DataGridView)
+        ByRef objView As System.Windows.Forms.DataGridView)
 
     Dim i As Integer
     Dim idxTeam As Integer
@@ -190,19 +263,23 @@ Private Sub makeTeamListOnGridViewHeader(
     Dim colText As String
     Dim textColumn As DataGridViewTextBoxColumn
 
-    Dim numTeams As Integer = scoreData.getNumTeams()
+    If (numTeams = -1) Then
+        numTeams = scoreData.getNumTeams()
+    End If
 
-    With objTable
+    With objView
         With .Columns
             .Clear()
 
             textColumn = makeGridViewColumn("team", "Team")
             .Add(textColumn)
 
-            textColumn = makeGridViewColumn("total", "Total")
-            textColumn.DefaultCellStyle.BackColor = Color.FromArgb(0, 255, 0)
-            textColumn.HeaderCell.Style.BackColor = Color.FromArgb(0, 255, 0)
-            .Add(textColumn)
+            If (flagShowTotal) Then
+                textColumn = makeGridViewColumn("total", "Total")
+                textColumn.DefaultCellStyle.BackColor = Color.FromArgb(0, 255, 0)
+                textColumn.HeaderCell.Style.BackColor = Color.FromArgb(0, 255, 0)
+                .Add(textColumn)
+            End If
 
             For i = 0 To numShowCount - 1
                 idxTeam = bufShowIndex(i)
@@ -212,10 +289,12 @@ Private Sub makeTeamListOnGridViewHeader(
                 .Add(textColumn)
             Next i
 
-            textColumn = makeGridViewColumn("league", "League")
-            textColumn.DefaultCellStyle.BackColor = Color.FromArgb(0, 255, 0)
-            textColumn.HeaderCell.Style.BackColor = Color.FromArgb(0, 255, 0)
-            .Add(textColumn)
+            If (flagShowTotal) Then
+                textColumn = makeGridViewColumn("league", "League")
+                textColumn.DefaultCellStyle.BackColor = Color.FromArgb(0, 255, 0)
+                textColumn.HeaderCell.Style.BackColor = Color.FromArgb(0, 255, 0)
+                .Add(textColumn)
+            End If
 
             For i = numShowCount To numTeams - 1
                 idxTeam = bufShowIndex(i)
@@ -225,10 +304,13 @@ Private Sub makeTeamListOnGridViewHeader(
                 .Add(textColumn)
             Next i
 
-            textColumn = makeGridViewColumn("inter", "Inter.")
-            textColumn.DefaultCellStyle.BackColor = Color.FromArgb(0, 255, 0)
-            textColumn.HeaderCell.Style.BackColor = Color.FromArgb(0, 255, 0)
-            .Add(textColumn)
+            If (flagShowTotal) Then
+                textColumn = makeGridViewColumn("inter", "Inter.")
+                textColumn.DefaultCellStyle.BackColor = Color.FromArgb(0, 255, 0)
+                textColumn.HeaderCell.Style.BackColor = Color.FromArgb(0, 255, 0)
+                .Add(textColumn)
+            End If
+
         End With
     End With
 
