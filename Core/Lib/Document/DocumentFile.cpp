@@ -1048,7 +1048,7 @@ DocumentFile::writeSettingBlock(
         ::memcpy(ptrCur, tmpTeamName, sizeof(tmpTeamName));
         ptrCur  +=  sizeof(tmpTeamName);
 
-        tmpTeamInfo[0]  =  bsInfo.cbTeamReqs;
+        tmpTeamInfo[0]  =  static_cast<HeaderItem>(bsInfo.cbTeamReqs);
         tmpTeamInfo[1]  =  teamInfo.leagueID;
         ::memcpy(ptrCur, tmpTeamInfo, sizeof(tmpTeamInfo));
         ptrCur  +=  sizeof(tmpTeamInfo);
