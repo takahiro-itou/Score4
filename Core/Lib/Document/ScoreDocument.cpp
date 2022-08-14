@@ -405,7 +405,8 @@ ScoreDocument::findGameRecord(
         const  RecordIndex  multiGame)  const
 {
     RecordIndex     multiIndex  = 0;
-    const  RecordIndex  numRecords  = this->m_gameResults.size();
+    const  RecordIndex
+        numRecords  = static_cast<RecordIndex>(this->m_gameResults.size());
     for ( RecordIndex i = 0; i < numRecords; ++ i ) {
         const   GameResult  &gr = this->m_gameResults.at(i);
         if ( gr.eGameFlags == GAME_EMPTY ) {
@@ -695,7 +696,7 @@ ScoreDocument::getNumRecords()  const
 TeamIndex
 ScoreDocument::getNumTeams()  const
 {
-    return ( static_cat<TeamIndex>(this->m_teamInfos.size()) );
+    return ( static_cast<TeamIndex>(this->m_teamInfos.size()) );
 }
 
 //----------------------------------------------------------------
