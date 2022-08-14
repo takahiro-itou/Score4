@@ -12,6 +12,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Wrapper.Net48", "Cli.Net4.8
         {86230C49-191D-4DE3-ACBF-9F48E054E583} = {86230C49-191D-4DE3-ACBF-9F48E054E583}
     EndProjectSection
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Wrapper.Net60", "Cli.Net6\Wrapper.Net60.vcxproj", "{2A260C3B-9DC2-4233-B5BE-DA48F8222253}"
+EndProject
 
 Project("{778DAE3C-4631-46EA-AA77-85C1314464D9}") = "View", "View\View.vbproj", "{59DB3E37-6DFD-4269-AAD5-678BDCBAE057}"
     ProjectSection(ProjectDependencies) = postProject
