@@ -24,6 +24,7 @@
 #include    "Score4Types.h"
 
 #include    <array>
+#include    <string>
 #include    <vector>
 
 SCORE4_CORE_NAMESPACE_BEGIN
