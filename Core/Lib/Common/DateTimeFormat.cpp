@@ -145,7 +145,7 @@ DateTimeFormat::getDateTimeFromSerial(
         ptrBuf->year    = wYear;
         ptrBuf->month   = wMonth;
     }
-    ptrBuf->day     = wdsRem + 1;
+    ptrBuf->day     = static_cast<int>(wdsRem + 1);
 
     DateSerial  dtTime  = dtSerial - static_cast<int>(dtSerial);
     ptrBuf->remsec  = dtTime;

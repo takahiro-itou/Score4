@@ -1001,12 +1001,12 @@ DocumentFile::writeSettingBlock(
     ::memset(blkInfo,  0, sizeof(blkInfo) );
     ::memset(docTitle, 0, sizeof(docTitle));
 
-    blkInfo[0]  =  bsInfo.cbTeamInfo;
-    blkInfo[1]  =  bsInfo.cbTeamRsvd;
-    blkInfo[2]  =  bsInfo.cbTeamReqs;
+    blkInfo[0]  =  static_cast<HeaderItem>(bsInfo.cbTeamInfo);
+    blkInfo[1]  =  static_cast<HeaderItem>(bsInfo.cbTeamRsvd);
+    blkInfo[2]  =  static_cast<HeaderItem>(bsInfo.cbTeamReqs);
     blkInfo[3]  =  0;
-    blkInfo[4]  =  bsInfo.bsSettings;
-    blkInfo[5]  =  fStart + blkInfo[4];
+    blkInfo[4]  =  static_cast<HeaderItem>(bsInfo.bsSettings);
+    blkInfo[5]  =  static_cast<HeaderItem>(fStart + blkInfo[4]);
     ::memcpy(ptrCur, blkInfo, sizeof(blkInfo));
     ptrCur  +=  sizeof(blkInfo);
 
@@ -1048,7 +1048,7 @@ DocumentFile::writeSettingBlock(
         ::memcpy(ptrCur, tmpTeamName, sizeof(tmpTeamName));
         ptrCur  +=  sizeof(tmpTeamName);
 
-        tmpTeamInfo[0]  =  bsInfo.cbTeamReqs;
+        tmpTeamInfo[0]  =  static_cast<HeaderItem>(bsInfo.cbTeamReqs);
         tmpTeamInfo[1]  =  teamInfo.leagueID;
         ::memcpy(ptrCur, tmpTeamInfo, sizeof(tmpTeamInfo));
         ptrCur  +=  sizeof(tmpTeamInfo);
