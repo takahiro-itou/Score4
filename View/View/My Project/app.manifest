@@ -1,20 +1,20 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<asmv1:assembly manifestVersion="1.0" xmlns="urn:schemas-microsoft-com:asm.v1" xmlns:asmv1="urn:schemas-microsoft-com:asm.v1" xmlns:asmv2="urn:schemas-microsoft-com:asm.v2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<assembly manifestVersion="1.0" xmlns="urn:schemas-microsoft-com:asm.v1">
   <assemblyIdentity version="1.0.0.0" name="MyApplication.app"/>
   <trustInfo xmlns="urn:schemas-microsoft-com:asm.v2">
     <security>
       <requestedPrivileges xmlns="urn:schemas-microsoft-com:asm.v3">
-        <!-- UAC Manifest Options
-            If you want to change the Windows User Account Control level replace the
-            requestedExecutionLevel node with one of the following.
+        <!-- UAC マニフェスト オプション
+             Windows のユーザー アカウント制御のレベルを変更するには、
+             requestedExecutionLevel ノードを以下のいずれかで置換します。
 
         <requestedExecutionLevel  level="asInvoker" uiAccess="false" />
         <requestedExecutionLevel  level="requireAdministrator" uiAccess="false" />
         <requestedExecutionLevel  level="highestAvailable" uiAccess="false" />
 
-            Specifying requestedExecutionLevel node will disable file and registry virtualization.
-            If you want to utilize File and Registry Virtualization for backward
-            compatibility then delete the requestedExecutionLevel node.
+            requestedExecutionLevel 要素を指定すると、ファイルおよびレジストリの仮想化が無効にされます。
+            アプリケーションが下位互換性を保つためにこの仮想化を要求する場合、この要素を
+            削除します。
         -->
         <requestedExecutionLevel level="asInvoker" uiAccess="false" />
       </requestedPrivileges>
@@ -23,26 +23,46 @@
 
   <compatibility xmlns="urn:schemas-microsoft-com:compatibility.v1">
     <application>
-      <!-- A list of all Windows versions that this application is designed to work with.
-      Windows will automatically select the most compatible environment.-->
+      <!-- このアプリケーションがテストされ、動作するよう設計された Windows バージョンの
+           一覧。適切な要素をコメント解除すると、最も互換性のある環境を Windows が
+           自動的に選択します。-->
 
-      <!-- If your application is designed to work with Windows Vista, uncomment the following supportedOS node-->
-      <!--<supportedOS Id="{e2011457-1546-43c5-a5fe-008deee3d3f0}"></supportedOS>-->
+      <!-- Windows Vista -->
+      <!--<supportedOS Id="{e2011457-1546-43c5-a5fe-008deee3d3f0}" />-->
 
-      <!-- If your application is designed to work with Windows 7, uncomment the following supportedOS node-->
-      <!--<supportedOS Id="{35138b9a-5d96-4fbd-8e2d-a2440225f93a}"/>-->
+      <!-- Windows 7 -->
+      <!--<supportedOS Id="{35138b9a-5d96-4fbd-8e2d-a2440225f93a}" />-->
 
-      <!-- If your application is designed to work with Windows 8, uncomment the following supportedOS node-->
-      <!--<supportedOS Id="{4a2f28e3-53b9-4441-ba9c-d69d4a4a6e38}"></supportedOS>-->
+      <!-- Windows 8 -->
+      <!--<supportedOS Id="{4a2f28e3-53b9-4441-ba9c-d69d4a4a6e38}" />-->
 
-      <!-- If your application is designed to work with Windows 8.1, uncomment the following supportedOS node-->
-      <!--<supportedOS Id="{1f676c76-80e1-4239-95bb-83d0f6d0da78}"/>-->
+      <!-- Windows 8.1 -->
+      <!--<supportedOS Id="{1f676c76-80e1-4239-95bb-83d0f6d0da78}" />-->
+
+      <!-- Windows 10 -->
+      <!--<supportedOS Id="{8e0f7a12-bfb3-4fe8-b9a5-48fd50a15a9a}" />-->
 
     </application>
   </compatibility>
 
-  <!-- Enable themes for Windows common controls and dialogs (Windows XP and later) -->
-  <!-- <dependency>
+  <!-- アプリケーションが DPI 対応であり、Windows によってそれ以上の DPI には自動的に拡大縮小されないことを
+       示します。Windows Presentation Foundation (WPF) アプリケーションは自動的に DPI に対応し、オプトインする必要は
+       ありません。さらに、この設定にオプトインする .NET Framework 4.6 を対象とする Windows フォーム アプリケーションは、
+       app.config ファイルで 'EnableWindowsFormsHighDpiAutoResizing' 設定を 'true' に設定する必要があります。
+
+       アプリケーションを長いパス対応にします。https://docs.microsoft.com/windows/win32/fileio/maximum-file-path-limitation をご覧ください -->
+  <!--
+  <application xmlns="urn:schemas-microsoft-com:asm.v3">
+    <windowsSettings>
+      <dpiAware xmlns="http://schemas.microsoft.com/SMI/2005/WindowsSettings">true</dpiAware>
+      <longPathAware xmlns="http://schemas.microsoft.com/SMI/2016/WindowsSettings">true</longPathAware>
+    </windowsSettings>
+  </application>
+  -->
+
+  <!-- Windows のコモン コントロールとダイアログのテーマを有効にします (Windows XP 以降) -->
+  <!--
+  <dependency>
     <dependentAssembly>
       <assemblyIdentity
           type="win32"
@@ -53,6 +73,7 @@
           language="*"
         />
     </dependentAssembly>
-  </dependency>-->
+  </dependency>
+  -->
 
-</asmv1:assembly>
+</assembly>
