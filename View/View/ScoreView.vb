@@ -189,10 +189,19 @@ Public Sub displayTeamMagicTableToGrid(
         Exit Sub
     End If
 
-    makeTeamListOnGridViewHeader(numShowCount, bufShowIndex, numShowCount, False, scoreData, objView)
+    makeTeamListOnGridViewHeader(
+        numShowCount, bufShowIndex, numShowCount, False, scoreData, objView)
 
     With objView
+         For i = 0 To numShowCount - 1
+            Dim idxTeam As Integer = bufShowIndex(i)
+            Dim teamInfo As Score4Wrapper.Common.TeamInfo
+            Dim scoreInfo As Score4Wrapper.Common.CountedScores
 
+            teamInfo = scoreData.teamInfo(idxTeam)
+            scoreInfo = scoreData.scoreInfo(idxTeam)
+            .Rows.Add(teamInfo.teamName)
+         Next i
     End With
 
 End Sub
