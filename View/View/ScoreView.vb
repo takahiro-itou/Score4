@@ -172,6 +172,7 @@ Public Sub displayTeamMagicTableToGrid(
         ByRef objView As System.Windows.Forms.DataGridView)
 
     Dim i As Integer
+    Dim j As Integer
     Dim bufShowIndex() As Integer
     Dim numTeams As Integer
     Dim numShowCount As Integer
@@ -201,6 +202,47 @@ Public Sub displayTeamMagicTableToGrid(
             teamInfo = scoreData.teamInfo(idxTeam)
             scoreInfo = scoreData.scoreInfo(idxTeam)
             .Rows.Add(teamInfo.teamName)
+
+            Dim cellText as String
+            Dim backColor as Color
+            Dim foreColor as Color = Color.FromArgb(0, 0, 0)
+
+            With .Rows(i)
+                For j = 0 To numShowCount - 1
+                    Dim idxEnemy As Integer = bufShowIndex(j)
+                    If (idxTeam = idxEnemy) Then
+                        .Cells(j + 1).Value = "--------"
+                    Else
+                        Dim beatProb As Integer = scoreInfo.beatProbability(idxEnemy)
+                        If (beatProb <= -9999) Then
+                             cellText = "-----"
+                             backColor = Color.FromArgb(255, 0, 0)
+                             foreColor = Color.FromArgb(255, 255, 255)
+                        Else
+                            cellText = Right("     " & beatProb, 5)
+                            backColor = Color.FromArgb(255, 255, 255)
+                            If (beatProb < 0) Then
+                                backColor = Color.FromArgb(255, 255, 0)
+                            Else
+                                backColor = Color.FromArgb(0, 255, 0)
+                            End If
+                        End If
+
+                        Dim vsMagic As Integer = scoreInfo.vsMagic(idxEnemy)
+                        If (vsMagic = 0) Then
+                            cellText = "M 0 :  ---"
+                            backColor = Color.FromArgb(0, 0, 255)
+                            foreColor = Color.FromArgb(255, 255, 255)
+                        Else
+                            cellText = "M " & vsMagic & " : " & cellText
+                            backColor = Color.FromArgb(0, 255, 255)
+                        End If
+                        .Cells(j + 1).Value = cellText
+                        .Cells(j + 1).Style.BackColor = backColor
+                        .Cells(j + 1).Style.ForeColor = foreColor
+                    End If
+                 Next j
+            End With
          Next i
     End With
 
