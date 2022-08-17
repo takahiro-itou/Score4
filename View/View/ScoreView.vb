@@ -176,6 +176,11 @@ Public Sub displayTeamMagicTableToGrid(
     Dim numTeams As Integer
     Dim numShowCount As Integer
 
+    With objView
+         .Columns.Clear()
+         .Rows.Clear()
+    End With
+
     numTeams = scoreData.getNumTeams()
     ReDim bufShowIndex(0 To numTeams - 1)
     numShowCount = scoreData.computeRankOrder(leagueIndex, bufShowIndex)
