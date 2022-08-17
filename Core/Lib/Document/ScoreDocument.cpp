@@ -1,4 +1,4 @@
-﻿//  -*-  coding: utf-8-with-signature;  mode: c++  -*-  //
+﻿//  -*-  coding: utf-8-with-signature-unix; mode: c++  -*-  //
 /*************************************************************************
 **                                                                      **
 **                  ---  The Score4 Core Library.  ---                  **
@@ -805,6 +805,16 @@ ScoreDocument::clearCountedScoresList(
 
         trgCS.restGames.clear();
         trgCS.restGames.resize(numTeam);
+
+        trgCS.beatProbability.clear();
+        trgCS.vsMagic        .clear();
+        trgCS.numWinsForMatch.clear();
+        trgCS.numRestForMatch.clear();
+        trgCS.beatProbability.resize(numTeam);
+        trgCS.vsMagic        .resize(numTeam);
+        trgCS.numWinsForMatch.resize(numTeam);
+        trgCS.numRestForMatch.resize(numTeam);
+
         trgCS.vsGotScores.clear();
         trgCS.vsGotScores.resize(numTeam);
         trgCS.vsLostScores.clear();
