@@ -49,6 +49,12 @@ private:
 
     typedef     Common::GameCountTable      GameCountTable;
 
+    typedef     std::vector< std::vector<WinningRate> >
+    WinningRateTable;
+
+    typedef     std::vector< std::vector<NumOfDigits> >
+    NumOfDigitsTable;
+
 public:
 
     /**   リーグ情報。  **/
