@@ -947,8 +947,8 @@ ScoreDocument::makeWinningRateTable(
 
     GamesCount  allPercentListCount = (maxRestGame + 1) * numTeam;
 
-    std::vector<WinningRate>    allPercentList(allPercentList);
-    std::vector<NumOfDigits>    digitsTempList(allPercentList);
+    std::vector<WinningRate>    allPercentList(allPercentListCount);
+    std::vector<NumOfDigits>    digitsTempList(allPercentListCount);
 
     //  各チームの勝数と最終勝率のテーブルを作る。  //
     allPercentListCount = 0;
