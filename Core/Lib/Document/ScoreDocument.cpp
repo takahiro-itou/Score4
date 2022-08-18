@@ -20,6 +20,7 @@
 
 #include    "Score4Core/Document/ScoreDocument.h"
 
+#include    <iostream>
 #include    <memory.h>
 #include    <stdio.h>
 #include    <vector>
@@ -388,6 +389,24 @@ ScoreDocument::countScores(
         countTotalScores(
                 getTeamInfo(idxTeam).leagueID,
                 bufCounted.at(idxTeam));
+    }
+
+    {
+        WinningRateTable    rateTable;
+        NumOfDigitsTable    digitsTable;
+        std::cout   <<  "# DEBUG : WinningRateTable ["
+                    <<  numTeam <<  "]\n";
+        makeWinningRateTable(bufCounted, -1, rateTable, digitsTable);
+        std::cout   <<  "Size = "   <<  rateTable.size()
+                    <<  std::endl;
+        for ( TeamIndex idxTeam = 0; idxTeam < numTeam; ++ idxTeam ) {
+            GamesCount  numRest  = rateTable.at(idxTeam).size();
+            for ( GamesCount win = 0; win < numRest; ++ win ) {
+                std::cout   <<  rateTable.at(idxTeam).at(win)
+                            <<  ",";
+            }
+        }
+        std::cout   <<  std::endl;
     }
 
     return ( ERR_SUCCESS );
