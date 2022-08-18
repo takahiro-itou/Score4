@@ -405,8 +405,8 @@ ScoreDocument::countScores(
                 std::cout   <<  rateTable.at(idxTeam).at(win)
                             <<  ",";
             }
+            std::cout   <<  std::endl;
         }
-        std::cout   <<  std::endl;
     }
 
     return ( ERR_SUCCESS );
@@ -985,7 +985,7 @@ ScoreDocument::makeWinningRateTable(
         for ( GamesCount win = 0; win <= teamRestGames; ++ win ) {
             //  勝率を計算する。    //
             const  WinningRate
-                lastPercent = (currentWonGames + win) / totalGames;
+                lastPercent = (currentWonGames + win) * 1.0 / totalGames;
 
             //  このデータをテンポラリリストにソートして挿入する。  //
             if ( teamLeague == leagueIndex ) {
