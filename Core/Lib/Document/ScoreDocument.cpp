@@ -981,7 +981,7 @@ ScoreDocument::makeWinningRateTable(
                         break;
                     }
                 }
-                if ( insertindex >= 0 ) {
+                if ( insertIndex >= 0 ) {
                     for ( int i = allPercentListCount - 1;
                             i >= insertIndex; -- i )
                     {
