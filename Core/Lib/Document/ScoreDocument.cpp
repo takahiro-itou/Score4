@@ -917,6 +917,90 @@ ScoreDocument::countTotalScores(
 }
 
 //----------------------------------------------------------------
+//    勝率テーブルを作成する。
+//
+
+GamesCount
+ScoreDocument::makeWinningRateTable(
+        const  CountedScoreList &csData,
+        const  LeagueIndex      leagueIndex,
+        WinningRateTable        &rateTable,
+        NumOfDigitsTable        &digitsTable)  const
+{
+    const   TeamIndex  numTeam  = this->getNumTeams();
+
+    //  配列を確保する。    //
+    rateTable.resize(numTeam);
+    digitsTable.resize(numTeam);
+
+    GamesCount  maxRestGame = 0;
+    for ( TeamIndex teamIndex = 0; teamIndex < numTeam; ++ teamIndex ) {
+        const  CountedScores  & cs = csData.at(teamIndex);
+        const  GamesCount
+            teamRestGames = cs.numTotalRestGames[FILTER_ALL_GAMES];
+        if ( maxRestGame < teamRestGames ) {
+            maxRestGame = teamRestGames;
+        }
+        rateTable.at(teamIndex).resize(teamRestGames);
+        digitsTable.at(teamIndex).resize(teamRestGames);
+    }
+
+    GamesCount  allPercentListCount = (maxRestGame + 1) * numTeam;
+
+    std::vector<WinningRate>    allPercentList(allPercentList);
+    std::vector<NumOfDigits>    digitsTempList(allPercentList);
+
+    //  各チームの勝数と最終勝率のテーブルを作る。  //
+    allPercentListCount = 0;
+    for ( TeamIndex teamIndex = 0; teamIndex < numTeam; ++ teamIndex ) {
+        const  LeagueIndex  teamLeague  = getTeamInfo(teamIndex).leagueID;
+        const  CountedScores  & csTeam  = csData.at(teamIndex);
+
+        const   GamesCount
+            currentWonGames = csTeam.numWons[FILTER_ALL_GAMES];
+        const   GamesCount
+            teamRestGames   = csTeam.numTotalRestGames[FILTER_ALL_GAMES];
+        const   GamesCount  totalGames  = currentWonGames
+            + csTeam.numLost[FILTER_ALL_GAMES] + teamRestGames;
+
+        for ( GamesCount win = 0; win <= teamRestGames; ++ win ) {
+            //  勝率を計算する。    //
+            const  WinningRate
+                lastPercent = (currentWonGames + win) / totalGames;
+
+            //  このデータをテンポラリリストにソートして挿入する。  //
+            if ( teamLeague == leagueIndex ) {
+                int insertIndex = allPercentListCount;
+                for ( int i = 0; i < allPercentListCount; ++ i ) {
+                    if ( allPercentList[i] == lastPercent ) {
+                        insertIndex  = -1;
+                        break;
+                    }
+                    if ( allPercentList[i] > lastPercent ) {
+                        insertIndex = i;
+                        break;
+                    }
+                }
+                if ( insertindex >= 0 ) {
+                    for ( int i = allPercentListCount - 1;
+                            i >= insertIndex; -- i )
+                    {
+                        allPercentList[i + 1] = allPercentList[i];
+                    }
+                    allPercentList[insertIndex] = lastPercent;
+                    ++ allPercentListCount;
+                }
+            }
+
+            //  データを勝率テーブルに書き込む。    //
+            rateTable.at(teamIndex).at(win) = lastPercent;
+        }
+    }
+
+    return ( maxRestGame );
+}
+
+//----------------------------------------------------------------
 //    対戦カード毎の試合数を設定する。
 //
 
