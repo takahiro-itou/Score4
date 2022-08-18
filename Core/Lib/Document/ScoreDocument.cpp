@@ -960,8 +960,8 @@ ScoreDocument::makeWinningRateTable(
         if ( maxRestGame < teamRestGames ) {
             maxRestGame = teamRestGames;
         }
-        rateTable.at(teamIndex).resize(teamRestGames);
-        digitsTable.at(teamIndex).resize(teamRestGames);
+        rateTable.at(teamIndex).resize(teamRestGames + 1);
+        digitsTable.at(teamIndex).resize(teamRestGames + 1);
     }
 
     GamesCount  allPercentListCount = (maxRestGame + 1) * numTeam;
