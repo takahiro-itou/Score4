@@ -556,7 +556,7 @@ private:
     /**   対チーム毎の集計結果から、合計を計算する。
     **
     **  @param [in]     idxLeague   所属するリーグ。
-    **  @param [in,out] trgCS      結果を読み書きする変数。
+    **  @param [in,out] trgCS       結果を読み書きする変数。
     **  @return     エラーコードを返す。
     **      -   異常終了の場合は、
     **          エラーの種類を示す非ゼロ値を返す。
@@ -566,6 +566,25 @@ private:
     countTotalScores(
             const  LeagueIndex  idxLeague,
             CountedScores     & trgCS)  const;
+
+    //----------------------------------------------------------------
+    /**   勝率テーブルを作成する。
+    **
+    **  @param [in] csData         集計済みデータ。
+    **  @param [in] leagueIndex    桁数テーブルを作成するリーグ。
+    **  @param[out] rateTable      勝率テーブルを格納する変数。
+    **  @param[out] digitsTable    桁数テーブルを格納する変数。
+    **          勝率テーブルの対応するセルを表示するのに
+    **          最低限必要な桁数を格納する。
+    **  @return     残り試合数の最大値を返す。
+    **      最も多くの試合を残しているチームの、その残り試合数。
+    **/
+    GamesCount
+    makeWinningRateTable(
+            const  CountedScoreList &csData,
+            const  LeagueIndex      leagueIndex,
+            WinningRateTable        &rateTable,
+            NumOfDigitsTable        &digitsTable)  const;
 
     //----------------------------------------------------------------
     /**   対戦カード毎の試合数を設定する。
