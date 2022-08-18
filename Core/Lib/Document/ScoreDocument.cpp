@@ -179,6 +179,33 @@ ScoreDocument::appendTeamInfo(
 }
 
 //----------------------------------------------------------------
+//    指定した相手を確実に上回るのに必要な勝数を計算する。
+//
+
+GamesCount
+ScoreDocument::calculateGamesForWin(
+        const   WinningRateTable  & percentTable,
+        const   TeamIndex           teamIndex,
+        const   TeamIndex           enemyIndex,
+        const   GamesCount          teamRest,
+        const   GamesCount          enemyRest,
+        const   Boolean             allowEqual)  const
+{
+    return ( 0 );
+}
+
+//----------------------------------------------------------------
+//    各チームのプレーオフ進出マジックを計算する。
+//
+
+ErrCode
+ScoreDocument::calculateMagicNumbers(
+        CountedScoreList    &bufCounted)
+{
+    return ( ERR_FAILURE );
+}
+
+//----------------------------------------------------------------
 //    ドキュメントの内容をクリアする。
 //
 

@@ -162,6 +162,32 @@ public:
             const  LeagueIndex  leagueID);
 
     //----------------------------------------------------------------
+    /**   指定した相手を確実に上回るのに必要な勝数を計算する。
+    **
+    **/
+    virtual  GamesCount
+    calculateGamesForWin(
+            const   WinningRateTable  & percentTable,
+            const   TeamIndex           teamIndex,
+            const   TeamIndex           enemyIndex,
+            const   GamesCount          teamRest,
+            const   GamesCount          enemyRest,
+            const   Boolean             allowEqual)  const;
+
+    //----------------------------------------------------------------
+    /**   各チームのプレーオフ進出マジックを計算する。
+    **
+    **  @param [in,out] bufCounted
+    **  @return     エラーコードを返す。
+    **      -   異常終了の場合は、
+    **          エラーの種類を示す非ゼロ値を返す。
+    **      -   正常終了の場合は、ゼロを返す。
+    **/
+    virtual  ErrCode
+    calculateMagicNumbers(
+            CountedScoreList    &bufCounted);
+
+    //----------------------------------------------------------------
     /**   ドキュメントの内容をクリアする。
     **
     **  @return     エラーコードを返す。
