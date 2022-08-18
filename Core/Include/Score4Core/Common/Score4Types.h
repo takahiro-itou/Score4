@@ -141,6 +141,12 @@ typedef     int                 LeagueIndex;
 typedef     int                 GamesCount;
 
 /**
+**    勝率を表す型。
+**/
+
+typedef     double              WinningRate;
+
+/**
 **    ゲームレコードのインデックス。
 **/
 typedef     GamesCount          RecordIndex;
@@ -151,6 +157,13 @@ typedef     GamesCount          RecordIndex;
 **/
 
 typedef     int                 ScoreValue;
+
+//----------------------------------------------------------------
+/**
+**    桁数を表す型。
+**/
+
+typedef     int                 NumOfDigits;
 
 //----------------------------------------------------------------
 /**
