@@ -282,6 +282,25 @@ public:
     initializeGameCountTable();
 
     //----------------------------------------------------------------
+    /**   勝率テーブルを作成する。
+    **
+    **  @param [in] csData         集計済みデータ。
+    **  @param [in] leagueIndex    桁数テーブルを作成するリーグ。
+    **  @param[out] rateTable      勝率テーブルを格納する変数。
+    **  @param[out] digitsTable    桁数テーブルを格納する変数。
+    **          勝率テーブルの対応するセルを表示するのに
+    **          最低限必要な桁数を格納する。
+    **  @return     残り試合数の最大値を返す。
+    **      最も多くの試合を残しているチームの、その残り試合数。
+    **/
+    virtual  GamesCount
+    makeWinningRateTable(
+            const  CountedScoreList &csData,
+            const  LeagueIndex      leagueIndex,
+            WinningRateTable        &rateTable,
+            NumOfDigitsTable        &digitsTable)  const;
+
+    //----------------------------------------------------------------
     /**   チーム情報用の領域を確保する。
     **
     **  @param [in] numTeam   チーム数。
@@ -592,25 +611,6 @@ private:
     countTotalScores(
             const  LeagueIndex  idxLeague,
             CountedScores     & trgCS)  const;
-
-    //----------------------------------------------------------------
-    /**   勝率テーブルを作成する。
-    **
-    **  @param [in] csData         集計済みデータ。
-    **  @param [in] leagueIndex    桁数テーブルを作成するリーグ。
-    **  @param[out] rateTable      勝率テーブルを格納する変数。
-    **  @param[out] digitsTable    桁数テーブルを格納する変数。
-    **          勝率テーブルの対応するセルを表示するのに
-    **          最低限必要な桁数を格納する。
-    **  @return     残り試合数の最大値を返す。
-    **      最も多くの試合を残しているチームの、その残り試合数。
-    **/
-    GamesCount
-    makeWinningRateTable(
-            const  CountedScoreList &csData,
-            const  LeagueIndex      leagueIndex,
-            WinningRateTable        &rateTable,
-            NumOfDigitsTable        &digitsTable)  const;
 
     //----------------------------------------------------------------
     /**   対戦カード毎の試合数を設定する。
