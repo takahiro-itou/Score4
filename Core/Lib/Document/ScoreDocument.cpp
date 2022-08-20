@@ -191,7 +191,50 @@ ScoreDocument::calculateGamesForWin(
         const   GamesCount          enemyRest,
         const   Boolean             allowEqual)  const
 {
-    return ( 0 );
+    GamesCount  winGames, loseGames, nResult;
+    WinningRate wrTeamLast, wrEnemyLast;
+    Boolean     flgSelf;
+
+    wrTeamLast  = percentTable.at(teamIndex ).at(teamRest );
+    wrEnemyLast = percentTable.at(enemyIndex).at(enemyRest);
+
+    if ( wrEnemyLast < wrTeamLast ) {
+        flgSelf = BOOL_TRUE;
+    } else if ( (allowEqual != BOOL_FALSE) && (wrTeamLast == wrEnemyLast) ) {
+        flgSelf = BOOL_TRUE;
+    } else {
+        flgSelf = BOOL_FALSE;
+    }
+
+    if ( flgSelf ) {
+        //  自力で  //
+        nResult = teamRest;
+        for ( winGames = 0; winGames <= teamRest; ++ winGames ) {
+            wrTeamLast  = percentTable.at(teamIndex).at(winGames);
+            if ( wrEnemyLast < wrTeamLast ) {
+                nResult = winGames;
+                break;
+            } else if ( (allowEqual) && (wrTeamLast == wrEnemyLast) ) {
+                nResult = winGames;
+                break;
+            }
+        }
+    } else {
+        //  他力本願。  //
+        nResult = Common::MAGIC_NO_PROBABILITY_WONS + teamRest;
+        for ( loseGames = 0; loseGames <= enemyRest; ++ loseGames ) {
+            wrEnemyLast = percentTable.at(enemyIndex).at(enemyRest - loseGames);
+            if ( wrEnemyLast < wrTeamLast ) {
+                nResult = teamRest + loseGames;
+                break;
+            } else if ( (allowEqual) && (wrEnemyLast == wrTeamLast) ) {
+                nResult = teamRest + loseGames;
+                break;
+            }
+        }
+    }
+
+    return ( nResult );
 }
 
 //----------------------------------------------------------------

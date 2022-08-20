@@ -186,6 +186,9 @@ struct  CountedScores
     ScoreTable      vsLostScores;
 };
 
+CONSTEXPR_VAR   GamesCount  MAGIC_NO_PROBABILITY_WONS   = 99999999;
+CONSTEXPR_VAR   GamesCount  MAGICLIST_NO_DATA_ENTRY     = -1;
+
 }   //  End of namespace  Common
 SCORE4_CORE_NAMESPACE_END
 
