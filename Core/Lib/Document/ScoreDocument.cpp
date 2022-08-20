@@ -288,7 +288,88 @@ ScoreDocument::calculateMagicNumbers(
         }
     }
 
-    return ( ERR_FAILURE );
+    for ( int lngCalculateMode = 0; lngCalculateMode <= 1; ++ lngCalculateMode )
+    {
+        std::vector<GamesCount> lngMagicNumber(TeamCount);
+        std::vector<GamesCount> lngBeatProb(TeamCount);
+        std::vector<Boolean>    blnFlagMagic(TeamCount);
+
+        for ( TeamIndex lngTeam = 0; lngTeam < TeamCount; ++ lngTeam ) {
+            const LeagueIndex lngTeamLeague = getTeamInfo(lngTeam).leagueID;
+            const TeamIndex lngCalcPlayoffTeams = getLeagueInfo(lngTeamLeague).numPlayOff;
+            Common::CountedScores &cs = bufCounted.at(lngTeam);
+
+            GamesCount  lngTeamRest = cs.numTotalRestGames[FILTER_ALL_GAMES];
+            blnFlagMagic.at(lngTeam) = BOOL_TRUE;
+            TeamIndex k = 0;
+            for ( TeamIndex lngEnemy = 0; lngEnemy < TeamCount; ++ lngEnemy) {
+                const LeagueIndex lngEnemyLeague = getTeamInfo(lngEnemy).leagueID;
+                if ( (lngEnemyLeague == lngTeamLeague) && (lngEnemy != lngTeam) )
+                {
+                    if ( blnBeatFlag.at(lngEnemy).at(lngTeam) != BOOL_FALSE ) {
+                        //  まだ自力での可能性が残っているチームがある。    //
+                        ++ k;
+                    }
+                }
+            }
+            if ( k >= lngCalcPlayoffTeams ) {
+                //  まだマジックは点灯していない。  //
+                blnFlagMagic.at(lngTeam) = BOOL_FALSE;
+            }
+            lngMagicNumber.at(lngTeam) == 0;
+
+            std::vector<GamesCount> lngMagicList(TeamCount);
+            for ( TeamIndex lngEnemy = 0; lngEnemy < TeamCount; ++ lngEnemy ) {
+                lngMagicList.at(lngEnemy) = -1;
+            }
+            for ( TeamIndex lngEnemy = 0; lngEnemy < TeamCount; ++ lngEnemy ) {
+                const LeagueIndex lngEnemyLeague = getTeamInfo(lngEnemy).leagueID;
+                Common::CountedScores &csEnemy = bufCounted.at(lngEnemy);
+                if ( (lngEnemyLeague == lngTeamLeague) && (lngEnemy != lngTeam) )
+                {
+                    GamesCount  lngEnemyRest = csEnemy.numTotalRestGames[FILTER_ALL_GAMES];
+                    GamesCount  lngDirectRest = csEnemy.restGames.at(lngTeam)[FILTER_ALL_GAMES];
+                    GamesCount  lngGamesForWin = calculateGamesForWin(dblPercent, lngTeam, lngEnemy, lngTeamRest, lngEnemyRest - lngDirectRest, BOOL_TRUE);
+                    lngGamesForWin = lngTeamRest - lngGamesForWin;
+                    lngBeatProb.at(lngEnemy) = lngGamesForWin;
+                    if ( lngGamesForWin > lngTeamRest - lngDirectRest ) {
+                        lngBeatProb.at(lngEnemy) = lngTeamRest - lngDirectRest;
+                    }
+                    if ( lngGamesForWin < 0 ) {
+                        lngGamesForWin = calculateGamesForWin(dblPercent, lngEnemy, lngTeam, lngEnemyRest - lngDirectRest, lngTeamRest, BOOL_FALSE);
+                        csEnemy.vsMagic.at(lngTeam) = lngGamesForWin;
+                    } else {
+                        csEnemy.vsMagic.at(lngTeam) = -1;
+                    }
+                    if ( blnFlagMagic.at(lngTeam) == BOOL_FALSE) {
+                        lngGamesForWin = calculateGamesForWin(dblPercent, lngTeam, lngEnemy, lngTeamRest, lngEnemyRest - lngDirectRest, BOOL_TRUE);
+                    } else {
+                        lngGamesForWin = calculateGamesForWin(dblPercent, lngTeam, lngEnemy, lngTeamRest - lngDirectRest, lngEnemyRest, BOOL_FALSE);
+                    }
+                } else {
+                    lngBeatProb.at(lngEnemy) = 0;
+                    csEnemy.vsMagic.at(lngTeam) = -1;
+                }
+            }
+
+            //  集計したデータの、プレーオフ進出ラインを呼び出す。  //
+            if ( blnFlagMagic.at(lngTeam) != BOOL_FALSE ) {
+                lngGamesForWin = lngMagicList.at(lngCalcPlayoffTeams - 1);
+                lngMagicNumber.at(lngTeam) = lngGamesForWin;
+            } else {
+                lngGamesForWin = lngMagicList.at(lngCalcPlayoffTeams - 1);
+                lngMagicNumber.at(lngTeam) = lngTeamRest - lngGamesForWin;
+            }
+
+            //  データを転送する。  //
+            for ( TeamIndex lngEnemy = 0; lngEnemy < TeamCount; ++ lngEnemy ) {
+                cs.beatProbability.at(lngEnemy) = lngBeatProb.at(lngEnemy);
+            }
+        }
+
+    }
+
+    return ( ERR_SUCCESS );
 }
 
 //----------------------------------------------------------------
