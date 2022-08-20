@@ -37,10 +37,6 @@ Public Sub displayRestGameTableToGrid(
 
     makeTeamListOnGridViewHeader(numShowCount, bufShowIndex, numTeams, True, scoreData, objView)
 
-    Const colTotalAll As Integer = 1
-    Dim colLeagueTotal As Integer = numShowCount + 2
-    Dim colInterTotal As Integer = numTeams + 3
-
     With objView
         .Rows.Clear()
         For i = 0 To numShowCount - 1
@@ -51,47 +47,15 @@ Public Sub displayRestGameTableToGrid(
             teamInfo = scoreData.teamInfo(idxTeam)
             scoreInfo = scoreData.scoreInfo(idxTeam)
 
-            Dim restTotal As Integer
-            Dim restLeague As Integer
-            Dim restInter As Integer
-            Dim targetTeam As Integer
-
-            With scoreInfo
-                restTotal = .numTotalRestGames(gameFilter)
-                restLeague = .numLeagueRestGames(gameFilter)
-                restInter = .numInterRestGames(gameFilter)
-            End With
-
             .Rows.Add(
-                teamInfo.teamName,
-                restTotal
+                teamInfo.teamName
             )
 
-            With .Rows(i)
-                .Cells(colTotalAll).Style.BackColor = Color.FromArgb(0, 255, 0)
-
-                ' 所属リーグ内の残り試合。対戦相手毎の試合数
-                For j = 0 To numShowCount - 1
-                    targetTeam = bufShowIndex(j)
-                    .Cells(j + 2).Value = scoreInfo.restGames(targetTeam, gameFilter)
-                Next j
-
-                ' 所属リーグ内の残り試合の合計
-                .Cells(colLeagueTotal).Value = restLeague
-                .Cells(colLeagueTotal).Style.BackColor = Color.FromArgb(0, 255, 0)
-
-                ' 交流戦の残り試合。対戦相手毎の試合数
-                For j = numShowCount To numTeams - 1
-                    targetTeam = bufShowIndex(j)
-                    .Cells(j + 3).Value = scoreInfo.restGames(targetTeam, gameFilter)
-                Next j
-
-                ' 交流戦の残り試合の合計
-                .Cells(colInterTotal).Value = restInter
-                .Cells(colInterTotal).Style.BackColor = Color.FromArgb(0, 255, 0)
-            End With
-
-        Next
+            writeTeamRestGamesToGridRow(
+                gameFilter, numTeams, numShowCount,
+                bufShowIndex, .Rows(i), scoreInfo
+            )
+        Next i
     End With
 End Sub
 
@@ -260,7 +224,6 @@ Public Sub displayWinsForBeatTableToGrid(
         ByRef scoreData As Score4Wrapper.Document.ScoreDocument,
         ByRef objView As System.Windows.Forms.DataGridView)
 
-    Dim i As Integer
     Dim bufShowIndex() As Integer
     Dim numTeams As Integer
     Dim numShowCount As Integer
@@ -381,6 +344,64 @@ Private Sub makeTeamListOnGridViewHeader(
             textColumn.HeaderCell.Style.BackColor = Color.FromArgb(0, 255, 0)
             .Add(textColumn)
         End If
+    End With
+
+End Sub
+
+Private Sub writeTeamRestGamesToGridRow(
+         ByVal gameFilter As Score4Wrapper.GameFilter,
+         ByVal numTeams As Integer,
+         ByVal numShowCount As Integer,
+         ByRef showIndex() As Integer,
+         ByRef destRow As System.Windows.Forms.DataGridViewRow,
+         ByRef scoreInfo As Score4Wrapper.Common.CountedScores)
+
+    Dim j As Integer
+    Dim restTotal As Integer
+    Dim restLeague As Integer
+    Dim restInter As Integer
+    Dim targetTeam As Integer
+
+    Const colTotalAll As Integer = 1
+    Dim colLeagueTotal As Integer = numShowCount + 2
+    Dim colInterTotal As Integer = numTeams + 3
+
+    With scoreInfo
+        restTotal = .numTotalRestGames(gameFilter)
+        restLeague = .numLeagueRestGames(gameFilter)
+        restInter = .numInterRestGames(gameFilter)
+    End With
+
+    With destRow
+        ' 残り試合の合計
+        With .Cells(colTotalAll)
+            .Style.BackColor = Color.FromArgb(0, 255, 0)
+            .Value = restTotal
+        End With
+
+        ' 所属リーグ内の残り試合。対戦相手毎の試合数
+        For j = 0 To numShowCount - 1
+            targetTeam = showIndex(j)
+            .Cells(j + 2).Value = scoreInfo.restGames(targetTeam, gameFilter)
+        Next j
+
+        ' 所属リーグ内の残り試合の合計
+        With .Cells(colLeagueTotal)
+            .Style.BackColor = Color.FromArgb(0, 255, 0)
+            .Value = restLeague
+        End With
+
+        ' 交流戦の残り試合。対戦相手毎の試合数
+        For j = numShowCount To numTeams - 1
+            targetTeam = showIndex(j)
+            .Cells(j + 3).Value = scoreInfo.restGames(targetTeam, gameFilter)
+        Next j
+
+        ' 交流戦の残り試合の合計
+        With .Cells(colInterTotal)
+            .Style.BackColor = Color.FromArgb(0, 255, 0)
+            .Value = restInter
+        End With
     End With
 
 End Sub
