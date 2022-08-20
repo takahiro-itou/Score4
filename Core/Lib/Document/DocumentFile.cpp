@@ -59,6 +59,25 @@ s_tblRecordFlagName[] = {
     "RESULT"
 };
 
+#if defined( SCORE4_USE_PRE_CONFIGURED_MSVC )
+
+inline  char *
+my_safe_strcpy(char *dest, const char *src, size_t dest_size)
+{
+    errno_t ret = ::strcpy_s(dest, static_cast<rsize_t>(dest_size), src);
+    return ( dest );
+}
+
+#else
+
+inline  char *
+my_safe_strcpy(char *dest, const char *src, size_t dest_size)
+{
+    return  ::strncpy(dest, src, dest_size);
+}
+
+#endif
+
 /**
 **    レコードのサイズ。
 **/
@@ -1027,7 +1046,7 @@ DocumentFile::writeSettingBlock(
         ::memset(tmpName, 0, sizeof(tmpName));
         ::memset(tmpInfo, 0, sizeof(tmpInfo));
 
-        ::strcpy(tmpName, leagueInfo.leagueName.c_str());
+        my_safe_strcpy(tmpName, leagueInfo.leagueName.c_str(), sizeof(tmpName));
         ::memcpy(ptrCur,  tmpName, sizeof(tmpName));
         ptrCur  +=  sizeof(tmpName);
 
@@ -1044,7 +1063,7 @@ DocumentFile::writeSettingBlock(
         const   ScoreDocument::TeamInfo
             & teamInfo  =  objDoc.getTeamInfo(i);
 
-        ::strcpy(tmpTeamName, teamInfo.teamName.c_str());
+        my_safe_strcpy(tmpTeamName, teamInfo.teamName.c_str(), sizeof(tmpTeamName));
         ::memcpy(ptrCur, tmpTeamName, sizeof(tmpTeamName));
         ptrCur  +=  sizeof(tmpTeamName);
 
