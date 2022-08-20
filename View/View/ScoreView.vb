@@ -299,6 +299,7 @@ Private Function makeGridViewColumn(
         .Visible = True
         .Width = 64
     End With
+
     makeGridViewColumn = textColumn
 
 End Function
@@ -318,57 +319,68 @@ Private Sub makeTeamListOnGridViewHeader(
     Dim idxTeam As Integer
     Dim colName As String
     Dim colText As String
+    Dim cellAlign As DataGridViewContentAlignment
     Dim textColumn As DataGridViewTextBoxColumn
+
+    cellAlign = DataGridViewContentAlignment.MiddleRight
 
     If (numTeams = -1) Then
         numTeams = scoreData.getNumTeams()
     End If
 
-    With objView
-        With .Columns
-            .Clear()
+    With objView.Columns
+        .Clear()
 
-            textColumn = makeGridViewColumn("team", "Team")
+        textColumn = makeGridViewColumn("team", "Team")
+        .Add(textColumn)
+
+        If (flagShowTotal) Then
+            textColumn = makeGridViewColumn("total", "Total")
+            With textColumn.DefaultCellStyle
+                .Alignment = cellAlign
+                .BackColor = Color.FromArgb(0, 255, 0)
+            End With
+            textColumn.HeaderCell.Style.BackColor = Color.FromArgb(0, 255, 0)
             .Add(textColumn)
+        End If
 
-            If (flagShowTotal) Then
-                textColumn = makeGridViewColumn("total", "Total")
-                textColumn.DefaultCellStyle.BackColor = Color.FromArgb(0, 255, 0)
-                textColumn.HeaderCell.Style.BackColor = Color.FromArgb(0, 255, 0)
-                .Add(textColumn)
-            End If
+        For i = 0 To numShowCount - 1
+            idxTeam = bufShowIndex(i)
+            colName = "team" & idxTeam
+            colText = scoreData.teamInfo(idxTeam).teamName
+            textColumn = makeGridViewColumn(colName, colText)
+            textColumn.DefaultCellStyle.Alignment = cellAlign
+            .Add(textColumn)
+        Next i
 
-            For i = 0 To numShowCount - 1
-                idxTeam = bufShowIndex(i)
-                colName = "team" & idxTeam
-                colText = scoreData.teamInfo(idxTeam).teamName
-                textColumn = makeGridViewColumn(colName, colText)
-                .Add(textColumn)
-            Next i
+        If (flagShowTotal) Then
+            textColumn = makeGridViewColumn("league", "League")
+            With textColumn.DefaultCellStyle
+                .Alignment = cellAlign
+                .BackColor = Color.FromArgb(0, 255, 0)
+            End With
+            textColumn.HeaderCell.Style.BackColor = Color.FromArgb(0, 255, 0)
+            .Add(textColumn)
+        End If
 
-            If (flagShowTotal) Then
-                textColumn = makeGridViewColumn("league", "League")
-                textColumn.DefaultCellStyle.BackColor = Color.FromArgb(0, 255, 0)
-                textColumn.HeaderCell.Style.BackColor = Color.FromArgb(0, 255, 0)
-                .Add(textColumn)
-            End If
+        For i = numShowCount To numTeams - 1
+            idxTeam = bufShowIndex(i)
+            colName = "team" & idxTeam
+            colText = scoreData.teamInfo(idxTeam).teamName
+            textColumn = makeGridViewColumn(colName, colText)
+            textColumn.DefaultCellStyle.Alignment = cellAlign
+            .Add(textColumn)
+        Next i
 
-            For i = numShowCount To numTeams - 1
-                idxTeam = bufShowIndex(i)
-                colName = "team" & idxTeam
-                colText = scoreData.teamInfo(idxTeam).teamName
-                textColumn = makeGridViewColumn(colName, colText)
-                .Add(textColumn)
-            Next i
-
-            If (flagShowTotal) Then
-                textColumn = makeGridViewColumn("inter", "Inter.")
-                textColumn.DefaultCellStyle.BackColor = Color.FromArgb(0, 255, 0)
-                textColumn.HeaderCell.Style.BackColor = Color.FromArgb(0, 255, 0)
-                .Add(textColumn)
-            End If
-
-        End With
+        If (flagShowTotal) Then
+            textColumn = makeGridViewColumn("inter", "Inter.")
+            With textColumn.DefaultCellStyle
+                .Alignment = cellAlign
+                .BackColor = Color.FromArgb(0, 255, 0)
+            End With
+            textColumn.HeaderCell.Style.BackColor = Color.FromArgb(0, 255, 0)
+            .Add(textColumn)
+        End If
     End With
 
 End Sub
