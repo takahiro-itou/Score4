@@ -99,7 +99,7 @@ inline  char *
 my_safe_strcpy(char (&dest)[N], const char *src)
 {
 
-#if !defined( SCORE4_USE_PRE_CONFIGURED_MSVC )
+#if !defined( _MSC_VER )
     ::strncpy(dest, src, N);
 #else
     errno_t ret = ::strcpy_s(dest, src);
