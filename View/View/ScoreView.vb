@@ -233,10 +233,11 @@ Public Sub displayTeamMagicTableToGrid(
                             cellText = "M 0 :  ---"
                             backColor = Color.FromArgb(0, 0, 255)
                             foreColor = Color.FromArgb(255, 255, 255)
-                        Else
+                        ElseIf (vsMagic >= 0) Then
                             cellText = "M " & vsMagic & " : " & cellText
                             backColor = Color.FromArgb(0, 255, 255)
                         End If
+
                         .Cells(j + 1).Value = cellText
                         .Cells(j + 1).Style.BackColor = backColor
                         .Cells(j + 1).Style.ForeColor = foreColor
