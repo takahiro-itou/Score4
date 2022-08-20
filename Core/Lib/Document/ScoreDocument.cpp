@@ -243,7 +243,7 @@ ScoreDocument::calculateGamesForWin(
 
 ErrCode
 ScoreDocument::calculateMagicNumbers(
-        CountedScoreList    &bufCounted)
+        CountedScoreList    &bufCounted)  const
 {
     WinningRateTable    dblPercent;
     NumOfDigitsTable    dummyDigitsBuffer;
@@ -602,6 +602,8 @@ ScoreDocument::countScores(
             std::cout   <<  std::endl;
         }
     }
+
+    calculateMagicNumbers(bufCounted);
 
     return ( ERR_SUCCESS );
 }

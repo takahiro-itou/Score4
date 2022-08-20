@@ -185,7 +185,7 @@ public:
     **/
     virtual  ErrCode
     calculateMagicNumbers(
-            CountedScoreList    &bufCounted);
+            CountedScoreList    &bufCounted)  const;
 
     //----------------------------------------------------------------
     /**   ドキュメントの内容をクリアする。
