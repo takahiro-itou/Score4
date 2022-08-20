@@ -315,7 +315,7 @@ ScoreDocument::calculateMagicNumbers(
                 //  まだマジックは点灯していない。  //
                 blnFlagMagic.at(lngTeam) = BOOL_FALSE;
             }
-            lngMagicNumber.at(lngTeam) == 0;
+            lngMagicNumber.at(lngTeam) = 0;
 
             std::vector<GamesCount> lngMagicList(TeamCount);
             for ( TeamIndex lngEnemy = 0; lngEnemy < TeamCount; ++ lngEnemy ) {
