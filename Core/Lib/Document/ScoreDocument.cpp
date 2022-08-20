@@ -245,6 +245,49 @@ ErrCode
 ScoreDocument::calculateMagicNumbers(
         CountedScoreList    &bufCounted)
 {
+    WinningRateTable    dblPercent;
+    NumOfDigitsTable    dummyDigitsBuffer;
+
+    const TeamIndex TeamCount = getNumTeams();
+    const GamesCount lngMaxRest = makeWinningRateTable(bufCounted, -1, dblPercent, dummyDigitsBuffer);
+    GamesCount  lngGamesForWin;
+
+    std::vector<std::vector<Boolean> >  blnBeatFlag(TeamCount);
+    std::vector<TeamIndex>  lngBeatTeams(TeamCount);
+
+    for ( TeamIndex lngTeam = 0; lngTeam < TeamCount; ++ lngTeam ) {
+        blnBeatFlag.at(lngTeam).resize(TeamCount);
+        lngBeatTeams.at(lngTeam) = 0;
+        const LeagueIndex lngTeamLeague = getTeamInfo(lngTeam).leagueID;
+        Common::CountedScores &cs = bufCounted.at(lngTeam);
+        const GamesCount lngTeamRest = cs.numTotalRestGames[FILTER_ALL_GAMES];
+        const WinningRate dblLastScorePercent = dblPercent.at(lngTeam)
+                .at(lngTeamRest);
+
+        for ( TeamIndex lngEnemy = 0; lngEnemy < TeamCount; ++ lngEnemy ) {
+            const LeagueIndex lngEnemyLeague = getTeamInfo(lngEnemy).leagueID;
+            if ( (lngEnemyLeague == lngTeamLeague) && (lngEnemy != lngTeam) ) {
+                //  この相手チームが直接対決以外で、    //
+                //  残りの試合に全部勝った時の勝率。    //
+                const Common::CountedScores &csEnemy = bufCounted.at(lngEnemy);
+                const GamesCount lngDirectRest = csEnemy.restGames.at(lngTeam)[FILTER_ALL_GAMES];
+                const GamesCount lngEnemyRest = csEnemy.numTotalRestGames[FILTER_ALL_GAMES];
+                const WinningRate dblEnemyLastPercent = dblPercent.at(lngEnemy).at(lngEnemyRest - lngDirectRest);
+                if ( dblLastScorePercent >= dblEnemyLastPercent ) {
+                    blnBeatFlag.at(lngTeam).at(lngEnemy) = BOOL_TRUE;
+                } else {
+                    blnBeatFlag.at(lngTeam).at(lngEnemy) = BOOL_FALSE;
+                    ++ lngBeatTeams.at(lngTeam);
+                }
+
+                //  この相手チームを確実に上回るのに必要な勝利数。  //
+                lngGamesForWin = calculateGamesForWin(dblPercent, lngTeam, lngEnemy, lngTeamRest, lngEnemyRest, BOOL_FALSE);
+                cs.numWinsForMatch.at(lngEnemy) = lngGamesForWin;
+                cs.numRestForMatch.at(lngEnemy) = lngTeamRest - lngDirectRest;
+            }
+        }
+    }
+
     return ( ERR_FAILURE );
 }
 
