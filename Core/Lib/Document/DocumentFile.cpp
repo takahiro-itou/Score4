@@ -65,6 +65,27 @@ s_tblRecordFlagName[] = {
 CONSTEXPR_VAR   FileLength  RECORD_SIZE     =  28;
 
 //----------------------------------------------------------------
+/**   ファイルを開く。
+**
+**/
+
+inline  FILE *
+my_fopen(const char *filename, const char *mode)
+{
+    FILE *  fp;
+#if defined( _MSC_VER )
+    errno_t ret;
+
+    if ( (ret = fopen_s(&fp, filename, mode)) != 0 ) {
+        return ( static_cast<FILE *>(NULL) );
+    }
+#else
+    fp  = fopen(filename, mode);
+#endif
+    return ( fp );
+}
+
+//----------------------------------------------------------------
 /**   安全な文字列コピー関数。
 **
 **  @tparam N   コピー先の配列のサイズ。
@@ -282,7 +303,7 @@ DocumentFile::readFromBinaryFile(
         ScoreDocument  *    ptrDoc)
 {
 #if defined( _MSC_VER )
-    FILE *  fp  = fopen(fileName.c_str(), "rb");
+    FILE *  fp  = my_fopen(fileName.c_str(), "rb");
     if ( fp == NULL ) {
         return ( ERR_FILE_OPEN_ERROR );
     }
@@ -636,7 +657,7 @@ DocumentFile::saveToBinaryFile(
         return ( retErr );
     }
 
-    FILE *  fp  = fopen(fileName.c_str(), "wb");
+    FILE *  fp  = my_fopen(fileName.c_str(), "wb");
     if ( fp == NULL ) {
         return ( ERR_FILE_OPEN_ERROR );
     }
