@@ -59,29 +59,33 @@ s_tblRecordFlagName[] = {
     "RESULT"
 };
 
-#if defined( SCORE4_USE_PRE_CONFIGURED_MSVC )
-
-inline  char *
-my_safe_strcpy(char *dest, const char *src, size_t dest_size)
-{
-    errno_t ret = ::strcpy_s(dest, static_cast<rsize_t>(dest_size), src);
-    return ( dest );
-}
-
-#else
-
-inline  char *
-my_safe_strcpy(char *dest, const char *src, size_t dest_size)
-{
-    return  ::strncpy(dest, src, dest_size);
-}
-
-#endif
-
 /**
 **    レコードのサイズ。
 **/
 CONSTEXPR_VAR   FileLength  RECORD_SIZE     =  28;
+
+//----------------------------------------------------------------
+/**   安全な文字列コピー関数。
+**
+**  @tparam N   コピー先の配列のサイズ。
+**  @param[out] dest    コピー先の文字配列 (の参照) 。
+**  @param [in] src     コピー元の文字列。
+**  @return     コピー先の先頭アドレスを返す。
+**/
+
+template <size_t N>
+inline  char *
+my_safe_strcpy(char (&dest)[N], const char *src)
+{
+
+#if !defined( SCORE4_USE_PRE_CONFIGURED_MSVC )
+    ::strncpy(dest, src, N);
+#else
+    errno_t ret = ::strcpy_s(dest, src);
+#endif
+    dest[N - 1] = '\0';
+    return ( dest );
+}
 
 }   //  End of (Unnamed) namespace.
 
@@ -1046,7 +1050,7 @@ DocumentFile::writeSettingBlock(
         ::memset(tmpName, 0, sizeof(tmpName));
         ::memset(tmpInfo, 0, sizeof(tmpInfo));
 
-        my_safe_strcpy(tmpName, leagueInfo.leagueName.c_str(), sizeof(tmpName));
+        my_safe_strcpy(tmpName, leagueInfo.leagueName.c_str());
         ::memcpy(ptrCur,  tmpName, sizeof(tmpName));
         ptrCur  +=  sizeof(tmpName);
 
@@ -1063,7 +1067,7 @@ DocumentFile::writeSettingBlock(
         const   ScoreDocument::TeamInfo
             & teamInfo  =  objDoc.getTeamInfo(i);
 
-        my_safe_strcpy(tmpTeamName, teamInfo.teamName.c_str(), sizeof(tmpTeamName));
+        my_safe_strcpy(tmpTeamName, teamInfo.teamName.c_str());
         ::memcpy(ptrCur, tmpTeamName, sizeof(tmpTeamName));
         ptrCur  +=  sizeof(tmpTeamName);
 
