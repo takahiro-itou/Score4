@@ -36,7 +36,7 @@ Public Sub displayRestGameTableToGrid(
     numShowCount = scoreData.computeRankOrder(leagueIndex, bufShowIndex)
 
     makeTeamListOnGridViewHeader(
-        numShowCount, bufShowIndex, numTeams, True, 720,
+        numShowCount, bufShowIndex, numTeams, True, 48,
         scoreData, objView)
 
     With objView
@@ -156,7 +156,7 @@ Public Sub displayTeamMagicTableToGrid(
     End If
 
     makeTeamListOnGridViewHeader(
-        numShowCount, bufShowIndex, numShowCount, False, 960,
+        numShowCount, bufShowIndex, numShowCount, False, 64,
         scoreData, objView)
 
     With objView
@@ -201,11 +201,11 @@ Public Sub displayWinsForBeatTableToGrid(
     End If
 
     makeTeamListOnGridViewHeader(
-        numShowCount, bufShowIndex, numShowCount, False, 1440,
+        numShowCount, bufShowIndex, numShowCount, False, 96,
         scoreData, objView)
 
     With objView
-        .Columns(0).Width = 1660
+        .Columns(0).Width = 112
 
         For i = 0 To numShowCount - 1
             Dim idxTeam As Integer = bufShowIndex(i)
