@@ -101,7 +101,12 @@ int  main(int argc, char * argv[])
     }
 
     std::vector<Common::CountedScores>  cs;
-    retErr  = objDoc.countScores(-1, cs);
+    try {
+        retErr  = objDoc.countScores(-1, cs);
+    } catch ( std::exception & e ) {
+        std::cerr   <<  e.what()    <<  std::endl;
+        return ( ERR_FAILURE );
+    }
 
     const  LeagueIndex  numLeagues  = objDoc.getNumLeagues();
     for ( LeagueIndex i = 0; i < numLeagues; ++ i ) {

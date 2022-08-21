@@ -1,9 +1,9 @@
-﻿//  -*-  coding: utf-8-with-signature;  mode: c++  -*-  //
+﻿//  -*-  coding: utf-8-with-signature-unix; mode: c++  -*-  //
 /*************************************************************************
 **                                                                      **
 **                  ---  The Score4 Core Library.  ---                  **
 **                                                                      **
-**          Copyright (C), 2017-2020, Takahiro Itou                     **
+**          Copyright (C), 2017-2022, Takahiro Itou                     **
 **          All Rights Reserved.                                        **
 **                                                                      **
 **          License: (See COPYING and LICENSE files)                    **
@@ -63,6 +63,50 @@ s_tblRecordFlagName[] = {
 **    レコードのサイズ。
 **/
 CONSTEXPR_VAR   FileLength  RECORD_SIZE     =  28;
+
+//----------------------------------------------------------------
+/**   ファイルを開く。
+**
+**/
+
+inline  FILE *
+my_fopen(const char *filename, const char *mode)
+{
+    FILE *  fp;
+#if defined( _MSC_VER )
+    errno_t ret;
+
+    if ( (ret = fopen_s(&fp, filename, mode)) != 0 ) {
+        return ( static_cast<FILE *>(NULL) );
+    }
+#else
+    fp  = fopen(filename, mode);
+#endif
+    return ( fp );
+}
+
+//----------------------------------------------------------------
+/**   安全な文字列コピー関数。
+**
+**  @tparam N   コピー先の配列のサイズ。
+**  @param[out] dest    コピー先の文字配列 (の参照) 。
+**  @param [in] src     コピー元の文字列。
+**  @return     コピー先の先頭アドレスを返す。
+**/
+
+template <size_t N>
+inline  char *
+my_safe_strcpy(char (&dest)[N], const char *src)
+{
+
+#if !defined( _MSC_VER )
+    ::strncpy(dest, src, N);
+#else
+    errno_t ret = ::strcpy_s(dest, src);
+#endif
+    dest[N - 1] = '\0';
+    return ( dest );
+}
 
 }   //  End of (Unnamed) namespace.
 
@@ -259,7 +303,7 @@ DocumentFile::readFromBinaryFile(
         ScoreDocument  *    ptrDoc)
 {
 #if defined( _MSC_VER )
-    FILE *  fp  = fopen(fileName.c_str(), "rb");
+    FILE *  fp  = my_fopen(fileName.c_str(), "rb");
     if ( fp == NULL ) {
         return ( ERR_FILE_OPEN_ERROR );
     }
@@ -613,7 +657,7 @@ DocumentFile::saveToBinaryFile(
         return ( retErr );
     }
 
-    FILE *  fp  = fopen(fileName.c_str(), "wb");
+    FILE *  fp  = my_fopen(fileName.c_str(), "wb");
     if ( fp == NULL ) {
         return ( ERR_FILE_OPEN_ERROR );
     }
@@ -1027,7 +1071,7 @@ DocumentFile::writeSettingBlock(
         ::memset(tmpName, 0, sizeof(tmpName));
         ::memset(tmpInfo, 0, sizeof(tmpInfo));
 
-        ::strcpy(tmpName, leagueInfo.leagueName.c_str());
+        my_safe_strcpy(tmpName, leagueInfo.leagueName.c_str());
         ::memcpy(ptrCur,  tmpName, sizeof(tmpName));
         ptrCur  +=  sizeof(tmpName);
 
@@ -1044,7 +1088,7 @@ DocumentFile::writeSettingBlock(
         const   ScoreDocument::TeamInfo
             & teamInfo  =  objDoc.getTeamInfo(i);
 
-        ::strcpy(tmpTeamName, teamInfo.teamName.c_str());
+        my_safe_strcpy(tmpTeamName, teamInfo.teamName.c_str());
         ::memcpy(ptrCur, tmpTeamName, sizeof(tmpTeamName));
         ptrCur  +=  sizeof(tmpTeamName);
 
