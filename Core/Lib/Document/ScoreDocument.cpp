@@ -20,6 +20,7 @@
 
 #include    "Score4Core/Document/ScoreDocument.h"
 
+#include    <iostream>
 #include    <memory.h>
 #include    <stdio.h>
 #include    <vector>
@@ -1219,9 +1220,15 @@ ScoreDocument::makeWinsForBeatInfo(
     //  まず直接対決で敵チームが全部勝利した時を計算する。  //
     WinningRate srcRate = rateTable.at(srcTeam).at(srcRest - directRest);
     WinningRate trgRate = rateTable.at(trgTeam).at(trgRest);
+
+    std::cerr   <<  srcTeam <<  " = "   <<  srcRate
+                <<  " vs "
+                <<  trgTeam <<  " = "   <<  trgRate
+                <<  std::endl;
     if ( trgRate < srcRate ) {
         //  この時にお互い残り試合を全勝して、  //
         //  相手を上回るなら、マジックが点灯。  //
+        std::cerr   <<  "MAGIC" <<  std::endl;
         retInfo.filterType  = MF_ON_MAGIC;
         retInfo.numNeedWins = calculateGamesForWin(
                 rateTable, srcTeam, trgTeam,
@@ -1260,31 +1267,29 @@ ScoreDocument::makeWinsForBeatTable(
     const   TeamIndex   numTeam = getNumTeams();
     GamesCount  trgRest, directRest;
 
-    for ( TeamIndex i = 0; i < numTeam; ++ i ) {
-        const   LeagueIndex league  = getTeamInfo(i).leagueID;
+    const   LeagueIndex league  = getTeamInfo(srcTeam).leagueID;
 
-        CountedScores   &cs = bufCounted.at(i);
-        const   GamesCount  srcRest = cs.numTotalRestGames[FILTER_ALL_GAMES];
+    CountedScores   &cs = bufCounted.at(srcTeam);
+    const   GamesCount  srcRest = cs.numTotalRestGames[FILTER_ALL_GAMES];
 
-        cs.numWinsForBeat.clear();
-        cs.numWinsForBeat.resize(numTeam);
+    cs.numWinsForBeat.clear();
+    cs.numWinsForBeat.resize(numTeam);
 
-        for ( TeamIndex j = 0; j < numTeam; ++ j ) {
-            if ( (getTeamInfo(j).leagueID != league) || (j == srcTeam) ) {
-                cs.numWinsForBeat[j].filterType     = MF_DIFFERENT_LEAGUE;
-                cs.numWinsForBeat[j].numNeedWins    = -1;
-                cs.numWinsForBeat[j].numRestGame    = -1;
-                continue;
-            }
-
-            const   CountedScores  & csTrg  = bufCounted.at(j);
-            trgRest     = csTrg.numTotalRestGames[FILTER_ALL_GAMES];
-            directRest  = cs.restGames.at(j)[FILTER_ALL_GAMES];
-
-            cs.numWinsForBeat[j] = makeWinsForBeatInfo(
-                    rateTable, i, j, srcRest, trgRest, directRest
-            );
+    for ( TeamIndex j = 0; j < numTeam; ++ j ) {
+        if ( (getTeamInfo(j).leagueID != league) || (j == srcTeam) ) {
+            cs.numWinsForBeat[j].filterType     = MF_DIFFERENT_LEAGUE;
+            cs.numWinsForBeat[j].numNeedWins    = -1;
+            cs.numWinsForBeat[j].numRestGame    = -1;
+            continue;
         }
+
+        const   CountedScores  & csTrg  = bufCounted.at(j);
+        trgRest     = csTrg.numTotalRestGames[FILTER_ALL_GAMES];
+        directRest  = cs.restGames.at(j)[FILTER_ALL_GAMES];
+
+        cs.numWinsForBeat[j] = makeWinsForBeatInfo(
+                rateTable, srcTeam, j, srcRest, trgRest, directRest
+        );
     }
 
     return ( ERR_SUCCESS );
