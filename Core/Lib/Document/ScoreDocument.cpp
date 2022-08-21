@@ -1214,7 +1214,7 @@ ScoreDocument::makeWinsForBeatInfo(
     //  敵が何ゲーム負ければ、可能性が復活するか計算する。  //
     retInfo.numWinsSelf = calculateGamesForWin(
             rateTable, srcTeam, trgTeam,
-            srcRest, trgRest - directRest, BOOL_FALSE);
+            srcRest, trgRest - directRest, BOOL_TRUE);
     retInfo.numWinsDiff = (srcRest - retInfo.numWinsSelf);
 
     //  まず直接対決で敵チームが全部勝利した時を計算する。  //
