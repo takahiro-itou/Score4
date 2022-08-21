@@ -357,9 +357,12 @@ Private Sub writeTeamMagicToGridRow(
         ByRef scoreInfo As Score4Wrapper.Common.CountedScores)
 
     Dim j As Integer
+    Dim beatInfo As Score4Wrapper.Common.NumWinsForBeat
+    Dim beatFlag As Score4Wrapper.MagicFilter
+    Dim numWins As Integer
     Dim cellText as String
     Dim backColor as Color
-    Dim foreColor as Color = Color.FromArgb(0, 0, 0)
+    Dim foreColor as Color
 
     With destRow
         For j = 0 To numShowCount - 1
@@ -368,6 +371,12 @@ Private Sub writeTeamMagicToGridRow(
                 .Cells(j + 1).Value = "--------"
                 Continue For
             End If
+
+            backColor = Color.FromArgb(255, 255, 255)
+            foreColor = Color.FromArgb(0, 0, 0)
+            beatInfo = scoreInfo.numWinsForBeat(idxEnemy)
+            beatFlag = beatInfo.filterType
+            numWins = beatInfo.numNeedWins
 
             Dim beatProb As Integer = scoreInfo.beatProbability(idxEnemy)
             If (beatProb <= -9999) Then
@@ -384,14 +393,15 @@ Private Sub writeTeamMagicToGridRow(
                 End If
             End If
 
-            Dim vsMagic As Integer = scoreInfo.vsMagic(idxEnemy)
-            If (vsMagic = 0) Then
-                cellText = "M 0 :  ---"
-                backColor = Color.FromArgb(0, 0, 255)
-                foreColor = Color.FromArgb(255, 255, 255)
-            ElseIf (vsMagic >= 0) Then
-                cellText = "M " & vsMagic & " : " & cellText
-                backColor = Color.FromArgb(0, 255, 255)
+            If (beatFlag = Score4Wrapper.MagicFilter.MF_ON_MAGIC) Then
+                If (numWins <= 0) Then
+                    cellText = "M 0 :  ---"
+                    backColor = Color.FromArgb(0, 0, 255)
+                    foreColor = Color.FromArgb(255, 255, 255)
+                Else
+                    cellText = "M " & numWins & " : " & cellText
+                    backColor = Color.FromArgb(0, 255, 255)
+                End If
             End If
 
             With .Cells(j + 1)
