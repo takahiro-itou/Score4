@@ -20,7 +20,6 @@
 
 #include    "Score4Core/Document/ScoreDocument.h"
 
-#include    <iostream>
 #include    <memory.h>
 #include    <stdio.h>
 #include    <vector>
@@ -1221,14 +1220,9 @@ ScoreDocument::makeWinsForBeatInfo(
     WinningRate srcRate = rateTable.at(srcTeam).at(srcRest - directRest);
     WinningRate trgRate = rateTable.at(trgTeam).at(trgRest);
 
-    std::cerr   <<  srcTeam <<  " = "   <<  srcRate
-                <<  " vs "
-                <<  trgTeam <<  " = "   <<  trgRate
-                <<  std::endl;
     if ( trgRate < srcRate ) {
         //  この時にお互い残り試合を全勝して、  //
         //  相手を上回るなら、マジックが点灯。  //
-        std::cerr   <<  "MAGIC" <<  std::endl;
         retInfo.filterType  = MF_ON_MAGIC;
         retInfo.numNeedWins = calculateGamesForWin(
                 rateTable, srcTeam, trgTeam,

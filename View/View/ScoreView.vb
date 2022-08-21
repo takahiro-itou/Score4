@@ -479,9 +479,7 @@ Private Sub writeWinsForBeatToGridRow(
     Dim j As Integer
     Dim beatInfo As Score4Wrapper.Common.NumWinsForBeat
     Dim beatFlag As Score4Wrapper.MagicFilter
-    Dim totalRestGames As Integer, directRestGames As Integer
     Dim numWins As Integer, numRest As Integer
-    Dim beatProb As Integer, vsMagic As Integer
     Dim cellText as String
     Dim backColor as Color
     Dim foreColor as Color = Color.FromArgb(0, 0, 0)
@@ -500,8 +498,6 @@ Private Sub writeWinsForBeatToGridRow(
             beatFlag = beatInfo.filterType
             numWins = beatInfo.numNeedWins
             numRest = beatInfo.numRestGame
-            beatProb = scoreInfo.beatProbability(idxEnemy)
-            vsMagic = scoreInfo.vsMagic(idxEnemy)
 
             cellText = numWins & " 勝 / " & numRest & " 試合"
             Select Case beatFlag
