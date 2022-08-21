@@ -1204,10 +1204,22 @@ ScoreDocument::makeWinsForBeatInfo(
         const   GamesCount          directRest)  const
 {
     Common::NumWinsForBeat  retInfo;
+    WinningRate srcRate, trgRate;
+
+    //  自力で敵チームを上回る可能性を計算する。            //
+    //  「自力」の意味は、直接対決は自チームが全て勝利し、  //
+    //  敵チームはそれを除く残り試合に全勝すると仮定する。  //
+    //  その時に、後何ゲーム負けても自力での可能性が残る、  //
+    //  あるいは、既に自力の可能性がなくなっている場合は、  //
+    //  敵が何ゲーム負ければ、可能性が復活するか計算する。  //
+    retInfo.numWinsSelf = calculateGamesForWin(
+            rateTable, srcTeam, trgTeam,
+            srcRest, trgRest - directRest, BOOL_FALSE);
+    retInfo.numWinsDiff = (srcRest - retInfo.numWinsSelf);
 
     //  まず直接対決で敵チームが全部勝利した時を計算する。  //
-    WinningRate srcRate = rateTable.at(srcTeam).at(srcRest - directRest);
-    WinningRate trgRate = rateTable.at(trgTeam).at(trgRest);
+    srcRate = rateTable.at(srcTeam).at(srcRest - directRest);
+    trgRate = rateTable.at(trgTeam).at(trgRest);
 
     if ( trgRate < srcRate ) {
         //  この時にお互い残り試合を全勝して、  //

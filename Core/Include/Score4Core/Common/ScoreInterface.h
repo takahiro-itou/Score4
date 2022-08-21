@@ -120,6 +120,16 @@ struct  NumWinsForBeat
     **    残り試合数。ただし、マジックが点灯している時は、直接対決を除く。
     **/
     GamesCount      numRestGame;
+
+    /**
+    **    対象チームを自力で上回るのに必要な勝利数。
+    **/
+    GamesCount      numWinsSelf;
+
+    /**
+    **    対象チームを自力で上回る可能性ギリギリのラインとのゲーム差。
+    **/
+    GamesCount      numWinsDiff;
 };
 
 typedef     std::vector<NumWinsForBeat>     WinsForBeatList;
