@@ -192,9 +192,6 @@ struct  CountedScores
     TeamIndex       currentRank;
 
     GameCountList   beatProbability;
-    GameCountList   vsMagic;
-    GameCountList   numWinsForMatch;
-    GameCountList   numRestForMatch;
 
     WinsForBeatList numWinsForBeat;
 

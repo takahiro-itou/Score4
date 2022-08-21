@@ -286,8 +286,6 @@ ScoreDocument::calculateMagicNumbers(
 
                 //  この相手チームを確実に上回るのに必要な勝利数。  //
                 lngGamesForWin = calculateGamesForWin(dblPercent, lngTeam, lngEnemy, lngTeamRest, lngEnemyRest, BOOL_FALSE);
-                cs.numWinsForMatch.at(lngEnemy) = lngGamesForWin;
-                cs.numRestForMatch.at(lngEnemy) = lngTeamRest - lngDirectRest;
             }
         }
     }
@@ -341,9 +339,7 @@ ScoreDocument::calculateMagicNumbers(
                     }
                     if ( lngGamesForWin < 0 ) {
                         lngGamesForWin = calculateGamesForWin(dblPercent, lngEnemy, lngTeam, lngEnemyRest - lngDirectRest, lngTeamRest, BOOL_FALSE);
-                        csEnemy.vsMagic.at(lngTeam) = lngGamesForWin;
                     } else {
-                        csEnemy.vsMagic.at(lngTeam) = -1;
                     }
                     if ( blnFlagMagic.at(lngTeam) == BOOL_FALSE) {
                         lngGamesForWin = calculateGamesForWin(dblPercent, lngTeam, lngEnemy, lngTeamRest, lngEnemyRest - lngDirectRest, BOOL_TRUE);
@@ -352,7 +348,6 @@ ScoreDocument::calculateMagicNumbers(
                     }
                 } else {
                     lngBeatProb.at(lngEnemy) = 0;
-                    csEnemy.vsMagic.at(lngTeam) = -1;
                 }
             }
 
@@ -1092,13 +1087,7 @@ ScoreDocument::clearCountedScoresList(
         trgCS.restGames.resize(numTeam);
 
         trgCS.beatProbability.clear();
-        trgCS.vsMagic        .clear();
-        trgCS.numWinsForMatch.clear();
-        trgCS.numRestForMatch.clear();
         trgCS.beatProbability.resize(numTeam);
-        trgCS.vsMagic        .resize(numTeam);
-        trgCS.numWinsForMatch.resize(numTeam);
-        trgCS.numRestForMatch.resize(numTeam);
 
         trgCS.vsGotScores.clear();
         trgCS.vsGotScores.resize(numTeam);
