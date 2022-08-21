@@ -1,9 +1,9 @@
-﻿//  -*-  coding: utf-8-with-signature;  mode: c++  -*-  //
+﻿//  -*-  coding: utf-8-with-signature-unix; mode: c++  -*-  //
 /*************************************************************************
 **                                                                      **
 **                  ---  The Score4 Core Library.  ---                  **
 **                                                                      **
-**          Copyright (C), 2017-2020, Takahiro Itou                     **
+**          Copyright (C), 2017-2022, Takahiro Itou                     **
 **          All Rights Reserved.                                        **
 **                                                                      **
 **          License: (See COPYING and LICENSE files)                    **
@@ -103,6 +103,39 @@ struct  GameResult
 
 //----------------------------------------------------------------
 /**
+**    必要勝利数の情報をまとめる構造体。
+**/
+
+struct  NumWinsForBeat
+{
+    /**   必要勝利数が示している情報の種類。    **/
+    MagicFilter     filterType;
+
+    /**
+    **    対象チームを上回るのに必要な勝利数。
+    **/
+    GamesCount      numNeedWins;
+
+    /**
+    **    残り試合数。ただし、マジックが点灯している時は、直接対決を除く。
+    **/
+    GamesCount      numRestGame;
+
+    /**
+    **    対象チームを自力で上回るのに必要な勝利数。
+    **/
+    GamesCount      numWinsSelf;
+
+    /**
+    **    対象チームを自力で上回る可能性ギリギリのラインとのゲーム差。
+    **/
+    GamesCount      numWinsDiff;
+};
+
+typedef     std::vector<NumWinsForBeat>     WinsForBeatList;
+
+//----------------------------------------------------------------
+/**
 **    マジックまたは自力での優勝／プレーオフ進出の可能性。
 **/
 
@@ -169,9 +202,8 @@ struct  CountedScores
     TeamIndex       currentRank;
 
     GameCountList   beatProbability;
-    GameCountList   vsMagic;
-    GameCountList   numWinsForMatch;
-    GameCountList   numRestForMatch;
+
+    WinsForBeatList numWinsForBeat;
 
     /**   総得点。  **/
     ScoreArray      totalGotScores;
@@ -185,6 +217,9 @@ struct  CountedScores
     /**  対チーム毎の失点。 **/
     ScoreTable      vsLostScores;
 };
+
+CONSTEXPR_VAR   GamesCount  MAGIC_NO_PROBABILITY_WONS   = 99999999;
+CONSTEXPR_VAR   GamesCount  MAGICLIST_NO_DATA_ENTRY     = -1;
 
 }   //  End of namespace  Common
 SCORE4_CORE_NAMESPACE_END

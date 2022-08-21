@@ -48,7 +48,7 @@
 //    キーワード constexpr  の検査。
 //
 
-#if ( 0 )
+#if ( 1 )
 #    define     SCORE4_CORE_ENABLE_CONSTEXPR        1
 #else
 #    undef      SCORE4_CORE_ENABLE_CONSTEXPR

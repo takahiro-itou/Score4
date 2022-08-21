@@ -1,4 +1,4 @@
-﻿//  -*-  coding: utf-8-with-signature;  mode: c++  -*-  //
+﻿//  -*-  coding: utf-8-with-signature-unix; mode: c++  -*-  //
 /*************************************************************************
 **                                                                      **
 **                  ---  The Score4 Core Library.  ---                  **
@@ -48,6 +48,12 @@ private:
     typedef     std::vector<CountedScores>  CountedScoreList;
 
     typedef     Common::GameCountTable      GameCountTable;
+
+    typedef     std::vector< std::vector<WinningRate> >
+    WinningRateTable;
+
+    typedef     std::vector< std::vector<NumOfDigits> >
+    NumOfDigitsTable;
 
 public:
 
@@ -156,6 +162,32 @@ public:
             const  LeagueIndex  leagueID);
 
     //----------------------------------------------------------------
+    /**   指定した相手を確実に上回るのに必要な勝数を計算する。
+    **
+    **/
+    virtual  GamesCount
+    calculateGamesForWin(
+            const   WinningRateTable  & percentTable,
+            const   TeamIndex           teamIndex,
+            const   TeamIndex           enemyIndex,
+            const   GamesCount          teamRest,
+            const   GamesCount          enemyRest,
+            const   Boolean             allowEqual)  const;
+
+    //----------------------------------------------------------------
+    /**   各チームのプレーオフ進出マジックを計算する。
+    **
+    **  @param [in,out] bufCounted
+    **  @return     エラーコードを返す。
+    **      -   異常終了の場合は、
+    **          エラーの種類を示す非ゼロ値を返す。
+    **      -   正常終了の場合は、ゼロを返す。
+    **/
+    virtual  ErrCode
+    calculateMagicNumbers(
+            CountedScoreList    &bufCounted)  const;
+
+    //----------------------------------------------------------------
     /**   ドキュメントの内容をクリアする。
     **
     **  @return     エラーコードを返す。
@@ -248,6 +280,25 @@ public:
     **/
     virtual  ErrCode
     initializeGameCountTable();
+
+    //----------------------------------------------------------------
+    /**   勝率テーブルを作成する。
+    **
+    **  @param [in] csData         集計済みデータ。
+    **  @param [in] leagueIndex    桁数テーブルを作成するリーグ。
+    **  @param[out] rateTable      勝率テーブルを格納する変数。
+    **  @param[out] digitsTable    桁数テーブルを格納する変数。
+    **          勝率テーブルの対応するセルを表示するのに
+    **          最低限必要な桁数を格納する。
+    **  @return     残り試合数の最大値を返す。
+    **      最も多くの試合を残しているチームの、その残り試合数。
+    **/
+    virtual  GamesCount
+    makeWinningRateTable(
+            const  CountedScoreList &csData,
+            const  LeagueIndex      leagueIndex,
+            WinningRateTable        &rateTable,
+            NumOfDigitsTable        &digitsTable)  const;
 
     //----------------------------------------------------------------
     /**   チーム情報用の領域を確保する。
@@ -550,7 +601,7 @@ private:
     /**   対チーム毎の集計結果から、合計を計算する。
     **
     **  @param [in]     idxLeague   所属するリーグ。
-    **  @param [in,out] trgCS      結果を読み書きする変数。
+    **  @param [in,out] trgCS       結果を読み書きする変数。
     **  @return     エラーコードを返す。
     **      -   異常終了の場合は、
     **          エラーの種類を示す非ゼロ値を返す。
@@ -560,6 +611,36 @@ private:
     countTotalScores(
             const  LeagueIndex  idxLeague,
             CountedScores     & trgCS)  const;
+
+    //----------------------------------------------------------------
+    /**   敵チームを上回るのに必要な勝利数を計算する。
+    **
+    **  @param [in] rateTable     事前に作成した勝率テーブル。
+    **  @param [in] srcTeam       チーム番号。
+    **  @param [in] trgTeam       チーム番号。
+    **  @param [in] srcRest       残り試合数。
+    **  @param [in] trgRest       残り試合数。
+    **  @param [in] directRest    直接対決の残り試合数。
+    **  @return     必要な勝利数を記録した構造体。
+    **/
+    const   Common::NumWinsForBeat
+    makeWinsForBeatInfo(
+            const   WinningRateTable  & rateTable,
+            const   TeamIndex           srcTeam,
+            const   TeamIndex           trgTeam,
+            const   GamesCount          srcRest,
+            const   GamesCount          trgRest,
+            const   GamesCount          directRest)  const;
+
+    //----------------------------------------------------------------
+    /**   各チームに対する必要勝利数テーブルを作成する。
+    **
+    **/
+    ErrCode
+    makeWinsForBeatTable(
+            const   WinningRateTable  & rateTable,
+            const   TeamIndex           srcTeam,
+            CountedScoreList          & bufCounted)  const;
 
     //----------------------------------------------------------------
     /**   対戦カード毎の試合数を設定する。
