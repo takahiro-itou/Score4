@@ -511,7 +511,7 @@ Private Sub writeWinsForBeatToGridRow(
                 If (numWins <= 0) Then
                     backColor = Color.FromArgb(0, 0, 255)
                     foreColor = Color.FromArgb(255, 255, 255)
-                ElseIf (vsMagic <= directRestGames) Then
+                Else
                     backColor = Color.FromArgb(0, 255, 255)
                 End If
             Case Score4Wrapper.MagicFilter.MF_MAGIC_IF_RIVAL_LOSE
