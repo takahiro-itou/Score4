@@ -158,18 +158,19 @@ Public Sub displayTeamMagicTableToGrid(
         numShowCount, bufShowIndex, numShowCount, False, scoreData, objView)
 
     With objView
-         For i = 0 To numShowCount - 1
+        For i = 0 To numShowCount - 1
             Dim idxTeam As Integer = bufShowIndex(i)
             Dim teamInfo As Score4Wrapper.Common.TeamInfo
             Dim scoreInfo As Score4Wrapper.Common.CountedScores
 
             teamInfo = scoreData.teamInfo(idxTeam)
             scoreInfo = scoreData.scoreInfo(idxTeam)
+
             .Rows.Add(teamInfo.teamName)
             writeTeamMagicToGridRow(
                 numTeams, numShowCount, idxTeam,
                 bufShowIndex, .Rows(i), scoreInfo)
-         Next i
+        Next i
     End With
 
 End Sub
@@ -201,7 +202,19 @@ Public Sub displayWinsForBeatTableToGrid(
         numShowCount, bufShowIndex, numShowCount, False, scoreData, objView)
 
     With objView
+        For i = 0 To numShowCount - 1
+            Dim idxTeam As Integer = bufShowIndex(i)
+            Dim teamInfo As Score4Wrapper.Common.TeamInfo
+            Dim scoreInfo As Score4Wrapper.Common.CountedScores
 
+            teamInfo = scoreData.teamInfo(idxTeam)
+            scoreInfo = scoreData.scoreInfo(idxTeam)
+
+            .Rows.Add(teamInfo.teamName)
+            writeWinsForBeatToGridRow(
+                numTeams, numShowCount, idxTeam,
+                bufShowIndex, .Rows(i), scoreInfo)
+        Next i
     End With
 
 End Sub
@@ -426,6 +439,71 @@ Private Sub writeTeamRestGamesToGridRow(
             .Style.BackColor = Color.FromArgb(0, 255, 0)
             .Value = restInter
         End With
+    End With
+
+End Sub
+
+''========================================================================
+''    指定されたグリッドの行に、チームの必要勝利数を書き込む。
+''========================================================================
+Private Sub writeWinsForBeatToGridRow(
+        ByVal numTeams As Integer,
+        ByVal numShowCount As Integer,
+        ByVal idxTeam As Integer,
+        ByRef showIndex() As Integer,
+        ByRef destRow As System.Windows.Forms.DataGridViewRow,
+        ByRef scoreInfo As Score4Wrapper.Common.CountedScores)
+
+    Dim j As Integer
+    Dim totalRestGames As Integer, directRestGames As Integer
+    Dim beatProb As Integer, vsMagic As Integer
+    Dim cellText as String
+    Dim backColor as Color
+    Dim foreColor as Color = Color.FromArgb(0, 0, 0)
+
+    With destRow
+        For j = 0 To numShowCount - 1
+            Dim idxEnemy As Integer = showIndex(j)
+            If (idxTeam = idxEnemy) Then
+                .Cells(j + 1).Value = "--------"
+                Continue For
+            End If
+
+            backColor = Color.FromArgb(255, 255, 255)
+            foreColor = Color.FromArgb(0, 0, 0)
+            beatProb = scoreInfo.beatProbability(idxEnemy)
+            vsMagic = scoreInfo.vsMagic(idxEnemy)
+
+            If (beatProb <= -99999999) Then
+                cellText = "不可"
+                backColor = Color.FromArgb(255, 0, 0)
+                foreColor = Color.FromArgb(255, 255, 255)
+            ElseIf (beatProb < 0) Then
+                cellText = totalRestGames - beatProb & " 勝 / " & _
+                        totalRestGames & " 試合"
+                backColor = Color.FromArgb(255, 255, 0)
+            ElseIf (vsMagic > totalRestGames) Then
+                cellText = totalRestGames - beatProb & " 勝 / " & _
+                        totalRestGames & " 試合"
+                backColor = Color.FromArgb(255, 255, 255)
+            Else
+                directRestGames = scoreInfo.numRestForMatch(idxEnemy)
+                cellText = vsMagic & " 勝 / " & directRestGames & " 試合"
+                If (vsMagic <= 0) Then
+                    backColor = Color.FromArgb(0, 0, 255)
+                    foreColor = Color.FromArgb(255, 255, 255)
+                ElseIf (vsMagic <= directRestGames) Then
+                    backColor = Color.FromArgb(0, 255, 255)
+                End If
+            End If
+
+            With .Cells(j + 1)
+                .Style.BackColor = backColor
+                .Style.ForeColor = foreColor
+                .Value = cellText
+            End With
+
+        Next j
     End With
 
 End Sub
