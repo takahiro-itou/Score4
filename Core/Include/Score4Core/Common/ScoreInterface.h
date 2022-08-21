@@ -203,6 +203,9 @@ struct  CountedScores
 
     GameCountList   beatProbability;
 
+    /**
+    **    必要勝利数等、マジック関連の補助計算データ。
+    **/
     WinsForBeatList numWinsForBeat;
 
     /**   総得点。  **/
