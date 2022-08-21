@@ -613,6 +613,36 @@ private:
             CountedScores     & trgCS)  const;
 
     //----------------------------------------------------------------
+    /**   敵チームを上回るのに必要な勝利数を計算する。
+    **
+    **  @param [in] rateTable     事前に作成した勝率テーブル。
+    **  @param [in] srcTeam       チーム番号。
+    **  @param [in] trgTeam       チーム番号。
+    **  @param [in] srcRest       残り試合数。
+    **  @param [in] trgRest       残り試合数。
+    **  @param [in] directRest    直接対決の残り試合数。
+    **  @return     必要な勝利数を記録した構造体。
+    **/
+    const   Common::NumWinsForBeat
+    makeWinsForBeatInfo(
+            const   WinningRateTable  & rateTable,
+            const   TeamIndex           srcTeam,
+            const   TeamIndex           trgTeam,
+            const   GamesCount          srcRest,
+            const   GamesCount          trgRest,
+            const   GamesCount          directRest)  const;
+
+    //----------------------------------------------------------------
+    /**   各チームに対する必要勝利数テーブルを作成する。
+    **
+    **/
+    ErrCode
+    makeWinsForBeatTable(
+            const   WinningRateTable  & rateTable,
+            const   TeamIndex           srcTeam,
+            CountedScoreList          & bufCounted)  const;
+
+    //----------------------------------------------------------------
     /**   対戦カード毎の試合数を設定する。
     **
     **  @param [in] srcTeam     チーム番号。
