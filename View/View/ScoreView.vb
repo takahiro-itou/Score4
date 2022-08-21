@@ -197,7 +197,8 @@ Public Sub displayWinsForBeatTableToGrid(
         Exit Sub
     End If
 
-    makeTeamListOnGridViewHeader(numShowCount, bufShowIndex, numShowCount, False, scoreData, objView)
+    makeTeamListOnGridViewHeader(
+        numShowCount, bufShowIndex, numShowCount, False, scoreData, objView)
 
     With objView
 
