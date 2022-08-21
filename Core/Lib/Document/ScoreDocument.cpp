@@ -248,8 +248,13 @@ ScoreDocument::calculateMagicNumbers(
     NumOfDigitsTable    dummyDigitsBuffer;
 
     const TeamIndex TeamCount = getNumTeams();
-    const GamesCount lngMaxRest = makeWinningRateTable(bufCounted, -1, dblPercent, dummyDigitsBuffer);
+    const GamesCount lngMaxRest = makeWinningRateTable(
+            bufCounted, -1, dblPercent, dummyDigitsBuffer);
     GamesCount  lngGamesForWin;
+
+    for ( TeamIndex i = 0; i < TeamCount; ++ i ) {
+        makeWinsForBeatTable(dblPercent, i, bufCounted);
+    }
 
     std::vector<std::vector<Boolean> >  blnBeatFlag(TeamCount);
     std::vector<TeamIndex>  lngBeatTeams(TeamCount);
@@ -274,19 +279,15 @@ ScoreDocument::calculateMagicNumbers(
                 const WinningRate dblEnemyLastPercent = dblPercent.at(lngEnemy).at(lngEnemyRest - lngDirectRest);
                 if ( dblLastScorePercent >= dblEnemyLastPercent ) {
                     blnBeatFlag.at(lngTeam).at(lngEnemy) = BOOL_TRUE;
-                    cs.numWinsForBeat.at(lngEnemy).filterType   = MF_ON_MAGIC;
                 } else {
                     blnBeatFlag.at(lngTeam).at(lngEnemy) = BOOL_FALSE;
                     ++ lngBeatTeams.at(lngTeam);
-                    cs.numWinsForBeat.at(lngEnemy).filterType   = MF_BEAT_IF_WIN_DIRECT;
                 }
 
                 //  この相手チームを確実に上回るのに必要な勝利数。  //
                 lngGamesForWin = calculateGamesForWin(dblPercent, lngTeam, lngEnemy, lngTeamRest, lngEnemyRest, BOOL_FALSE);
                 cs.numWinsForMatch.at(lngEnemy) = lngGamesForWin;
                 cs.numRestForMatch.at(lngEnemy) = lngTeamRest - lngDirectRest;
-                cs.numWinsForBeat[lngEnemy].numNeedWins = lngGamesForWin;
-                cs.numWinsForBeat[lngEnemy].numRestGame = lngTeamRest - lngDirectRest;
             }
         }
     }
@@ -1269,7 +1270,7 @@ ScoreDocument::makeWinsForBeatTable(
         cs.numWinsForBeat.resize(numTeam);
 
         for ( TeamIndex j = 0; j < numTeam; ++ j ) {
-            if ( getTeamInfo(j).leagueID != league ) {
+            if ( (getTeamInfo(j).leagueID != league) || (j == srcTeam) ) {
                 cs.numWinsForBeat[j].filterType     = MF_DIFFERENT_LEAGUE;
                 cs.numWinsForBeat[j].numNeedWins    = -1;
                 cs.numWinsForBeat[j].numRestGame    = -1;
