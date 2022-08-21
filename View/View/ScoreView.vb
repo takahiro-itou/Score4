@@ -141,6 +141,8 @@ Public Sub displayTeamMagicTableToGrid(
     Dim bufShowIndex() As Integer
     Dim numTeams As Integer
     Dim numShowCount As Integer
+    Dim rowHeader As String
+    Dim gameFilter As Score4Wrapper.GameFilter
 
     With objView
          .Columns.Clear()
@@ -158,8 +160,11 @@ Public Sub displayTeamMagicTableToGrid(
     makeTeamListOnGridViewHeader(
         numShowCount, bufShowIndex, numShowCount, False, 64,
         scoreData, objView)
+    gameFilter = Score4Wrapper.GameFilter.FILTER_ALL_GAMES
 
     With objView
+        .Columns(0).Width = 112
+
         For i = 0 To numShowCount - 1
             Dim idxTeam As Integer = bufShowIndex(i)
             Dim teamInfo As Score4Wrapper.Common.TeamInfo
@@ -168,7 +173,9 @@ Public Sub displayTeamMagicTableToGrid(
             teamInfo = scoreData.teamInfo(idxTeam)
             scoreInfo = scoreData.scoreInfo(idxTeam)
 
-            .Rows.Add(teamInfo.teamName)
+            rowHeader = teamInfo.teamName & "  ( " & _
+                    scoreInfo.numTotalRestGames(gameFilter) & " 試合)"
+            .Rows.Add(rowHeader)
             writeTeamMagicToGridRow(
                 numTeams, numShowCount, idxTeam,
                 bufShowIndex, .Rows(i), scoreInfo)
@@ -191,6 +198,8 @@ Public Sub displayWinsForBeatTableToGrid(
     Dim bufShowIndex() As Integer
     Dim numTeams As Integer
     Dim numShowCount As Integer
+    Dim rowHeader As String
+    Dim gameFilter As Score4Wrapper.GameFilter
 
     numTeams = scoreData.getNumTeams()
     ReDim bufShowIndex(0 To numTeams - 1)
@@ -203,6 +212,7 @@ Public Sub displayWinsForBeatTableToGrid(
     makeTeamListOnGridViewHeader(
         numShowCount, bufShowIndex, numShowCount, False, 96,
         scoreData, objView)
+    gameFilter = Score4Wrapper.GameFilter.FILTER_ALL_GAMES
 
     With objView
         .Columns(0).Width = 112
@@ -215,7 +225,9 @@ Public Sub displayWinsForBeatTableToGrid(
             teamInfo = scoreData.teamInfo(idxTeam)
             scoreInfo = scoreData.scoreInfo(idxTeam)
 
-            .Rows.Add(teamInfo.teamName)
+            rowHeader = teamInfo.teamName & "  ( " & _
+                    scoreInfo.numTotalRestGames(gameFilter) & " 試合)"
+            .Rows.Add(rowHeader)
             writeWinsForBeatToGridRow(
                 numTeams, numShowCount, idxTeam,
                 bufShowIndex, .Rows(i), scoreInfo)
@@ -276,7 +288,10 @@ Private Sub makeTeamListOnGridViewHeader(
         .Clear()
 
         textColumn = makeGridViewColumn("team", "Team")
-        textColumn.Width = columnWidth
+        With textColumn
+            .DefaultCellStyle.Alignment = cellAlign
+            .Width = columnWidth
+        End With
         .Add(textColumn)
 
         If (flagShowTotal) Then
@@ -378,7 +393,7 @@ Private Sub writeTeamMagicToGridRow(
             beatFlag = beatInfo.filterType
             numWins = beatInfo.numNeedWins
 
-            Dim beatProb As Integer = scoreInfo.beatProbability(idxEnemy)
+            Dim beatProb As Integer = beatInfo.numWinsDiff
             If (beatProb <= -9999) Then
                 cellText = "-----"
                 backColor = Color.FromArgb(255, 0, 0)
@@ -402,6 +417,8 @@ Private Sub writeTeamMagicToGridRow(
                     cellText = "M " & numWins & " : " & cellText
                     backColor = Color.FromArgb(0, 255, 255)
                 End If
+            Else
+                cellText = "(" & beatInfo.numWinsSelf & ") : " & cellText
             End If
 
             With .Cells(j + 1)
