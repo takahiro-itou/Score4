@@ -36,7 +36,8 @@ Public Sub displayRestGameTableToGrid(
     numShowCount = scoreData.computeRankOrder(leagueIndex, bufShowIndex)
 
     makeTeamListOnGridViewHeader(
-        numShowCount, bufShowIndex, numTeams, True, scoreData, objView)
+        numShowCount, bufShowIndex, numTeams, True, 720,
+        scoreData, objView)
 
     With objView
         .Rows.Clear()
@@ -155,7 +156,8 @@ Public Sub displayTeamMagicTableToGrid(
     End If
 
     makeTeamListOnGridViewHeader(
-        numShowCount, bufShowIndex, numShowCount, False, scoreData, objView)
+        numShowCount, bufShowIndex, numShowCount, False, 960,
+        scoreData, objView)
 
     With objView
         For i = 0 To numShowCount - 1
@@ -199,9 +201,12 @@ Public Sub displayWinsForBeatTableToGrid(
     End If
 
     makeTeamListOnGridViewHeader(
-        numShowCount, bufShowIndex, numShowCount, False, scoreData, objView)
+        numShowCount, bufShowIndex, numShowCount, False, 1440,
+        scoreData, objView)
 
     With objView
+        .Columns(0).Width = 1660
+
         For i = 0 To numShowCount - 1
             Dim idxTeam As Integer = bufShowIndex(i)
             Dim teamInfo As Score4Wrapper.Common.TeamInfo
@@ -250,6 +255,7 @@ Private Sub makeTeamListOnGridViewHeader(
         ByRef bufShowIndex() As Integer,
         ByVal numTeams As Integer,
         ByVal flagShowTotal As Boolean,
+        ByVal columnWidth As Integer,
         ByRef scoreData As Score4Wrapper.Document.ScoreDocument,
         ByRef objView As System.Windows.Forms.DataGridView)
 
@@ -270,15 +276,19 @@ Private Sub makeTeamListOnGridViewHeader(
         .Clear()
 
         textColumn = makeGridViewColumn("team", "Team")
+        textColumn.Width = columnWidth
         .Add(textColumn)
 
         If (flagShowTotal) Then
             textColumn = makeGridViewColumn("total", "Total")
-            With textColumn.DefaultCellStyle
-                .Alignment = cellAlign
-                .BackColor = Color.FromArgb(0, 255, 0)
+            With textColumn
+                With .DefaultCellStyle
+                    .Alignment = cellAlign
+                    .BackColor = Color.FromArgb(0, 255, 0)
+                End With
+                .HeaderCell.Style.BackColor = Color.FromArgb(0, 255, 0)
+                .Width = columnWidth
             End With
-            textColumn.HeaderCell.Style.BackColor = Color.FromArgb(0, 255, 0)
             .Add(textColumn)
         End If
 
@@ -287,17 +297,23 @@ Private Sub makeTeamListOnGridViewHeader(
             colName = "team" & idxTeam
             colText = scoreData.teamInfo(idxTeam).teamName
             textColumn = makeGridViewColumn(colName, colText)
-            textColumn.DefaultCellStyle.Alignment = cellAlign
+            With textColumn
+                .DefaultCellStyle.Alignment = cellAlign
+                .Width = columnWidth
+            End With
             .Add(textColumn)
         Next i
 
         If (flagShowTotal) Then
             textColumn = makeGridViewColumn("league", "League")
-            With textColumn.DefaultCellStyle
-                .Alignment = cellAlign
-                .BackColor = Color.FromArgb(0, 255, 0)
+            With textColumn
+                With .DefaultCellStyle
+                    .Alignment = cellAlign
+                    .BackColor = Color.FromArgb(0, 255, 0)
+                End With
+                .HeaderCell.Style.BackColor = Color.FromArgb(0, 255, 0)
+                .Width = columnWidth
             End With
-            textColumn.HeaderCell.Style.BackColor = Color.FromArgb(0, 255, 0)
             .Add(textColumn)
         End If
 
@@ -306,17 +322,23 @@ Private Sub makeTeamListOnGridViewHeader(
             colName = "team" & idxTeam
             colText = scoreData.teamInfo(idxTeam).teamName
             textColumn = makeGridViewColumn(colName, colText)
-            textColumn.DefaultCellStyle.Alignment = cellAlign
+            With textColumn
+                .DefaultCellStyle.Alignment = cellAlign
+                .Width = columnWidth
+            End With
             .Add(textColumn)
         Next i
 
         If (flagShowTotal) Then
             textColumn = makeGridViewColumn("inter", "Inter.")
-            With textColumn.DefaultCellStyle
-                .Alignment = cellAlign
-                .BackColor = Color.FromArgb(0, 255, 0)
+            With textColumn
+                With .DefaultCellStyle
+                    .Alignment = cellAlign
+                    .BackColor = Color.FromArgb(0, 255, 0)
+                End With
+                .HeaderCell.Style.BackColor = Color.FromArgb(0, 255, 0)
+                .Width = columnWidth
             End With
-            textColumn.HeaderCell.Style.BackColor = Color.FromArgb(0, 255, 0)
             .Add(textColumn)
         End If
     End With
