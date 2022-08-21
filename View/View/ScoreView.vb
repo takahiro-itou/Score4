@@ -515,7 +515,7 @@ Private Sub writeWinsForBeatToGridRow(
                     backColor = Color.FromArgb(0, 255, 255)
                 End If
             Case Score4Wrapper.MagicFilter.MF_MAGIC_IF_RIVAL_LOSE
-                backColor = Color.FromArgb(255, 255, 255)
+                backColor = Color.FromArgb(0, 255, 0)
             Case Score4Wrapper.MagicFilter.MF_BEAT_IF_WIN_DIRECT
                 backColor = Color.FromArgb(255, 255, 255)
             Case Score4Wrapper.MagicFilter.MF_CANNOT_BEAT_BY_SELF
