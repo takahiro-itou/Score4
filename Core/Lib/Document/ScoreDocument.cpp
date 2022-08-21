@@ -1237,6 +1237,15 @@ ScoreDocument::makeWinsForBeatInfo(
         return ( retInfo );
     }
 
+    const   GamesCount  winTemp = calculateGamesForWin(
+            rateTable, srcTeam, trgTeam,
+            srcRest, trgRest, BOOL_FALSE);
+    if ( winTemp <= srcRest ) {
+        retInfo.filterType  = MF_MAGIC_IF_RIVAL_LOSE;
+        retInfo.numNeedWins = winTemp;
+        retInfo.numRestGame = srcRest - directRest;
+    }
+
     //  次に直接対決で自チームが全部勝利した時を計算する。  //
     {
         retInfo.numNeedWins = calculateGamesForWin(
