@@ -1244,6 +1244,7 @@ ScoreDocument::makeWinsForBeatInfo(
         retInfo.filterType  = MF_MAGIC_IF_RIVAL_LOSE;
         retInfo.numNeedWins = winTemp;
         retInfo.numRestGame = srcRest - directRest;
+        return ( retInfo );
     }
 
     //  次に直接対決で自チームが全部勝利した時を計算する。  //
