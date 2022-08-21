@@ -35,7 +35,8 @@ Public Sub displayRestGameTableToGrid(
     ReDim bufShowIndex(0 To numTeams - 1)
     numShowCount = scoreData.computeRankOrder(leagueIndex, bufShowIndex)
 
-    makeTeamListOnGridViewHeader(numShowCount, bufShowIndex, numTeams, True, scoreData, objView)
+    makeTeamListOnGridViewHeader(
+        numShowCount, bufShowIndex, numTeams, True, scoreData, objView)
 
     With objView
         .Rows.Clear()
@@ -136,7 +137,6 @@ Public Sub displayTeamMagicTableToGrid(
         ByRef objView As System.Windows.Forms.DataGridView)
 
     Dim i As Integer
-    Dim j As Integer
     Dim bufShowIndex() As Integer
     Dim numTeams As Integer
     Dim numShowCount As Integer
@@ -166,48 +166,9 @@ Public Sub displayTeamMagicTableToGrid(
             teamInfo = scoreData.teamInfo(idxTeam)
             scoreInfo = scoreData.scoreInfo(idxTeam)
             .Rows.Add(teamInfo.teamName)
-
-            Dim cellText as String
-            Dim backColor as Color
-            Dim foreColor as Color = Color.FromArgb(0, 0, 0)
-
-            With .Rows(i)
-                For j = 0 To numShowCount - 1
-                    Dim idxEnemy As Integer = bufShowIndex(j)
-                    If (idxTeam = idxEnemy) Then
-                        .Cells(j + 1).Value = "--------"
-                    Else
-                        Dim beatProb As Integer = scoreInfo.beatProbability(idxEnemy)
-                        If (beatProb <= -9999) Then
-                             cellText = "-----"
-                             backColor = Color.FromArgb(255, 0, 0)
-                             foreColor = Color.FromArgb(255, 255, 255)
-                        Else
-                            cellText = Right("     " & beatProb, 5)
-                            backColor = Color.FromArgb(255, 255, 255)
-                            If (beatProb < 0) Then
-                                backColor = Color.FromArgb(255, 255, 0)
-                            Else
-                                backColor = Color.FromArgb(0, 255, 0)
-                            End If
-                        End If
-
-                        Dim vsMagic As Integer = scoreInfo.vsMagic(idxEnemy)
-                        If (vsMagic = 0) Then
-                            cellText = "M 0 :  ---"
-                            backColor = Color.FromArgb(0, 0, 255)
-                            foreColor = Color.FromArgb(255, 255, 255)
-                        ElseIf (vsMagic >= 0) Then
-                            cellText = "M " & vsMagic & " : " & cellText
-                            backColor = Color.FromArgb(0, 255, 255)
-                        End If
-
-                        .Cells(j + 1).Value = cellText
-                        .Cells(j + 1).Style.BackColor = backColor
-                        .Cells(j + 1).Style.ForeColor = foreColor
-                    End If
-                 Next j
-            End With
+            writeTeamMagicToGridRow(
+                numTeams, numShowCount, idxTeam,
+                bufShowIndex, .Rows(i), scoreInfo)
          Next i
     End With
 
@@ -348,13 +309,75 @@ Private Sub makeTeamListOnGridViewHeader(
 
 End Sub
 
+''========================================================================
+''    指定されたグリッドの行に、チームのマジック等を書き込む。
+''========================================================================
+Private Sub writeTeamMagicToGridRow(
+        ByVal numTeams As Integer,
+        ByVal numShowCount As Integer,
+        ByVal idxTeam As Integer,
+        ByRef showIndex() As Integer,
+        ByRef destRow As System.Windows.Forms.DataGridViewRow,
+        ByRef scoreInfo As Score4Wrapper.Common.CountedScores)
+
+    Dim j As Integer
+    Dim cellText as String
+    Dim backColor as Color
+    Dim foreColor as Color = Color.FromArgb(0, 0, 0)
+
+    With destRow
+        For j = 0 To numShowCount - 1
+            Dim idxEnemy As Integer = showIndex(j)
+            If (idxTeam = idxEnemy) Then
+                .Cells(j + 1).Value = "--------"
+                Continue For
+            End If
+
+            Dim beatProb As Integer = scoreInfo.beatProbability(idxEnemy)
+            If (beatProb <= -9999) Then
+                cellText = "-----"
+                backColor = Color.FromArgb(255, 0, 0)
+                foreColor = Color.FromArgb(255, 255, 255)
+            Else
+                cellText = Right("     " & beatProb, 5)
+                backColor = Color.FromArgb(255, 255, 255)
+                If (beatProb < 0) Then
+                    backColor = Color.FromArgb(255, 255, 0)
+                Else
+                    backColor = Color.FromArgb(0, 255, 0)
+                End If
+            End If
+
+            Dim vsMagic As Integer = scoreInfo.vsMagic(idxEnemy)
+            If (vsMagic = 0) Then
+                cellText = "M 0 :  ---"
+                backColor = Color.FromArgb(0, 0, 255)
+                foreColor = Color.FromArgb(255, 255, 255)
+            ElseIf (vsMagic >= 0) Then
+                cellText = "M " & vsMagic & " : " & cellText
+                backColor = Color.FromArgb(0, 255, 255)
+            End If
+
+            With .Cells(j + 1)
+                .Style.BackColor = backColor
+                .Style.ForeColor = foreColor
+                .Value = cellText
+            End With
+        Next j
+    End With
+
+End Sub
+
+''========================================================================
+''    指定されたグリッドの行に、チームの残り試合数を書き込む。
+''========================================================================
 Private Sub writeTeamRestGamesToGridRow(
-         ByVal gameFilter As Score4Wrapper.GameFilter,
-         ByVal numTeams As Integer,
-         ByVal numShowCount As Integer,
-         ByRef showIndex() As Integer,
-         ByRef destRow As System.Windows.Forms.DataGridViewRow,
-         ByRef scoreInfo As Score4Wrapper.Common.CountedScores)
+        ByVal gameFilter As Score4Wrapper.GameFilter,
+        ByVal numTeams As Integer,
+        ByVal numShowCount As Integer,
+        ByRef showIndex() As Integer,
+        ByRef destRow As System.Windows.Forms.DataGridViewRow,
+        ByRef scoreInfo As Score4Wrapper.Common.CountedScores)
 
     Dim j As Integer
     Dim restTotal As Integer
