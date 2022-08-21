@@ -103,6 +103,65 @@ struct  GameResult
 
 //----------------------------------------------------------------
 /**
+**    マジック等の状態を示すフィルタフラグ。
+**/
+
+enum  MagicFilter
+{
+    /**
+    **    マジックが点灯する。
+    **
+    **  すなわち直接対決は全敗しても、
+    **  残りの試合に全勝すれば、対象チームを上回る。
+    **/
+    MF_ON_MAGIC             = 0,
+
+    /**
+    **    マジックは点灯しないが、直接対決での全勝を含め、
+    **  残りの試合に全勝すれば、対象チームを上回る。
+    **/
+    MF_BEAT_IF_WIN_DIRECT   = 1,
+
+    /**
+    **    他力本願。すなわち、残り試合に全勝しても、
+    **  対象チームを上回ることができない。
+    **/
+    MF_CANNOT_BEAT_BY_SELF  = 2,
+
+    /**
+    **    すでに対象チームを上回ることができない。
+    **
+    **  すなわち、残り試合に全勝し、かつ、
+    **  対象チームが全敗しても、対象チームを上回ることができない。
+    **/
+    MF_NEVER_BEAT           = 3
+};
+
+//----------------------------------------------------------------
+/**
+**
+**/
+
+struct  NumWinsForBeat
+{
+    /**   必要勝利数が示している情報の種類。    **/
+    MagicFilter     filterType;
+
+    /**
+    **    対象チームを上回るのに必要な勝利数。
+    **/
+    GamesCount      numNeedWins;
+
+    /**
+    **    残り試合数。ただし、マジックが点灯している時は、直接対決を除く。
+    **/
+    GamesCount      numRestGame;
+};
+
+typedef     std::vector<NumWinsForBeat>     WinsForBeatList;
+
+//----------------------------------------------------------------
+/**
 **    マジックまたは自力での優勝／プレーオフ進出の可能性。
 **/
 
@@ -172,6 +231,8 @@ struct  CountedScores
     GameCountList   vsMagic;
     GameCountList   numWinsForMatch;
     GameCountList   numRestForMatch;
+
+    WinsForBeatList numWinsForBeat;
 
     /**   総得点。  **/
     ScoreArray      totalGotScores;
