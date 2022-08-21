@@ -477,7 +477,10 @@ Private Sub writeWinsForBeatToGridRow(
         ByRef scoreInfo As Score4Wrapper.Common.CountedScores)
 
     Dim j As Integer
+    Dim beatInfo As Score4Wrapper.Common.NumWinsForBeat
+    Dim beatFlag As Score4Wrapper.MagicFilter
     Dim totalRestGames As Integer, directRestGames As Integer
+    Dim numWins As Integer, numRest As Integer
     Dim beatProb As Integer, vsMagic As Integer
     Dim cellText as String
     Dim backColor as Color
@@ -493,31 +496,35 @@ Private Sub writeWinsForBeatToGridRow(
 
             backColor = Color.FromArgb(255, 255, 255)
             foreColor = Color.FromArgb(0, 0, 0)
+            beatInfo = scoreInfo.numWinsForBeat(idxEnemy)
+            beatFlag = beatInfo.filterType
+            numWins = beatInfo.numNeedWins
+            numRest = beatInfo.numRestGame
             beatProb = scoreInfo.beatProbability(idxEnemy)
             vsMagic = scoreInfo.vsMagic(idxEnemy)
 
-            If (beatProb <= -99999999) Then
-                cellText = "不可"
-                backColor = Color.FromArgb(255, 0, 0)
-                foreColor = Color.FromArgb(255, 255, 255)
-            ElseIf (beatProb < 0) Then
-                cellText = totalRestGames - beatProb & " 勝 / " & _
-                        totalRestGames & " 試合"
-                backColor = Color.FromArgb(255, 255, 0)
-            ElseIf (vsMagic > totalRestGames) Then
-                cellText = totalRestGames - beatProb & " 勝 / " & _
-                        totalRestGames & " 試合"
-                backColor = Color.FromArgb(255, 255, 255)
-            Else
-                directRestGames = scoreInfo.numRestForMatch(idxEnemy)
-                cellText = vsMagic & " 勝 / " & directRestGames & " 試合"
-                If (vsMagic <= 0) Then
+            cellText = numWins & " 勝 / " & numRest & " 試合"
+            Select Case beatFlag
+            Case Score4Wrapper.MagicFilter.MF_DIFFERENT_LEAGUE
+                 cellText = "--------"
+            Case Score4Wrapper.MagicFilter.MF_ON_MAGIC
+                If (numWins <= 0) Then
                     backColor = Color.FromArgb(0, 0, 255)
                     foreColor = Color.FromArgb(255, 255, 255)
                 ElseIf (vsMagic <= directRestGames) Then
                     backColor = Color.FromArgb(0, 255, 255)
                 End If
-            End If
+            Case Score4Wrapper.MagicFilter.MF_MAGIC_IF_RIVAL_LOSE
+                backColor = Color.FromArgb(255, 255, 255)
+            Case Score4Wrapper.MagicFilter.MF_BEAT_IF_WIN_DIRECT
+                backColor = Color.FromArgb(255, 255, 255)
+            Case Score4Wrapper.MagicFilter.MF_CANNOT_BEAT_BY_SELF
+                backColor = Color.FromArgb(255, 255, 0)
+            Case Score4Wrapper.MagicFilter.MF_NEVER_BEAT
+                cellText = "不可"
+                backColor = Color.FromArgb(255, 0, 0)
+                foreColor = Color.FromArgb(255, 255, 255)
+            End Select
 
             With .Cells(j + 1)
                 .Style.BackColor = backColor
