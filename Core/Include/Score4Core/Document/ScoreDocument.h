@@ -162,19 +162,6 @@ public:
             const  LeagueIndex  leagueID);
 
     //----------------------------------------------------------------
-    /**   指定した相手を確実に上回るのに必要な勝数を計算する。
-    **
-    **/
-    virtual  GamesCount
-    calculateGamesForWin(
-            const   WinningRateTable  & percentTable,
-            const   TeamIndex           teamIndex,
-            const   TeamIndex           enemyIndex,
-            const   GamesCount          teamRest,
-            const   GamesCount          enemyRest,
-            const   Boolean             allowEqual)  const;
-
-    //----------------------------------------------------------------
     /**   各チームのプレーオフ進出マジックを計算する。
     **
     **  @param [in,out] bufCounted
@@ -338,6 +325,20 @@ public:
 //
 //    Public Member Functions.
 //
+public:
+
+    //----------------------------------------------------------------
+    /**   指定した相手を確実に上回るのに必要な勝数を計算する。
+    **
+    **/
+    static  GamesCount
+    calculateGamesForWin(
+            const   WinningRateTable  & rateTable,
+            const   TeamIndex           teamIndex,
+            const   TeamIndex           enemyIndex,
+            const   GamesCount          teamRest,
+            const   GamesCount          enemyRest,
+            const   Boolean             allowEqual);
 
 //========================================================================
 //
