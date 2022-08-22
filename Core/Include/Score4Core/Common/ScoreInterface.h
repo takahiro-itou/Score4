@@ -201,8 +201,6 @@ struct  CountedScores
     /**   現在の順位。              **/
     TeamIndex       currentRank;
 
-    GameCountList   beatProbability;
-
     /**
     **    必要勝利数等、マジック関連の補助計算データ。
     **/
