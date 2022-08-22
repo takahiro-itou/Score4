@@ -247,20 +247,20 @@ ScoreDocument::calculateMagicNumbers(
     WinningRateTable    dblPercent;
     NumOfDigitsTable    dummyDigitsBuffer;
 
-    const TeamIndex TeamCount = getNumTeams();
+    const   TeamIndex   numTeam = getNumTeams();
     const GamesCount lngMaxRest = makeWinningRateTable(
             bufCounted, -1, dblPercent, dummyDigitsBuffer);
     GamesCount  lngGamesForWin;
 
-    for ( TeamIndex i = 0; i < TeamCount; ++ i ) {
+    for ( TeamIndex i = 0; i < numTeam; ++ i ) {
         makeWinsForBeatTable(dblPercent, i, bufCounted);
     }
 
-    std::vector<std::vector<Boolean> >  blnBeatFlag(TeamCount);
-    std::vector<TeamIndex>  lngBeatTeams(TeamCount);
+    std::vector<std::vector<Boolean> >  blnBeatFlag(numTeam);
+    std::vector<TeamIndex>  lngBeatTeams(numTeam);
 
-    for ( TeamIndex lngTeam = 0; lngTeam < TeamCount; ++ lngTeam ) {
-        blnBeatFlag.at(lngTeam).resize(TeamCount);
+    for ( TeamIndex lngTeam = 0; lngTeam < numTeam; ++ lngTeam ) {
+        blnBeatFlag.at(lngTeam).resize(numTeam);
         lngBeatTeams.at(lngTeam) = 0;
         const LeagueIndex lngTeamLeague = getTeamInfo(lngTeam).leagueID;
         Common::CountedScores &cs = bufCounted.at(lngTeam);
@@ -268,7 +268,7 @@ ScoreDocument::calculateMagicNumbers(
         const WinningRate dblLastScorePercent = dblPercent.at(lngTeam)
                 .at(lngTeamRest);
 
-        for ( TeamIndex lngEnemy = 0; lngEnemy < TeamCount; ++ lngEnemy ) {
+        for ( TeamIndex lngEnemy = 0; lngEnemy < numTeam; ++ lngEnemy ) {
             const LeagueIndex lngEnemyLeague = getTeamInfo(lngEnemy).leagueID;
             if ( (lngEnemyLeague == lngTeamLeague) && (lngEnemy != lngTeam) ) {
                 //  この相手チームが直接対決以外で、    //
@@ -292,11 +292,11 @@ ScoreDocument::calculateMagicNumbers(
 
     for ( int lngCalculateMode = 0; lngCalculateMode <= 1; ++ lngCalculateMode )
     {
-        std::vector<GamesCount> lngMagicNumber(TeamCount);
-        std::vector<GamesCount> lngBeatProb(TeamCount);
-        std::vector<Boolean>    blnFlagMagic(TeamCount);
+        std::vector<GamesCount> lngMagicNumber(numTeam);
+        std::vector<GamesCount> lngBeatProb(numTeam);
+        std::vector<Boolean>    blnFlagMagic(numTeam);
 
-        for ( TeamIndex lngTeam = 0; lngTeam < TeamCount; ++ lngTeam ) {
+        for ( TeamIndex lngTeam = 0; lngTeam < numTeam; ++ lngTeam ) {
             const LeagueIndex lngTeamLeague = getTeamInfo(lngTeam).leagueID;
             const TeamIndex lngCalcPlayoffTeams = getLeagueInfo(lngTeamLeague).numPlayOff;
             Common::CountedScores &cs = bufCounted.at(lngTeam);
@@ -304,7 +304,7 @@ ScoreDocument::calculateMagicNumbers(
             GamesCount  lngTeamRest = cs.numTotalRestGames[FILTER_ALL_GAMES];
             blnFlagMagic.at(lngTeam) = BOOL_TRUE;
             TeamIndex k = 0;
-            for ( TeamIndex lngEnemy = 0; lngEnemy < TeamCount; ++ lngEnemy) {
+            for ( TeamIndex lngEnemy = 0; lngEnemy < numTeam; ++ lngEnemy) {
                 const LeagueIndex lngEnemyLeague = getTeamInfo(lngEnemy).leagueID;
                 if ( (lngEnemyLeague == lngTeamLeague) && (lngEnemy != lngTeam) )
                 {
@@ -320,11 +320,11 @@ ScoreDocument::calculateMagicNumbers(
             }
             lngMagicNumber.at(lngTeam) = 0;
 
-            std::vector<GamesCount> lngMagicList(TeamCount);
-            for ( TeamIndex lngEnemy = 0; lngEnemy < TeamCount; ++ lngEnemy ) {
+            std::vector<GamesCount> lngMagicList(numTeam);
+            for ( TeamIndex lngEnemy = 0; lngEnemy < numTeam; ++ lngEnemy ) {
                 lngMagicList.at(lngEnemy) = -1;
             }
-            for ( TeamIndex lngEnemy = 0; lngEnemy < TeamCount; ++ lngEnemy ) {
+            for ( TeamIndex lngEnemy = 0; lngEnemy < numTeam; ++ lngEnemy ) {
                 const LeagueIndex lngEnemyLeague = getTeamInfo(lngEnemy).leagueID;
                 Common::CountedScores &csEnemy = bufCounted.at(lngEnemy);
                 if ( (lngEnemyLeague == lngTeamLeague) && (lngEnemy != lngTeam) )
@@ -361,7 +361,7 @@ ScoreDocument::calculateMagicNumbers(
             }
 
             //  データを転送する。  //
-            for ( TeamIndex lngEnemy = 0; lngEnemy < TeamCount; ++ lngEnemy ) {
+            for ( TeamIndex lngEnemy = 0; lngEnemy < numTeam; ++ lngEnemy ) {
             }
         }
 
