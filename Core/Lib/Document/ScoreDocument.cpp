@@ -362,7 +362,6 @@ ScoreDocument::calculateMagicNumbers(
 
             //  データを転送する。  //
             for ( TeamIndex lngEnemy = 0; lngEnemy < TeamCount; ++ lngEnemy ) {
-                cs.beatProbability.at(lngEnemy) = lngBeatProb.at(lngEnemy);
             }
         }
 
@@ -1085,9 +1084,6 @@ ScoreDocument::clearCountedScoresList(
 
         trgCS.restGames.clear();
         trgCS.restGames.resize(numTeam);
-
-        trgCS.beatProbability.clear();
-        trgCS.beatProbability.resize(numTeam);
 
         trgCS.vsGotScores.clear();
         trgCS.vsGotScores.resize(numTeam);
