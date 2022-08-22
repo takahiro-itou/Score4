@@ -217,6 +217,20 @@ struct  CountedScores
 
     /**  対チーム毎の失点。 **/
     ScoreTable      vsLostScores;
+
+    CountedScores()
+        : numWons(), numLost(), numDraw(),
+          numGames(),
+          vsWons(), vsLost(), vsDraw(),
+          restGames(),
+          numLeagueRestGames(), numInterRestGames(),
+          numTotalRestGames(),
+          totalMagic(),
+          currentRank(),
+          numWinsForBeat(),
+          totalGotScores(), totalLostScores(),
+          vsGotScores(), vsLostScores()
+    { }
 };
 
 CONSTEXPR_VAR   GamesCount  MAGIC_NO_PROBABILITY_WONS   = 99999999;
