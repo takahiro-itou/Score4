@@ -366,14 +366,14 @@ ScoreDocument::computeRankRange(
         const  CountedScores   & csSrc  = bufCounted[s];
 
         for ( TeamIndex t = 0; t < numTeam; ++ t ) {
-            if ( s == t ) {
-                continue;
-            }
             if ( getTeamInfo(t).leagueID != srcLeague ) {
                 continue;
             }
-
             ++ sameLeague;
+            if ( s == t ) {
+                continue;
+            }
+
             const   CountedScores  & csTrg  = bufCounted[t];
             if ( csSrc.totalMagic.wrateHigh < csTrg.totalMagic.wrateLow ) {
                 //  このチーム s は相手 t を上回ることができない。  //
