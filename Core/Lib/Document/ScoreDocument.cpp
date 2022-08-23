@@ -344,6 +344,17 @@ ScoreDocument::computeRankOrder(
 }
 
 //----------------------------------------------------------------
+//    確定順位を計算して書き込む。
+//
+
+ErrCode
+ScoreDocument::computeRankRange(
+        CountedScoreList    &bufCounted)  const
+{
+    return ( ERR_FAILURE );
+}
+
+//----------------------------------------------------------------
 //    試合結果を集計する。
 //
 
