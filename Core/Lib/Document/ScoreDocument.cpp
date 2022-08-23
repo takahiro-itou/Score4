@@ -963,6 +963,27 @@ ScoreDocument::setTeamInfo(
 //
 
 //----------------------------------------------------------------
+//    可能性のある最終勝率の範囲を計算する。
+//
+
+ErrCode
+ScoreDocument::computeWinningRateRange(
+        const  CountedScores  & csData,
+        Common::MagicInfo     & miOut)
+{
+    const   GamesCount  curWons = csData.numWons[FILTER_ALL_GAMES];
+    const   GamesCount  numRest = csData.numTotalRestGames[FILTER_ALL_GAMES];
+    const   GamesCount
+        finNumGames = (curWons + csData.numLost[FILTER_ALL_GAMES] + numRest);
+    const   GamesCount  finWons = (curWons + numRest);
+
+    miOut.wrateLow  = (curWons * 1.0) / finNumGames;
+    miOut.wrateHigh = (finWons * 1.0) / finNumGames;
+
+    return ( ERR_SUCCESS );
+}
+
+//----------------------------------------------------------------
 //    集計結果を格納する配列をクリアする。
 //
 

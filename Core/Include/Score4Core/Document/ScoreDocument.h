@@ -601,6 +601,17 @@ public:
 private:
 
     //----------------------------------------------------------------
+    /**   可能性のある最終勝率の範囲を計算する。
+    **
+    **  @param [in] csData    集計済みデータ。
+    **  @param[out] miOut     結果を書き込む変数。
+    **/
+    static  ErrCode
+    computeWinningRateRange(
+            const  CountedScores  & csData,
+            Common::MagicInfo     & miOut);
+
+    //----------------------------------------------------------------
     /**   集計結果を格納する配列をクリアする。
     **
     **  @param[out] bufCounted    結果を格納する変数。
