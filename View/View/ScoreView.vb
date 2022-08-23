@@ -84,15 +84,19 @@ Public Sub displayScoreTableToGrid(
             Dim idxTeam As Integer = bufShowIndex(i)
             Dim teamInfo As Score4Wrapper.Common.TeamInfo
             Dim scoreInfo As Score4Wrapper.Common.CountedScores
+            Dim magicInfo As Score4Wrapper.Common.MagicInfo
 
             teamInfo = scoreData.teamInfo(idxTeam)
             scoreInfo = scoreData.scoreInfo(idxTeam)
+            magicInfo = scoreInfo.totalMagicInfo
 
             Dim numWons As Integer = scoreInfo.numWons(2)
             Dim numLost As Integer = scoreInfo.numLost(2)
             Dim numDraw As Integer = scoreInfo.numDraw(2)
             Dim strDiff As String
             Dim strPerc As String
+            Dim strMagic As String
+            Dim strRank As String
 
             ' ゲーム差
             Dim curDiff As Integer = numWons - numLost
@@ -114,6 +118,20 @@ Public Sub displayScoreTableToGrid(
                 strPerc = Format(numWons / wpDenom, "#.000")
             End If
 
+            ' マジック
+            strMagic = ""
+
+            ' 確定順位範囲
+            With magicInfo
+                If (.rankHigh <= 0) And (.rankLow <= 0) Then
+                    strRank = ""
+                ElseIf (.rankHigh = .rankLow) Then
+                    strRank = .rankHigh & "位確定"
+                Else
+                    strRank = .rankHigh & "～" & .rankLow
+                End If
+            End With
+
             .Rows.Add(
                 teamInfo.teamName,
                 numGame,
@@ -121,7 +139,9 @@ Public Sub displayScoreTableToGrid(
                 numLost,
                 numDraw,
                 strDiff,
-                strPerc
+                strPerc,
+                strMagic,
+                strRank
             )
         Next
     End With
