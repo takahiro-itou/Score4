@@ -151,6 +151,12 @@ struct  MagicInfo
 
     /**   マジック。                **/
     GamesCount      magicNumber[2];
+
+    /**   可能性のある最低勝率。    **/
+    WinningRate     wrateLow;
+
+    /**   可能性のある最高勝率。    **/
+    WinningRate     wrateHigh;
 };
 
 //----------------------------------------------------------------
