@@ -351,7 +351,46 @@ ErrCode
 ScoreDocument::computeRankRange(
         CountedScoreList    &bufCounted)  const
 {
-    return ( ERR_FAILURE );
+    const   TeamIndex   numTeam = getNumTeams();
+    for ( TeamIndex i = 0; i < numTeam; ++ i ) {
+        CountedScores  &cs  = bufCounted.at(i);
+        computeWinningRateRange(cs, cs.totalMagic);
+    }
+
+    for ( TeamIndex s = 0; s < numTeam; ++ s ) {
+        TeamIndex   numNotLower = 0;
+        TeamIndex   numNotUpper = 0;
+        TeamIndex   sameLeague  = 0;
+
+        const  LeagueIndex  srcLeague   = getTeamInfo(s).leagueID;
+        const  CountedScores   & csSrc  = bufCounted[s];
+
+        for ( TeamIndex t = 0; t < numTeam; ++ t ) {
+            if ( s == t ) {
+                continue;
+            }
+            if ( getTeamInfo(t).leagueID != srcLeague ) {
+                continue;
+            }
+
+            ++ sameLeague;
+            const   CountedScores  & csTrg  = bufCounted[t];
+            if ( csSrc.totalMagic.wrateHigh < csTrg.totalMagic.wrateLow ) {
+                //  このチーム s は相手 t を上回ることができない。  //
+                ++ numNotUpper;
+            }
+            if ( csTrg.totalMagic.wrateHigh < csSrc.totalMagic.wrateLow ) {
+                //  このチーム s は相手 t を下回ることはない。  //
+                ++ numNotLower;
+            }
+        }
+
+        Common::MagicInfo   &mi = bufCounted[s].totalMagic;
+        mi.rankLow  = sameLeague - numNotLower;
+        mi.rankHigh = numNotUpper + 1;
+    }
+
+    return ( ERR_SUCCESS );
 }
 
 //----------------------------------------------------------------
