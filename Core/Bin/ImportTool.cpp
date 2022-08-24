@@ -77,13 +77,21 @@ int  main(int argc, char * argv[])
         retErr  = docFile.readFromTextStream(std::cin, &objDoc);
     }
     if ( retErr != ERR_SUCCESS ) {
+        std::cerr   <<  "ERROR : Read From Text."   <<  std::endl;
         return ( retErr );
     }
+    std::cerr   <<  "Read : OK."    <<  std::endl;
 
-    retErr  = docFile.saveToTextStream(objDoc, std::cout);
+    try {
+        retErr  = docFile.saveToTextStream(objDoc, std::cout);
+    } catch ( std::exception &e ) {
+        std::cerr   <<  "Exception in saveToTextStream\n"
+                    <<  e.what()    <<  std::endl;
+    }
     if ( retErr != ERR_SUCCESS ) {
         return ( retErr );
     }
+    std::cerr   <<  "Read From Text : OK."  <<  std::endl;
 
     std::vector<Common::CountedScores>  cs;
     retErr  = objDoc.countScores(-1, cs);
