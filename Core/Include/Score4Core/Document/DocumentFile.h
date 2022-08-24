@@ -71,6 +71,18 @@ public:
         FileLength  cbRecsBody;     /**<  レコード部本体領域。  **/
     };
 
+    /**   エラー情報。  **/
+    struct  ErrorInfo
+    {
+        std::string     message
+        std::string     what;
+    };
+
+    /**
+    **    発生したエラーを保存しておくバッファ。
+    **/
+    typedef     std::vector<ErrorInfo>      ErrorArray;
+
     /**   ゲーム結果のレコード。    **/
     typedef     Common::GameResult          GameResult;
 
