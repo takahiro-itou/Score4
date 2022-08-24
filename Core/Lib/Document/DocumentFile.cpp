@@ -753,6 +753,34 @@ DocumentFile::saveToTextStream(
 //    Protected Member Functions.
 //
 
+//----------------------------------------------------------------
+//    発生したエラーの情報を登録する。
+//
+
+void
+DocumentFile::appendErrorInfo(
+        const  ErrorInfo  & errInfo)
+{
+    this->appendErrorInfo(errInfo.message, errInfo.what);
+}
+
+//----------------------------------------------------------------
+//    発生したエラーの情報を登録する。
+//
+
+void
+DocumentFile::appendErrorInfo(
+        const  std::string  &message,
+        const  std::string  &what)
+{
+    std::cerr   <<  "# ERROR : "
+                <<  message
+                <<  ", "
+                <<  what
+                <<  std::endl;
+    return;
+}
+
 //========================================================================
 //
 //    For Internal Use Only.

@@ -283,6 +283,28 @@ public:
 //
 //    Protected Member Functions.
 //
+protected:
+
+    //----------------------------------------------------------------
+    /**   発生したエラーの情報を登録する。
+    **
+    **  @param [in] errInfo
+    **  @return     void.
+    **/
+    void
+    appendErrorInfo(
+            const  ErrorInfo  & errInfo);
+
+    //----------------------------------------------------------------
+    /**   発生したエラーの情報を登録する。
+    **
+    **  @param [in] errInfo
+    **  @return     void.
+    **/
+    void
+    appendErrorInfo(
+            const  std::string  &message,
+            const  std::string  &what);
 
 //========================================================================
 //
