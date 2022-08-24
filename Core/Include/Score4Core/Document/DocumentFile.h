@@ -74,7 +74,7 @@ public:
     /**   エラー情報。  **/
     struct  ErrorInfo
     {
-        std::string     message
+        std::string     message;
         std::string     what;
     };
 
@@ -156,7 +156,7 @@ public:
     **          エラーの種類を示す非ゼロ値を返す。
     **      -   正常終了の場合は、ゼロを返す。
     **/
-    static  ErrCode
+    ErrCode
     importRecordFromTextStream(
             std::istream     &  inStr,
             ScoreDocument  *    ptrDoc);
@@ -203,7 +203,7 @@ public:
     **          エラーの種類を示す非ゼロ値を返す。
     **      -   正常終了の場合は、ゼロを返す。
     **/
-    static  ErrCode
+    ErrCode
     readFromTextStream(
             std::istream     &  inStr,
             ScoreDocument  *    ptrDoc);
@@ -219,7 +219,7 @@ public:
     **          エラーの種類を示す非ゼロ値を返す。
     **      -   正常終了の場合は、ゼロを返す。
     **/
-    static  ErrCode
+    ErrCode
     readRecordFromTextStream(
             const  ScoreDocument  & objDoc,
             std::istream          & inStr,
