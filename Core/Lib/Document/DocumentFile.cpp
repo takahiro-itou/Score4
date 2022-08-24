@@ -28,6 +28,7 @@
 
 #include    <fcntl.h>
 #include    <memory.h>
+#include    <sstream>
 #include    <stdexcept>
 #include    <stdio.h>
 #include    <stdlib.h>
@@ -544,6 +545,19 @@ DocumentFile::readRecordFromTextStream(
         gameRecord.homeTeam     = objDoc.findTeamInfo(vTokens[1]);
         gameRecord.visitorScore = atoi(vTokens[3]);
         gameRecord.homeScore    = atoi(vTokens[2]);
+
+        if ( (gameRecord.visitorTeam < 0) ) {
+            std::stringstream   ss;
+            ss  <<  "Invalid visitor team name :"   <<  vTokens[4];
+            appendErrorInfo(ss.str(), "");
+            return ( ERR_INDEX_OUT_OF_RANGE );
+        }
+        if ( (gameRecord.homeTeam < 0) ) {
+            std::stringstream   ss;
+            ss  <<  "Invalid home team name :"      <<  vTokens[1];
+            appendErrorInfo(ss.str(), "");
+            return ( ERR_INDEX_OUT_OF_RANGE );
+        }
 
         outRec.push_back(gameRecord);
     }
