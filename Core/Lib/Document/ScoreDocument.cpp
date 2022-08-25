@@ -112,6 +112,16 @@ public:
     }
 };
 
+class  CompWinsDiff  {
+public:
+    bool operator() (
+            const  Common::NumWinsForBeat  &lhs,
+            const  Common::NumWinsForBeat  &rhs) const
+    {
+        return ( lhs.numWinsDiff < rhs.numWinsDiff );
+    }
+};
+
 }   //  End of (Unnamed) namespace.
 
 //========================================================================
