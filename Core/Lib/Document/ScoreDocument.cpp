@@ -66,6 +66,38 @@ aggregateRestGames(
     trg[FILTER_SCDL_ALLS]   += src[FILTER_SCDL_ALLS];
 }
 
+template <typename T, class Compare>
+inline  void
+insertSort(
+        const  std::vector<T>  &vecSrc,
+        std::vector<T>         &vecTrg,
+        Compare                 comp)
+{
+    const   size_t  num = vecSrc.size();
+
+    std::vector<int>    flags(num, 0);
+
+    vecTrg.clear();
+    vecSrc.resize(num);
+
+    for ( size_t i = 0; i < num; ++ i ) {
+        T *     ptr = nullptr;
+        size_t  pos = num;
+        for ( size_t j = 0; j < num; ++ j ) {
+            if ( flags[j] != 0 ) {
+                continue;
+            }
+            if ( (ptr == nullptr) || comp(vecSrc[j], *ptr) ) {
+                ptr = &vecSrc[pos = j];
+            }
+        }
+        flags[pos]  = 1;
+        vecTrg[i]   = (* ptr);
+    }
+
+    return;
+}
+
 }   //  End of (Unnamed) namespace.
 
 //========================================================================
