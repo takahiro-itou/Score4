@@ -98,6 +98,20 @@ insertSort(
     return;
 }
 
+class  ReverseCompMagic  {
+public:
+    bool operator() (
+            const  Common::NumWinsForBeat  &lhs,
+            const  Common::NumWinsForBeat  &rhs) const
+    {
+        const  int  ft  = (lhs.filterType) - (rhs.filterType);
+        if ( ft != 0 ) {
+            return ( ft > 0 );
+        }
+        return ( lhs.numNeedWins > rhs.numNeedWins );
+    }
+};
+
 }   //  End of (Unnamed) namespace.
 
 //========================================================================
