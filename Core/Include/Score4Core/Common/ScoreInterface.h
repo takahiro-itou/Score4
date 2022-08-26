@@ -147,7 +147,7 @@ struct  MagicInfo
     /**   可能性のある最高順位。    **/
     TeamIndex       rankHigh;
 
-    Boolean         bMagic[NUM_MAGIC_MODES];
+    MagicInfoFlags  magicFlags [NUM_MAGIC_MODES];
 
     /**   マジック。                **/
     GamesCount      magicNumber[NUM_MAGIC_MODES];
