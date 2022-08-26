@@ -169,7 +169,9 @@ enum  MagicFilter
 enum  MagicNumberMode
 {
     MAGIC_VICTORY   = 0,    /**<  優勝マジック。            **/
-    MAGIC_PLAYOFF   = 1     /**<  プレーオフ進出マジック。  **/
+    MAGIC_PLAYOFF,   = 1    /**<  プレーオフ進出マジック。  **/
+
+    NUM_MAGIC_MODES
 };
 
 //----------------------------------------------------------------

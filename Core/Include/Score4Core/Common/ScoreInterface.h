@@ -147,10 +147,10 @@ struct  MagicInfo
     /**   可能性のある最高順位。    **/
     TeamIndex       rankHigh;
 
-    Boolean         bMagic[2];
+    Boolean         bMagic[NUM_MAGIC_MODES];
 
     /**   マジック。                **/
-    GamesCount      magicNumber[2];
+    GamesCount      magicNumber[NUM_MAGIC_MODES];
 
     /**   可能性のある最低勝率。    **/
     WinningRate     wrateLow;
