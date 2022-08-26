@@ -250,7 +250,7 @@ ScoreDocument::calculateMagicNumbers(
     NumOfDigitsTable    dummyDigitsBuffer;
 
     const   TeamIndex   numTeam = getNumTeams();
-    const GamesCount lngMaxRest = makeWinningRateTable(
+    makeWinningRateTable(
             bufCounted, -1, dblPercent, dummyDigitsBuffer);
 
     for ( TeamIndex i = 0; i < numTeam; ++ i ) {
