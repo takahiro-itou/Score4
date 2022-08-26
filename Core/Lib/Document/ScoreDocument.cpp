@@ -66,12 +66,17 @@ aggregateRestGames(
     trg[FILTER_SCDL_ALLS]   += src[FILTER_SCDL_ALLS];
 }
 
+//----------------------------------------------------------------
+/**   少数のデータをソートする。
+**
+**/
+
 template <typename T, class Compare>
 inline  void
-insertSort(
-        const  std::vector<T>  &vecSrc,
-        std::vector<T>         &vecTrg,
-        Compare                 comp)
+sortSmallData(
+        const   std::vector<T>  &vecSrc,
+        Compare                 comp,
+        std::vector<const T *>  &vecTrg)
 {
     const   size_t  num = vecSrc.size();
 
@@ -92,7 +97,7 @@ insertSort(
             }
         }
         flags[pos]  = 1;
-        vecTrg[i]   = (* ptr);
+        vecTrg[i]   = (ptr);
     }
 
     return;
