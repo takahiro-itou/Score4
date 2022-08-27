@@ -126,6 +126,15 @@ public:
             const  Common::NumWinsForBeat  &lhs,
             const  Common::NumWinsForBeat  &rhs) const
     {
+        if ( (lhs.filterType == MF_DIFFERENT_LEAGUE) ) {
+            if ( (rhs.filterType != MF_DIFFERENT_LEAGUE) )
+            {
+                return ( false );
+            }
+        }
+        if ( (rhs.filterType == MF_DIFFERENT_LEAGUE) ) {
+            return ( true );
+        }
         return ( lhs.numWinsDiff < rhs.numWinsDiff );
     }
 };
