@@ -114,7 +114,11 @@ Public Sub displayScoreTableToGrid(
             End If
 
             ' マジック
-            strMagic = ""
+            If magicInfo.magicFlags(1) Then
+                strMagic = "M" & magicInfo.magicNumber(1)
+            Else
+                strMagic = magicInfo.magicNumber(1)
+            End If
 
             ' 確定順位範囲
             With magicInfo
