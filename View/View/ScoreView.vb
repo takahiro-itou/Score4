@@ -6,11 +6,6 @@ Public Enum ExtraViewMode As Integer
     EXTRA_VIEW_WIN_FOR_MATCH = 2
 End Enum
 
-Public Enum MagicMode As Integer
-    MAGIC_MODE_VICTORY = 0      ' 優勝マジック
-    MAGIC_MODE_PLAYOFF = 1      ' プレーオフ進出マジック
-End Enum
-
 ''========================================================================
 ''    指定されたグリッドビューに残り試合のテーブルを表示する
 ''========================================================================
@@ -66,7 +61,7 @@ End Sub
 ''========================================================================
 Public Sub displayScoreTableToGrid(
         ByVal leagueIndex As Integer,
-        ByVal magicMode As MagicMode,
+        ByVal magicMode As Score4Wrapper.MagicNumberMode,
         ByRef scoreData As Score4Wrapper.Document.ScoreDocument,
         ByRef objView As System.Windows.Forms.DataGridView)
 
@@ -153,7 +148,7 @@ End Sub
 ''========================================================================
 Public Sub displayTeamMagicTableToGrid(
         ByVal leagueIndex As Integer,
-        ByVal magicMode As MagicMode,
+        ByVal magicMode As Score4Wrapper.MagicNumberMode,
         ByRef scoreData As Score4Wrapper.Document.ScoreDocument,
         ByRef objView As System.Windows.Forms.DataGridView)
 

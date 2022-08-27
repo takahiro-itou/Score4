@@ -16,7 +16,7 @@ Private m_scoreData As Score4Wrapper.Document.ScoreDocument
 
 Private m_currentLeague As Integer
 Private m_currentDate As System.DateTime
-Private m_flagMagicMode As MagicMode
+Private m_flagMagicMode As Score4Wrapper.MagicNumberMode
 Private m_flagExtraView As ExtraViewMode
 Private m_flagSchedule As Score4Wrapper.GameFilter
 
@@ -223,7 +223,7 @@ End Sub
 Private Sub updateTables(
             ByVal idxLeague As Integer,
             ByVal trgLastDate As System.DateTime,
-            ByVal modeMagic As MagicMode,
+            ByVal modeMagic As Score4Wrapper.MagicNumberMode,
             ByVal modeExtra As ExtraViewMode,
             ByVal modeSchedule As Score4Wrapper.GameFilter)
 
