@@ -130,6 +130,11 @@ struct  NumWinsForBeat
     **    対象チームを自力で上回る可能性ギリギリのラインとのゲーム差。
     **/
     GamesCount      numWinsDiff;
+
+    /**
+    **    デバッグ用にチーム番号を保存。
+    **/
+    TeamIndex       targetTeam;
 };
 
 typedef     std::vector<NumWinsForBeat>     WinsForBeatList;

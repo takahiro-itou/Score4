@@ -20,6 +20,7 @@
 
 #include    "Score4Core/Document/ScoreDocument.h"
 
+#include    <iostream>
 #include    <memory.h>
 #include    <stdio.h>
 #include    <vector>
@@ -1229,6 +1230,8 @@ ScoreDocument::makeWinsForBeatInfo(
     Common::NumWinsForBeat  retInfo;
     WinningRate srcRate, trgRate;
 
+    retInfo.targetTeam  = trgTeam;
+
     //  自力で敵チームを上回る可能性を計算する。            //
     //  「自力」の意味は、直接対決は自チームが全て勝利し、  //
     //  敵チームはそれを除く残り試合に全勝すると仮定する。  //
@@ -1305,6 +1308,7 @@ ScoreDocument::makeWinsForBeatTable(
 
     for ( TeamIndex j = 0; j < numTeam; ++ j ) {
         if ( (getTeamInfo(j).leagueID != league) || (j == srcTeam) ) {
+            cs.numWinsForBeat[j].targetTeam     = j;
             cs.numWinsForBeat[j].filterType     = MF_DIFFERENT_LEAGUE;
             cs.numWinsForBeat[j].numNeedWins    = -1;
             cs.numWinsForBeat[j].numRestGame    = -1;
@@ -1369,6 +1373,22 @@ ScoreDocument::writeTeamMagicNumbers(
 
     sortSmallData(wbData, ReverseCompMagic(), sorted1);
     sortSmallData(wbData, CompWinsDiff(),     sorted2);
+
+    std::cerr   <<  "Info Magic for : " <<  idxTeam <<  std::endl;
+    for ( int i = 0; i < sorted1.size(); ++ i ) {
+        std::cerr   <<  sorted1[i]->targetTeam
+                    <<  ":" <<  sorted1[i]->filterType
+                    <<  "=" <<  sorted1[i]->numNeedWins
+                    <<  ", ";
+    }
+    std::cerr   <<  std::endl;
+    for ( int i = 0; i < sorted2.size(); ++ i ) {
+        std::cerr   <<  sorted2[i]->targetTeam
+                    <<  ":" <<  sorted2[i]->filterType
+                    <<  "=" <<  sorted2[i]->numNeedWins
+                    <<  ", ";
+    }
+    std::cerr   <<  std::endl;
 
     for ( int mode = 0; mode < NUM_MAGIC_MODES; ++ mode ) {
         TeamIndex   num = 1;
