@@ -30,8 +30,9 @@ Private Function isModificationClean() As Boolean
     End If
 
     Dim msgAns As System.Windows.Forms.DialogResult
-    msgAns = MessageBox.Show("このデータには変更が加えられています。保存しますか？", "Save",
-                                MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question)
+    msgAns = MessageBox.Show(
+        "このデータには変更が加えられています。保存しますか？", "Save",
+        MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question)
     If (msgAns = Windows.Forms.DialogResult.Cancel) Then
         Return False
     End If
@@ -240,6 +241,15 @@ Private Sub updateTables(
     m_flagMagicMode = modeMagic
     m_flagExtraView = modeExtra
     m_flagSchedule = modeSchedule
+
+    mnuMagicVictory.Checked = False
+    mnuMagicPlayoff.Checked = False
+    Select Case modeMagic
+    Case Score4Wrapper.MagicNumberMode.MAGIC_VICTORY
+        mnuMagicVictory.Checked = True
+    Case Score4Wrapper.MagicNumberMode.MAGIC_PLAYOFF
+        mnuMagicPlayoff.Checked = True
+    End Select
 
     Me.m_scoreData.countScores(trgLastDate)
     ScoreView.displayScoreTableToGrid(
