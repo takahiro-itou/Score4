@@ -30,8 +30,9 @@ Private Function isModificationClean() As Boolean
     End If
 
     Dim msgAns As System.Windows.Forms.DialogResult
-    msgAns = MessageBox.Show("このデータには変更が加えられています。保存しますか？", "Save",
-                                MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question)
+    msgAns = MessageBox.Show(
+        "このデータには変更が加えられています。保存しますか？", "Save",
+        MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question)
     If (msgAns = Windows.Forms.DialogResult.Cancel) Then
         Return False
     End If
@@ -80,13 +81,15 @@ Private Function openScoreData(ByVal fileName As String) As Boolean
     Dim msgAns As System.Windows.Forms.DialogResult
 
     Do
-        retVal = Score4Wrapper.Document.DocumentFile.readFromBinaryFile(fileName, Me.m_scoreData)
+        retVal = Score4Wrapper.Document.DocumentFile.readFromBinaryFile(
+            fileName, Me.m_scoreData)
         If retVal = Score4Wrapper.ErrCode.ERR_SUCCESS Then
             Exit Do
         End If
 
-        msgAns = MessageBox.Show("データの読み込みに失敗しました。再試行しますか？", "Error",
-                                    MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation)
+        msgAns = MessageBox.Show(
+            "データの読み込みに失敗しました。再試行しますか？", "Error",
+             MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation)
         If (msgAns = vbNo) Then
             Return False
         End If
@@ -103,8 +106,10 @@ Private Function openScoreData(ByVal fileName As String) As Boolean
     Dim flagAutoImport As Boolean = False
 
     If (flagAutoImport) Then
-        msgAns = MessageBox.Show("データが２日以上前のデータです。今すぐ更新してください。", "Old Data File",
-                                    MessageBoxButtons.OKCancel, MessageBoxIcon.Information)
+        msgAns = MessageBox.Show(
+            "データが２日以上前のデータです。今すぐ更新してください。",
+            "Old Data File",
+            MessageBoxButtons.OKCancel, MessageBoxIcon.Information)
         If (msgAns = vbOK) Then
             processImportData(True)
         End If
@@ -149,13 +154,16 @@ Private Function saveScoreData(ByVal fileName As String) As Boolean
     Dim msgAns As System.Windows.Forms.DialogResult
 
     Do
-        retVal = Score4Wrapper.Document.DocumentFile.saveToBinaryFile(Me.m_scoreData, fileName)
+        retVal = Score4Wrapper.Document.DocumentFile.saveToBinaryFile(
+            Me.m_scoreData, fileName)
         If retVal = Score4Wrapper.ErrCode.ERR_SUCCESS Then
             Exit Do
         End If
 
-        msgAns = MessageBox.Show("データの保存に失敗しました。再試行しますか？",
-                                    "Error", MessageBoxButtons.YesNo)
+        msgAns = MessageBox.Show(
+            "データの保存に失敗しました。再試行しますか？",
+            "Error",
+            MessageBoxButtons.YesNo)
         If (msgAns = vbNo) Then
             Return False
         End If
@@ -164,8 +172,9 @@ Private Function saveScoreData(ByVal fileName As String) As Boolean
     m_flagModified = False
     updateScoreView()
 
-    MessageBox.Show("保存は正常に完了しました。", "Save",
-                    MessageBoxButtons.OK, MessageBoxIcon.Information)
+    MessageBox.Show(
+        "保存は正常に完了しました。", "Save",
+        MessageBoxButtons.OK, MessageBoxIcon.Information)
     m_lastFileName = fileName
 
     Return True
@@ -233,6 +242,15 @@ Private Sub updateTables(
     m_flagExtraView = modeExtra
     m_flagSchedule = modeSchedule
 
+    mnuMagicVictory.Checked = False
+    mnuMagicPlayoff.Checked = False
+    Select Case modeMagic
+    Case Score4Wrapper.MagicNumberMode.MAGIC_VICTORY
+        mnuMagicVictory.Checked = True
+    Case Score4Wrapper.MagicNumberMode.MAGIC_PLAYOFF
+        mnuMagicPlayoff.Checked = True
+    End Select
+
     Me.m_scoreData.countScores(trgLastDate)
     ScoreView.displayScoreTableToGrid(
             idxLeague, modeMagic, Me.m_scoreData, Me.grdScore)
@@ -262,21 +280,24 @@ End Sub
 ''========================================================================
 ''    メニュー「ファイル」－「終了」
 ''========================================================================
-Private Sub mnuFileExit_Click(sender As Object, e As EventArgs) Handles mnuFileExit.Click
+Private Sub mnuFileExit_Click(sender As Object, e As EventArgs) Handles _
+            mnuFileExit.Click
     Application.Exit()
 End Sub
 
 ''========================================================================
 ''    メニュー「ファイル」－「新規作成」
 ''========================================================================
-Private Sub mnuFileNew_Click(sender As Object, e As EventArgs) Handles mnuFileNew.Click
+Private Sub mnuFileNew_Click(sender As Object, e As EventArgs) Handles _
+            mnuFileNew.Click
 
 End Sub
 
 ''========================================================================
 ''    メニュー「ファイル」－「開く」
 ''========================================================================
-Private Sub mnuFileOpen_Click(sender As Object, e As EventArgs) Handles mnuFileOpen.Click
+Private Sub mnuFileOpen_Click(sender As Object, e As EventArgs) Handles _
+            mnuFileOpen.Click
 
     If isModificationClean() = False Then Exit Sub
 
@@ -297,7 +318,9 @@ End Sub
 ''========================================================================
 ''    メニュー「ファイル」－「上書き保存」
 ''========================================================================
-Private Sub mnuFileSave_Click(sender As Object, e As EventArgs) Handles mnuFileSave.Click
+Private Sub mnuFileSave_Click(sender As Object, e As EventArgs) Handles _
+            mnuFileSave.Click
+
     If (m_lastFileName = "") Then
         processSaveAs()
     Else
@@ -308,81 +331,103 @@ End Sub
 ''========================================================================
 ''    メニュー「ファイル」－「名前をつけて保存」
 ''========================================================================
-Private Sub mnuFileSaveAs_Click(sender As Object, e As EventArgs) Handles mnuFileSaveAs.Click
+Private Sub mnuFileSaveAs_Click(sender As Object, e As EventArgs) Handles _
+            mnuFileSaveAs.Click
     processSaveAs()
 End Sub
 
 ''========================================================================
 ''    メニュー「マジック」－「簡易計算で行う」
 ''========================================================================
-Private Sub mnuMagicEasy_Click(sender As Object, e As EventArgs) Handles mnuMagicEasy.Click
+Private Sub mnuMagicEasy_Click(sender As Object, e As EventArgs) Handles _
+            mnuMagicEasy.Click
 
 End Sub
 
 ''========================================================================
 ''    メニュー「マジック」－「詳細表示」
 ''========================================================================
-Private Sub mnuMagicLine_Click(sender As Object, e As EventArgs) Handles mnuMagicLine.Click
+Private Sub mnuMagicLine_Click(sender As Object, e As EventArgs) Handles _
+            mnuMagicLine.Click
 
 End Sub
 
 ''========================================================================
 ''    メニュー「マジック」－「プレーオフマジック」
 ''========================================================================
-Private Sub mnuMagicPlayoff_Click(sender As Object, e As EventArgs) Handles mnuMagicPlayoff.Click
+Private Sub mnuMagicPlayoff_Click(sender As Object, e As EventArgs) Handles _
+            mnuMagicPlayoff.Click
+
+    updateTables(
+        m_currentLeague, m_currentDate,
+        Score4Wrapper.MagicNumberMode.MAGIC_PLAYOFF,
+        m_flagExtraView, m_flagSchedule)
 
 End Sub
 
 ''========================================================================
 ''    メニュー「マジック」－「優勝マジック」
 ''========================================================================
-Private Sub mnuMagicVictory_Click(sender As Object, e As EventArgs) Handles mnuMagicVictory.Click
+Private Sub mnuMagicVictory_Click(sender As Object, e As EventArgs) Handles _
+            mnuMagicVictory.Click
+
+    updateTables(
+        m_currentLeague, m_currentDate,
+        Score4Wrapper.MagicNumberMode.MAGIC_VICTORY,
+        m_flagExtraView, m_flagSchedule)
 
 End Sub
 
 ''========================================================================
 ''    メニュー「オプション」－「フォント」
 ''========================================================================
-Private Sub mnuOptionsFont_Click(sender As Object, e As EventArgs) Handles mnuOptionsFont.Click
+Private Sub mnuOptionsFont_Click(sender As Object, e As EventArgs) Handles _
+            mnuOptionsFont.Click
 
 End Sub
 
 ''========================================================================
 ''    メニュー「スコア」－「詳細」
 ''========================================================================
-Private Sub mnuScoreDetail_Click(sender As Object, e As EventArgs) Handles mnuScoreDetail.Click
+Private Sub mnuScoreDetail_Click(sender As Object, e As EventArgs) Handles _
+            mnuScoreDetail.Click
 
 End Sub
 
 ''========================================================================
 ''    メニュー「スコア」－「編集」
 ''========================================================================
-Private Sub mnuScoreEdit_Click(sender As Object, e As EventArgs) Handles mnuScoreEdit.Click
+Private Sub mnuScoreEdit_Click(sender As Object, e As EventArgs) Handles _
+            mnuScoreEdit.Click
 
 End Sub
 
 ''========================================================================
 ''    メニュー「スコア」－「インポート」
 ''========================================================================
-Private Sub mnuScoreImport_Click(sender As Object, e As EventArgs) Handles mnuScoreImport.Click
+Private Sub mnuScoreImport_Click(sender As Object, e As EventArgs) Handles _
+            mnuScoreImport.Click
     processImportData(False)
 End Sub
 
 ''========================================================================
 ''    メニュー「スコア」－「最新の情報に更新」
 ''========================================================================
-Private Sub mnuScoreRefresh_Click(sender As Object, e As EventArgs) Handles mnuScoreRefresh.Click
+Private Sub mnuScoreRefresh_Click(sender As Object, e As EventArgs) Handles _
+            mnuScoreRefresh.Click
 
 End Sub
 
 ''========================================================================
 ''    メニュー「スコア」－「設定の変更」
 ''========================================================================
-Private Sub mnuScoreSettings_Click(sender As Object, e As EventArgs) Handles mnuScoreSettings.Click
+Private Sub mnuScoreSettings_Click(sender As Object, e As EventArgs) Handles _
+            mnuScoreSettings.Click
 
 End Sub
 
-Private Sub MainView_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
+Private Sub MainView_FormClosing(sender As Object, e As FormClosingEventArgs) _
+        Handles Me.FormClosing
     saveWindowPrefs()
 End Sub
 
@@ -393,22 +438,31 @@ Private Sub MainView_Load(sender As Object, e As EventArgs) Handles MyBase.Load
     moveWindowToStartPosition()
 End Sub
 
-Private Sub tabLeague_SelectedIndexChanged(sender As Object, e As EventArgs) Handles tabLeague.SelectedIndexChanged
+Private Sub tabLeague_SelectedIndexChanged(sender As Object, e As EventArgs) _
+        Handles tabLeague.SelectedIndexChanged
+
     Dim idxLeague As Integer = tabLeague.SelectedIndex
-    updateTables(idxLeague, m_currentDate, m_flagMagicMode, m_flagExtraView, m_flagSchedule)
+    updateTables(
+        idxLeague, m_currentDate, m_flagMagicMode,
+        m_flagExtraView, m_flagSchedule)
 End Sub
 
 ''========================================================================
 ''========================================================================
-Private Sub mnvDate_DateChanged(sender As Object, e As DateRangeEventArgs) Handles mnvDate.DateChanged
-    updateTables(m_currentLeague, mnvDate.SelectionStart, m_flagMagicMode, m_flagExtraView, m_flagSchedule)
+Private Sub mnvDate_DateChanged(sender As Object, e As DateRangeEventArgs) _
+        Handles mnvDate.DateChanged
+
+    updateTables(
+        m_currentLeague, mnvDate.SelectionStart, m_flagMagicMode,
+        m_flagExtraView, m_flagSchedule)
 End Sub
 
 ''========================================================================
 ''    チェックボックスの状態によって、残り試合数の表示に
 ''  日程上の「予定」試合を集計するか決定する
 ''========================================================================
-Private Sub chkSchedule_CheckedChanged(sender As Object, e As EventArgs) Handles chkSchedule.CheckedChanged
+Private Sub chkSchedule_CheckedChanged(sender As Object, e As EventArgs) _
+        Handles chkSchedule.CheckedChanged
 Dim flagSchedule As Score4Wrapper.GameFilter
 
     If (chkSchedule.CheckState = CheckState.Checked) Then
@@ -417,11 +471,15 @@ Dim flagSchedule As Score4Wrapper.GameFilter
         flagSchedule = 0
     End If
 
-    updateTables(m_currentLeague, m_currentDate, m_flagMagicMode, m_flagExtraView, flagSchedule)
+    updateTables(
+        m_currentLeague, m_currentDate, m_flagMagicMode,
+        m_flagExtraView, flagSchedule)
 End Sub
 
-Private Sub optShowExtra_CheckedChanged(sender As Object, e As EventArgs) Handles _
-                    optShowRest.CheckedChanged, optShowMagic.CheckedChanged, optShowWins.CheckedChanged
+Private Sub optShowExtra_CheckedChanged(sender As Object, e As EventArgs) _
+        Handles optShowRest.CheckedChanged, optShowMagic.CheckedChanged, _
+                optShowWins.CheckedChanged
+
     Dim modeExtra As ExtraViewMode
 
     If optShowRest.Checked Then
@@ -434,7 +492,9 @@ Private Sub optShowExtra_CheckedChanged(sender As Object, e As EventArgs) Handle
         modeExtra = ExtraViewMode.EXTRA_VIEW_REST_GAMES
     End If
 
-    updateTables(m_currentLeague, m_currentDate, m_flagMagicMode, modeExtra, m_flagSchedule)
+    updateTables(
+        m_currentLeague, m_currentDate, m_flagMagicMode,
+        modeExtra, m_flagSchedule)
 End Sub
 
 End Class
