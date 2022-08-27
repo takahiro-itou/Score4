@@ -1419,13 +1419,13 @@ ScoreDocument::writeTeamMagicNumbers(
 
         //  一旦マジックは点灯していない場合を書き込んでおく。  //
         miOut.magicFlags [mode] = MIF_WINS_DIFF;
-        miOut.magicNumber[mode] = sorted2[num]->numWinsDiff;
+        miOut.magicNumber[mode] = sorted2.at(num - 1)->numWinsDiff;
 
         //  プレーオフ進出ラインを読みだして、  //
         //  マジック点灯の場合はデータを更新。  //
-        if ( sorted1[num]->filterType == MF_ON_MAGIC ) {
+        if ( sorted1.at(num - 1)->filterType == MF_ON_MAGIC ) {
             miOut.magicFlags [mode] = MIF_ON_MAGIC;
-            miOut.magicNumber[mode] = sorted1[num]->numNeedWins;
+            miOut.magicNumber[mode] = sorted1[num - 1]->numNeedWins;
         }
     }
 
