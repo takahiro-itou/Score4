@@ -20,7 +20,6 @@
 
 #include    "Score4Core/Document/ScoreDocument.h"
 
-#include    <iostream>
 #include    <memory.h>
 #include    <stdio.h>
 #include    <vector>
@@ -1385,24 +1384,6 @@ ScoreDocument::writeTeamMagicNumbers(
 
     sortSmallData(wbData, ReverseCompMagic(), sorted1);
     sortSmallData(wbData, CompWinsDiff(),     sorted2);
-
-    std::cerr   <<  "Info Magic for : " <<  idxTeam <<  std::endl;
-    for ( int i = 0; i < sorted1.size(); ++ i ) {
-        std::cerr   <<  sorted1[i]->targetTeam
-                    <<  ":" <<  sorted1[i]->filterType
-                    <<  "=" <<  sorted1[i]->numNeedWins
-                    <<  "/" <<  sorted1[i]->numWinsDiff
-                    <<  ", ";
-    }
-    std::cerr   <<  std::endl;
-    for ( int i = 0; i < sorted2.size(); ++ i ) {
-        std::cerr   <<  sorted2[i]->targetTeam
-                    <<  ":" <<  sorted2[i]->filterType
-                    <<  "=" <<  sorted2[i]->numNeedWins
-                    <<  "/" <<  sorted2[i]->numWinsDiff
-                    <<  ", ";
-    }
-    std::cerr   <<  std::endl;
 
     for ( int mode = 0; mode < NUM_MAGIC_MODES; ++ mode ) {
         TeamIndex   num = 1;
