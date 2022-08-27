@@ -131,8 +131,7 @@ public:
             {
                 return ( false );
             }
-        }
-        if ( (rhs.filterType == MF_DIFFERENT_LEAGUE) ) {
+        } else if ( (rhs.filterType == MF_DIFFERENT_LEAGUE) ) {
             return ( true );
         }
         return ( lhs.numWinsDiff < rhs.numWinsDiff );
