@@ -331,12 +331,22 @@ End Sub
 ''========================================================================
 Private Sub mnuMagicPlayoff_Click(sender As Object, e As EventArgs) Handles mnuMagicPlayoff.Click
 
+    updateTables(
+        m_currentLeague, m_currentDate,
+        Score4Wrapper.MagicNumberMode.MAGIC_PLAYOFF,
+        m_flagExtraView, m_flagSchedule)
+
 End Sub
 
 ''========================================================================
 ''    メニュー「マジック」－「優勝マジック」
 ''========================================================================
 Private Sub mnuMagicVictory_Click(sender As Object, e As EventArgs) Handles mnuMagicVictory.Click
+
+    updateTables(
+        m_currentLeague, m_currentDate,
+        Score4Wrapper.MagicNumberMode.MAGIC_PLAYOFF,
+        m_flagExtraView, m_flagSchedule)
 
 End Sub
 
