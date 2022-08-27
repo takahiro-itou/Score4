@@ -1314,7 +1314,7 @@ ScoreDocument::makeWinsForBeatTable(
             cs.numWinsForBeat[j].numRestGame    = -1;
             cs.numWinsForBeat[j].numWinsSelf
                     = -Common::MAGIC_NO_PROBABILITY_WONS;
-            cs.numWinsForBeat[j].numWinsSelf
+            cs.numWinsForBeat[j].numWinsDiff
                     =  Common::MAGIC_NO_PROBABILITY_WONS;
             continue;
         }
@@ -1390,8 +1390,8 @@ ScoreDocument::writeTeamMagicNumbers(
     for ( int i = 0; i < sorted2.size(); ++ i ) {
         std::cerr   <<  sorted2[i]->targetTeam
                     <<  ":" <<  sorted2[i]->filterType
-                    <<  "=" <<  sorted1[i]->numNeedWins
-                    <<  "/" <<  sorted1[i]->numWinsDiff
+                    <<  "=" <<  sorted2[i]->numNeedWins
+                    <<  "/" <<  sorted2[i]->numWinsDiff
                     <<  ", ";
     }
     std::cerr   <<  std::endl;
