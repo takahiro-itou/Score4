@@ -1379,13 +1379,15 @@ ScoreDocument::writeTeamMagicNumbers(
         std::cerr   <<  sorted1[i]->targetTeam
                     <<  ":" <<  sorted1[i]->filterType
                     <<  "=" <<  sorted1[i]->numNeedWins
+                    <<  "/" <<  sorted1[i]->numWinsDiff
                     <<  ", ";
     }
     std::cerr   <<  std::endl;
     for ( int i = 0; i < sorted2.size(); ++ i ) {
         std::cerr   <<  sorted2[i]->targetTeam
                     <<  ":" <<  sorted2[i]->filterType
-                    <<  "=" <<  sorted2[i]->numNeedWins
+                    <<  "=" <<  sorted1[i]->numNeedWins
+                    <<  "/" <<  sorted1[i]->numWinsDiff
                     <<  ", ";
     }
     std::cerr   <<  std::endl;
