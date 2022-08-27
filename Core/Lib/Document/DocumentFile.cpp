@@ -28,6 +28,7 @@
 
 #include    <fcntl.h>
 #include    <memory.h>
+#include    <sstream>
 #include    <stdexcept>
 #include    <stdio.h>
 #include    <stdlib.h>
@@ -545,6 +546,19 @@ DocumentFile::readRecordFromTextStream(
         gameRecord.visitorScore = atoi(vTokens[3]);
         gameRecord.homeScore    = atoi(vTokens[2]);
 
+        if ( (gameRecord.visitorTeam < 0) ) {
+            std::stringstream   ss;
+            ss  <<  "Invalid visitor team name :"   <<  vTokens[4];
+            appendErrorInfo(ss.str(), "");
+            return ( ERR_INDEX_OUT_OF_RANGE );
+        }
+        if ( (gameRecord.homeTeam < 0) ) {
+            std::stringstream   ss;
+            ss  <<  "Invalid home team name :"      <<  vTokens[1];
+            appendErrorInfo(ss.str(), "");
+            return ( ERR_INDEX_OUT_OF_RANGE );
+        }
+
         outRec.push_back(gameRecord);
     }
 
@@ -752,6 +766,34 @@ DocumentFile::saveToTextStream(
 //
 //    Protected Member Functions.
 //
+
+//----------------------------------------------------------------
+//    発生したエラーの情報を登録する。
+//
+
+void
+DocumentFile::appendErrorInfo(
+        const  ErrorInfo  & errInfo)
+{
+    this->appendErrorInfo(errInfo.message, errInfo.what);
+}
+
+//----------------------------------------------------------------
+//    発生したエラーの情報を登録する。
+//
+
+void
+DocumentFile::appendErrorInfo(
+        const  std::string  &message,
+        const  std::string  &what)
+{
+    std::cerr   <<  "# ERROR : "
+                <<  message
+                <<  ", "
+                <<  what
+                <<  std::endl;
+    return;
+}
 
 //========================================================================
 //

@@ -44,6 +44,8 @@ class  ScoreDocument
 //
 private:
 
+    typedef     Common::WinsForBeatList     WinsForBeatList;
+
     typedef     Common::CountedScores       CountedScores;
     typedef     std::vector<CountedScores>  CountedScoreList;
 
@@ -162,19 +164,6 @@ public:
             const  LeagueIndex  leagueID);
 
     //----------------------------------------------------------------
-    /**   指定した相手を確実に上回るのに必要な勝数を計算する。
-    **
-    **/
-    virtual  GamesCount
-    calculateGamesForWin(
-            const   WinningRateTable  & percentTable,
-            const   TeamIndex           teamIndex,
-            const   TeamIndex           enemyIndex,
-            const   GamesCount          teamRest,
-            const   GamesCount          enemyRest,
-            const   Boolean             allowEqual)  const;
-
-    //----------------------------------------------------------------
     /**   各チームのプレーオフ進出マジックを計算する。
     **
     **  @param [in,out] bufCounted
@@ -223,6 +212,21 @@ public:
             const  CountedScoreList &csData,
             const  LeagueIndex      idxLeague,
             std::vector<TeamIndex>  &bufIndex)  const;
+
+    //----------------------------------------------------------------
+    /**   確定順位を計算して書き込む。
+    **
+    **  集計済みデータから、可能性のある順位の範囲を決定する。
+    **
+    **  @param [in,out] bufCounted
+    **  @return     エラーコードを返す。
+    **      -   異常終了の場合は、
+    **          エラーの種類を示す非ゼロ値を返す。
+    **      -   正常終了の場合は、ゼロを返す。
+    **/
+    virtual  ErrCode
+    computeRankRange(
+            CountedScoreList    &bufCounted)  const;
 
     //----------------------------------------------------------------
     /**   試合結果を集計する。
@@ -338,6 +342,20 @@ public:
 //
 //    Public Member Functions.
 //
+public:
+
+    //----------------------------------------------------------------
+    /**   指定した相手を確実に上回るのに必要な勝数を計算する。
+    **
+    **/
+    static  GamesCount
+    calculateGamesForWin(
+            const   WinningRateTable  & rateTable,
+            const   TeamIndex           teamIndex,
+            const   TeamIndex           enemyIndex,
+            const   GamesCount          teamRest,
+            const   GamesCount          enemyRest,
+            const   Boolean             allowEqual);
 
 //========================================================================
 //
@@ -585,6 +603,17 @@ public:
 private:
 
     //----------------------------------------------------------------
+    /**   可能性のある最終勝率の範囲を計算する。
+    **
+    **  @param [in] csData    集計済みデータ。
+    **  @param[out] miOut     結果を書き込む変数。
+    **/
+    static  ErrCode
+    computeWinningRateRange(
+            const  CountedScores  & csData,
+            Common::MagicInfo     & miOut);
+
+    //----------------------------------------------------------------
     /**   集計結果を格納する配列をクリアする。
     **
     **  @param[out] bufCounted    結果を格納する変数。
@@ -660,6 +689,20 @@ private:
             const   TeamIndex   trgTeam,
             const   GameFilter  flagGame,
             const   GamesCount  gameCount);
+
+    //----------------------------------------------------------------
+    /**   チームごとのマジック関連の情報を書き込む。
+    **
+    **  @return     エラーコードを返す。
+    **      -   異常終了の場合は、
+    **          エラーの種類を示す非ゼロ値を返す。
+    **      -   正常終了の場合は、ゼロを返す。
+    **/
+    ErrCode
+    writeTeamMagicNumbers(
+            const  TeamIndex        idxTeam,
+            const  WinsForBeatList  &wbData,
+            Common::MagicInfo       &miOut)  const;
 
 //========================================================================
 //

@@ -66,6 +66,77 @@ aggregateRestGames(
     trg[FILTER_SCDL_ALLS]   += src[FILTER_SCDL_ALLS];
 }
 
+//----------------------------------------------------------------
+/**   少数のデータをソートする。
+**
+**/
+
+template <typename T, class Compare>
+inline  void
+sortSmallData(
+        const   std::vector<T>  &vecSrc,
+        Compare                 comp,
+        std::vector<const T *>  &vecTrg)
+{
+    const   size_t  num = vecSrc.size();
+
+    std::vector<int>    flags(num, 0);
+
+    vecTrg.clear();
+    vecTrg.resize(num);
+
+    for ( size_t i = 0; i < num; ++ i ) {
+        const T *   ptr = nullptr;
+        size_t      pos = num;
+        for ( size_t j = 0; j < num; ++ j ) {
+            if ( flags[j] != 0 ) {
+                continue;
+            }
+            if ( (ptr == nullptr) || comp(vecSrc[j], *ptr) ) {
+                ptr = &vecSrc[pos = j];
+            }
+        }
+        flags[pos]  = 1;
+        vecTrg[i]   = (ptr);
+    }
+
+    return;
+}
+
+//----------------------------------------------------------------
+
+class  ReverseCompMagic  {
+public:
+    bool operator() (
+            const  Common::NumWinsForBeat  &lhs,
+            const  Common::NumWinsForBeat  &rhs) const
+    {
+        const  int  ft  = (lhs.filterType) - (rhs.filterType);
+        if ( ft != 0 ) {
+            return ( ft > 0 );
+        }
+        return ( lhs.numNeedWins > rhs.numNeedWins );
+    }
+};
+
+class  CompWinsDiff  {
+public:
+    bool operator() (
+            const  Common::NumWinsForBeat  &lhs,
+            const  Common::NumWinsForBeat  &rhs) const
+    {
+        if ( (lhs.filterType == MF_DIFFERENT_LEAGUE) ) {
+            if ( (rhs.filterType != MF_DIFFERENT_LEAGUE) )
+            {
+                return ( false );
+            }
+        } else if ( (rhs.filterType == MF_DIFFERENT_LEAGUE) ) {
+            return ( true );
+        }
+        return ( lhs.numWinsDiff < rhs.numWinsDiff );
+    }
+};
+
 }   //  End of (Unnamed) namespace.
 
 //========================================================================
@@ -178,65 +249,6 @@ ScoreDocument::appendTeamInfo(
 }
 
 //----------------------------------------------------------------
-//    指定した相手を確実に上回るのに必要な勝数を計算する。
-//
-
-GamesCount
-ScoreDocument::calculateGamesForWin(
-        const   WinningRateTable  & percentTable,
-        const   TeamIndex           teamIndex,
-        const   TeamIndex           enemyIndex,
-        const   GamesCount          teamRest,
-        const   GamesCount          enemyRest,
-        const   Boolean             allowEqual)  const
-{
-    GamesCount  winGames, loseGames, nResult;
-    WinningRate wrTeamLast, wrEnemyLast;
-    Boolean     flgSelf;
-
-    wrTeamLast  = percentTable.at(teamIndex ).at(teamRest );
-    wrEnemyLast = percentTable.at(enemyIndex).at(enemyRest);
-
-    if ( wrEnemyLast < wrTeamLast ) {
-        flgSelf = BOOL_TRUE;
-    } else if ( (allowEqual != BOOL_FALSE) && (wrTeamLast == wrEnemyLast) ) {
-        flgSelf = BOOL_TRUE;
-    } else {
-        flgSelf = BOOL_FALSE;
-    }
-
-    if ( flgSelf ) {
-        //  自力で  //
-        nResult = teamRest;
-        for ( winGames = 0; winGames <= teamRest; ++ winGames ) {
-            wrTeamLast  = percentTable.at(teamIndex).at(winGames);
-            if ( wrEnemyLast < wrTeamLast ) {
-                nResult = winGames;
-                break;
-            } else if ( (allowEqual) && (wrTeamLast == wrEnemyLast) ) {
-                nResult = winGames;
-                break;
-            }
-        }
-    } else {
-        //  他力本願。  //
-        nResult = Common::MAGIC_NO_PROBABILITY_WONS + teamRest;
-        for ( loseGames = 0; loseGames <= enemyRest; ++ loseGames ) {
-            wrEnemyLast = percentTable.at(enemyIndex).at(enemyRest - loseGames);
-            if ( wrEnemyLast < wrTeamLast ) {
-                nResult = teamRest + loseGames;
-                break;
-            } else if ( (allowEqual) && (wrEnemyLast == wrTeamLast) ) {
-                nResult = teamRest + loseGames;
-                break;
-            }
-        }
-    }
-
-    return ( nResult );
-}
-
-//----------------------------------------------------------------
 //    各チームのプレーオフ進出マジックを計算する。
 //
 
@@ -247,125 +259,17 @@ ScoreDocument::calculateMagicNumbers(
     WinningRateTable    dblPercent;
     NumOfDigitsTable    dummyDigitsBuffer;
 
-    const TeamIndex TeamCount = getNumTeams();
-    const GamesCount lngMaxRest = makeWinningRateTable(
+    const   TeamIndex   numTeam = getNumTeams();
+    makeWinningRateTable(
             bufCounted, -1, dblPercent, dummyDigitsBuffer);
-    GamesCount  lngGamesForWin;
 
-    for ( TeamIndex i = 0; i < TeamCount; ++ i ) {
+    for ( TeamIndex i = 0; i < numTeam; ++ i ) {
         makeWinsForBeatTable(dblPercent, i, bufCounted);
-    }
 
-    std::vector<std::vector<Boolean> >  blnBeatFlag(TeamCount);
-    std::vector<TeamIndex>  lngBeatTeams(TeamCount);
-
-    for ( TeamIndex lngTeam = 0; lngTeam < TeamCount; ++ lngTeam ) {
-        blnBeatFlag.at(lngTeam).resize(TeamCount);
-        lngBeatTeams.at(lngTeam) = 0;
-        const LeagueIndex lngTeamLeague = getTeamInfo(lngTeam).leagueID;
-        Common::CountedScores &cs = bufCounted.at(lngTeam);
-        const GamesCount lngTeamRest = cs.numTotalRestGames[FILTER_ALL_GAMES];
-        const WinningRate dblLastScorePercent = dblPercent.at(lngTeam)
-                .at(lngTeamRest);
-
-        for ( TeamIndex lngEnemy = 0; lngEnemy < TeamCount; ++ lngEnemy ) {
-            const LeagueIndex lngEnemyLeague = getTeamInfo(lngEnemy).leagueID;
-            if ( (lngEnemyLeague == lngTeamLeague) && (lngEnemy != lngTeam) ) {
-                //  この相手チームが直接対決以外で、    //
-                //  残りの試合に全部勝った時の勝率。    //
-                const Common::CountedScores &csEnemy = bufCounted.at(lngEnemy);
-                const GamesCount lngDirectRest = csEnemy.restGames.at(lngTeam)[FILTER_ALL_GAMES];
-                const GamesCount lngEnemyRest = csEnemy.numTotalRestGames[FILTER_ALL_GAMES];
-                const WinningRate dblEnemyLastPercent = dblPercent.at(lngEnemy).at(lngEnemyRest - lngDirectRest);
-                if ( dblLastScorePercent >= dblEnemyLastPercent ) {
-                    blnBeatFlag.at(lngTeam).at(lngEnemy) = BOOL_TRUE;
-                } else {
-                    blnBeatFlag.at(lngTeam).at(lngEnemy) = BOOL_FALSE;
-                    ++ lngBeatTeams.at(lngTeam);
-                }
-
-                //  この相手チームを確実に上回るのに必要な勝利数。  //
-                lngGamesForWin = calculateGamesForWin(dblPercent, lngTeam, lngEnemy, lngTeamRest, lngEnemyRest, BOOL_FALSE);
-            }
-        }
-    }
-
-    for ( int lngCalculateMode = 0; lngCalculateMode <= 1; ++ lngCalculateMode )
-    {
-        std::vector<GamesCount> lngMagicNumber(TeamCount);
-        std::vector<GamesCount> lngBeatProb(TeamCount);
-        std::vector<Boolean>    blnFlagMagic(TeamCount);
-
-        for ( TeamIndex lngTeam = 0; lngTeam < TeamCount; ++ lngTeam ) {
-            const LeagueIndex lngTeamLeague = getTeamInfo(lngTeam).leagueID;
-            const TeamIndex lngCalcPlayoffTeams = getLeagueInfo(lngTeamLeague).numPlayOff;
-            Common::CountedScores &cs = bufCounted.at(lngTeam);
-
-            GamesCount  lngTeamRest = cs.numTotalRestGames[FILTER_ALL_GAMES];
-            blnFlagMagic.at(lngTeam) = BOOL_TRUE;
-            TeamIndex k = 0;
-            for ( TeamIndex lngEnemy = 0; lngEnemy < TeamCount; ++ lngEnemy) {
-                const LeagueIndex lngEnemyLeague = getTeamInfo(lngEnemy).leagueID;
-                if ( (lngEnemyLeague == lngTeamLeague) && (lngEnemy != lngTeam) )
-                {
-                    if ( blnBeatFlag.at(lngEnemy).at(lngTeam) != BOOL_FALSE ) {
-                        //  まだ自力での可能性が残っているチームがある。    //
-                        ++ k;
-                    }
-                }
-            }
-            if ( k >= lngCalcPlayoffTeams ) {
-                //  まだマジックは点灯していない。  //
-                blnFlagMagic.at(lngTeam) = BOOL_FALSE;
-            }
-            lngMagicNumber.at(lngTeam) = 0;
-
-            std::vector<GamesCount> lngMagicList(TeamCount);
-            for ( TeamIndex lngEnemy = 0; lngEnemy < TeamCount; ++ lngEnemy ) {
-                lngMagicList.at(lngEnemy) = -1;
-            }
-            for ( TeamIndex lngEnemy = 0; lngEnemy < TeamCount; ++ lngEnemy ) {
-                const LeagueIndex lngEnemyLeague = getTeamInfo(lngEnemy).leagueID;
-                Common::CountedScores &csEnemy = bufCounted.at(lngEnemy);
-                if ( (lngEnemyLeague == lngTeamLeague) && (lngEnemy != lngTeam) )
-                {
-                    GamesCount  lngEnemyRest = csEnemy.numTotalRestGames[FILTER_ALL_GAMES];
-                    GamesCount  lngDirectRest = csEnemy.restGames.at(lngTeam)[FILTER_ALL_GAMES];
-                    GamesCount  lngGamesForWin = calculateGamesForWin(dblPercent, lngTeam, lngEnemy, lngTeamRest, lngEnemyRest - lngDirectRest, BOOL_TRUE);
-                    lngGamesForWin = lngTeamRest - lngGamesForWin;
-                    lngBeatProb.at(lngEnemy) = lngGamesForWin;
-                    if ( lngGamesForWin > lngTeamRest - lngDirectRest ) {
-                        lngBeatProb.at(lngEnemy) = lngTeamRest - lngDirectRest;
-                    }
-                    if ( lngGamesForWin < 0 ) {
-                        lngGamesForWin = calculateGamesForWin(dblPercent, lngEnemy, lngTeam, lngEnemyRest - lngDirectRest, lngTeamRest, BOOL_FALSE);
-                    } else {
-                    }
-                    if ( blnFlagMagic.at(lngTeam) == BOOL_FALSE) {
-                        lngGamesForWin = calculateGamesForWin(dblPercent, lngTeam, lngEnemy, lngTeamRest, lngEnemyRest - lngDirectRest, BOOL_TRUE);
-                    } else {
-                        lngGamesForWin = calculateGamesForWin(dblPercent, lngTeam, lngEnemy, lngTeamRest - lngDirectRest, lngEnemyRest, BOOL_FALSE);
-                    }
-                } else {
-                    lngBeatProb.at(lngEnemy) = 0;
-                }
-            }
-
-            //  集計したデータの、プレーオフ進出ラインを呼び出す。  //
-            if ( blnFlagMagic.at(lngTeam) != BOOL_FALSE ) {
-                lngGamesForWin = lngMagicList.at(lngCalcPlayoffTeams - 1);
-                lngMagicNumber.at(lngTeam) = lngGamesForWin;
-            } else {
-                lngGamesForWin = lngMagicList.at(lngCalcPlayoffTeams - 1);
-                lngMagicNumber.at(lngTeam) = lngTeamRest - lngGamesForWin;
-            }
-
-            //  データを転送する。  //
-            for ( TeamIndex lngEnemy = 0; lngEnemy < TeamCount; ++ lngEnemy ) {
-                cs.beatProbability.at(lngEnemy) = lngBeatProb.at(lngEnemy);
-            }
-        }
-
+        writeTeamMagicNumbers(
+                i,
+                bufCounted[i].numWinsForBeat,
+                bufCounted[i].totalMagic);
     }
 
     return ( ERR_SUCCESS );
@@ -513,6 +417,56 @@ ScoreDocument::computeRankOrder(
     }
 
     return ( cntTeam );
+}
+
+//----------------------------------------------------------------
+//    確定順位を計算して書き込む。
+//
+
+ErrCode
+ScoreDocument::computeRankRange(
+        CountedScoreList    &bufCounted)  const
+{
+    const   TeamIndex   numTeam = getNumTeams();
+    for ( TeamIndex i = 0; i < numTeam; ++ i ) {
+        CountedScores  &cs  = bufCounted.at(i);
+        computeWinningRateRange(cs, cs.totalMagic);
+    }
+
+    for ( TeamIndex s = 0; s < numTeam; ++ s ) {
+        TeamIndex   numNotLower = 0;
+        TeamIndex   numNotUpper = 0;
+        TeamIndex   sameLeague  = 0;
+
+        const  LeagueIndex  srcLeague   = getTeamInfo(s).leagueID;
+        const  CountedScores   & csSrc  = bufCounted[s];
+
+        for ( TeamIndex t = 0; t < numTeam; ++ t ) {
+            if ( getTeamInfo(t).leagueID != srcLeague ) {
+                continue;
+            }
+            ++ sameLeague;
+            if ( s == t ) {
+                continue;
+            }
+
+            const   CountedScores  & csTrg  = bufCounted[t];
+            if ( csSrc.totalMagic.wrateHigh < csTrg.totalMagic.wrateLow ) {
+                //  このチーム s は相手 t を上回ることができない。  //
+                ++ numNotUpper;
+            }
+            if ( csTrg.totalMagic.wrateHigh < csSrc.totalMagic.wrateLow ) {
+                //  このチーム s は相手 t を下回ることはない。  //
+                ++ numNotLower;
+            }
+        }
+
+        Common::MagicInfo   &mi = bufCounted[s].totalMagic;
+        mi.rankLow  = sameLeague - numNotLower;
+        mi.rankHigh = numNotUpper + 1;
+    }
+
+    return ( ERR_SUCCESS );
 }
 
 //----------------------------------------------------------------
@@ -796,6 +750,65 @@ ScoreDocument::verifyRecord(
 //    Public Member Functions.
 //
 
+//----------------------------------------------------------------
+//    指定した相手を確実に上回るのに必要な勝数を計算する。
+//
+
+GamesCount
+ScoreDocument::calculateGamesForWin(
+        const   WinningRateTable  & rateTable,
+        const   TeamIndex           teamIndex,
+        const   TeamIndex           enemyIndex,
+        const   GamesCount          teamRest,
+        const   GamesCount          enemyRest,
+        const   Boolean             allowEqual)
+{
+    GamesCount  winGames, loseGames, nResult;
+    WinningRate wrTeamLast, wrEnemyLast;
+    Boolean     flgSelf;
+
+    wrTeamLast  = rateTable.at(teamIndex ).at(teamRest );
+    wrEnemyLast = rateTable.at(enemyIndex).at(enemyRest);
+
+    if ( wrEnemyLast < wrTeamLast ) {
+        flgSelf = BOOL_TRUE;
+    } else if ( (allowEqual != BOOL_FALSE) && (wrTeamLast == wrEnemyLast) ) {
+        flgSelf = BOOL_TRUE;
+    } else {
+        flgSelf = BOOL_FALSE;
+    }
+
+    if ( flgSelf ) {
+        //  自力で  //
+        nResult = teamRest;
+        for ( winGames = 0; winGames <= teamRest; ++ winGames ) {
+            wrTeamLast  = rateTable.at(teamIndex).at(winGames);
+            if ( wrEnemyLast < wrTeamLast ) {
+                nResult = winGames;
+                break;
+            } else if ( (allowEqual) && (wrTeamLast == wrEnemyLast) ) {
+                nResult = winGames;
+                break;
+            }
+        }
+    } else {
+        //  他力本願。  //
+        nResult = Common::MAGIC_NO_PROBABILITY_WONS + teamRest;
+        for ( loseGames = 0; loseGames <= enemyRest; ++ loseGames ) {
+            wrEnemyLast = rateTable.at(enemyIndex).at(enemyRest - loseGames);
+            if ( wrEnemyLast < wrTeamLast ) {
+                nResult = teamRest + loseGames;
+                break;
+            } else if ( (allowEqual) && (wrEnemyLast == wrTeamLast) ) {
+                nResult = teamRest + loseGames;
+                break;
+            }
+        }
+    }
+
+    return ( nResult );
+}
+
 //========================================================================
 //
 //    Accessors.
@@ -1065,6 +1078,27 @@ ScoreDocument::setTeamInfo(
 //
 
 //----------------------------------------------------------------
+//    可能性のある最終勝率の範囲を計算する。
+//
+
+ErrCode
+ScoreDocument::computeWinningRateRange(
+        const  CountedScores  & csData,
+        Common::MagicInfo     & miOut)
+{
+    const   GamesCount  curWons = csData.numWons[FILTER_ALL_GAMES];
+    const   GamesCount  numRest = csData.numTotalRestGames[FILTER_ALL_GAMES];
+    const   GamesCount
+        finNumGames = (curWons + csData.numLost[FILTER_ALL_GAMES] + numRest);
+    const   GamesCount  finWons = (curWons + numRest);
+
+    miOut.wrateLow  = (curWons * 1.0) / finNumGames;
+    miOut.wrateHigh = (finWons * 1.0) / finNumGames;
+
+    return ( ERR_SUCCESS );
+}
+
+//----------------------------------------------------------------
 //    集計結果を格納する配列をクリアする。
 //
 
@@ -1085,9 +1119,6 @@ ScoreDocument::clearCountedScoresList(
 
         trgCS.restGames.clear();
         trgCS.restGames.resize(numTeam);
-
-        trgCS.beatProbability.clear();
-        trgCS.beatProbability.resize(numTeam);
 
         trgCS.vsGotScores.clear();
         trgCS.vsGotScores.resize(numTeam);
@@ -1206,6 +1237,8 @@ ScoreDocument::makeWinsForBeatInfo(
     Common::NumWinsForBeat  retInfo;
     WinningRate srcRate, trgRate;
 
+    retInfo.targetTeam  = trgTeam;
+
     //  自力で敵チームを上回る可能性を計算する。            //
     //  「自力」の意味は、直接対決は自チームが全て勝利し、  //
     //  敵チームはそれを除く残り試合に全勝すると仮定する。  //
@@ -1282,9 +1315,14 @@ ScoreDocument::makeWinsForBeatTable(
 
     for ( TeamIndex j = 0; j < numTeam; ++ j ) {
         if ( (getTeamInfo(j).leagueID != league) || (j == srcTeam) ) {
+            cs.numWinsForBeat[j].targetTeam     = j;
             cs.numWinsForBeat[j].filterType     = MF_DIFFERENT_LEAGUE;
             cs.numWinsForBeat[j].numNeedWins    = -1;
             cs.numWinsForBeat[j].numRestGame    = -1;
+            cs.numWinsForBeat[j].numWinsSelf
+                    = -Common::MAGIC_NO_PROBABILITY_WONS;
+            cs.numWinsForBeat[j].numWinsDiff
+                    =  Common::MAGIC_NO_PROBABILITY_WONS;
             continue;
         }
 
@@ -1327,6 +1365,54 @@ ScoreDocument::setGameCount(
 
     return ( ERR_SUCCESS );
 }
+
+//----------------------------------------------------------------
+//    チームごとのマジック関連の情報を書き込む。
+//
+
+ErrCode
+ScoreDocument::writeTeamMagicNumbers(
+        const  TeamIndex        idxTeam,
+        const  WinsForBeatList  &wbData,
+        Common::MagicInfo       &miOut)  const
+{
+    const  LeagueIndex  leagueID    = getTeamInfo(idxTeam).leagueID;
+    const  TeamIndex    numPlayOff  = getLeagueInfo(leagueID).numPlayOff;
+
+    std::vector<const Common::NumWinsForBeat *> sorted1;
+    std::vector<const Common::NumWinsForBeat *> sorted2;
+
+    sortSmallData(wbData, ReverseCompMagic(), sorted1);
+    sortSmallData(wbData, CompWinsDiff(),     sorted2);
+
+    for ( int mode = 0; mode < NUM_MAGIC_MODES; ++ mode ) {
+        TeamIndex   num = 1;
+        switch ( mode ) {
+        case  MAGIC_VICTORY:
+            //  優勝マジックの計算は、                              //
+            //  １チームだけが進出するプレーオフとして計算できる。  //
+            num = 1;
+            break;
+        case  MAGIC_PLAYOFF:
+            num = numPlayOff;   //  プレーオフマジック  //
+            break;
+        }
+
+        //  一旦マジックは点灯していない場合を書き込んでおく。  //
+        miOut.magicFlags [mode] = MIF_WINS_DIFF;
+        miOut.magicNumber[mode] = sorted2.at(num - 1)->numWinsDiff;
+
+        //  プレーオフ進出ラインを読みだして、  //
+        //  マジック点灯の場合はデータを更新。  //
+        if ( sorted1.at(num - 1)->filterType == MF_ON_MAGIC ) {
+            miOut.magicFlags [mode] = MIF_ON_MAGIC;
+            miOut.magicNumber[mode] = sorted1[num - 1]->numNeedWins;
+        }
+    }
+
+    return ( ERR_SUCCESS );
+}
+
 
 }   //  End of namespace  Document
 SCORE4_CORE_NAMESPACE_END
