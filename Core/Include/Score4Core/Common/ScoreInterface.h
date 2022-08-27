@@ -130,6 +130,11 @@ struct  NumWinsForBeat
     **    対象チームを自力で上回る可能性ギリギリのラインとのゲーム差。
     **/
     GamesCount      numWinsDiff;
+
+    /**
+    **    デバッグ用にチーム番号を保存。
+    **/
+    TeamIndex       targetTeam;
 };
 
 typedef     std::vector<NumWinsForBeat>     WinsForBeatList;
@@ -147,10 +152,16 @@ struct  MagicInfo
     /**   可能性のある最高順位。    **/
     TeamIndex       rankHigh;
 
-    Boolean         bMagic[2];
+    MagicInfoFlags  magicFlags [NUM_MAGIC_MODES];
 
     /**   マジック。                **/
-    GamesCount      magicNumber[2];
+    GamesCount      magicNumber[NUM_MAGIC_MODES];
+
+    /**   可能性のある最低勝率。    **/
+    WinningRate     wrateLow;
+
+    /**   可能性のある最高勝率。    **/
+    WinningRate     wrateHigh;
 };
 
 //----------------------------------------------------------------
@@ -201,8 +212,9 @@ struct  CountedScores
     /**   現在の順位。              **/
     TeamIndex       currentRank;
 
-    GameCountList   beatProbability;
-
+    /**
+    **    必要勝利数等、マジック関連の補助計算データ。
+    **/
     WinsForBeatList numWinsForBeat;
 
     /**   総得点。  **/
@@ -216,6 +228,20 @@ struct  CountedScores
 
     /**  対チーム毎の失点。 **/
     ScoreTable      vsLostScores;
+
+    CountedScores()
+        : numWons(), numLost(), numDraw(),
+          numGames(),
+          vsWons(), vsLost(), vsDraw(),
+          restGames(),
+          numLeagueRestGames(), numInterRestGames(),
+          numTotalRestGames(),
+          totalMagic(),
+          currentRank(),
+          numWinsForBeat(),
+          totalGotScores(), totalLostScores(),
+          vsGotScores(), vsLostScores()
+    { }
 };
 
 CONSTEXPR_VAR   GamesCount  MAGIC_NO_PROBABILITY_WONS   = 99999999;

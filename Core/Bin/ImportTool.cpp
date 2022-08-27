@@ -1,9 +1,9 @@
-﻿//  -*-  coding: utf-8-with-signature;  mode: c++  -*-  //
+﻿//  -*-  coding: utf-8-with-signature-unix; mode: c++  -*-  //
 /*************************************************************************
 **                                                                      **
 **                  ---  The Score4 Core Library.  ---                  **
 **                                                                      **
-**          Copyright (C), 2017-2020, Takahiro Itou                     **
+**          Copyright (C), 2017-2022, Takahiro Itou                     **
 **          All Rights Reserved.                                        **
 **                                                                      **
 **          License: (See COPYING and LICENSE files)                    **
@@ -77,13 +77,21 @@ int  main(int argc, char * argv[])
         retErr  = docFile.readFromTextStream(std::cin, &objDoc);
     }
     if ( retErr != ERR_SUCCESS ) {
+        std::cerr   <<  "ERROR : Read From Text."   <<  std::endl;
         return ( retErr );
     }
+    std::cerr   <<  "Read : OK."    <<  std::endl;
 
-    retErr  = docFile.saveToTextStream(objDoc, std::cout);
+    try {
+        retErr  = docFile.saveToTextStream(objDoc, std::cout);
+    } catch ( std::exception &e ) {
+        std::cerr   <<  "Exception in saveToTextStream\n"
+                    <<  e.what()    <<  std::endl;
+    }
     if ( retErr != ERR_SUCCESS ) {
         return ( retErr );
     }
+    std::cerr   <<  "Read From Text : OK."  <<  std::endl;
 
     std::vector<Common::CountedScores>  cs;
     retErr  = objDoc.countScores(-1, cs);
@@ -107,10 +115,13 @@ int  main(int argc, char * argv[])
         }
     }
 
+    std::cerr   <<  "INFO : saveToBinaryFile"   <<  std::endl;
     retErr  = docFile.saveToBinaryFile(objDoc, "dummyout.bin");
     if ( retErr != ERR_SUCCESS ) {
+        std::cerr   <<  "ERROR : Write To Binary."  <<  std::endl;
         return ( retErr );
     }
+    std::cerr   <<  "Save Binary : OK"  <<  std::endl;
 
     return ( 0 );
 }
