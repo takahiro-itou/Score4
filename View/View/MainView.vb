@@ -345,7 +345,7 @@ Private Sub mnuMagicVictory_Click(sender As Object, e As EventArgs) Handles mnuM
 
     updateTables(
         m_currentLeague, m_currentDate,
-        Score4Wrapper.MagicNumberMode.MAGIC_PLAYOFF,
+        Score4Wrapper.MagicNumberMode.MAGIC_VICTORY,
         m_flagExtraView, m_flagSchedule)
 
 End Sub
