@@ -83,11 +83,11 @@ sortSmallData(
     std::vector<int>    flags(num, 0);
 
     vecTrg.clear();
-    vecSrc.resize(num);
+    vecTrg.resize(num);
 
     for ( size_t i = 0; i < num; ++ i ) {
-        T *     ptr = nullptr;
-        size_t  pos = num;
+        const T *   ptr = nullptr;
+        size_t      pos = num;
         for ( size_t j = 0; j < num; ++ j ) {
             if ( flags[j] != 0 ) {
                 continue;
@@ -102,6 +102,8 @@ sortSmallData(
 
     return;
 }
+
+//----------------------------------------------------------------
 
 class  ReverseCompMagic  {
 public:
@@ -255,6 +257,11 @@ ScoreDocument::calculateMagicNumbers(
 
     for ( TeamIndex i = 0; i < numTeam; ++ i ) {
         makeWinsForBeatTable(dblPercent, i, bufCounted);
+
+        writeTeamMagicNumbers(
+                i,
+                bufCounted[i].numWinsForBeat,
+                bufCounted[i].totalMagic);
     }
 
     return ( ERR_SUCCESS );
@@ -1343,6 +1350,54 @@ ScoreDocument::setGameCount(
 
     return ( ERR_SUCCESS );
 }
+
+//----------------------------------------------------------------
+//    チームごとのマジック関連の情報を書き込む。
+//
+
+ErrCode
+ScoreDocument::writeTeamMagicNumbers(
+        const  TeamIndex        idxTeam,
+        const  WinsForBeatList  &wbData,
+        Common::MagicInfo       &miOut)  const
+{
+    const  LeagueIndex  leagueID    = getTeamInfo(idxTeam).leagueID;
+    const  TeamIndex    numPlayOff  = getLeagueInfo(leagueID).numPlayOff;
+
+    std::vector<const Common::NumWinsForBeat *> sorted1;
+    std::vector<const Common::NumWinsForBeat *> sorted2;
+
+    sortSmallData(wbData, ReverseCompMagic(), sorted1);
+    sortSmallData(wbData, CompWinsDiff(),     sorted2);
+
+    for ( int mode = 0; mode < NUM_MAGIC_MODES; ++ mode ) {
+        TeamIndex   num = 1;
+        switch ( mode ) {
+        case  MAGIC_VICTORY:
+            //  優勝マジックの計算は、                              //
+            //  １チームだけが進出するプレーオフとして計算できる。  //
+            num = 1;
+            break;
+        case  MAGIC_PLAYOFF:
+            num = numPlayOff;   //  プレーオフマジック  //
+            break;
+        }
+
+        //  一旦マジックは点灯していない場合を書き込んでおく。  //
+        miOut.magicFlags [mode] = MIF_WINS_DIFF;
+        miOut.magicNumber[mode] = sorted2[num]->numWinsDiff;
+
+        //  プレーオフ進出ラインを読みだして、  //
+        //  マジック点灯の場合はデータを更新。  //
+        if ( sorted1[num]->filterType == MF_ON_MAGIC ) {
+            miOut.magicFlags [mode] = MIF_ON_MAGIC;
+            miOut.magicNumber[mode] = sorted1[num]->numNeedWins;
+        }
+    }
+
+    return ( ERR_SUCCESS );
+}
+
 
 }   //  End of namespace  Document
 SCORE4_CORE_NAMESPACE_END

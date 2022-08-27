@@ -44,6 +44,8 @@ class  ScoreDocument
 //
 private:
 
+    typedef     Common::WinsForBeatList     WinsForBeatList;
+
     typedef     Common::CountedScores       CountedScores;
     typedef     std::vector<CountedScores>  CountedScoreList;
 
@@ -687,6 +689,20 @@ private:
             const   TeamIndex   trgTeam,
             const   GameFilter  flagGame,
             const   GamesCount  gameCount);
+
+    //----------------------------------------------------------------
+    /**   チームごとのマジック関連の情報を書き込む。
+    **
+    **  @return     エラーコードを返す。
+    **      -   異常終了の場合は、
+    **          エラーの種類を示す非ゼロ値を返す。
+    **      -   正常終了の場合は、ゼロを返す。
+    **/
+    ErrCode
+    writeTeamMagicNumbers(
+            const  TeamIndex        idxTeam,
+            const  WinsForBeatList  &wbData,
+            Common::MagicInfo       &miOut)  const;
 
 //========================================================================
 //
