@@ -1312,6 +1312,10 @@ ScoreDocument::makeWinsForBeatTable(
             cs.numWinsForBeat[j].filterType     = MF_DIFFERENT_LEAGUE;
             cs.numWinsForBeat[j].numNeedWins    = -1;
             cs.numWinsForBeat[j].numRestGame    = -1;
+            cs.numWinsForBeat[j].numWinsSelf
+                    = -Common::MAGIC_NO_PROBABILITY_WONS;
+            cs.numWinsForBeat[j].numWinsSelf
+                    =  Common::MAGIC_NO_PROBABILITY_WONS;
             continue;
         }
 
