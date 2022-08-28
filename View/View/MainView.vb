@@ -400,6 +400,10 @@ End Sub
 Private Sub mnuScoreEdit_Click(sender As Object, e As EventArgs) Handles _
             mnuScoreEdit.Click
 
+    Dim frmEdit As EditForm = New EditForm()
+
+    frmEdit.Show()
+
 End Sub
 
 ''========================================================================
