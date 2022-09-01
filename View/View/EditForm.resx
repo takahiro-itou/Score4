@@ -233,6 +233,35 @@ xo  <data name="fraInput.TabIndex" type="System.Int32, mscorlib">
     <value>&amp;View</value>
   </data>
 
+  <data name="&gt;&gt;Label1.Name" xml:space="preserve">
+    <value>Label1</value>
+  </data>
+  <data name="&gt;&gt;Label1.Parent" xml:space="preserve">
+    <value>fraInput</value>
+  </data>
+  <data name="&gt;&gt;Label1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+
+  <data name="&gt;&gt;Label1.ZOrder" xml:space="preserve">
+    <value>10</value>
+  </data>
+  <data name="Label1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>80, 16</value>
+  </data>
+  <data name="Label1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>160, 16</value>
+  </data>
+  <data name="Label1.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="Label1.Text" xml:space="preserve">
+    <value>Team:</value>
+  </data>
+  <data name="Label1.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleCenter</value>
+  </data>
+
   <data name="&gt;&gt;Label5.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
@@ -266,17 +295,11 @@ xo  <data name="fraInput.TabIndex" type="System.Int32, mscorlib">
   <data name="mnvEdit.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
-  <data name="&gt;&gt;Label1.ZOrder" xml:space="preserve">
-    <value>10</value>
-  </data>
   <data name="&gt;&gt;Label4.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="Label5.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleCenter</value>
-  </data>
-  <data name="Label1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>80, 16</value>
   </data>
   <data name="&gt;&gt;ComboBox1.ZOrder" xml:space="preserve">
     <value>2</value>
@@ -313,9 +336,6 @@ xo  <data name="fraInput.TabIndex" type="System.Int32, mscorlib">
   </data>
   <data name="Label3.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleRight</value>
-  </data>
-  <data name="Label1.Text" xml:space="preserve">
-    <value>Team:</value>
   </data>
   <data name="&gt;&gt;updScoreHome.Parent" xml:space="preserve">
     <value>fraInput</value>
@@ -361,9 +381,6 @@ xo  <data name="fraInput.TabIndex" type="System.Int32, mscorlib">
   </data>
   <data name="lblDate.Location" type="System.Drawing.Point, System.Drawing">
     <value>216, 152</value>
-  </data>
-  <data name="&gt;&gt;Label1.Parent" xml:space="preserve">
-    <value>fraInput</value>
   </data>
   <data name="&gt;&gt;lblDate.Parent" xml:space="preserve">
     <value>fraView</value>
@@ -438,9 +455,6 @@ xo  <data name="fraInput.TabIndex" type="System.Int32, mscorlib">
   <data name="cmbTeamVisitor.Location" type="System.Drawing.Point, System.Drawing">
     <value>80, 72</value>
   </data>
-  <data name="&gt;&gt;Label1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="&gt;&gt;mnvEdit.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
@@ -461,9 +475,6 @@ xo  <data name="fraInput.TabIndex" type="System.Int32, mscorlib">
   </data>
   <data name="Label3.Text" xml:space="preserve">
     <value>&amp;Home:</value>
-  </data>
-  <data name="Label1.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
   </data>
   <data name="btnDelete.Location" type="System.Drawing.Point, System.Drawing">
     <value>248, 104</value>
@@ -490,12 +501,6 @@ xo  <data name="fraInput.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
   </data>
 
-  <data name="&gt;&gt;Label1.Name" xml:space="preserve">
-    <value>Label1</value>
-  </data>
-  <data name="Label1.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleCenter</value>
-  </data>
   <data name="&gt;&gt;cmbTeamVisitor.Parent" xml:space="preserve">
     <value>fraInput</value>
   </data>
@@ -570,9 +575,6 @@ xo  <data name="fraInput.TabIndex" type="System.Int32, mscorlib">
   </data>
   <data name="Label4.Text" xml:space="preserve">
     <value>&amp;Visitor:</value>
-  </data>
-  <data name="Label1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>160, 16</value>
   </data>
   <data name="&gt;&gt;btnEdit.Name" xml:space="preserve">
     <value>btnEdit</value>
