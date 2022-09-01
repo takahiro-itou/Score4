@@ -161,6 +161,28 @@
     <value>&amp;Cancel</value>
   </data>
 
+  <data name="&gt;&gt;dgvRecord.Name" xml:space="preserve">
+    <value>dgvRecord</value>
+  </data>
+  <data name="&gt;&gt;dgvRecord.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;dgvRecord.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridView, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;dgvRecord.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="dgvRecord.Location" type="System.Drawing.Point, System.Drawing">
+    <value>352, 16</value>
+  </data>
+  <data name="dgvRecord.Size" type="System.Drawing.Size, System.Drawing">
+    <value>376, 392</value>
+  </data>
+  <data name="dgvRecord.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+
   <data name="&gt;&gt;Label5.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
@@ -205,15 +227,6 @@
   </data>
   <data name="Label5.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleCenter</value>
-  </data>
-  <data name="&gt;&gt;dgvRecord.Name" xml:space="preserve">
-    <value>dgvRecord</value>
-  </data>
-  <data name="dgvRecord.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
-  </data>
-  <data name="&gt;&gt;dgvRecord.Parent" xml:space="preserve">
-    <value>$this</value>
   </data>
   <data name="Label1.Location" type="System.Drawing.Point, System.Drawing">
     <value>80, 16</value>
@@ -372,9 +385,6 @@
   <data name="fraInput.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
   </data>
-  <data name="&gt;&gt;dgvRecord.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridView, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="&gt;&gt;fraView.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
@@ -383,9 +393,6 @@
   </data>
   <data name="&gt;&gt;btnEdit.Parent" xml:space="preserve">
     <value>fraInput</value>
-  </data>
-  <data name="&gt;&gt;dgvRecord.ZOrder" xml:space="preserve">
-    <value>2</value>
   </data>
   <data name="Label2.Size" type="System.Drawing.Size, System.Drawing">
     <value>80, 16</value>
@@ -420,9 +427,6 @@
   <data name="&gt;&gt;mnvEdit.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="dgvRecord.Location" type="System.Drawing.Point, System.Drawing">
-    <value>352, 16</value>
-  </data>
   <data name="&gt;&gt;Label2.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
@@ -437,9 +441,6 @@
   </data>
   <data name="&gt;&gt;cmbTeamVisitor.Name" xml:space="preserve">
     <value>cmbTeamVisitor</value>
-  </data>
-  <data name="dgvRecord.Size" type="System.Drawing.Size, System.Drawing">
-    <value>376, 392</value>
   </data>
   <data name="Label3.Text" xml:space="preserve">
     <value>&amp;Home:</value>
