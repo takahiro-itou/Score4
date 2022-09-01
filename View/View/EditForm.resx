@@ -86,11 +86,11 @@
     <value>Edit Data</value>
   </data>
 
-  <data name="&gt;&gt;btnOK.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
   <data name="&gt;&gt;btnOK.Name" xml:space="preserve">
     <value>btnOK</value>
+  </data>
+  <data name="&gt;&gt;btnOK.Parent" xml:space="preserve">
+    <value>$this</value>
   </data>
   <data name="&gt;&gt;btnOK.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -109,6 +109,31 @@
   </data>
   <data name="btnOK.Text" xml:space="preserve">
     <value>&amp;OK</value>
+  </data>
+
+  <data name="&gt;&gt;btnApply.Name" xml:space="preserve">
+    <value>btnApply</value>
+  </data>
+  <data name="&gt;&gt;btnApply.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;btnApply.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btnApply.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="btnApply.Location" type="System.Drawing.Point, System.Drawing">
+    <value>104, 376</value>
+  </data>
+  <data name="btnApply.Size" type="System.Drawing.Size, System.Drawing">
+    <value>80, 32</value>
+  </data>
+  <data name="btnApply.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="btnApply.Text" xml:space="preserve">
+    <value>&amp;Apply</value>
   </data>
 
   <data name="&gt;&gt;Label5.ZOrder" xml:space="preserve">
@@ -186,9 +211,6 @@
   <data name="&gt;&gt;fraInput.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="btnApply.Size" type="System.Drawing.Size, System.Drawing">
-    <value>80, 32</value>
-  </data>
   <data name="&gt;&gt;Label3.ZOrder" xml:space="preserve">
     <value>8</value>
   </data>
@@ -228,20 +250,11 @@
   <data name="Label1.Text" xml:space="preserve">
     <value>Team:</value>
   </data>
-  <data name="btnApply.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="btnApply.Location" type="System.Drawing.Point, System.Drawing">
-    <value>104, 376</value>
-  </data>
   <data name="&gt;&gt;updScoreHome.Parent" xml:space="preserve">
     <value>fraInput</value>
   </data>
   <data name="&gt;&gt;ComboBox1.Parent" xml:space="preserve">
     <value>fraInput</value>
-  </data>
-  <data name="&gt;&gt;btnApply.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;mnvEdit.Parent" xml:space="preserve">
     <value>fraView</value>
@@ -306,9 +319,6 @@
   <data name="&gt;&gt;mnvEdit.Type" xml:space="preserve">
     <value>System.Windows.Forms.MonthCalendar, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="btnApply.Text" xml:space="preserve">
-    <value>&amp;Apply</value>
-  </data>
   <data name="cmbTeamHome.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
   </data>
@@ -369,9 +379,6 @@
   </data>
   <data name="mnvEdit.Location" type="System.Drawing.Point, System.Drawing">
     <value>8, 16</value>
-  </data>
-  <data name="&gt;&gt;btnApply.ZOrder" xml:space="preserve">
-    <value>4</value>
   </data>
   <data name="Label5.Text" xml:space="preserve">
     <value>&amp;Date</value>
@@ -514,9 +521,6 @@
   <data name="&gt;&gt;Label5.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;btnApply.Name" xml:space="preserve">
-    <value>btnApply</value>
-  </data>
   <data name="&gt;&gt;Label3.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
@@ -549,9 +553,6 @@
   </data>
   <data name="btnCancel.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
-  </data>
-  <data name="&gt;&gt;btnApply.Parent" xml:space="preserve">
-    <value>$this</value>
   </data>
   <data name="&gt;&gt;Label5.Parent" xml:space="preserve">
     <value>fraView</value>
