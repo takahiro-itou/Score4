@@ -57,4 +57,13 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="fraInput.Text" xml:space="preserve">
+    <value>データの追加・変更</value>
+  </data>
+  <data name="fraView.Text" xml:space="preserve">
+    <value>表示(&amp;V)</value>
+  </data>
+  <data name="Label5.Text" xml:space="preserve">
+    <value>編集する日付(&amp;D)</value>
+  </data>
 </root>
