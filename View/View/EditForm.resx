@@ -208,6 +208,31 @@ xo  <data name="fraInput.TabIndex" type="System.Int32, mscorlib">
     <value>Add/Edit Data</value>
   </data>
 
+  <data name="&gt;&gt;fraView.Name" xml:space="preserve">
+    <value>fraView</value>
+  </data>
+  <data name="&gt;&gt;fraView.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;fraView.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;fraView.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="fraView.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 176</value>
+  </data>
+  <data name="fraView.Size" type="System.Drawing.Size, System.Drawing">
+    <value>336, 184</value>
+  </data>
+  <data name="fraView.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="fraView.Text" xml:space="preserve">
+    <value>&amp;View</value>
+  </data>
+
   <data name="&gt;&gt;Label5.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
@@ -231,9 +256,6 @@ xo  <data name="fraInput.TabIndex" type="System.Int32, mscorlib">
   </data>
   <data name="ComboBox1.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
-  </data>
-  <data name="&gt;&gt;fraView.ZOrder" xml:space="preserve">
-    <value>0</value>
   </data>
   <data name="Label4.Size" type="System.Drawing.Size, System.Drawing">
     <value>64, 16</value>
@@ -325,9 +347,6 @@ xo  <data name="fraInput.TabIndex" type="System.Int32, mscorlib">
   <data name="&gt;&gt;Label4.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
-  <data name="fraView.Text" xml:space="preserve">
-    <value>&amp;View</value>
-  </data>
   <data name="btnEdit.Location" type="System.Drawing.Point, System.Drawing">
     <value>160, 104</value>
   </data>
@@ -392,9 +411,6 @@ xo  <data name="fraInput.TabIndex" type="System.Int32, mscorlib">
   <data name="updScoreHome.Location" type="System.Drawing.Point, System.Drawing">
     <value>248, 40</value>
   </data>
-  <data name="&gt;&gt;fraView.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
   <data name="&gt;&gt;btnEdit.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
@@ -418,9 +434,6 @@ xo  <data name="fraInput.TabIndex" type="System.Int32, mscorlib">
   </data>
   <data name="&gt;&gt;lblDate.ZOrder" xml:space="preserve">
     <value>0</value>
-  </data>
-  <data name="&gt;&gt;fraView.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="cmbTeamVisitor.Location" type="System.Drawing.Point, System.Drawing">
     <value>80, 72</value>
@@ -476,9 +489,7 @@ xo  <data name="fraInput.TabIndex" type="System.Int32, mscorlib">
   <data name="updScoreHome.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
   </data>
-  <data name="&gt;&gt;fraView.Name" xml:space="preserve">
-    <value>fraView</value>
-  </data>
+
   <data name="&gt;&gt;Label1.Name" xml:space="preserve">
     <value>Label1</value>
   </data>
@@ -506,20 +517,11 @@ xo  <data name="fraInput.TabIndex" type="System.Int32, mscorlib">
   <data name="&gt;&gt;updScoreVisitor.Parent" xml:space="preserve">
     <value>fraInput</value>
   </data>
-  <data name="fraView.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
-  </data>
-  <data name="fraView.Size" type="System.Drawing.Size, System.Drawing">
-    <value>336, 184</value>
-  </data>
   <data name="Label2.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleCenter</value>
   </data>
   <data name="btnEdit.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
-  </data>
-  <data name="fraView.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 176</value>
   </data>
   <data name="&gt;&gt;btnDelete.Name" xml:space="preserve">
     <value>btnDelete</value>
