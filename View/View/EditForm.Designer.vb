@@ -37,6 +37,9 @@ Partial Class EditForm
         Me.btnEdit = New System.Windows.Forms.Button()
         Me.btnDelete = New System.Windows.Forms.Button()
         Me.fraView = New System.Windows.Forms.GroupBox()
+        Me.Label5 = New System.Windows.Forms.Label()
+        Me.mnvEdit = New System.Windows.Forms.MonthCalendar()
+        Me.lblDate = New System.Windows.Forms.Label()
 
         CType(Me.dgvRecord, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.fraInput.SuspendLayout()
@@ -82,6 +85,7 @@ Partial Class EditForm
 
         '
         ' fraInput
+        '
         resources.ApplyResources(Me.fraInput, "fraInput")
         With Me.fraInput
             With .Controls
@@ -193,19 +197,57 @@ Partial Class EditForm
         End With
 
         '
+        ' fraView
+        '
+        resources.ApplyResources(Me.fraView, "fraView")
+        With Me.fraView
+            With .Controls
+                .Add(Me.Label5)
+                .Add(Me.mnvEdit)
+                .Add(Me.lblDate)
+            End With
+            .Name = "fraView"
+            .TabStop = False
+        End With
+        '
+        ' Label5
+        '
+        resources.ApplyResources(Me.Label5, "Label5")
+        With Me.Label5
+            .BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+            .Name = "Label5"
+        End With
+        '
+        ' mnvEdit
+        '
+        resources.ApplyResources(Me.mnvEdit, "mnvEdit")
+        With Me.mnvEdit
+            .Name = "mnvEdit"
+        End With
+        '
+        ' lblDate
+        '
+        resources.ApplyResources(Me.lblDate, "lblDate")
+        With Me.lblDate
+            .BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+            .Name = "lblDate"
+        End With
+
+        '
         'EditForm
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None
         Me.CancelButton = Me.btnCancel
 
-        Me.Controls.Add(Me.btnOK)
-        Me.Controls.Add(Me.btnApply)
-        Me.Controls.Add(Me.btnCancel)
-        Me.Controls.Add(Me.dgvRecord)
-        Me.Controls.Add(Me.fraInput)
-        Me.Controls.Add(Me.fraView)
-
+        With Me.Controls
+            .Add(Me.btnOK)
+            .Add(Me.btnApply)
+            .Add(Me.btnCancel)
+            .Add(Me.dgvRecord)
+            .Add(Me.fraInput)
+            .Add(Me.fraView)
+        End With
         Me.Name = "EditForm"
 
         CType(Me.dgvRecord, System.ComponentModel.ISupportInitialize).EndInit()
@@ -233,5 +275,8 @@ Partial Class EditForm
     Friend WithEvents btnEdit As Button
     Friend WithEvents btnDelete As Button
     Friend WithEvents fraView As GroupBox
+    Friend WithEvents Label5 As Label
+    Friend WithEvents mnvEdit As MonthCalendar
+    Friend WithEvents lblDate As Label
 
 End Class
