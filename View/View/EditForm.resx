@@ -1,4 +1,4 @@
-﻿<root>
+﻿s<root>
   <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
     <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
     <xsd:element name="root" msdata:IsDataSet="true">
@@ -396,6 +396,28 @@ xo  <data name="fraInput.TabIndex" type="System.Int32, mscorlib">
     <value>MiddleRight</value>
   </data>
 
+  <data name="&gt;&gt;cmbTeamVisitor.Name" xml:space="preserve">
+    <value>cmbTeamVisitor</value>
+  </data>
+  <data name="&gt;&gt;cmbTeamVisitor.Parent" xml:space="preserve">
+    <value>fraInput</value>
+  </data>
+  <data name="&gt;&gt;cmbTeamVisitor.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;cmbTeamVisitor.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="cmbTeamVisitor.Location" type="System.Drawing.Point, System.Drawing">
+    <value>80, 72</value>
+  </data>
+  <data name="cmbTeamVisitor.Size" type="System.Drawing.Size, System.Drawing">
+    <value>160, 20</value>
+  </data>
+  <data name="cmbTeamVisitor.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+
   <data name="&gt;&gt;Label5.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
@@ -407,9 +429,6 @@ xo  <data name="fraInput.TabIndex" type="System.Int32, mscorlib">
   </data>
   <data name="lblDate.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleCenter</value>
-  </data>
-  <data name="cmbTeamVisitor.TabIndex" type="System.Int32, mscorlib">
-    <value>6</value>
   </data>
   <data name="&gt;&gt;ComboBox1.Name" xml:space="preserve">
     <value>ComboBox1</value>
@@ -444,9 +463,6 @@ xo  <data name="fraInput.TabIndex" type="System.Int32, mscorlib">
   <data name="Label5.Location" type="System.Drawing.Point, System.Drawing">
     <value>216, 16</value>
   </data>
-  <data name="cmbTeamVisitor.Size" type="System.Drawing.Size, System.Drawing">
-    <value>160, 20</value>
-  </data>
   <data name="updScoreVisitor.Location" type="System.Drawing.Point, System.Drawing">
     <value>248, 72</value>
   </data>
@@ -464,9 +480,6 @@ xo  <data name="fraInput.TabIndex" type="System.Int32, mscorlib">
   </data>
   <data name="ComboBox1.Size" type="System.Drawing.Size, System.Drawing">
     <value>144, 20</value>
-  </data>
-  <data name="&gt;&gt;cmbTeamVisitor.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="lblDate.Location" type="System.Drawing.Point, System.Drawing">
     <value>216, 152</value>
@@ -511,17 +524,8 @@ xo  <data name="fraInput.TabIndex" type="System.Int32, mscorlib">
   <data name="&gt;&gt;lblDate.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="cmbTeamVisitor.Location" type="System.Drawing.Point, System.Drawing">
-    <value>80, 72</value>
-  </data>
   <data name="&gt;&gt;mnvEdit.ZOrder" xml:space="preserve">
     <value>1</value>
-  </data>
-  <data name="&gt;&gt;cmbTeamVisitor.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="&gt;&gt;cmbTeamVisitor.Name" xml:space="preserve">
-    <value>cmbTeamVisitor</value>
   </data>
   <data name="btnDelete.Location" type="System.Drawing.Point, System.Drawing">
     <value>248, 104</value>
@@ -539,9 +543,6 @@ xo  <data name="fraInput.TabIndex" type="System.Int32, mscorlib">
     <value>updScoreVisitor</value>
   </data>
 
-  <data name="&gt;&gt;cmbTeamVisitor.Parent" xml:space="preserve">
-    <value>fraInput</value>
-  </data>
   <data name="&gt;&gt;btnDelete.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
