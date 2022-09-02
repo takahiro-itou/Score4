@@ -318,6 +318,28 @@ xo  <data name="fraInput.TabIndex" type="System.Int32, mscorlib">
     <value>MiddleRight</value>
   </data>
 
+  <data name="&gt;&gt;cmbTeamHome.Name" xml:space="preserve">
+    <value>cmbTeamHome</value>
+  </data>
+  <data name="&gt;&gt;cmbTeamHome.Parent" xml:space="preserve">
+    <value>fraInput</value>
+  </data>
+  <data name="&gt;&gt;cmbTeamHome.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;cmbTeamHome.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="cmbTeamHome.Location" type="System.Drawing.Point, System.Drawing">
+    <value>80, 40</value>
+  </data>
+  <data name="cmbTeamHome.Size" type="System.Drawing.Size, System.Drawing">
+    <value>160, 20</value>
+  </data>
+  <data name="cmbTeamHome.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+
   <data name="&gt;&gt;Label5.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
@@ -365,9 +387,6 @@ xo  <data name="fraInput.TabIndex" type="System.Int32, mscorlib">
   </data>
   <data name="Label4.Location" type="System.Drawing.Point, System.Drawing">
     <value>8, 72</value>
-  </data>
-  <data name="cmbTeamHome.Location" type="System.Drawing.Point, System.Drawing">
-    <value>80, 40</value>
   </data>
   <data name="lblDate.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -432,9 +451,6 @@ xo  <data name="fraInput.TabIndex" type="System.Int32, mscorlib">
   <data name="&gt;&gt;mnvEdit.Type" xml:space="preserve">
     <value>System.Windows.Forms.MonthCalendar, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="cmbTeamHome.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
-  </data>
   <data name="updScoreVisitor.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 2, 3, 2</value>
   </data>
@@ -487,9 +503,6 @@ xo  <data name="fraInput.TabIndex" type="System.Int32, mscorlib">
   <data name="&gt;&gt;cmbTeamVisitor.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
-  <data name="&gt;&gt;cmbTeamHome.Name" xml:space="preserve">
-    <value>cmbTeamHome</value>
-  </data>
   <data name="Label4.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleRight</value>
   </data>
@@ -505,9 +518,6 @@ xo  <data name="fraInput.TabIndex" type="System.Int32, mscorlib">
   <data name="updScoreVisitor.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
     <value>Right</value>
   </data>
-  <data name="&gt;&gt;cmbTeamHome.Parent" xml:space="preserve">
-    <value>fraInput</value>
-  </data>
   <data name="mnvEdit.Font" type="System.Drawing.Font, System.Drawing">
     <value>ＭＳ ゴシック, 9pt</value>
   </data>
@@ -520,9 +530,6 @@ xo  <data name="fraInput.TabIndex" type="System.Int32, mscorlib">
 
   <data name="&gt;&gt;cmbTeamVisitor.Parent" xml:space="preserve">
     <value>fraInput</value>
-  </data>
-  <data name="&gt;&gt;cmbTeamHome.ZOrder" xml:space="preserve">
-    <value>7</value>
   </data>
   <data name="&gt;&gt;btnDelete.ZOrder" xml:space="preserve">
     <value>0</value>
@@ -551,14 +558,8 @@ xo  <data name="fraInput.TabIndex" type="System.Int32, mscorlib">
   <data name="&gt;&gt;Label5.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="cmbTeamHome.Size" type="System.Drawing.Size, System.Drawing">
-    <value>160, 20</value>
-  </data>
   <data name="Label5.Size" type="System.Drawing.Size, System.Drawing">
     <value>112, 24</value>
-  </data>
-  <data name="&gt;&gt;cmbTeamHome.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="btnDelete.TabIndex" type="System.Int32, mscorlib">
     <value>10</value>
