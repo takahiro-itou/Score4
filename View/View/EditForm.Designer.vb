@@ -25,39 +25,172 @@ Partial Class EditForm
         Me.btnCancel = New System.Windows.Forms.Button()
         Me.dgvRecord = New System.Windows.Forms.DataGridView()
         Me.fraInput = New System.Windows.Forms.GroupBox()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.Label2 = New System.Windows.Forms.Label()
+        Me.Label3 = New System.Windows.Forms.Label()
+        Me.cmbTeamHome = New System.Windows.Forms.ComboBox()
+        Me.updScoreHome = New System.Windows.Forms.NumericUpDown()
+        Me.Label4 = New System.Windows.Forms.Label()
+        Me.cmbTeamVisitor = New System.Windows.Forms.ComboBox()
+        Me.updScoreVisitor = New System.Windows.Forms.NumericUpDown()
+        Me.cmbFlags = New System.Windows.Forms.ComboBox()
+        Me.btnEdit = New System.Windows.Forms.Button()
+        Me.btnDelete = New System.Windows.Forms.Button()
         Me.fraView = New System.Windows.Forms.GroupBox()
 
-        CType(Me.dgvRecord, System.ComponentModel.ISupportInitialize).BeginInit
-        Me.SuspendLayout
+        CType(Me.dgvRecord, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.fraInput.SuspendLayout()
+        CType(Me.updScoreHome, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.updScoreVisitor, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.fraView.SuspendLayout()
+        Me.SuspendLayout()
 
         '
-        'btnOK
+        ' btnOK
         '
         resources.ApplyResources(Me.btnOK, "btnOK")
-        Me.btnOK.Name = "btnOK"
-        Me.btnOK.UseVisualStyleBackColor = true
-
+        With Me.btnOK
+            .Name = "btnOK"
+            .UseVisualStyleBackColor = True
+        End With
         '
-        'btnApply
+        ' btnApply
         '
         resources.ApplyResources(Me.btnApply, "btnApply")
-        Me.btnApply.Name = "btnApply"
-        Me.btnApply.UseVisualStyleBackColor = true
-
+        With Me.btnApply
+            .Name = "btnApply"
+            .UseVisualStyleBackColor = True
+        End With
         '
-        'btnCancel
+        ' btnCancel
         '
         resources.ApplyResources(Me.btnCancel, "btnCancel")
-        Me.btnCancel.Name = "btnCancel"
-        Me.btnCancel.UseVisualStyleBackColor = true
+        With Me.btnCancel
+            .Name = "btnCancel"
+            .UseVisualStyleBackColor = True
+        End With
+        '
+        ' dgvRecord
+        '
+        resources.ApplyResources(Me.dgvRecord, "dgvRecord")
+        With Me.dgvRecord
+            .ColumnHeadersHeightSizeMode = _
+                System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+            .Name = "dgvRecord"
+            .RowTemplate.Height = 25
+        End With
 
         '
-        'dgvRecord
+        ' fraInput
+        resources.ApplyResources(Me.fraInput, "fraInput")
+        With Me.fraInput
+            With .Controls
+                .Add(Me.Label1)
+                .Add(Me.Label2)
+                .Add(Me.Label3)
+                .Add(Me.cmbTeamHome)
+                .Add(Me.updScoreHome)
+                .Add(Me.Label4)
+                .Add(Me.cmbTeamVisitor)
+                .Add(Me.updScoreVisitor)
+                .Add(Me.cmbFlags)
+                .Add(Me.btnEdit)
+                .Add(Me.btnDelete)
+            End With
+            .Name = "fraInput"
+            .TabStop = False
+        End With
         '
-        Me.dgvRecord.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        resources.ApplyResources(Me.dgvRecord, "dgvRecord")
-        Me.dgvRecord.Name = "dgvRecord"
-        Me.dgvRecord.RowTemplate.Height = 25
+        ' Label1
+        '
+        resources.ApplyResources(Me.Label1, "Label1")
+        With Me.Label1
+            .BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+            .Name = "Label1"
+        End With
+        '
+        ' Label2
+        '
+        resources.ApplyResources(Me.Label2, "Label2")
+        With Me.Label2
+            .BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+            .Name = "Label2"
+        End With
+        '
+        ' Label3
+        '
+        resources.ApplyResources(Me.Label3, "Label3")
+        With Me.Label3
+            .BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+            .Name = "Label3"
+        End With
+        '
+        ' cmbTeamHome
+        '
+        resources.ApplyResources(Me.cmbTeamHome, "cmbTeamHome")
+        With Me.cmbTeamHome
+            .DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+            .FormattingEnabled = True
+            .Name = "cmbTeamHome"
+        End With
+        '
+        ' updScoreHome
+        '
+        resources.ApplyResources(Me.updScoreHome, "updScoreHome")
+        With Me.updScoreHome
+            .Maximum = New Decimal(New Integer() {999, 0, 0, 0})
+            .Name = "updScoreHome"
+        End With
+        '
+        'Label4
+        '
+        resources.ApplyResources(Me.Label4, "Label4")
+        With Me.Label4
+            .BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+            .Name = "Label4"
+        End With
+        '
+        ' cmbTeamVisitor
+        '
+        resources.ApplyResources(Me.cmbTeamVisitor, "cmbTeamVisitor")
+        With Me.cmbTeamVisitor
+            .DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+            .FormattingEnabled = True
+            .Name = "cmbTeamVisitor"
+        End With
+        '
+        ' updScoreVisitor
+        '
+        resources.ApplyResources(Me.updScoreVisitor, "updScoreVisitor")
+        With Me.updScoreVisitor
+            .Maximum = New Decimal(New Integer() {999, 0, 0, 0})
+            .Name = "updScoreVisitor"
+        End With
+        '
+        ' cmbFlags
+        '
+        resources.ApplyResources(Me.cmbFlags, "cmbFlags")
+        With Me.cmbFlags
+            .DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+            .FormattingEnabled = True
+            .Name = "cmbFlags"
+        End With
+        '
+        ' btnEdit
+        '
+        resources.ApplyResources(Me.btnEdit, "btnEdit")
+        With Me.btnEdit
+            .Name = "btnEdit"
+            .UseVisualStyleBackColor = True
+        End With
+        '
+        ' btnDelete
+        '
+        resources.ApplyResources(Me.btnDelete, "btnDelete")
+        With Me.btnDelete
+            .Name = "btnDelete"
+            .UseVisualStyleBackColor = True
+        End With
 
         '
         'EditForm
@@ -74,10 +207,13 @@ Partial Class EditForm
         Me.Controls.Add(Me.fraView)
 
         Me.Name = "EditForm"
-        Me.fraView.ResumeLayout(false)
 
-        CType(Me.dgvRecord, System.ComponentModel.ISupportInitialize).EndInit
-        Me.ResumeLayout(false)
+        CType(Me.dgvRecord, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.fraInput.ResumeLayout(False)
+        CType(Me.updScoreHome, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.updScoreVisitor, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.fraView.ResumeLayout(False)
+        Me.ResumeLayout(False)
     End Sub
 
     Friend WithEvents btnOK As Button
@@ -85,6 +221,17 @@ Partial Class EditForm
     Friend WithEvents btnCancel As Button
     Friend WithEvents dgvRecord As DataGridView
     Friend WithEvents fraInput As GroupBox
+    Friend WithEvents Label1 As Label
+    Friend WithEvents Label2 As Label
+    Friend WithEvents Label3 As Label
+    Friend WithEvents cmbTeamHome As ComboBox
+    Friend WithEvents updScoreHome As NumericUpDown
+    Friend WithEvents Label4 As Label
+    Friend WithEvents cmbTeamVisitor As ComboBox
+    Friend WithEvents updScoreVisitor As NumericUpDown
+    Friend WithEvents cmbFlags As ComboBox
+    Friend WithEvents btnEdit As Button
+    Friend WithEvents btnDelete As Button
     Friend WithEvents fraView As GroupBox
 
 End Class
