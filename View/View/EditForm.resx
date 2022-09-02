@@ -446,6 +446,28 @@ xo  <data name="fraInput.TabIndex" type="System.Int32, mscorlib">
     <value>Right</value>
   </data>
 
+  <data name="&gt;&gt;cmbFlags.Name" xml:space="preserve">
+    <value>cmbFlags</value>
+  </data>
+    <data name="&gt;&gt;cmbFlags.Parent" xml:space="preserve">
+    <value>fraInput</value>
+  </data>
+  <data name="&gt;&gt;cmbFlags.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;cmbFlags.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="cmbFlags.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 104</value>
+  </data>
+  <data name="cmbFlags.Size" type="System.Drawing.Size, System.Drawing">
+    <value>144, 20</value>
+  </data>
+  <data name="cmbFlags.TabIndex" type="System.Int32, mscorlib">
+    <value>8</value>
+  </data>
+
   <data name="&gt;&gt;Label5.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
@@ -458,29 +480,17 @@ xo  <data name="fraInput.TabIndex" type="System.Int32, mscorlib">
   <data name="lblDate.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleCenter</value>
   </data>
-  <data name="&gt;&gt;ComboBox1.Name" xml:space="preserve">
-    <value>ComboBox1</value>
-  </data>
-  <data name="ComboBox1.TabIndex" type="System.Int32, mscorlib">
-    <value>8</value>
-  </data>
   <data name="mnvEdit.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
   <data name="Label5.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleCenter</value>
   </data>
-  <data name="&gt;&gt;ComboBox1.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
   <data name="lblDate.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
   <data name="&gt;&gt;lblDate.Name" xml:space="preserve">
     <value>lblDate</value>
-  </data>
-  <data name="&gt;&gt;ComboBox1.Parent" xml:space="preserve">
-    <value>fraInput</value>
   </data>
   <data name="&gt;&gt;mnvEdit.Parent" xml:space="preserve">
     <value>fraView</value>
@@ -497,9 +507,6 @@ xo  <data name="fraInput.TabIndex" type="System.Int32, mscorlib">
   <data name="btnDelete.Size" type="System.Drawing.Size, System.Drawing">
     <value>80, 32</value>
   </data>
-  <data name="ComboBox1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>144, 20</value>
-  </data>
   <data name="lblDate.Location" type="System.Drawing.Point, System.Drawing">
     <value>216, 152</value>
   </data>
@@ -511,9 +518,6 @@ xo  <data name="fraInput.TabIndex" type="System.Int32, mscorlib">
   </data>
   <data name="&gt;&gt;mnvEdit.Type" xml:space="preserve">
     <value>System.Windows.Forms.MonthCalendar, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;ComboBox1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
 
   <data name="&gt;&gt;btnDelete.Parent" xml:space="preserve">
@@ -527,9 +531,6 @@ xo  <data name="fraInput.TabIndex" type="System.Int32, mscorlib">
   </data>
   <data name="&gt;&gt;btnEdit.Parent" xml:space="preserve">
     <value>fraInput</value>
-  </data>
-  <data name="ComboBox1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 104</value>
   </data>
   <data name="mnvEdit.Location" type="System.Drawing.Point, System.Drawing">
     <value>8, 16</value>
