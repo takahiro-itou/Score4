@@ -340,11 +340,36 @@ xo  <data name="fraInput.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
   </data>
 
-  <data name="&gt;&gt;Label5.ZOrder" xml:space="preserve">
-    <value>2</value>
+  <data name="&gt;&gt;updScoreHome.Name" xml:space="preserve">
+    <value>updScoreHome</value>
+  </data>
+  <data name="&gt;&gt;updScoreHome.Parent" xml:space="preserve">
+    <value>fraInput</value>
+  </data>
+  <data name="&gt;&gt;updScoreHome.Type" xml:space="preserve">
+    <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;updScoreHome.ZOrder" xml:space="preserve">
     <value>6</value>
+  </data>
+  <data name="updScoreHome.Location" type="System.Drawing.Point, System.Drawing">
+    <value>248, 40</value>
+  </data>
+  <data name="updScoreHome.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 2, 3, 2</value>
+  </data>
+  <data name="updScoreHome.Size" type="System.Drawing.Size, System.Drawing">
+    <value>80, 19</value>
+  </data>
+  <data name="updScoreHome.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="updScoreHome.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
+    <value>Right</value>
+  </data>
+
+  <data name="&gt;&gt;Label5.ZOrder" xml:space="preserve">
+    <value>2</value>
   </data>
   <data name="btnEdit.Size" type="System.Drawing.Size, System.Drawing">
     <value>80, 32</value>
@@ -394,9 +419,6 @@ xo  <data name="fraInput.TabIndex" type="System.Int32, mscorlib">
   <data name="&gt;&gt;lblDate.Name" xml:space="preserve">
     <value>lblDate</value>
   </data>
-  <data name="&gt;&gt;updScoreHome.Parent" xml:space="preserve">
-    <value>fraInput</value>
-  </data>
   <data name="&gt;&gt;ComboBox1.Parent" xml:space="preserve">
     <value>fraInput</value>
   </data>
@@ -445,9 +467,6 @@ xo  <data name="fraInput.TabIndex" type="System.Int32, mscorlib">
   <data name="&gt;&gt;btnEdit.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="&gt;&gt;updScoreHome.Name" xml:space="preserve">
-    <value>updScoreHome</value>
-  </data>
   <data name="&gt;&gt;mnvEdit.Type" xml:space="preserve">
     <value>System.Windows.Forms.MonthCalendar, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
@@ -456,9 +475,6 @@ xo  <data name="fraInput.TabIndex" type="System.Int32, mscorlib">
   </data>
   <data name="&gt;&gt;ComboBox1.Type" xml:space="preserve">
     <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="updScoreHome.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 2, 3, 2</value>
   </data>
 
   <data name="Label4.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
@@ -469,9 +485,6 @@ xo  <data name="fraInput.TabIndex" type="System.Int32, mscorlib">
   </data>
   <data name="&gt;&gt;Label5.Name" xml:space="preserve">
     <value>Label5</value>
-  </data>
-  <data name="updScoreHome.Location" type="System.Drawing.Point, System.Drawing">
-    <value>248, 40</value>
   </data>
   <data name="&gt;&gt;btnEdit.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -487,9 +500,6 @@ xo  <data name="fraInput.TabIndex" type="System.Int32, mscorlib">
   </data>
   <data name="Label5.Text" xml:space="preserve">
     <value>&amp;Date</value>
-  </data>
-  <data name="updScoreHome.Size" type="System.Drawing.Size, System.Drawing">
-    <value>80, 19</value>
   </data>
   <data name="&gt;&gt;lblDate.ZOrder" xml:space="preserve">
     <value>0</value>
@@ -524,18 +534,12 @@ xo  <data name="fraInput.TabIndex" type="System.Int32, mscorlib">
   <data name="&gt;&gt;updScoreVisitor.Name" xml:space="preserve">
     <value>updScoreVisitor</value>
   </data>
-  <data name="updScoreHome.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
-  </data>
 
   <data name="&gt;&gt;cmbTeamVisitor.Parent" xml:space="preserve">
     <value>fraInput</value>
   </data>
   <data name="&gt;&gt;btnDelete.ZOrder" xml:space="preserve">
     <value>0</value>
-  </data>
-  <data name="&gt;&gt;updScoreHome.Type" xml:space="preserve">
-    <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;updScoreVisitor.Parent" xml:space="preserve">
     <value>fraInput</value>
@@ -551,9 +555,6 @@ xo  <data name="fraInput.TabIndex" type="System.Int32, mscorlib">
   </data>
   <data name="btnDelete.Text" xml:space="preserve">
     <value>&amp;Remove</value>
-  </data>
-  <data name="updScoreHome.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
-    <value>Right</value>
   </data>
   <data name="&gt;&gt;Label5.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
