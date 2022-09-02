@@ -578,6 +578,41 @@ ScoreDocument::findGameRecord(
 }
 
 //----------------------------------------------------------------
+//    指定した条件の対戦カードを検索する。
+//
+
+RecordIndex
+ScoreDocument::findGameRecords(
+        const  DateSerial   gameDate,
+        const  TeamIndex    homeTeam,
+        const  TeamIndex    awayTeam,
+        RecordIndexList   & bufRecord)  const
+{
+    RecordIndex     numRet  = 0;
+    const  RecordIndex
+        numRecords  = static_cast<RecordIndex>(this->m_gameResults.size());
+    for ( RecordIndex i = 0; i < numRecords; ++ i ) {
+        const   GameResult  &gr = this->m_gameResults.at(i);
+        if ( gr.eGameFlags == GAME_EMPTY ) {
+            continue;
+        }
+        if ( (gameDate > 0) && (gr.recordDate != gameDate) ) {
+            continue;
+        }
+        if ( (homeTeam >= 0) && (gr.homeTeam != homeTeam) ) {
+            continue;
+        }
+        if ( (awayTeam >= 0) && (gr.visitorTeam != awayTeam) ) {
+            continue;
+        }
+        bufRecord.push_back(i);
+        ++ numRet;
+    }
+
+    return ( numRet );
+}
+
+//----------------------------------------------------------------
 //    チーム情報を検索する。
 //
 

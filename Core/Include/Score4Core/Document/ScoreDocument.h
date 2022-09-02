@@ -60,13 +60,16 @@ private:
 public:
 
     /**   リーグ情報。  **/
-    typedef     Common::LeagueInfo      LeagueInfo;
+    typedef     Common::LeagueInfo          LeagueInfo;
 
     /**   チーム情報。  **/
-    typedef     Common::TeamInfo        TeamInfo;
+    typedef     Common::TeamInfo            TeamInfo;
 
     /**   ゲーム結果のレコード。    **/
-    typedef     Common::GameResult      GameResult;
+    typedef     Common::GameResult          GameResult;
+
+    /**   レコード番号の配列。      **/
+    typedef     std::vector<RecordIndex>    RecordIndexList;
 
 //========================================================================
 //
@@ -263,6 +266,23 @@ public:
             const  TeamIndex    homeTeam,
             const  TeamIndex    visitorTeam,
             const  RecordIndex  multiGame)  const;
+
+    //----------------------------------------------------------------
+    /**   指定した条件の対戦カードを検索する。
+    **
+    **  @param [in] gameDate      試合日。
+    **  @param [in] homeTeam      ホームチームの番号。
+    **  @param [in] visitorTeam   ビジタチームの番号。
+    **  @param[out] bufRecord     結果を格納する変数。
+    **      見つかったレコードのインデックスを格納する。
+    **  @return     見つかったレコードの件数を返す。
+    **/
+    virtual  RecordIndex
+    findGameRecords(
+            const  DateSerial   gameDate,
+            const  TeamIndex    homeTeam,
+            const  TeamIndex    visitorTeam,
+            RecordIndexList   & bufRecord)  const;
 
     //----------------------------------------------------------------
     /**   チーム情報を検索する。
