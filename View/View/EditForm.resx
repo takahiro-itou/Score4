@@ -290,6 +290,34 @@ xo  <data name="fraInput.TabIndex" type="System.Int32, mscorlib">
     <value>MiddleCenter</value>
   </data>
 
+  <data name="&gt;&gt;Label3.Name" xml:space="preserve">
+    <value>Label3</value>
+  </data>
+  <data name="&gt;&gt;Label3.Parent" xml:space="preserve">
+    <value>fraInput</value>
+  </data>
+  <data name="&gt;&gt;Label3.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;Label3.ZOrder" xml:space="preserve">
+    <value>8</value>
+  </data>
+  <data name="Label3.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 40</value>
+  </data>
+  <data name="Label3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>64, 16</value>
+  </data>
+  <data name="Label3.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="Label3.Text" xml:space="preserve">
+    <value>&amp;Home:</value>
+  </data>
+  <data name="Label3.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleRight</value>
+  </data>
+
   <data name="&gt;&gt;Label5.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
@@ -332,12 +360,6 @@ xo  <data name="fraInput.TabIndex" type="System.Int32, mscorlib">
   <data name="&gt;&gt;ComboBox1.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
-  <data name="Label3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 40</value>
-  </data>
-  <data name="&gt;&gt;Label3.ZOrder" xml:space="preserve">
-    <value>8</value>
-  </data>
   <data name="updScoreVisitor.Size" type="System.Drawing.Size, System.Drawing">
     <value>80, 19</value>
   </data>
@@ -350,14 +372,8 @@ xo  <data name="fraInput.TabIndex" type="System.Int32, mscorlib">
   <data name="lblDate.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
-  <data name="&gt;&gt;Label3.Name" xml:space="preserve">
-    <value>Label3</value>
-  </data>
   <data name="&gt;&gt;lblDate.Name" xml:space="preserve">
     <value>lblDate</value>
-  </data>
-  <data name="Label3.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleRight</value>
   </data>
   <data name="&gt;&gt;updScoreHome.Parent" xml:space="preserve">
     <value>fraInput</value>
@@ -379,9 +395,6 @@ xo  <data name="fraInput.TabIndex" type="System.Int32, mscorlib">
   </data>
   <data name="&gt;&gt;updScoreVisitor.Type" xml:space="preserve">
     <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="Label3.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
   </data>
   <data name="Label5.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -483,17 +496,11 @@ xo  <data name="fraInput.TabIndex" type="System.Int32, mscorlib">
   <data name="&gt;&gt;cmbTeamVisitor.Name" xml:space="preserve">
     <value>cmbTeamVisitor</value>
   </data>
-  <data name="Label3.Text" xml:space="preserve">
-    <value>&amp;Home:</value>
-  </data>
   <data name="btnDelete.Location" type="System.Drawing.Point, System.Drawing">
     <value>248, 104</value>
   </data>
   <data name="&gt;&gt;mnvEdit.Name" xml:space="preserve">
     <value>mnvEdit</value>
-  </data>
-  <data name="&gt;&gt;Label3.Parent" xml:space="preserve">
-    <value>fraInput</value>
   </data>
   <data name="updScoreVisitor.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
     <value>Right</value>
@@ -513,9 +520,6 @@ xo  <data name="fraInput.TabIndex" type="System.Int32, mscorlib">
 
   <data name="&gt;&gt;cmbTeamVisitor.Parent" xml:space="preserve">
     <value>fraInput</value>
-  </data>
-  <data name="Label3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>64, 16</value>
   </data>
   <data name="&gt;&gt;cmbTeamHome.ZOrder" xml:space="preserve">
     <value>7</value>
@@ -545,9 +549,6 @@ xo  <data name="fraInput.TabIndex" type="System.Int32, mscorlib">
     <value>Right</value>
   </data>
   <data name="&gt;&gt;Label5.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;Label3.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="cmbTeamHome.Size" type="System.Drawing.Size, System.Drawing">
