@@ -515,17 +515,40 @@ xo  <data name="fraInput.TabIndex" type="System.Int32, mscorlib">
     <value>&amp;View</value>
   </data>
 
+  <data name="&gt;&gt;Label5.Name" xml:space="preserve">
+    <value>Label5</value>
+  </data>
+  <data name="&gt;&gt;Label5.Parent" xml:space="preserve">
+    <value>fraView</value>
+  </data>
+  <data name="&gt;&gt;Label5.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="&gt;&gt;Label5.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
+  <data name="Label5.Location" type="System.Drawing.Point, System.Drawing">
+    <value>216, 16</value>
+  </data>
+  <data name="Label5.Size" type="System.Drawing.Size, System.Drawing">
+    <value>112, 24</value>
+  </data>
+  <data name="Label5.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="Label5.Text" xml:space="preserve">
+    <value>&amp;Date</value>
+  </data>
+  <data name="Label5.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleCenter</value>
+  </data>
+
+
   <data name="lblDate.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleCenter</value>
   </data>
   <data name="mnvEdit.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
-  </data>
-  <data name="Label5.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleCenter</value>
   </data>
   <data name="lblDate.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -535,12 +558,6 @@ xo  <data name="fraInput.TabIndex" type="System.Int32, mscorlib">
   </data>
   <data name="&gt;&gt;mnvEdit.Parent" xml:space="preserve">
     <value>fraView</value>
-  </data>
-  <data name="Label5.Location" type="System.Drawing.Point, System.Drawing">
-    <value>216, 16</value>
-  </data>
-  <data name="Label5.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
   </data>
   <data name="lblDate.Location" type="System.Drawing.Point, System.Drawing">
     <value>216, 152</value>
@@ -552,14 +569,8 @@ xo  <data name="fraInput.TabIndex" type="System.Int32, mscorlib">
     <value>System.Windows.Forms.MonthCalendar, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
 
-  <data name="&gt;&gt;Label5.Name" xml:space="preserve">
-    <value>Label5</value>
-  </data>
   <data name="mnvEdit.Location" type="System.Drawing.Point, System.Drawing">
     <value>8, 16</value>
-  </data>
-  <data name="Label5.Text" xml:space="preserve">
-    <value>&amp;Date</value>
   </data>
   <data name="&gt;&gt;lblDate.ZOrder" xml:space="preserve">
     <value>0</value>
@@ -576,15 +587,6 @@ xo  <data name="fraInput.TabIndex" type="System.Int32, mscorlib">
 
   <data name="lblDate.Size" type="System.Drawing.Size, System.Drawing">
     <value>112, 24</value>
-  </data>
-  <data name="&gt;&gt;Label5.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="Label5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>112, 24</value>
-  </data>
-  <data name="&gt;&gt;Label5.Parent" xml:space="preserve">
-    <value>fraView</value>
   </data>
   <data name="&gt;&gt;lblDate.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
