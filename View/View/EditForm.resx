@@ -490,11 +490,33 @@ xo  <data name="fraInput.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
   </data>
 
-  <data name="&gt;&gt;Label5.ZOrder" xml:space="preserve">
-    <value>2</value>
+  <data name="&gt;&gt;btnDelete.Name" xml:space="preserve">
+    <value>btnDelete</value>
+  </data>
+  <data name="&gt;&gt;btnDelete.Parent" xml:space="preserve">
+    <value>fraInput</value>
   </data>
   <data name="&gt;&gt;btnDelete.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btnDelete.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="btnDelete.Location" type="System.Drawing.Point, System.Drawing">
+    <value>248, 104</value>
+  </data>
+  <data name="btnDelete.Size" type="System.Drawing.Size, System.Drawing">
+    <value>80, 32</value>
+  </data>
+  <data name="btnDelete.TabIndex" type="System.Int32, mscorlib">
+    <value>10</value>
+  </data>
+  <data name="btnDelete.Text" xml:space="preserve">
+    <value>&amp;Remove</value>
+  </data>
+
+  <data name="&gt;&gt;Label5.ZOrder" xml:space="preserve">
+    <value>2</value>
   </data>
   <data name="lblDate.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleCenter</value>
@@ -520,9 +542,6 @@ xo  <data name="fraInput.TabIndex" type="System.Int32, mscorlib">
   <data name="Label5.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="btnDelete.Size" type="System.Drawing.Size, System.Drawing">
-    <value>80, 32</value>
-  </data>
   <data name="lblDate.Location" type="System.Drawing.Point, System.Drawing">
     <value>216, 152</value>
   </data>
@@ -533,9 +552,6 @@ xo  <data name="fraInput.TabIndex" type="System.Int32, mscorlib">
     <value>System.Windows.Forms.MonthCalendar, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
 
-  <data name="&gt;&gt;btnDelete.Parent" xml:space="preserve">
-    <value>fraInput</value>
-  </data>
   <data name="&gt;&gt;Label5.Name" xml:space="preserve">
     <value>Label5</value>
   </data>
@@ -551,9 +567,6 @@ xo  <data name="fraInput.TabIndex" type="System.Int32, mscorlib">
   <data name="&gt;&gt;mnvEdit.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="btnDelete.Location" type="System.Drawing.Point, System.Drawing">
-    <value>248, 104</value>
-  </data>
   <data name="&gt;&gt;mnvEdit.Name" xml:space="preserve">
     <value>mnvEdit</value>
   </data>
@@ -561,26 +574,14 @@ xo  <data name="fraInput.TabIndex" type="System.Int32, mscorlib">
     <value>ＭＳ ゴシック, 9pt</value>
   </data>
 
-  <data name="&gt;&gt;btnDelete.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;btnDelete.Name" xml:space="preserve">
-    <value>btnDelete</value>
-  </data>
   <data name="lblDate.Size" type="System.Drawing.Size, System.Drawing">
     <value>112, 24</value>
-  </data>
-  <data name="btnDelete.Text" xml:space="preserve">
-    <value>&amp;Remove</value>
   </data>
   <data name="&gt;&gt;Label5.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="Label5.Size" type="System.Drawing.Size, System.Drawing">
     <value>112, 24</value>
-  </data>
-  <data name="btnDelete.TabIndex" type="System.Int32, mscorlib">
-    <value>10</value>
   </data>
   <data name="&gt;&gt;Label5.Parent" xml:space="preserve">
     <value>fraView</value>
