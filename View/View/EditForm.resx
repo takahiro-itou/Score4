@@ -208,31 +208,6 @@ xo  <data name="fraInput.TabIndex" type="System.Int32, mscorlib">
     <value>Add/Edit Data</value>
   </data>
 
-  <data name="&gt;&gt;fraView.Name" xml:space="preserve">
-    <value>fraView</value>
-  </data>
-  <data name="&gt;&gt;fraView.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;fraView.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;fraView.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="fraView.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 176</value>
-  </data>
-  <data name="fraView.Size" type="System.Drawing.Size, System.Drawing">
-    <value>336, 184</value>
-  </data>
-  <data name="fraView.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
-  </data>
-  <data name="fraView.Text" xml:space="preserve">
-    <value>&amp;View</value>
-  </data>
-
   <data name="&gt;&gt;Label1.Name" xml:space="preserve">
     <value>Label1</value>
   </data>
@@ -513,6 +488,31 @@ xo  <data name="fraInput.TabIndex" type="System.Int32, mscorlib">
   </data>
   <data name="btnDelete.Text" xml:space="preserve">
     <value>&amp;Remove</value>
+  </data>
+
+  <data name="&gt;&gt;fraView.Name" xml:space="preserve">
+    <value>fraView</value>
+  </data>
+  <data name="&gt;&gt;fraView.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;fraView.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;fraView.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="fraView.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 176</value>
+  </data>
+  <data name="fraView.Size" type="System.Drawing.Size, System.Drawing">
+    <value>336, 184</value>
+  </data>
+  <data name="fraView.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="fraView.Text" xml:space="preserve">
+    <value>&amp;View</value>
   </data>
 
   <data name="&gt;&gt;Label5.ZOrder" xml:space="preserve">
