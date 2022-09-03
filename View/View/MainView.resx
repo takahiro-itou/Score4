@@ -520,14 +520,24 @@
     <value>&amp;Font ...</value>
   </data>
 
-  <data name="mnuScoreEdit.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
-    <value>F5</value>
+  <data name="&gt;&gt;mnuScore.Name" xml:space="preserve">
+    <value>mnuScore</value>
   </data>
-  <data name="mnuScoreEdit.Size" type="System.Drawing.Size, System.Drawing">
-    <value>145, 22</value>
+  <data name="&gt;&gt;mnuScore.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="mnuScoreEdit.Text" xml:space="preserve">
-    <value>&amp;Edit ...</value>
+  <data name="mnuScore.Size" type="System.Drawing.Size, System.Drawing">
+    <value>46, 20</value>
+  </data>
+  <data name="mnuScore.Text" xml:space="preserve">
+    <value>&amp;Score</value>
+  </data>
+
+  <data name="&gt;&gt;mnuScoreDetail.Name" xml:space="preserve">
+    <value>mnuScoreDetail</value>
+  </data>
+  <data name="&gt;&gt;mnuScoreDetail.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="mnuScoreDetail.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
     <value>F3</value>
@@ -538,6 +548,29 @@
   <data name="mnuScoreDetail.Text" xml:space="preserve">
     <value>&amp;Detail ...</value>
   </data>
+
+  <data name="&gt;&gt;mnuScoreEdit.Name" xml:space="preserve">
+    <value>mnuScoreEdit</value>
+  </data>
+  <data name="&gt;&gt;mnuScoreEdit.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="mnuScoreEdit.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
+    <value>F5</value>
+  </data>
+  <data name="mnuScoreEdit.Size" type="System.Drawing.Size, System.Drawing">
+    <value>145, 22</value>
+  </data>
+  <data name="mnuScoreEdit.Text" xml:space="preserve">
+    <value>&amp;Edit ...</value>
+  </data>
+
+  <data name="&gt;&gt;mnuScoreImport.Name" xml:space="preserve">
+    <value>mnuScoreImport</value>
+  </data>
+  <data name="&gt;&gt;mnuScoreImport.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="mnuScoreImport.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
     <value>Ctrl+I</value>
   </data>
@@ -547,17 +580,12 @@
   <data name="mnuScoreImport.Text" xml:space="preserve">
     <value>&amp;Import ...</value>
   </data>
-  <data name="mnuScoreSep0.Size" type="System.Drawing.Size, System.Drawing">
-    <value>142, 6</value>
+
+  <data name="&gt;&gt;mnuScoreRefresh.Name" xml:space="preserve">
+    <value>mnuScoreRefresh</value>
   </data>
-  <data name="mnuScoreSettings.Size" type="System.Drawing.Size, System.Drawing">
-    <value>145, 22</value>
-  </data>
-  <data name="mnuScoreSettings.Text" xml:space="preserve">
-    <value>&amp;Settings ...</value>
-  </data>
-  <data name="mnuScoreSep1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>142, 6</value>
+  <data name="&gt;&gt;mnuScoreRefresh.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="mnuScoreRefresh.Size" type="System.Drawing.Size, System.Drawing">
     <value>145, 22</value>
@@ -565,11 +593,38 @@
   <data name="mnuScoreRefresh.Text" xml:space="preserve">
     <value>&amp;Refresh</value>
   </data>
-  <data name="mnuScore.Size" type="System.Drawing.Size, System.Drawing">
-    <value>46, 20</value>
+
+  <data name="&gt;&gt;mnuScoreSettings.Name" xml:space="preserve">
+    <value>mnuScoreSettings</value>
   </data>
-  <data name="mnuScore.Text" xml:space="preserve">
-    <value>&amp;Score</value>
+  <data name="&gt;&gt;mnuScoreSettings.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="mnuScoreSettings.Size" type="System.Drawing.Size, System.Drawing">
+    <value>145, 22</value>
+  </data>
+  <data name="mnuScoreSettings.Text" xml:space="preserve">
+    <value>&amp;Settings ...</value>
+  </data>
+
+  <data name="&gt;&gt;mnuScoreSep0.Name" xml:space="preserve">
+    <value>mnuScoreSep0</value>
+  </data>
+  <data name="&gt;&gt;mnuScoreSep0.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="mnuScoreSep0.Size" type="System.Drawing.Size, System.Drawing">
+    <value>142, 6</value>
+  </data>
+
+  <data name="&gt;&gt;mnuScoreSep1.Name" xml:space="preserve">
+    <value>mnuScoreSep1</value>
+  </data>
+  <data name="&gt;&gt;mnuScoreSep1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="mnuScoreSep1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>142, 6</value>
   </data>
 
   <metadata name="dlgOpen.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
@@ -782,54 +837,7 @@
   <data name="&gt;&gt;tabLeague.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
-  <data name="&gt;&gt;mnuScore.Name" xml:space="preserve">
-    <value>mnuScore</value>
-  </data>
-  <data name="&gt;&gt;mnuScore.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;mnuScoreEdit.Name" xml:space="preserve">
-    <value>mnuScoreEdit</value>
-  </data>
-  <data name="&gt;&gt;mnuScoreEdit.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;mnuScoreDetail.Name" xml:space="preserve">
-    <value>mnuScoreDetail</value>
-  </data>
-  <data name="&gt;&gt;mnuScoreDetail.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;mnuScoreImport.Name" xml:space="preserve">
-    <value>mnuScoreImport</value>
-  </data>
-  <data name="&gt;&gt;mnuScoreImport.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;mnuScoreSep0.Name" xml:space="preserve">
-    <value>mnuScoreSep0</value>
-  </data>
-  <data name="&gt;&gt;mnuScoreSep0.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;mnuScoreSettings.Name" xml:space="preserve">
-    <value>mnuScoreSettings</value>
-  </data>
-  <data name="&gt;&gt;mnuScoreSettings.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;mnuScoreSep1.Name" xml:space="preserve">
-    <value>mnuScoreSep1</value>
-  </data>
-  <data name="&gt;&gt;mnuScoreSep1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;mnuScoreRefresh.Name" xml:space="preserve">
-    <value>mnuScoreRefresh</value>
-  </data>
-  <data name="&gt;&gt;mnuScoreRefresh.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
+
   <data name="&gt;&gt;dlgOpen.Name" xml:space="preserve">
     <value>dlgOpen</value>
   </data>
