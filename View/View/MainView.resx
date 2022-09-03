@@ -166,6 +166,147 @@
     <value>Count "On &amp;Schedule"</value>
   </data>
 
+  <metadata name="colDiff.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="&gt;&gt;colDiff.Name" xml:space="preserve">
+    <value>colDiff</value>
+  </data>
+  <data name="&gt;&gt;colDiff.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="colDiff.HeaderText" xml:space="preserve">
+    <value>Diff</value>
+  </data>
+  <data name="colDiff.Width" type="System.Int32, mscorlib">
+    <value>48</value>
+  </data>
+
+  <metadata name="colDraw.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="&gt;&gt;colDraw.Name" xml:space="preserve">
+    <value>colDraw</value>
+  </data>
+  <data name="&gt;&gt;colDraw.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="colDraw.HeaderText" xml:space="preserve">
+    <value>Draw</value>
+  </data>
+  <data name="colDraw.Width" type="System.Int32, mscorlib">
+    <value>48</value>
+  </data>
+
+  <metadata name="colLost.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="&gt;&gt;colLost.Name" xml:space="preserve">
+    <value>colLost</value>
+  </data>
+  <data name="&gt;&gt;colLost.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="colLost.HeaderText" xml:space="preserve">
+    <value>Lost</value>
+  </data>
+  <data name="colLost.Width" type="System.Int32, mscorlib">
+    <value>48</value>
+  </data>
+
+  <metadata name="colMagic.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="&gt;&gt;colMagic.Name" xml:space="preserve">
+    <value>colMagic</value>
+  </data>
+  <data name="&gt;&gt;colMagic.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="colMagic.HeaderText" xml:space="preserve">
+    <value>Magic</value>
+  </data>
+  <data name="colMagic.Width" type="System.Int32, mscorlib">
+    <value>48</value>
+  </data>
+
+  <metadata name="colPercent.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="&gt;&gt;colPercent.Name" xml:space="preserve">
+    <value>colPercent</value>
+  </data>
+  <data name="&gt;&gt;colPercent.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="colPercent.HeaderText" xml:space="preserve">
+    <value>%</value>
+  </data>
+  <data name="colPercent.Width" type="System.Int32, mscorlib">
+    <value>48</value>
+  </data>
+
+  <metadata name="colRank.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="&gt;&gt;colRank.Name" xml:space="preserve">
+    <value>colRank</value>
+  </data>
+  <data name="&gt;&gt;colRank.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="colRank.HeaderText" xml:space="preserve">
+    <value>Rank</value>
+  </data>
+  <data name="colRank.Width" type="System.Int32, mscorlib">
+    <value>60</value>
+  </data>
+
+  <metadata name="colTeam.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="&gt;&gt;colTeam.Name" xml:space="preserve">
+    <value>colTeam</value>
+  </data>
+  <data name="&gt;&gt;colTeam.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="colTeam.HeaderText" xml:space="preserve">
+    <value>Team</value>
+  </data>
+
+  <metadata name="colTotal.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="&gt;&gt;colTotal.Name" xml:space="preserve">
+    <value>colTotal</value>
+  </data>
+  <data name="&gt;&gt;colTotal.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="colTotal.HeaderText" xml:space="preserve">
+    <value>Total</value>
+  </data>
+  <data name="colTotal.Width" type="System.Int32, mscorlib">
+    <value>48</value>
+  </data>
+
+  <metadata name="colWon.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="&gt;&gt;colWon.Name" xml:space="preserve">
+    <value>colWon</value>
+  </data>
+  <data name="&gt;&gt;colWon.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="colWon.HeaderText" xml:space="preserve">
+    <value>Won</value>
+  </data>
+  <data name="colWon.Width" type="System.Int32, mscorlib">
+    <value>48</value>
+  </data>
+
   <metadata name="dlgFont.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>298, 17</value>
   </metadata>
@@ -786,137 +927,4 @@
     <value>1</value>
   </data>
 
-  <metadata name="colTeam.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="colTeam.HeaderText" xml:space="preserve">
-    <value>Team</value>
-  </data>
-  <metadata name="colTotal.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="colTotal.HeaderText" xml:space="preserve">
-    <value>Total</value>
-  </data>
-  <data name="colTotal.Width" type="System.Int32, mscorlib">
-    <value>48</value>
-  </data>
-  <metadata name="colWon.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="colWon.HeaderText" xml:space="preserve">
-    <value>Won</value>
-  </data>
-  <data name="colWon.Width" type="System.Int32, mscorlib">
-    <value>48</value>
-  </data>
-  <metadata name="colLost.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="colLost.HeaderText" xml:space="preserve">
-    <value>Lost</value>
-  </data>
-  <data name="colLost.Width" type="System.Int32, mscorlib">
-    <value>48</value>
-  </data>
-  <metadata name="colDraw.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="colDraw.HeaderText" xml:space="preserve">
-    <value>Draw</value>
-  </data>
-  <data name="colDraw.Width" type="System.Int32, mscorlib">
-    <value>48</value>
-  </data>
-  <metadata name="colDiff.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="colDiff.HeaderText" xml:space="preserve">
-    <value>Diff</value>
-  </data>
-  <data name="colDiff.Width" type="System.Int32, mscorlib">
-    <value>48</value>
-  </data>
-  <metadata name="colPercent.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="colPercent.HeaderText" xml:space="preserve">
-    <value>%</value>
-  </data>
-  <data name="colPercent.Width" type="System.Int32, mscorlib">
-    <value>48</value>
-  </data>
-  <metadata name="colMagic.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="colMagic.HeaderText" xml:space="preserve">
-    <value>Magic</value>
-  </data>
-  <data name="colMagic.Width" type="System.Int32, mscorlib">
-    <value>48</value>
-  </data>
-  <metadata name="colRank.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="colRank.HeaderText" xml:space="preserve">
-    <value>Rank</value>
-  </data>
-  <data name="colRank.Width" type="System.Int32, mscorlib">
-    <value>60</value>
-  </data>
-
-  <data name="&gt;&gt;colTeam.Name" xml:space="preserve">
-    <value>colTeam</value>
-  </data>
-  <data name="&gt;&gt;colTeam.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;colTotal.Name" xml:space="preserve">
-    <value>colTotal</value>
-  </data>
-  <data name="&gt;&gt;colTotal.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;colWon.Name" xml:space="preserve">
-    <value>colWon</value>
-  </data>
-  <data name="&gt;&gt;colWon.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;colLost.Name" xml:space="preserve">
-    <value>colLost</value>
-  </data>
-  <data name="&gt;&gt;colLost.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;colDraw.Name" xml:space="preserve">
-    <value>colDraw</value>
-  </data>
-  <data name="&gt;&gt;colDraw.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;colDiff.Name" xml:space="preserve">
-    <value>colDiff</value>
-  </data>
-  <data name="&gt;&gt;colDiff.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;colPercent.Name" xml:space="preserve">
-    <value>colPercent</value>
-  </data>
-  <data name="&gt;&gt;colPercent.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;colMagic.Name" xml:space="preserve">
-    <value>colMagic</value>
-  </data>
-  <data name="&gt;&gt;colMagic.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;colRank.Name" xml:space="preserve">
-    <value>colRank</value>
-  </data>
-  <data name="&gt;&gt;colRank.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
 </root>
