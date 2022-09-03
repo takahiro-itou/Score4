@@ -627,6 +627,31 @@
     <value>142, 6</value>
   </data>
 
+  <data name="&gt;&gt;optShowMagic.Name" xml:space="preserve">
+    <value>optShowMagic</value>
+  </data>
+  <data name="&gt;&gt;optShowMagic.Parent" xml:space="preserve">
+    <value>grpScore</value>
+  </data>
+  <data name="&gt;&gt;optShowMagic.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;optShowMagic.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="optShowMagic.Location" type="System.Drawing.Point, System.Drawing">
+    <value>363, 279</value>
+  </data>
+  <data name="optShowMagic.Size" type="System.Drawing.Size, System.Drawing">
+    <value>128, 16</value>
+  </data>
+  <data name="optShowMagic.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="optShowMagic.Text" xml:space="preserve">
+    <value>&amp;Magic</value>
+  </data>
+
   <metadata name="dlgOpen.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>114, 17</value>
   </metadata>
@@ -663,30 +688,7 @@
   <data name="&gt;&gt;optShowWins.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
-  <data name="optShowMagic.Location" type="System.Drawing.Point, System.Drawing">
-    <value>363, 279</value>
-  </data>
-  <data name="optShowMagic.Size" type="System.Drawing.Size, System.Drawing">
-    <value>128, 16</value>
-  </data>
-  <data name="optShowMagic.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
-  </data>
-  <data name="optShowMagic.Text" xml:space="preserve">
-    <value>&amp;Magic</value>
-  </data>
-  <data name="&gt;&gt;optShowMagic.Name" xml:space="preserve">
-    <value>optShowMagic</value>
-  </data>
-  <data name="&gt;&gt;optShowMagic.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;optShowMagic.Parent" xml:space="preserve">
-    <value>grpScore</value>
-  </data>
-  <data name="&gt;&gt;optShowMagic.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
+
   <data name="optShowRest.Location" type="System.Drawing.Point, System.Drawing">
     <value>229, 279</value>
   </data>
