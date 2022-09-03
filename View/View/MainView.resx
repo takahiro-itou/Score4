@@ -166,6 +166,37 @@
     <value>Count "On &amp;Schedule"</value>
   </data>
 
+  <metadata name="dlgFont.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>298, 17</value>
+  </metadata>
+  <data name="&gt;&gt;dlgFont.Name" xml:space="preserve">
+    <value>dlgFont</value>
+  </data>
+  <data name="&gt;&gt;dlgFont.Type" xml:space="preserve">
+    <value>System.Windows.Forms.FontDialog, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+
+  <metadata name="dlgOpen.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>114, 17</value>
+  </metadata>
+
+  <data name="&gt;&gt;dlgOpen.Name" xml:space="preserve">
+    <value>dlgOpen</value>
+  </data>
+  <data name="&gt;&gt;dlgOpen.Type" xml:space="preserve">
+    <value>System.Windows.Forms.OpenFileDialog, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+
+  <metadata name="dlgSave.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>207, 17</value>
+  </metadata>
+  <data name="&gt;&gt;dlgSave.Name" xml:space="preserve">
+    <value>dlgSave</value>
+  </data>
+  <data name="&gt;&gt;dlgSave.Type" xml:space="preserve">
+    <value>System.Windows.Forms.SaveFileDialog, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+
   <data name="&gt;&gt;grdExtra.Name" xml:space="preserve">
     <value>grdExtra</value>
   </data>
@@ -627,6 +658,31 @@
     <value>142, 6</value>
   </data>
 
+  <data name="&gt;&gt;mnvDate.Name" xml:space="preserve">
+    <value>mnvDate</value>
+  </data>
+  <data name="&gt;&gt;mnvDate.Parent" xml:space="preserve">
+    <value>grpScore</value>
+  </data>
+  <data name="&gt;&gt;mnvDate.Type" xml:space="preserve">
+    <value>System.Windows.Forms.MonthCalendar, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;mnvDate.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="mnvDate.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="mnvDate.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="mnvDate.Location" type="System.Drawing.Point, System.Drawing">
+    <value>592, 18</value>
+  </data>
+  <data name="mnvDate.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+
   <data name="&gt;&gt;optShowMagic.Name" xml:space="preserve">
     <value>optShowMagic</value>
   </data>
@@ -705,40 +761,31 @@
     <value>&amp;Wins For Victory</value>
   </data>
 
-  <metadata name="dlgOpen.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>114, 17</value>
-  </metadata>
-  <metadata name="dlgSave.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>207, 17</value>
-  </metadata>
-  <metadata name="dlgFont.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>298, 17</value>
-  </metadata>
-
-  <data name="mnvDate.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
+  <data name="&gt;&gt;tabLeague.Name" xml:space="preserve">
+    <value>tabLeague</value>
   </data>
-  <data name="mnvDate.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+  <data name="&gt;&gt;tabLeague.Parent" xml:space="preserve">
+    <value>$this</value>
   </data>
-  <data name="mnvDate.Location" type="System.Drawing.Point, System.Drawing">
-    <value>592, 18</value>
+  <data name="&gt;&gt;tabLeague.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabControl, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="mnvDate.TabIndex" type="System.Int32, mscorlib">
+  <data name="&gt;&gt;tabLeague.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="tabLeague.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Bottom, Left, Right</value>
+  </data>
+  <data name="tabLeague.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 30</value>
+  </data>
+  <data name="tabLeague.Size" type="System.Drawing.Size, System.Drawing">
+    <value>846, 595</value>
+  </data>
+  <data name="tabLeague.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
-  <data name="&gt;&gt;mnvDate.Name" xml:space="preserve">
-    <value>mnvDate</value>
-  </data>
-  <data name="&gt;&gt;mnvDate.Type" xml:space="preserve">
-    <value>System.Windows.Forms.MonthCalendar, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;mnvDate.Parent" xml:space="preserve">
-    <value>grpScore</value>
-  </data>
-  <data name="&gt;&gt;mnvDate.ZOrder" xml:space="preserve">
-    <value>6</value>
-  </data>
+
   <metadata name="colTeam.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
@@ -817,49 +864,7 @@
   <data name="colRank.Width" type="System.Int32, mscorlib">
     <value>60</value>
   </data>
-  <data name="tabLeague.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Bottom, Left, Right</value>
-  </data>
-  <data name="tabLeague.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 30</value>
-  </data>
-  <data name="tabLeague.Size" type="System.Drawing.Size, System.Drawing">
-    <value>846, 595</value>
-  </data>
-  <data name="tabLeague.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;tabLeague.Name" xml:space="preserve">
-    <value>tabLeague</value>
-  </data>
-  <data name="&gt;&gt;tabLeague.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabControl, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tabLeague.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;tabLeague.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
 
-  <data name="&gt;&gt;dlgOpen.Name" xml:space="preserve">
-    <value>dlgOpen</value>
-  </data>
-  <data name="&gt;&gt;dlgOpen.Type" xml:space="preserve">
-    <value>System.Windows.Forms.OpenFileDialog, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;dlgSave.Name" xml:space="preserve">
-    <value>dlgSave</value>
-  </data>
-  <data name="&gt;&gt;dlgSave.Type" xml:space="preserve">
-    <value>System.Windows.Forms.SaveFileDialog, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;dlgFont.Name" xml:space="preserve">
-    <value>dlgFont</value>
-  </data>
-  <data name="&gt;&gt;dlgFont.Type" xml:space="preserve">
-    <value>System.Windows.Forms.FontDialog, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="&gt;&gt;colTeam.Name" xml:space="preserve">
     <value>colTeam</value>
   </data>
