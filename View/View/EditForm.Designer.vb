@@ -114,69 +114,53 @@ Partial Class EditForm
         ' cmbTeamHome
         '
         resources.ApplyResources(Me.cmbTeamHome, "cmbTeamHome")
-        With Me.cmbTeamHome
-            .DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-            .FormattingEnabled = True
-            .Name = "cmbTeamHome"
-        End With
+        Me.cmbTeamHome.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cmbTeamHome.FormattingEnabled = True
+        Me.cmbTeamHome.Name = "cmbTeamHome"
         '
         ' updScoreHome
         '
         resources.ApplyResources(Me.updScoreHome, "updScoreHome")
-        With Me.updScoreHome
-            .Maximum = New Decimal(New Integer() {999, 0, 0, 0})
-            .Name = "updScoreHome"
-        End With
+        Me.updScoreHome.Maximum = New Decimal(New Integer() {999, 0, 0, 0})
+        Me.updScoreHome.Name = "updScoreHome"
         '
         'Label4
         '
         resources.ApplyResources(Me.Label4, "Label4")
-        With Me.Label4
-            .BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-            .Name = "Label4"
-        End With
+        Me.Label4.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.Label4.Name = "Label4"
         '
         ' cmbTeamVisitor
         '
         resources.ApplyResources(Me.cmbTeamVisitor, "cmbTeamVisitor")
-        With Me.cmbTeamVisitor
-            .DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-            .FormattingEnabled = True
-            .Name = "cmbTeamVisitor"
-        End With
+        Me.cmbTeamVisitor.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cmbTeamVisitor.FormattingEnabled = True
+        Me.cmbTeamVisitor.Name = "cmbTeamVisitor"
         '
         ' updScoreVisitor
         '
         resources.ApplyResources(Me.updScoreVisitor, "updScoreVisitor")
-        With Me.updScoreVisitor
-            .Maximum = New Decimal(New Integer() {999, 0, 0, 0})
-            .Name = "updScoreVisitor"
-        End With
+        Me.updScoreVisitor.Maximum = New Decimal(New Integer() {999, 0, 0, 0})
+        Me.updScoreVisitor.Name = "updScoreVisitor"
         '
         ' cmbFlags
         '
         resources.ApplyResources(Me.cmbFlags, "cmbFlags")
-        With Me.cmbFlags
-            .DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-            .FormattingEnabled = True
-            .Name = "cmbFlags"
-        End With
+        Me.cmbFlags.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cmbFlags.FormattingEnabled = True
+        Me.cmbFlags.Name = "cmbFlags"
         '
         ' btnEdit
         '
         resources.ApplyResources(Me.btnEdit, "btnEdit")
-        With Me.btnEdit
-            .Name = "btnEdit"
-            .UseVisualStyleBackColor = True
-        End With
+        Me.btnEdit.Name = "btnEdit"
+        Me.btnEdit.UseVisualStyleBackColor = True
         '
         ' btnDelete
         '
         resources.ApplyResources(Me.btnDelete, "btnDelete")
-        With Me.btnDelete
-            .Name = "btnDelete"
-            .UseVisualStyleBackColor = True
-        End With
+        Me.btnDelete.Name = "btnDelete"
+        Me.btnDelete.UseVisualStyleBackColor = True
 
         '
         ' fraView
