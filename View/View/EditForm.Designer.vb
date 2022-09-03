@@ -52,82 +52,64 @@ Partial Class EditForm
         ' btnOK
         '
         resources.ApplyResources(Me.btnOK, "btnOK")
-        With Me.btnOK
-            .Name = "btnOK"
-            .UseVisualStyleBackColor = True
-        End With
+        Me.btnOK.Name = "btnOK"
+        Me.btnOK.UseVisualStyleBackColor = True
         '
         ' btnApply
         '
         resources.ApplyResources(Me.btnApply, "btnApply")
-        With Me.btnApply
-            .Name = "btnApply"
-            .UseVisualStyleBackColor = True
-        End With
+        Me.btnApply.Name = "btnApply"
+        Me.btnApply.UseVisualStyleBackColor = True
         '
         ' btnCancel
         '
         resources.ApplyResources(Me.btnCancel, "btnCancel")
-        With Me.btnCancel
-            .Name = "btnCancel"
-            .UseVisualStyleBackColor = True
-        End With
+        Me.btnCancel.Name = "btnCancel"
+        Me.btnCancel.UseVisualStyleBackColor = True
         '
         ' dgvRecord
         '
         resources.ApplyResources(Me.dgvRecord, "dgvRecord")
-        With Me.dgvRecord
-            .ColumnHeadersHeightSizeMode = _
+        Me.dgvRecord.ColumnHeadersHeightSizeMode = _
                 System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-            .Name = "dgvRecord"
-            .RowTemplate.Height = 25
-        End With
+        Me.dgvRecord.Name = "dgvRecord"
+        Me.dgvRecord.RowTemplate.Height = 25
 
         '
         ' fraInput
         '
         resources.ApplyResources(Me.fraInput, "fraInput")
-        With Me.fraInput
-            With .Controls
-                .Add(Me.Label1)
-                .Add(Me.Label2)
-                .Add(Me.Label3)
-                .Add(Me.cmbTeamHome)
-                .Add(Me.updScoreHome)
-                .Add(Me.Label4)
-                .Add(Me.cmbTeamVisitor)
-                .Add(Me.updScoreVisitor)
-                .Add(Me.cmbFlags)
-                .Add(Me.btnEdit)
-                .Add(Me.btnDelete)
-            End With
-            .Name = "fraInput"
-            .TabStop = False
-        End With
+        Me.fraInput.Controls.Add(Me.Label1)
+        Me.fraInput.Controls.Add(Me.Label2)
+        Me.fraInput.Controls.Add(Me.Label3)
+        Me.fraInput.Controls.Add(Me.cmbTeamHome)
+        Me.fraInput.Controls.Add(Me.updScoreHome)
+        Me.fraInput.Controls.Add(Me.Label4)
+        Me.fraInput.Controls.Add(Me.cmbTeamVisitor)
+        Me.fraInput.Controls.Add(Me.updScoreVisitor)
+        Me.fraInput.Controls.Add(Me.cmbFlags)
+        Me.fraInput.Controls.Add(Me.btnEdit)
+        Me.fraInput.Controls.Add(Me.btnDelete)
+        Me.fraInput.Name = "fraInput"
+        Me.fraInput.TabStop = False
         '
         ' Label1
         '
         resources.ApplyResources(Me.Label1, "Label1")
-        With Me.Label1
-            .BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-            .Name = "Label1"
-        End With
+        Me.Label1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.Label1.Name = "Label1"
         '
         ' Label2
         '
         resources.ApplyResources(Me.Label2, "Label2")
-        With Me.Label2
-            .BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-            .Name = "Label2"
-        End With
+        Me.Label2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.Label2.Name = "Label2"
         '
         ' Label3
         '
         resources.ApplyResources(Me.Label3, "Label3")
-        With Me.Label3
-            .BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-            .Name = "Label3"
-        End With
+        Me.Label3.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.Label3.Name = "Label3"
         '
         ' cmbTeamHome
         '
