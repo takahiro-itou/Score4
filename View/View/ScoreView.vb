@@ -177,12 +177,12 @@ Public Sub displayTeamMagicTableToGrid(
     End If
 
     makeTeamListOnGridViewHeader(
-        numShowCount, bufShowIndex, numShowCount, False, 64,
+        numShowCount, bufShowIndex, numShowCount, False, 72,
         scoreData, objView)
     gameFilter = Score4Wrapper.GameFilter.FILTER_ALL_GAMES
 
     With objView
-        .Columns(0).Width = 112
+        .Columns(0).Width = 128
 
         For i = 0 To numShowCount - 1
             Dim idxTeam As Integer = bufShowIndex(i)
@@ -229,12 +229,12 @@ Public Sub displayWinsForBeatTableToGrid(
     End If
 
     makeTeamListOnGridViewHeader(
-        numShowCount, bufShowIndex, numShowCount, False, 96,
+        numShowCount, bufShowIndex, numShowCount, False, 104,
         scoreData, objView)
     gameFilter = Score4Wrapper.GameFilter.FILTER_ALL_GAMES
 
     With objView
-        .Columns(0).Width = 112
+        .Columns(0).Width = 128
 
         For i = 0 To numShowCount - 1
             Dim idxTeam As Integer = bufShowIndex(i)
@@ -507,6 +507,8 @@ Private Sub writeTeamRestGamesToGridRow(
             .Style.BackColor = Color.FromArgb(0, 255, 0)
             .Value = restInter
         End With
+
+        .Visible = True
     End With
 
 End Sub
