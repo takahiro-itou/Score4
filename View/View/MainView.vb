@@ -402,7 +402,10 @@ Private Sub mnuScoreEdit_Click(sender As Object, e As EventArgs) Handles _
 
     Dim frmEdit As EditForm = New EditForm()
 
-    frmEdit.Show()
+    With frmEdit
+        .setupSettings(m_scoreData, m_currentDate)
+        .Show()
+    End With
 
 End Sub
 
