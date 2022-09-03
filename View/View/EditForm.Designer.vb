@@ -181,6 +181,7 @@ Partial Class EditForm
         ' mnvEdit
         '
         resources.ApplyResources(Me.mnvEdit, "mnvEdit")
+        Me.mnvEdit.MaxSelectionCount = 1
         Me.mnvEdit.Name = "mnvEdit"
         '
         ' lblDate
