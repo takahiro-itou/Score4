@@ -53,7 +53,10 @@ Public Sub displayRestGameTableToGrid(
                 bufShowIndex, .Rows(i), scoreInfo
             )
         Next i
+
+        .Visible = True
     End With
+
 End Sub
 
 ''========================================================================
@@ -508,7 +511,6 @@ Private Sub writeTeamRestGamesToGridRow(
             .Value = restInter
         End With
 
-        .Visible = True
     End With
 
 End Sub
