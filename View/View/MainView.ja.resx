@@ -117,7 +117,29 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+
+  <data name="$this.Text" xml:space="preserve">
+    <value>成績／順位　一覧</value>
+  </data>
+
+  <data name="chkSchedule.Text" xml:space="preserve">
+    <value>日程上の「予定」も集計する(&amp;S)</value>
+  </data>
+
+  <data name="mnuFile.Size" type="System.Drawing.Size, System.Drawing">
+    <value>66, 20</value>
+  </data>
+  <data name="mnuFile.Text" xml:space="preserve">
+    <value>ファイル(&amp;F)</value>
+  </data>
+  <data name="mnuFileExit.Size" type="System.Drawing.Size, System.Drawing">
+    <value>181, 22</value>
+  </data>
+  <data name="mnuFileExit.Text" xml:space="preserve">
+    <value>終了(&amp;X)</value>
+  </data>
   <data name="mnuFileNew.Size" type="System.Drawing.Size, System.Drawing">
     <value>181, 22</value>
   </data>
@@ -129,9 +151,6 @@
   </data>
   <data name="mnuFileOpen.Text" xml:space="preserve">
     <value>開く(&amp;O) ...</value>
-  </data>
-  <data name="mnuFileSep0.Size" type="System.Drawing.Size, System.Drawing">
-    <value>178, 6</value>
   </data>
   <data name="mnuFileSave.Size" type="System.Drawing.Size, System.Drawing">
     <value>181, 22</value>
@@ -145,68 +164,30 @@
   <data name="mnuFileSaveAs.Text" xml:space="preserve">
     <value>名前をつけて保存(&amp;A) ...</value>
   </data>
+  <data name="mnuFileSep0.Size" type="System.Drawing.Size, System.Drawing">
+    <value>178, 6</value>
+  </data>
   <data name="mnuFileSep1.Size" type="System.Drawing.Size, System.Drawing">
     <value>178, 6</value>
   </data>
-  <data name="mnuFileExit.Size" type="System.Drawing.Size, System.Drawing">
-    <value>181, 22</value>
+
+  <data name="mnuMagic.Size" type="System.Drawing.Size, System.Drawing">
+    <value>68, 20</value>
   </data>
-  <data name="mnuFileExit.Text" xml:space="preserve">
-    <value>終了(&amp;X)</value>
+  <data name="mnuMagic.Text" xml:space="preserve">
+    <value>マジック(&amp;M)</value>
   </data>
-  <data name="mnuFile.Size" type="System.Drawing.Size, System.Drawing">
-    <value>66, 20</value>
-  </data>
-  <data name="mnuFile.Text" xml:space="preserve">
-    <value>ファイル(&amp;F)</value>
-  </data>
-  <data name="mnuScoreEdit.Size" type="System.Drawing.Size, System.Drawing">
-    <value>170, 22</value>
-  </data>
-  <data name="mnuScoreEdit.Text" xml:space="preserve">
-    <value>編集(&amp;E) ...</value>
-  </data>
-  <data name="mnuScoreDetail.Size" type="System.Drawing.Size, System.Drawing">
-    <value>170, 22</value>
-  </data>
-  <data name="mnuScoreDetail.Text" xml:space="preserve">
-    <value>詳細(&amp;D) ...</value>
-  </data>
-  <data name="mnuScoreImport.Size" type="System.Drawing.Size, System.Drawing">
-    <value>170, 22</value>
-  </data>
-  <data name="mnuScoreImport.Text" xml:space="preserve">
-    <value>インポート(&amp;I) ...</value>
-  </data>
-  <data name="mnuScoreSep0.Size" type="System.Drawing.Size, System.Drawing">
-    <value>167, 6</value>
-  </data>
-  <data name="mnuScoreSettings.Size" type="System.Drawing.Size, System.Drawing">
-    <value>170, 22</value>
-  </data>
-  <data name="mnuScoreSettings.Text" xml:space="preserve">
-    <value>設定の変更(&amp;O) ...</value>
-  </data>
-  <data name="mnuScoreSep1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>167, 6</value>
-  </data>
-  <data name="mnuScoreRefresh.Size" type="System.Drawing.Size, System.Drawing">
-    <value>170, 22</value>
-  </data>
-  <data name="mnuScoreRefresh.Text" xml:space="preserve">
-    <value>最新の情報に更新</value>
-  </data>
-  <data name="mnuScore.Size" type="System.Drawing.Size, System.Drawing">
-    <value>58, 20</value>
-  </data>
-  <data name="mnuScore.Text" xml:space="preserve">
-    <value>スコア(&amp;S)</value>
-  </data>
-  <data name="mnuMagicVictory.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="mnuMagicEasy.Size" type="System.Drawing.Size, System.Drawing">
     <value>185, 22</value>
   </data>
-  <data name="mnuMagicVictory.Text" xml:space="preserve">
-    <value>優勝マジック(&amp;V)</value>
+  <data name="mnuMagicEasy.Text" xml:space="preserve">
+    <value>簡易計算で行う</value>
+  </data>
+  <data name="mnuMagicLine.Size" type="System.Drawing.Size, System.Drawing">
+    <value>185, 22</value>
+  </data>
+  <data name="mnuMagicLine.Text" xml:space="preserve">
+    <value>詳細表示(&amp;L) ...</value>
   </data>
   <data name="mnuMagicPlayoff.Size" type="System.Drawing.Size, System.Drawing">
     <value>185, 22</value>
@@ -217,26 +198,21 @@
   <data name="mnuMagicSep0.Size" type="System.Drawing.Size, System.Drawing">
     <value>182, 6</value>
   </data>
-  <data name="mnuMagicEasy.Size" type="System.Drawing.Size, System.Drawing">
-    <value>185, 22</value>
-  </data>
-  <data name="mnuMagicEasy.Text" xml:space="preserve">
-    <value>簡易計算で行う</value>
-  </data>
   <data name="mnuMagicSep1.Size" type="System.Drawing.Size, System.Drawing">
     <value>182, 6</value>
   </data>
-  <data name="mnuMagicLine.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="mnuMagicVictory.Size" type="System.Drawing.Size, System.Drawing">
     <value>185, 22</value>
   </data>
-  <data name="mnuMagicLine.Text" xml:space="preserve">
-    <value>詳細表示(&amp;L) ...</value>
+  <data name="mnuMagicVictory.Text" xml:space="preserve">
+    <value>優勝マジック(&amp;V)</value>
   </data>
-  <data name="mnuMagic.Size" type="System.Drawing.Size, System.Drawing">
-    <value>68, 20</value>
+
+  <data name="mnuOptions.Size" type="System.Drawing.Size, System.Drawing">
+    <value>76, 20</value>
   </data>
-  <data name="mnuMagic.Text" xml:space="preserve">
-    <value>マジック(&amp;M)</value>
+  <data name="mnuOptions.Text" xml:space="preserve">
+    <value>オプション(&amp;O)</value>
   </data>
   <data name="mnuOptionsFont.Size" type="System.Drawing.Size, System.Drawing">
     <value>128, 22</value>
@@ -244,25 +220,58 @@
   <data name="mnuOptionsFont.Text" xml:space="preserve">
     <value>フォント(&amp;F) ...</value>
   </data>
-  <data name="mnuOptions.Size" type="System.Drawing.Size, System.Drawing">
-    <value>76, 20</value>
+
+  <data name="mnuScore.Size" type="System.Drawing.Size, System.Drawing">
+    <value>58, 20</value>
   </data>
-  <data name="mnuOptions.Text" xml:space="preserve">
-    <value>オプション(&amp;O)</value>
+  <data name="mnuScore.Text" xml:space="preserve">
+    <value>スコア(&amp;S)</value>
   </data>
-  <data name="optShowWins.Text" xml:space="preserve">
-    <value>必要勝利数(&amp;W)</value>
+  <data name="mnuScoreDetail.Size" type="System.Drawing.Size, System.Drawing">
+    <value>170, 22</value>
   </data>
+  <data name="mnuScoreDetail.Text" xml:space="preserve">
+    <value>詳細(&amp;D) ...</value>
+  </data>
+  <data name="mnuScoreEdit.Size" type="System.Drawing.Size, System.Drawing">
+    <value>170, 22</value>
+  </data>
+  <data name="mnuScoreEdit.Text" xml:space="preserve">
+    <value>編集(&amp;E) ...</value>
+  </data>
+  <data name="mnuScoreImport.Size" type="System.Drawing.Size, System.Drawing">
+    <value>170, 22</value>
+  </data>
+  <data name="mnuScoreImport.Text" xml:space="preserve">
+    <value>インポート(&amp;I) ...</value>
+  </data>
+  <data name="mnuScoreRefresh.Size" type="System.Drawing.Size, System.Drawing">
+    <value>170, 22</value>
+  </data>
+  <data name="mnuScoreRefresh.Text" xml:space="preserve">
+    <value>最新の情報に更新</value>
+  </data>
+  <data name="mnuScoreSep0.Size" type="System.Drawing.Size, System.Drawing">
+    <value>167, 6</value>
+  </data>
+  <data name="mnuScoreSep1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>167, 6</value>
+  </data>
+  <data name="mnuScoreSettings.Size" type="System.Drawing.Size, System.Drawing">
+    <value>170, 22</value>
+  </data>
+  <data name="mnuScoreSettings.Text" xml:space="preserve">
+    <value>設定の変更(&amp;O) ...</value>
+  </data>
+
   <data name="optShowMagic.Text" xml:space="preserve">
     <value>マジック(&amp;M)</value>
   </data>
   <data name="optShowRest.Text" xml:space="preserve">
     <value>残り試合数(&amp;R)</value>
   </data>
-  <data name="chkSchedule.Text" xml:space="preserve">
-    <value>日程上の「予定」も集計する(&amp;S)</value>
+  <data name="optShowWins.Text" xml:space="preserve">
+    <value>必要勝利数(&amp;W)</value>
   </data>
-  <data name="$this.Text" xml:space="preserve">
-    <value>成績／順位　一覧</value>
-  </data>
+
 </root>

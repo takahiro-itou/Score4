@@ -766,19 +766,6 @@
     <value>&amp;Refresh</value>
   </data>
 
-  <data name="&gt;&gt;mnuScoreSettings.Name" xml:space="preserve">
-    <value>mnuScoreSettings</value>
-  </data>
-  <data name="&gt;&gt;mnuScoreSettings.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="mnuScoreSettings.Size" type="System.Drawing.Size, System.Drawing">
-    <value>145, 22</value>
-  </data>
-  <data name="mnuScoreSettings.Text" xml:space="preserve">
-    <value>&amp;Settings ...</value>
-  </data>
-
   <data name="&gt;&gt;mnuScoreSep0.Name" xml:space="preserve">
     <value>mnuScoreSep0</value>
   </data>
@@ -797,6 +784,19 @@
   </data>
   <data name="mnuScoreSep1.Size" type="System.Drawing.Size, System.Drawing">
     <value>142, 6</value>
+  </data>
+
+  <data name="&gt;&gt;mnuScoreSettings.Name" xml:space="preserve">
+    <value>mnuScoreSettings</value>
+  </data>
+  <data name="&gt;&gt;mnuScoreSettings.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="mnuScoreSettings.Size" type="System.Drawing.Size, System.Drawing">
+    <value>145, 22</value>
+  </data>
+  <data name="mnuScoreSettings.Text" xml:space="preserve">
+    <value>&amp;Settings ...</value>
   </data>
 
   <data name="&gt;&gt;mnvDate.Name" xml:space="preserve">
