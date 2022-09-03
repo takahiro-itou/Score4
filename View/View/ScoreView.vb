@@ -202,6 +202,8 @@ Public Sub displayTeamMagicTableToGrid(
                 numTeams, numShowCount, idxTeam,
                 bufShowIndex, .Rows(i), scoreInfo)
         Next i
+
+        .Visible = True
     End With
 
 End Sub
@@ -254,6 +256,8 @@ Public Sub displayWinsForBeatTableToGrid(
                 numTeams, numShowCount, idxTeam,
                 bufShowIndex, .Rows(i), scoreInfo)
         Next i
+
+        .Visible = True
     End With
 
 End Sub
