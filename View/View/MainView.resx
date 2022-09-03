@@ -213,6 +213,31 @@
     <value>0</value>
   </data>
 
+  <data name="&gt;&gt;grpScore.Name" xml:space="preserve">
+    <value>grpScore</value>
+  </data>
+  <data name="&gt;&gt;grpScore.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;grpScore.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;grpScore.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="grpScore.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Bottom, Left, Right</value>
+  </data>
+  <data name="grpScore.Location" type="System.Drawing.Point, System.Drawing">
+    <value>24, 56</value>
+  </data>
+  <data name="grpScore.Size" type="System.Drawing.Size, System.Drawing">
+    <value>824, 557</value>
+  </data>
+  <data name="grpScore.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+
   <data name="&gt;&gt;lblDate.Name" xml:space="preserve">
     <value>lblDate</value>
   </data>
@@ -439,9 +464,6 @@
   <metadata name="dlgFont.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>298, 17</value>
   </metadata>
-  <data name="grpScore.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Bottom, Left, Right</value>
-  </data>
   <data name="optShowWins.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
@@ -618,27 +640,6 @@
   </data>
   <data name="colRank.Width" type="System.Int32, mscorlib">
     <value>60</value>
-  </data>
-  <data name="grpScore.Location" type="System.Drawing.Point, System.Drawing">
-    <value>24, 56</value>
-  </data>
-  <data name="grpScore.Size" type="System.Drawing.Size, System.Drawing">
-    <value>824, 557</value>
-  </data>
-  <data name="grpScore.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;grpScore.Name" xml:space="preserve">
-    <value>grpScore</value>
-  </data>
-  <data name="&gt;&gt;grpScore.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;grpScore.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;grpScore.ZOrder" xml:space="preserve">
-    <value>0</value>
   </data>
   <data name="tabLeague.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left, Right</value>
