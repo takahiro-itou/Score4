@@ -141,6 +141,31 @@
     <value>Score and Ranking</value>
   </data>
 
+  <data name="&gt;&gt;chkSchedule.Name" xml:space="preserve">
+    <value>chkSchedule</value>
+  </data>
+  <data name="&gt;&gt;chkSchedule.Parent" xml:space="preserve">
+    <value>grpScore</value>
+  </data>
+  <data name="&gt;&gt;chkSchedule.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;chkSchedule.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="chkSchedule.Location" type="System.Drawing.Point, System.Drawing">
+    <value>15, 280</value>
+  </data>
+  <data name="chkSchedule.Size" type="System.Drawing.Size, System.Drawing">
+    <value>192, 16</value>
+  </data>
+  <data name="chkSchedule.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="chkSchedule.Text" xml:space="preserve">
+    <value>Count "On &amp;Schedule"</value>
+  </data>
+
   <metadata name="mnuMain.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
@@ -467,30 +492,6 @@
   </data>
   <data name="&gt;&gt;optShowRest.ZOrder" xml:space="preserve">
     <value>4</value>
-  </data>
-  <data name="chkSchedule.Location" type="System.Drawing.Point, System.Drawing">
-    <value>15, 280</value>
-  </data>
-  <data name="chkSchedule.Size" type="System.Drawing.Size, System.Drawing">
-    <value>192, 16</value>
-  </data>
-  <data name="chkSchedule.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
-  </data>
-  <data name="chkSchedule.Text" xml:space="preserve">
-    <value>Count "On &amp;Schedule"</value>
-  </data>
-  <data name="&gt;&gt;chkSchedule.Name" xml:space="preserve">
-    <value>chkSchedule</value>
-  </data>
-  <data name="&gt;&gt;chkSchedule.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;chkSchedule.Parent" xml:space="preserve">
-    <value>grpScore</value>
-  </data>
-  <data name="&gt;&gt;chkSchedule.ZOrder" xml:space="preserve">
-    <value>5</value>
   </data>
   <data name="mnvDate.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
