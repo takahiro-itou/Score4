@@ -166,38 +166,28 @@ Partial Class EditForm
         ' fraView
         '
         resources.ApplyResources(Me.fraView, "fraView")
-        With Me.fraView
-            With .Controls
-                .Add(Me.Label5)
-                .Add(Me.mnvEdit)
-                .Add(Me.lblDate)
-            End With
-            .Name = "fraView"
-            .TabStop = False
-        End With
+        Me.fraView.Controls.Add(Me.Label5)
+        Me.fraView.Controls.Add(Me.mnvEdit)
+        Me.fraView.Controls.Add(Me.lblDate)
+        Me.fraView.Name = "fraView"
+        Me.fraView.TabStop = False
         '
         ' Label5
         '
         resources.ApplyResources(Me.Label5, "Label5")
-        With Me.Label5
-            .BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-            .Name = "Label5"
-        End With
+        Me.Label5.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.Label5.Name = "Label5"
         '
         ' mnvEdit
         '
         resources.ApplyResources(Me.mnvEdit, "mnvEdit")
-        With Me.mnvEdit
-            .Name = "mnvEdit"
-        End With
+        Me.mnvEdit.Name = "mnvEdit"
         '
         ' lblDate
         '
         resources.ApplyResources(Me.lblDate, "lblDate")
-        With Me.lblDate
-            .BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-            .Name = "lblDate"
-        End With
+        Me.lblDate.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.lblDate.Name = "lblDate"
 
         '
         'EditForm
@@ -206,14 +196,12 @@ Partial Class EditForm
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None
         Me.CancelButton = Me.btnCancel
 
-        With Me.Controls
-            .Add(Me.btnOK)
-            .Add(Me.btnApply)
-            .Add(Me.btnCancel)
-            .Add(Me.dgvRecord)
-            .Add(Me.fraInput)
-            .Add(Me.fraView)
-        End With
+        Me.Controls.Add(Me.btnOK)
+        Me.Controls.Add(Me.btnApply)
+        Me.Controls.Add(Me.btnCancel)
+        Me.Controls.Add(Me.dgvRecord)
+        Me.Controls.Add(Me.fraInput)
+        Me.Controls.Add(Me.fraView)
         Me.Name = "EditForm"
 
         CType(Me.dgvRecord, System.ComponentModel.ISupportInitialize).EndInit()
