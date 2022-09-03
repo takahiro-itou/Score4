@@ -166,6 +166,31 @@
     <value>Count "On &amp;Schedule"</value>
   </data>
 
+  <data name="&gt;&gt;grdExtra.Name" xml:space="preserve">
+    <value>grdExtra</value>
+  </data>
+  <data name="&gt;&gt;grdExtra.Parent" xml:space="preserve">
+    <value>grpScore</value>
+  </data>
+  <data name="&gt;&gt;grdExtra.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridView, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;grdExtra.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="grdExtra.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Left, Right</value>
+  </data>
+  <data name="grdExtra.Location" type="System.Drawing.Point, System.Drawing">
+    <value>15, 306</value>
+  </data>
+  <data name="grdExtra.Size" type="System.Drawing.Size, System.Drawing">
+    <value>797, 240</value>
+  </data>
+  <data name="grdExtra.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+
   <metadata name="mnuMain.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
@@ -393,30 +418,6 @@
   </data>
   <data name="&gt;&gt;lblDate.ZOrder" xml:space="preserve">
     <value>0</value>
-  </data>
-  <data name="grdExtra.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Bottom, Left, Right</value>
-  </data>
-  <data name="grdExtra.Location" type="System.Drawing.Point, System.Drawing">
-    <value>15, 306</value>
-  </data>
-  <data name="grdExtra.Size" type="System.Drawing.Size, System.Drawing">
-    <value>797, 240</value>
-  </data>
-  <data name="grdExtra.TabIndex" type="System.Int32, mscorlib">
-    <value>6</value>
-  </data>
-  <data name="&gt;&gt;grdExtra.Name" xml:space="preserve">
-    <value>grdExtra</value>
-  </data>
-  <data name="&gt;&gt;grdExtra.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridView, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;grdExtra.Parent" xml:space="preserve">
-    <value>grpScore</value>
-  </data>
-  <data name="&gt;&gt;grdExtra.ZOrder" xml:space="preserve">
-    <value>1</value>
   </data>
   <data name="optShowWins.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
