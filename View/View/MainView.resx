@@ -373,6 +373,100 @@
     <value>149, 6</value>
   </data>
 
+  <data name="&gt;&gt;mnuMagic.Name" xml:space="preserve">
+    <value>mnuMagic</value>
+  </data>
+  <data name="&gt;&gt;mnuMagic.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="mnuMagic.Size" type="System.Drawing.Size, System.Drawing">
+    <value>47, 20</value>
+  </data>
+  <data name="mnuMagic.Text" xml:space="preserve">
+    <value>&amp;Magic</value>
+  </data>
+
+  <data name="&gt;&gt;mnuMagicEasy.Name" xml:space="preserve">
+    <value>mnuMagicEasy</value>
+  </data>
+  <data name="&gt;&gt;mnuMagicEasy.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="mnuMagicEasy.Size" type="System.Drawing.Size, System.Drawing">
+    <value>190, 22</value>
+  </data>
+  <data name="mnuMagicEasy.Text" xml:space="preserve">
+    <value>&amp;Easy Calc Mode</value>
+  </data>
+
+  <data name="&gt;&gt;mnuMagicLine.Name" xml:space="preserve">
+    <value>mnuMagicLine</value>
+  </data>
+  <data name="&gt;&gt;mnuMagicLine.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="mnuMagicLine.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
+    <value>Ctrl+F7</value>
+  </data>
+  <data name="mnuMagicLine.Size" type="System.Drawing.Size, System.Drawing">
+    <value>190, 22</value>
+  </data>
+  <data name="mnuMagicLine.Text" xml:space="preserve">
+    <value>Show &amp;Details ...</value>
+  </data>
+
+  <data name="&gt;&gt;mnuMagicPlayoff.Name" xml:space="preserve">
+    <value>mnuMagicPlayoff</value>
+  </data>
+  <data name="&gt;&gt;mnuMagicPlayoff.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="mnuMagicPlayoff.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
+    <value>F8</value>
+  </data>
+  <data name="mnuMagicPlayoff.Size" type="System.Drawing.Size, System.Drawing">
+    <value>190, 22</value>
+  </data>
+  <data name="mnuMagicPlayoff.Text" xml:space="preserve">
+    <value>&amp;Playoff Magic</value>
+  </data>
+
+  <data name="&gt;&gt;mnuMagicSep0.Name" xml:space="preserve">
+    <value>mnuMagicSep0</value>
+  </data>
+  <data name="&gt;&gt;mnuMagicSep0.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="mnuMagicSep0.Size" type="System.Drawing.Size, System.Drawing">
+    <value>187, 6</value>
+  </data>
+
+  <data name="&gt;&gt;mnuMagicSep1.Name" xml:space="preserve">
+    <value>mnuMagicSep1</value>
+  </data>
+  <data name="&gt;&gt;mnuMagicSep1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="mnuMagicSep1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>187, 6</value>
+  </data>
+
+  <data name="&gt;&gt;mnuMagicVictory.Name" xml:space="preserve">
+    <value>mnuMagicVictory</value>
+  </data>
+  <data name="&gt;&gt;mnuMagicVictory.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="mnuMagicVictory.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
+    <value>F7</value>
+  </data>
+  <data name="mnuMagicVictory.Size" type="System.Drawing.Size, System.Drawing">
+    <value>190, 22</value>
+  </data>
+  <data name="mnuMagicVictory.Text" xml:space="preserve">
+    <value>&amp;Victory Magic</value>
+  </data>
+
   <metadata name="mnuMain.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
@@ -427,51 +521,6 @@
   </data>
   <data name="mnuScore.Text" xml:space="preserve">
     <value>&amp;Score</value>
-  </data>
-  <data name="mnuMagicVictory.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
-    <value>F7</value>
-  </data>
-  <data name="mnuMagicVictory.Size" type="System.Drawing.Size, System.Drawing">
-    <value>190, 22</value>
-  </data>
-  <data name="mnuMagicVictory.Text" xml:space="preserve">
-    <value>&amp;Victory Magic</value>
-  </data>
-  <data name="mnuMagicPlayoff.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
-    <value>F8</value>
-  </data>
-  <data name="mnuMagicPlayoff.Size" type="System.Drawing.Size, System.Drawing">
-    <value>190, 22</value>
-  </data>
-  <data name="mnuMagicPlayoff.Text" xml:space="preserve">
-    <value>&amp;Playoff Magic</value>
-  </data>
-  <data name="mnuMagicSep0.Size" type="System.Drawing.Size, System.Drawing">
-    <value>187, 6</value>
-  </data>
-  <data name="mnuMagicEasy.Size" type="System.Drawing.Size, System.Drawing">
-    <value>190, 22</value>
-  </data>
-  <data name="mnuMagicEasy.Text" xml:space="preserve">
-    <value>&amp;Easy Calc Mode</value>
-  </data>
-  <data name="mnuMagicSep1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>187, 6</value>
-  </data>
-  <data name="mnuMagicLine.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
-    <value>Ctrl+F7</value>
-  </data>
-  <data name="mnuMagicLine.Size" type="System.Drawing.Size, System.Drawing">
-    <value>190, 22</value>
-  </data>
-  <data name="mnuMagicLine.Text" xml:space="preserve">
-    <value>Show &amp;Details ...</value>
-  </data>
-  <data name="mnuMagic.Size" type="System.Drawing.Size, System.Drawing">
-    <value>47, 20</value>
-  </data>
-  <data name="mnuMagic.Text" xml:space="preserve">
-    <value>&amp;Magic</value>
   </data>
   <data name="mnuOptionsFont.Size" type="System.Drawing.Size, System.Drawing">
     <value>103, 22</value>
@@ -766,48 +815,6 @@
     <value>mnuScoreRefresh</value>
   </data>
   <data name="&gt;&gt;mnuScoreRefresh.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;mnuMagic.Name" xml:space="preserve">
-    <value>mnuMagic</value>
-  </data>
-  <data name="&gt;&gt;mnuMagic.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;mnuMagicVictory.Name" xml:space="preserve">
-    <value>mnuMagicVictory</value>
-  </data>
-  <data name="&gt;&gt;mnuMagicVictory.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;mnuMagicPlayoff.Name" xml:space="preserve">
-    <value>mnuMagicPlayoff</value>
-  </data>
-  <data name="&gt;&gt;mnuMagicPlayoff.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;mnuMagicSep0.Name" xml:space="preserve">
-    <value>mnuMagicSep0</value>
-  </data>
-  <data name="&gt;&gt;mnuMagicSep0.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;mnuMagicEasy.Name" xml:space="preserve">
-    <value>mnuMagicEasy</value>
-  </data>
-  <data name="&gt;&gt;mnuMagicEasy.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;mnuMagicSep1.Name" xml:space="preserve">
-    <value>mnuMagicSep1</value>
-  </data>
-  <data name="&gt;&gt;mnuMagicSep1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;mnuMagicLine.Name" xml:space="preserve">
-    <value>mnuMagicLine</value>
-  </data>
-  <data name="&gt;&gt;mnuMagicLine.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;mnuOptions.Name" xml:space="preserve">
