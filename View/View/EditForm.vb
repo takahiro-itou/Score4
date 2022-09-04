@@ -66,7 +66,9 @@ Private Sub dgvRecord_CellClick( _
         sender As Object, e As DataGridViewCellEventArgs) _
         Handles dgvRecord.CellClick
 
-    m_selectedRecord = dgvRecord.RowIndex - 2
+    For Each r As DataGridViewRow In dgvRecord.SelectedRows
+        m_selectedRecord = r.Index - 1
+    Next r
 
 End Sub
 
