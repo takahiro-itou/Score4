@@ -24,11 +24,11 @@ Public Sub setupSettings(
     With Me.m_gameRecord
         numTeams = .getNumTeams()
         cmbTeamHome.Items.Clear()
-        cmbTeamVisitor.Items.Clear()
+        cmbTeamAway.Items.Clear()
         For i = 0 To numTeams - 1
             strName = .teamInfo(i).teamName
             cmbTeamHome.Items.Add(strName)
-            cmbTeamVisitor.Items.Add(strName)
+            cmbTeamAway.Items.Add(strName)
         Next i
     End With
 
@@ -79,9 +79,9 @@ Private Sub dgvRecord_CellClick( _
             cmbFlags.SelectedIndex = Score4Wrapper.RecordFlag.GAME_RESULT
         End If
         cmbTeamHome.SelectedIndex = 0
-        cmbTeamVisitor.SelectedIndex = 1
+        cmbTeamAway.SelectedIndex = 1
         updScoreHome.Value = 0
-        updScoreVisitor.Value = 0
+        updScoreAway.Value = 0
     Else
         idxRec = m_showIndex(m_selectedRecord)
         btnEdit.Text = "Edit"
@@ -90,9 +90,9 @@ Private Sub dgvRecord_CellClick( _
         With gameRecord
             cmbFlags.SelectedIndex = .eGameFlags
             cmbTeamHome.SelectedIndex = .homeTeam
-            cmbTeamVisitor.SelectedIndex = .awayTeam
+            cmbTeamAway.SelectedIndex = .awayTeam
             updScoreHome.Value = .homeScore
-            updScoreVisitor.Value = .awayScore
+            updScoreAway.Value = .awayScore
         End With
     End If
 

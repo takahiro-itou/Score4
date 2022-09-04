@@ -31,8 +31,8 @@ Partial Class EditForm
         Me.cmbTeamHome = New System.Windows.Forms.ComboBox()
         Me.updScoreHome = New System.Windows.Forms.NumericUpDown()
         Me.Label4 = New System.Windows.Forms.Label()
-        Me.cmbTeamVisitor = New System.Windows.Forms.ComboBox()
-        Me.updScoreVisitor = New System.Windows.Forms.NumericUpDown()
+        Me.cmbTeamAway = New System.Windows.Forms.ComboBox()
+        Me.updScoreAway = New System.Windows.Forms.NumericUpDown()
         Me.cmbFlags = New System.Windows.Forms.ComboBox()
         Me.btnEdit = New System.Windows.Forms.Button()
         Me.btnDelete = New System.Windows.Forms.Button()
@@ -44,7 +44,7 @@ Partial Class EditForm
         CType(Me.dgvRecord, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.fraInput.SuspendLayout()
         CType(Me.updScoreHome, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.updScoreVisitor, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.updScoreAway, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.fraView.SuspendLayout()
         Me.SuspendLayout()
 
@@ -93,8 +93,8 @@ Partial Class EditForm
         Me.fraInput.Controls.Add(Me.cmbTeamHome)
         Me.fraInput.Controls.Add(Me.updScoreHome)
         Me.fraInput.Controls.Add(Me.Label4)
-        Me.fraInput.Controls.Add(Me.cmbTeamVisitor)
-        Me.fraInput.Controls.Add(Me.updScoreVisitor)
+        Me.fraInput.Controls.Add(Me.cmbTeamAway)
+        Me.fraInput.Controls.Add(Me.updScoreAway)
         Me.fraInput.Controls.Add(Me.cmbFlags)
         Me.fraInput.Controls.Add(Me.btnEdit)
         Me.fraInput.Controls.Add(Me.btnDelete)
@@ -138,18 +138,18 @@ Partial Class EditForm
         Me.Label4.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
         Me.Label4.Name = "Label4"
         '
-        ' cmbTeamVisitor
+        ' cmbTeamAway
         '
-        resources.ApplyResources(Me.cmbTeamVisitor, "cmbTeamVisitor")
-        Me.cmbTeamVisitor.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cmbTeamVisitor.FormattingEnabled = True
-        Me.cmbTeamVisitor.Name = "cmbTeamVisitor"
+        resources.ApplyResources(Me.cmbTeamAway, "cmbTeamAway")
+        Me.cmbTeamAway.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cmbTeamAway.FormattingEnabled = True
+        Me.cmbTeamAway.Name = "cmbTeamAway"
         '
-        ' updScoreVisitor
+        ' updScoreAway
         '
-        resources.ApplyResources(Me.updScoreVisitor, "updScoreVisitor")
-        Me.updScoreVisitor.Maximum = New Decimal(New Integer() {999, 0, 0, 0})
-        Me.updScoreVisitor.Name = "updScoreVisitor"
+        resources.ApplyResources(Me.updScoreAway, "updScoreAway")
+        Me.updScoreAway.Maximum = New Decimal(New Integer() {999, 0, 0, 0})
+        Me.updScoreAway.Name = "updScoreAway"
         '
         ' cmbFlags
         '
@@ -216,7 +216,7 @@ Partial Class EditForm
         CType(Me.dgvRecord, System.ComponentModel.ISupportInitialize).EndInit()
         Me.fraInput.ResumeLayout(False)
         CType(Me.updScoreHome, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.updScoreVisitor, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.updScoreAway, System.ComponentModel.ISupportInitialize).EndInit()
         Me.fraView.ResumeLayout(False)
         Me.ResumeLayout(False)
     End Sub
@@ -232,8 +232,8 @@ Partial Class EditForm
     Friend WithEvents cmbTeamHome As ComboBox
     Friend WithEvents updScoreHome As NumericUpDown
     Friend WithEvents Label4 As Label
-    Friend WithEvents cmbTeamVisitor As ComboBox
-    Friend WithEvents updScoreVisitor As NumericUpDown
+    Friend WithEvents cmbTeamAway As ComboBox
+    Friend WithEvents updScoreAway As NumericUpDown
     Friend WithEvents cmbFlags As ComboBox
     Friend WithEvents btnEdit As Button
     Friend WithEvents btnDelete As Button

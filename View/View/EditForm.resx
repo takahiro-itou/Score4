@@ -372,53 +372,53 @@ xo  <data name="fraInput.TabIndex" type="System.Int32, mscorlib">
     <value>MiddleRight</value>
   </data>
 
-  <data name="&gt;&gt;cmbTeamVisitor.Name" xml:space="preserve">
-    <value>cmbTeamVisitor</value>
+  <data name="&gt;&gt;cmbTeamAway.Name" xml:space="preserve">
+    <value>cmbTeamAway</value>
   </data>
-  <data name="&gt;&gt;cmbTeamVisitor.Parent" xml:space="preserve">
+  <data name="&gt;&gt;cmbTeamAway.Parent" xml:space="preserve">
     <value>fraInput</value>
   </data>
-  <data name="&gt;&gt;cmbTeamVisitor.Type" xml:space="preserve">
+  <data name="&gt;&gt;cmbTeamAway.Type" xml:space="preserve">
     <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;cmbTeamVisitor.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;cmbTeamAway.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
-  <data name="cmbTeamVisitor.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="cmbTeamAway.Location" type="System.Drawing.Point, System.Drawing">
     <value>80, 72</value>
   </data>
-  <data name="cmbTeamVisitor.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="cmbTeamAway.Size" type="System.Drawing.Size, System.Drawing">
     <value>160, 20</value>
   </data>
-  <data name="cmbTeamVisitor.TabIndex" type="System.Int32, mscorlib">
+  <data name="cmbTeamAway.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
   </data>
 
-  <data name="&gt;&gt;updScoreVisitor.Name" xml:space="preserve">
-    <value>updScoreVisitor</value>
+  <data name="&gt;&gt;updScoreAway.Name" xml:space="preserve">
+    <value>updScoreAway</value>
   </data>
-  <data name="&gt;&gt;updScoreVisitor.Parent" xml:space="preserve">
+  <data name="&gt;&gt;updScoreAway.Parent" xml:space="preserve">
     <value>fraInput</value>
   </data>
-  <data name="&gt;&gt;updScoreVisitor.Type" xml:space="preserve">
+  <data name="&gt;&gt;updScoreAway.Type" xml:space="preserve">
     <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;updScoreVisitor.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;updScoreAway.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
-  <data name="updScoreVisitor.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="updScoreAway.Location" type="System.Drawing.Point, System.Drawing">
     <value>248, 72</value>
   </data>
-  <data name="updScoreVisitor.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+  <data name="updScoreAway.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 2, 3, 2</value>
   </data>
-  <data name="updScoreVisitor.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="updScoreAway.Size" type="System.Drawing.Size, System.Drawing">
     <value>80, 19</value>
   </data>
-  <data name="updScoreVisitor.TabIndex" type="System.Int32, mscorlib">
+  <data name="updScoreAway.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
   </data>
-  <data name="updScoreVisitor.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
+  <data name="updScoreAway.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
     <value>Right</value>
   </data>
 
