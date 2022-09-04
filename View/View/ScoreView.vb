@@ -18,8 +18,12 @@ Public Sub displayRecordsToGrid(
     Dim numShow As Integer
     Dim numTeam As Integer
     Dim teamIdxHome As Integer, teamIdxAway As Integer
+    Dim scoreHome As Integer, scoreAway As Integer
     Dim recordIndex() As Integer
     Dim teamNameHome As String, teamNameAway As String
+    Dim strInfo As String, flagText As String
+    Dim gameRecord As Score4Wrapper.Common.GameResult
+    Dim gameFlags As Score4Wrapper.RecordFlag
 
     Redim recordIndex(1)
     makeRecordEditColumnsHeader(objView)
@@ -31,17 +35,48 @@ Public Sub displayRecordsToGrid(
 
         For i = 0 To 1
             j = i 'recordIndex(i)
-            teamIdxHome = scoreData.getGameRecord(j).homeTeam
+            gameRecord = scoreData.getGameRecord(j)
+            With gameRecord
+                teamIdxHome = .homeTeam
+                teamIdxAway = .visitorTeam
+                scoreHome = .homeScore
+                scoreAway = .visitorScore
+            End With
 
-            If (teamIdxHome >= 0) And (teamIdxHome < numTeam) Then
-                teamNameHome = scoreData.teamInfo(teamIdxHome).teamName
-            Else
-                teamNameHome = "???"
-            End If
+            With scoreData
+                If (teamIdxHome >= 0) And (teamIdxHome < numTeam) Then
+                    teamNameHome = .teamInfo(teamIdxHome).teamName
+                Else
+                    teamNameHome = "???"
+                End If
+
+                If (teamIdxAway >= 0) And (teamIdxAway < numTeam) Then
+                    teamNameAway = .teamInfo(teamIdxAway).teamName
+                Else
+                    teamNameHome = "???"
+                End If
+            End With
+
+            Select Case gameFlags
+            Case Score4Wrapper.RecordFlag.GAME_SCHEDULE:
+                flagText = "SCHEDULE"
+            Case Score4Wrapper.RecordFlag.GAME_CANCEL:
+                flagText = "CANCEL"
+            Case Score4Wrapper.RecordFlag.GAME_RESULT:
+                flagText = "RESULT"
+            Case Else
+                flagText = ""
+            End Select
+            strInfo = gameFlags & ":" & flagText
 
             .Rows.Add(
                 j,
-                teamNameHome
+                teamNameHome,
+                scoreHome,
+                "-",
+                scoreAway,
+                teamNameAway,
+                strInfo
             )
         Next i
 
