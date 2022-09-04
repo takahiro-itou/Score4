@@ -12,6 +12,7 @@ End Enum
 Public Sub displayRecordsToGrid(
         ByVal startDate As System.DateTime,
         ByRef scoreData As Score4Wrapper.Document.ScoreDocument,
+        ByVal cellFont As System.Drawing.Font,
         ByRef objView As System.Windows.Forms.DataGridView)
 
     Dim i As Integer, j As Integer
@@ -26,7 +27,7 @@ Public Sub displayRecordsToGrid(
     Dim gameFlags As Score4Wrapper.RecordFlag
 
     Redim recordIndex(1)
-    makeRecordEditColumnsHeader(objView)
+    makeRecordEditColumnsHeader(cellFont, objView)
     numTeam = scoreData.getNumTeams()
     numShow = scoreData.findGameRecords(startDate, -1, -1, recordIndex)
 
@@ -369,6 +370,7 @@ End Function
 ''    グリッドビューのヘッダ列を用意する。
 ''========================================================================
 Private Sub makeRecordEditColumnsHeader(
+        ByVal cellFont As System.Drawing.Font,
         ByRef objView As System.Windows.Forms.DataGridView)
 
     Dim alignCenter As DataGridViewContentAlignment
@@ -394,6 +396,7 @@ Private Sub makeRecordEditColumnsHeader(
             textColumn = makeGridViewColumn("index", "No.")
             With textColumn
                 .DefaultCellStyle.Alignment = alignRight
+                .DefaultCellStyle.Font = cellFont
                 .Width = COL_WIDTH_INDEX
             End With
             .Add(textColumn)
@@ -401,6 +404,7 @@ Private Sub makeRecordEditColumnsHeader(
             textColumn = makeGridViewColumn("homeTeam", "Home")
             With textColumn
                 .DefaultCellStyle.Alignment = alignRight
+                .DefaultCellStyle.Font = cellFont
                 .Width = COL_WIDTH_TEAM
             End With
             .Add(textColumn)
@@ -408,6 +412,7 @@ Private Sub makeRecordEditColumnsHeader(
             textColumn = makeGridViewColumn("homeScore", "")
             With textColumn
                 .DefaultCellStyle.Alignment = alignRight
+                .DefaultCellStyle.Font = cellFont
                 .Width = COL_WIDTH_SCORE
             End With
             .Add(textColumn)
@@ -415,6 +420,7 @@ Private Sub makeRecordEditColumnsHeader(
             textColumn = makeGridViewColumn("vs", "vs")
             With textColumn
                 .DefaultCellStyle.Alignment = alignCenter
+                .DefaultCellStyle.Font = cellFont
                 .Width = COL_WIDTH_SPACE
             End With
             .Add(textColumn)
@@ -422,6 +428,7 @@ Private Sub makeRecordEditColumnsHeader(
 
             With textColumn
                 .DefaultCellStyle.Alignment = alignLeft
+                .DefaultCellStyle.Font = cellFont
                 .Width = COL_WIDTH_SCORE
             End With
             .Add(textColumn)
@@ -429,6 +436,7 @@ Private Sub makeRecordEditColumnsHeader(
             textColumn = makeGridViewColumn("arayTeam", "Visitor")
             With textColumn
                 .DefaultCellStyle.Alignment = alignLeft
+                .DefaultCellStyle.Font = cellFont
                 .Width = COL_WIDTH_TEAM
             End With
             .Add(textColumn)
@@ -436,6 +444,7 @@ Private Sub makeRecordEditColumnsHeader(
             textColumn = makeGridViewColumn("status", "Info")
             With textColumn
                 .DefaultCellStyle.Alignment = alignRight
+                .DefaultCellStyle.Font = cellFont
                 .Width = COL_WIDTH_STATE
             End With
             .Add(textColumn)
