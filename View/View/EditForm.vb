@@ -45,9 +45,16 @@ Public Sub setupSettings(
     mnvEdit.SelectionStart = startupDate
 End Sub
 
+''========================================================================
+''    レコードテーブルの表示を更新する。
+''========================================================================
 Private Sub updateRecordTable(ByVal targetDate As System.DateTime)
-    Me.m_currentDate = targetDate
+
+    m_currentDate = targetDate
     lblDate.Text = targetDate
+
+    displayRecordsToGrid(targetDate, m_gameRecord, dgvRecord)
+
 End Sub
 
 Private Sub mnvEdit_DateChanged(sender As Object, e As DateRangeEventArgs) _
