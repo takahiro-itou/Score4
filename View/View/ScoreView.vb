@@ -420,14 +420,14 @@ Private Sub makeRecordEditColumnsHeader(
             textColumn = makeGridViewColumn("awayScore", "")
 
             With textColumn
-                .DefaultCellStyle.Alignment = alignRight
+                .DefaultCellStyle.Alignment = alignLeft
                 .Width = COL_WIDTH_SCORE
             End With
             .Add(textColumn)
 
             textColumn = makeGridViewColumn("arayTeam", "Visitor")
             With textColumn
-                .DefaultCellStyle.Alignment = alignRight
+                .DefaultCellStyle.Alignment = alignLeft
                 .Width = COL_WIDTH_TEAM
             End With
             .Add(textColumn)
