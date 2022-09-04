@@ -37,6 +37,7 @@ Public Sub displayRecordsToGrid(
             j = i 'recordIndex(i)
             gameRecord = scoreData.getGameRecord(j)
             With gameRecord
+                gameFlags = .eGameFlags
                 teamIdxHome = .homeTeam
                 teamIdxAway = .visitorTeam
                 scoreHome = .homeScore
