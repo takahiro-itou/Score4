@@ -90,7 +90,7 @@ Private Sub dgvRecord_CellClick( _
         With gameRecord
             cmbFlags.SelectedIndex = .eGameFlags
             cmbTeamHome.SelectedIndex = .homeTeam
-            cmbTeamVisitor.SelectedIndex = .visitorTeam
+            cmbTeamVisitor.SelectedIndex = .awayTeam
             updScoreHome.Value = .homeScore
             updScoreVisitor.Value = .visitorScore
         End With

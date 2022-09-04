@@ -43,7 +43,7 @@ Public Sub displayRecordsToGrid(
             With gameRecord
                 gameFlags = .eGameFlags
                 teamIdxHome = .homeTeam
-                teamIdxAway = .visitorTeam
+                teamIdxAway = .awayTeam
                 scoreHome = .homeScore
                 scoreAway = .visitorScore
             End With
