@@ -13,20 +13,20 @@ Public Sub displayRecordsToGrid(
         ByVal startDate As System.DateTime,
         ByRef scoreData As Score4Wrapper.Document.ScoreDocument,
         ByVal cellFont As System.Drawing.Font,
-        ByRef objView As System.Windows.Forms.DataGridView)
+        ByRef objView As System.Windows.Forms.DataGridView,
+        ByRef recordIndex() As Integer)
 
     Dim i As Integer, j As Integer
     Dim numShow As Integer
     Dim numTeam As Integer
     Dim teamIdxHome As Integer, teamIdxAway As Integer
     Dim scoreHome As Integer, scoreAway As Integer
-    Dim recordIndex() As Integer
     Dim teamNameHome As String, teamNameAway As String
     Dim strInfo As String, flagText As String
     Dim gameRecord As Score4Wrapper.Common.GameResult
     Dim gameFlags As Score4Wrapper.RecordFlag
 
-    Redim recordIndex(1)
+    ReDim recordIndex(0)
     makeRecordEditColumnsHeader(cellFont, objView)
     numTeam = scoreData.getNumTeams()
     numShow = scoreData.findGameRecords(startDate, -1, -1, recordIndex)

@@ -53,7 +53,8 @@ Private Sub updateRecordTable(ByVal targetDate As System.DateTime)
     m_currentDate = targetDate
     lblDate.Text = targetDate
 
-    displayRecordsToGrid(targetDate, m_gameRecord, Me.Font, dgvRecord)
+    displayRecordsToGrid(
+        targetDate, m_gameRecord, Me.Font, dgvRecord, m_showIndex)
 
 End Sub
 
