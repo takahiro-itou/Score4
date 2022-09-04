@@ -57,6 +57,18 @@ Private Sub updateRecordTable(ByVal targetDate As System.DateTime)
 
 End Sub
 
+''========================================================================
+''    選択した行のデータを変更フレームに表示する。
+''========================================================================
+
+Private Sub dgvRecord_CellClick( _
+        sender As Object, e As DataGridViewCellEventArgs) _
+        Handles dgvRecord.CellClick
+
+    m_selectedRecord = dgvRecord.RowIndex - 2
+
+End Sub
+
 Private Sub mnvEdit_DateChanged(sender As Object, e As DateRangeEventArgs) _
         Handles mnvEdit.DateChanged
 
