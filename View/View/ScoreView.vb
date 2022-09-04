@@ -14,13 +14,39 @@ Public Sub displayRecordsToGrid(
         ByRef scoreData As Score4Wrapper.Document.ScoreDocument,
         ByRef objView As System.Windows.Forms.DataGridView)
 
-    Dim i As Integer
+    Dim i As Integer, j As Integer
     Dim numShow As Integer
+    Dim numTeam As Integer
+    Dim teamIdxHome As Integer, teamIdxAway As Integer
     Dim recordIndex() As Integer
+    Dim teamNameHome As String, teamNameAway As String
 
     Redim recordIndex(1)
     makeRecordEditColumnsHeader(objView)
+    numTeam = scoreData.getNumTeams()
     numShow = scoreData.findGameRecords(startDate, -1, -1, recordIndex)
+
+    With objView
+        .Rows.Clear()
+
+        For i = 0 To 1
+            j = i 'recordIndex(i)
+            teamIdxHome = scoreData.getGameRecord(j).homeTeam
+
+            If (teamIdxHome >= 0) And (teamIdxHome < numTeam) Then
+                teamNameHome = scoreData.teamInfo(teamIdxHome).teamName
+            Else
+                teamNameHome = "???"
+            End If
+
+            .Rows.Add(
+                j,
+                teamNameHome
+            )
+        Next i
+
+        .Visible = True
+    End With
 
 End Sub
 
@@ -304,6 +330,86 @@ Private Function makeGridViewColumn(
 End Function
 
 ''========================================================================
+''    グリッドビューのヘッダ列を用意する。
+''========================================================================
+Private Sub makeRecordEditColumnsHeader(
+        ByRef objView As System.Windows.Forms.DataGridView)
+
+    Dim alignCenter As DataGridViewContentAlignment
+    Dim alignLeft As DataGridViewContentAlignment
+    Dim alignRight As DataGridViewContentAlignment
+    Dim textColumn As DataGridViewTextBoxColumn
+
+    Const COL_WIDTH_INDEX As Integer = 32
+    Const COL_WIDTH_TEAM As Integer = 80
+    Const COL_WIDTH_SCORE As Integer = 40
+    Const COL_WIDTH_SPACE As Integer = 24
+    Const COL_WIDTH_STATE As Integer = 64
+
+    alignCenter = DataGridViewContentAlignment.MiddleCenter
+    alignLeft = DataGridViewContentAlignment.MiddleLeft
+    alignRight = DataGridViewContentAlignment.MiddleRight
+
+    With objView
+        .Rows.Clear()
+        With .Columns
+            .Clear()
+
+            textColumn = makeGridViewColumn("index", "No.")
+            With textColumn
+                .DefaultCellStyle.Alignment = alignRight
+                .Width = COL_WIDTH_INDEX
+            End With
+            .Add(textColumn)
+
+            textColumn = makeGridViewColumn("homeTeam", "Home")
+            With textColumn
+                .DefaultCellStyle.Alignment = alignRight
+                .Width = COL_WIDTH_TEAM
+            End With
+            .Add(textColumn)
+
+            textColumn = makeGridViewColumn("homeScore", "")
+            With textColumn
+                .DefaultCellStyle.Alignment = alignRight
+                .Width = COL_WIDTH_SCORE
+            End With
+            .Add(textColumn)
+
+            textColumn = makeGridViewColumn("vs", "vs")
+            With textColumn
+                .DefaultCellStyle.Alignment = alignCenter
+                .Width = COL_WIDTH_SPACE
+            End With
+            .Add(textColumn)
+            textColumn = makeGridViewColumn("awayScore", "")
+
+            With textColumn
+                .DefaultCellStyle.Alignment = alignRight
+                .Width = COL_WIDTH_SCORE
+            End With
+            .Add(textColumn)
+
+            textColumn = makeGridViewColumn("arayTeam", "Visitor")
+            With textColumn
+                .DefaultCellStyle.Alignment = alignRight
+                .Width = COL_WIDTH_TEAM
+            End With
+            .Add(textColumn)
+
+            textColumn = makeGridViewColumn("status", "Info")
+            With textColumn
+                .DefaultCellStyle.Alignment = alignRight
+                .Width = COL_WIDTH_STATE
+            End With
+            .Add(textColumn)
+
+        End With
+    End With
+
+End Sub
+
+''========================================================================
 ''    グリッドビューのヘッダ列にチーム名のリストをセットする。
 ''========================================================================
 Private Sub makeTeamListOnGridViewHeader(
@@ -400,86 +506,6 @@ Private Sub makeTeamListOnGridViewHeader(
             End With
             .Add(textColumn)
         End If
-    End With
-
-End Sub
-
-''========================================================================
-''    グリッドビューのヘッダ列を用意する。
-''========================================================================
-Private Sub makeRecordEditColumnsHeader(
-        ByRef objView As System.Windows.Forms.DataGridView)
-
-    Dim alignCenter As DataGridViewContentAlignment
-    Dim alignLeft As DataGridViewContentAlignment
-    Dim alignRight As DataGridViewContentAlignment
-    Dim textColumn As DataGridViewTextBoxColumn
-
-    Const COL_WIDTH_INDEX As Integer = 32
-    Const COL_WIDTH_TEAM As Integer = 64
-    Const COL_WIDTH_SCORE As Integer = 32
-    Const COL_WIDTH_SPACE As Integer = 16
-    Const COL_WIDTH_STATE As Integer = 96
-
-    alignCenter = DataGridViewContentAlignment.MiddleCenter
-    alignLeft = DataGridViewContentAlignment.MiddleLeft
-    alignRight = DataGridViewContentAlignment.MiddleRight
-
-    With objView
-        .Rows.Clear()
-        With .Columns
-            .Clear()
-
-            textColumn = makeGridViewColumn("index", "No.")
-            With textColumn
-                .DefaultCellStyle.Alignment = alignRight
-                .Width = COL_WIDTH_INDEX
-            End With
-            .Add(textColumn)
-
-            textColumn = makeGridViewColumn("homeTeam", "Home")
-            With textColumn
-                .DefaultCellStyle.Alignment = alignRight
-                .Width = COL_WIDTH_TEAM
-            End With
-            .Add(textColumn)
-
-            textColumn = makeGridViewColumn("homeScore", "")
-            With textColumn
-                .DefaultCellStyle.Alignment = alignRight
-                .Width = COL_WIDTH_SCORE
-            End With
-            .Add(textColumn)
-
-            textColumn = makeGridViewColumn("vs", "vs")
-            With textColumn
-                .DefaultCellStyle.Alignment = alignCenter
-                .Width = COL_WIDTH_SPACE
-            End With
-            .Add(textColumn)
-            textColumn = makeGridViewColumn("awayScore", "")
-
-            With textColumn
-                .DefaultCellStyle.Alignment = alignRight
-                .Width = COL_WIDTH_SCORE
-            End With
-            .Add(textColumn)
-
-            textColumn = makeGridViewColumn("arayTeam", "Visitor")
-            With textColumn
-                .DefaultCellStyle.Alignment = alignRight
-                .Width = COL_WIDTH_TEAM
-            End With
-            .Add(textColumn)
-
-            textColumn = makeGridViewColumn("status", "Info")
-            With textColumn
-                .DefaultCellStyle.Alignment = alignRight
-                .Width = COL_WIDTH_STATE
-            End With
-            .Add(textColumn)
-
-        End With
     End With
 
 End Sub
