@@ -81,6 +81,7 @@ Partial Class EditForm
         Me.dgvRecord.ReadOnly = True
         Me.dgvRecord.RowHeadersVisible = False
         Me.dgvRecord.RowTemplate.Height = 21
+        Me.dgvRecord.SelectionMode = DataGridViewSelectionMode.FullRowSelect
 
         '
         ' fraInput
