@@ -53,7 +53,7 @@ Public Sub displayRecordsToGrid(
                 If (teamIdxAway >= 0) And (teamIdxAway < numTeam) Then
                     teamNameAway = .teamInfo(teamIdxAway).teamName
                 Else
-                    teamNameHome = "???"
+                    teamNameAway = "???"
                 End If
             End With
 
