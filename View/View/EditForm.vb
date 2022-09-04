@@ -66,9 +66,35 @@ Private Sub dgvRecord_CellClick( _
         sender As Object, e As DataGridViewCellEventArgs) _
         Handles dgvRecord.CellClick
 
+    Dim idxRec As Integer
+    Dim gameRecord As Score4Wrapper.Common.GameResult
+
     For Each r As DataGridViewRow In dgvRecord.SelectedRows
         m_selectedRecord = r.Index - 1
     Next r
+    If (m_selectedRecord < 0) Then
+        ' 新規データの追加
+        btnEdit.Text= "Add"
+        If (cmbFlags.SelectedIndex < 0) Then
+            cmbFlags.SelectedIndex = Score4Wrapper.RecordFlag.GAME_RESULT
+        End If
+        cmbTeamHome.SelectedIndex = 0
+        cmbTeamVisitor.SelectedIndex = 1
+        updScoreHome.Value = 0
+        updScoreVisitor.Value = 0
+    Else
+        idxRec = m_showIndex(m_selectedRecord)
+        btnEdit.Text = "Edit"
+        gameRecord = m_gameRecord.getGameRecord(idxRec)
+
+        With gameRecord
+            cmbFlags.SelectedIndex = .eGameFlags
+            cmbTeamHome.SelectedIndex = .homeTeam
+            cmbTeamVisitor.SelectedIndex = .visitorTeam
+            updScoreHome.Value = .homeScore
+            updScoreVisitor.Value = .visitorScore
+        End With
+    End If
 
 End Sub
 
