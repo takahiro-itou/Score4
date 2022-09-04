@@ -34,6 +34,9 @@ Public Sub displayRecordsToGrid(
     With objView
         .Rows.Clear()
 
+        ' データ追加用に空行を挿入しておく
+        .Rows.Add("", "", "", "", "", "", "")
+
         For i = 0 To numShow - 1
             j = recordIndex(i)
             gameRecord = scoreData.getGameRecord(j)
