@@ -30,6 +30,12 @@ Public Sub displayRecordsToGrid(
     numTeam = scoreData.getNumTeams()
     numShow = scoreData.findGameRecords(startDate, -1, -1, recordIndex)
 
+    strInfo = " 検索結果 : " & numShow
+    For i = 0 To numShow - 1
+        strInfo = strInfo & "\r\n" & recordIndex(i)
+    Next i
+    MessageBox.Show(strInfo)
+
     With objView
         .Rows.Clear()
 
