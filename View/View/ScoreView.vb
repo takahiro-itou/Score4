@@ -33,8 +33,8 @@ Public Sub displayRecordsToGrid(
     With objView
         .Rows.Clear()
 
-        For i = 0 To 1
-            j = i 'recordIndex(i)
+        For i = 0 To numShow - 1
+            j = recordIndex(i)
             gameRecord = scoreData.getGameRecord(j)
             With gameRecord
                 gameFlags = .eGameFlags
