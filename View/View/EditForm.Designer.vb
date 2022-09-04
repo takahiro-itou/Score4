@@ -70,10 +70,17 @@ Partial Class EditForm
         ' dgvRecord
         '
         resources.ApplyResources(Me.dgvRecord, "dgvRecord")
+        Me.dgvRecord.AllowUserToAddRows = False
+        Me.dgvRecord.AllowUserToDeleteRows = False
+        Me.dgvRecord.AllowUserToResizeColumns = True
+        Me.dgvRecord.AllowUserToResizeRows = False
         Me.dgvRecord.ColumnHeadersHeightSizeMode = _
                 System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.dgvRecord.MultiSelect = False
         Me.dgvRecord.Name = "dgvRecord"
-        Me.dgvRecord.RowTemplate.Height = 25
+        Me.dgvRecord.ReadOnly = True
+        Me.dgvRecord.RowHeadersVisible = False
+        Me.dgvRecord.RowTemplate.Height = 21
 
         '
         ' fraInput

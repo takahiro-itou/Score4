@@ -249,7 +249,7 @@ Partial Class MainView
         '
         Me.grdExtra.AllowUserToAddRows = False
         Me.grdExtra.AllowUserToDeleteRows = False
-        Me.grdScore.AllowUserToResizeColumns = False
+        Me.grdScore.AllowUserToResizeColumns = True
         Me.grdScore.AllowUserToResizeRows = False
         resources.ApplyResources(Me.grdExtra, "grdExtra")
         Me.grdExtra.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
@@ -300,7 +300,7 @@ Partial Class MainView
         '
         Me.grdScore.AllowUserToAddRows = False
         Me.grdScore.AllowUserToDeleteRows = False
-        Me.grdExtra.AllowUserToResizeColumns = False
+        Me.grdExtra.AllowUserToResizeColumns = True
         Me.grdExtra.AllowUserToResizeRows = False
         Me.grdScore.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.grdScore.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.colTeam, Me.colTotal, Me.colWon, Me.colLost, Me.colDraw, Me.colDiff, Me.colPercent, Me.colMagic, Me.colRank})
