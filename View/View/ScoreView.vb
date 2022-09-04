@@ -45,7 +45,7 @@ Public Sub displayRecordsToGrid(
                 teamIdxHome = .homeTeam
                 teamIdxAway = .awayTeam
                 scoreHome = .homeScore
-                scoreAway = .visitorScore
+                scoreAway = .awayScore
             End With
 
             With scoreData

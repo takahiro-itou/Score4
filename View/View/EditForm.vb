@@ -92,7 +92,7 @@ Private Sub dgvRecord_CellClick( _
             cmbTeamHome.SelectedIndex = .homeTeam
             cmbTeamVisitor.SelectedIndex = .awayTeam
             updScoreHome.Value = .homeScore
-            updScoreVisitor.Value = .visitorScore
+            updScoreVisitor.Value = .awayScore
         End With
     End If
 
