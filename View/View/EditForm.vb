@@ -88,7 +88,7 @@ Private Sub btnDelete_Click(sender As Object, e As EventArgs) Handles _
         "Delete",
         MessageBoxButtons.YesNo, MessageBoxIcon.Question,
         MessageBoxDefaultButton.Button2)
-    If (msgAns <> vbYes) Then
+    If (msgAns <> DialogResult.Yes) Then
         Exit Sub
     End If
 
