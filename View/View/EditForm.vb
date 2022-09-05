@@ -59,9 +59,24 @@ Private Sub updateRecordTable(ByVal targetDate As System.DateTime)
 End Sub
 
 ''========================================================================
+''    「編集」ボタンのクリックイベントハンドラ。
+''========================================================================
+Private Sub btnEdit_Click(sender As Object, e As EventArgs) Handles _
+            btnEdit.Click
+
+End Sub
+
+''========================================================================
+''    「削除」ボタンのクリックイベントハンドラ。
+''========================================================================
+Private Sub btnDelete_Click(sender As Object, e As EventArgs) Handles _
+            btnDelete.Click
+
+End Sub
+
+''========================================================================
 ''    選択した行のデータを変更フレームに表示する。
 ''========================================================================
-
 Private Sub dgvRecord_CellClick( _
         sender As Object, e As DataGridViewCellEventArgs) _
         Handles dgvRecord.CellClick
