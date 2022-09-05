@@ -437,6 +437,21 @@ public:
             const  RecordIndex  idxRecord)  const;
 
     //----------------------------------------------------------------
+    /**   ゲームレコードを設定する。
+    **
+    **  @param [in] idxRecrod     上書きするレコード番号。
+    **  @param [in] gameRecord    上書きするレコード内容。
+    **  @return     エラーコードを返す。
+    **      -   異常終了の場合は、
+    **          エラーの種類を示す非ゼロ値を返す。
+    **      -   正常終了の場合は、ゼロを返す。
+    **/
+    ErrCode
+    setGameRecord(
+            const  RecordIndex  idxRecord,
+            const  GameResult   &gameRecord);
+
+    //----------------------------------------------------------------
     /**   最終試合日付を取得する。
     **
     **  @return     試合が実際に行われたデータの最終日付。
