@@ -72,6 +72,37 @@ End Sub
 Private Sub btnDelete_Click(sender As Object, e As EventArgs) Handles _
             btnDelete.Click
 
+    Dim selectedRecord As Integer
+    Dim gameRecord As Score4Wrapper.Common.GameResult
+    Dim msgAns As System.Windows.Forms.DialogResult
+
+    If (m_selectedRecord < 0) Then
+        MessageBox.Show(
+            "削除したいレコードを選択してから実行してください。")
+        Exit Sub
+    End If
+
+    selectedRecord = m_showIndex(m_selectedRecord)
+    msgAns = MessageBox.Show(
+        "選択したレコードを削除します。よろしいですか？",
+        "Delete",
+        MessageBoxButtons.YesNo, MessageBoxIcon.Question,
+        MessageBoxDefaultButton.Button2)
+    If (msgAns <> vbYes) Then
+        Exit Sub
+    End If
+
+    gameRecord = new Score4Wrapper.Common.GameResult
+    With gameRecord
+        .eGameFlags   = Score4Wrapper.RecordFlag.GAME_EMPTY
+        .homeTeam     = 0
+        .awayTeam     = 0
+        .homeScore    = 0
+        .awayScore    = 0
+    End With
+
+    m_gameRecord.setGameRecord(selectedRecord, gameRecord)
+
 End Sub
 
 ''========================================================================
