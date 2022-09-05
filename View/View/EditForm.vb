@@ -102,6 +102,7 @@ Private Sub btnDelete_Click(sender As Object, e As EventArgs) Handles _
     End With
 
     m_gameRecord.setGameRecord(selectedRecord, gameRecord)
+    updateRecordTable(m_currentDate)
 
 End Sub
 
