@@ -329,22 +329,19 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;grpScore.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;grpScore.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="grpScore.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Bottom, Left, Right</value>
-  </data>
   <data name="grpScore.Location" type="System.Drawing.Point, System.Drawing">
-    <value>24, 56</value>
+    <value>16, 56</value>
   </data>
   <data name="grpScore.Size" type="System.Drawing.Size, System.Drawing">
-    <value>824, 557</value>
+    <value>792, 560</value>
   </data>
   <data name="grpScore.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
+    <value>2</value>
   </data>
 
   <data name="&gt;&gt;lblDate.Name" xml:space="preserve">
