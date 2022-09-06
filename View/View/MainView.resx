@@ -114,7 +114,7 @@
     <value>colDiff</value>
   </data>
   <data name="&gt;&gt;colDiff.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="colDiff.HeaderText" xml:space="preserve">
     <value>Diff</value>
@@ -130,7 +130,7 @@
     <value>colDraw</value>
   </data>
   <data name="&gt;&gt;colDraw.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="colDraw.HeaderText" xml:space="preserve">
     <value>Draw</value>
@@ -146,7 +146,7 @@
     <value>colLost</value>
   </data>
   <data name="&gt;&gt;colLost.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="colLost.HeaderText" xml:space="preserve">
     <value>Lost</value>
@@ -162,7 +162,7 @@
     <value>colMagic</value>
   </data>
   <data name="&gt;&gt;colMagic.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="colMagic.HeaderText" xml:space="preserve">
     <value>Magic</value>
@@ -178,7 +178,7 @@
     <value>colPercent</value>
   </data>
   <data name="&gt;&gt;colPercent.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="colPercent.HeaderText" xml:space="preserve">
     <value>%</value>
@@ -194,7 +194,7 @@
     <value>colRank</value>
   </data>
   <data name="&gt;&gt;colRank.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="colRank.HeaderText" xml:space="preserve">
     <value>Rank</value>
@@ -210,7 +210,7 @@
     <value>colTeam</value>
   </data>
   <data name="&gt;&gt;colTeam.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="colTeam.HeaderText" xml:space="preserve">
     <value>Team</value>
@@ -223,7 +223,7 @@
     <value>colTotal</value>
   </data>
   <data name="&gt;&gt;colTotal.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="colTotal.HeaderText" xml:space="preserve">
     <value>Total</value>
@@ -239,7 +239,7 @@
     <value>colWon</value>
   </data>
   <data name="&gt;&gt;colWon.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="colWon.HeaderText" xml:space="preserve">
     <value>Won</value>
