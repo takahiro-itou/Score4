@@ -285,19 +285,16 @@
     <value>grpScore</value>
   </data>
   <data name="&gt;&gt;grdExtra.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridView, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.DataGridView, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;grdExtra.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="grdExtra.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Bottom, Left, Right</value>
+    <value>0</value>
   </data>
   <data name="grdExtra.Location" type="System.Drawing.Point, System.Drawing">
-    <value>15, 306</value>
+    <value>8, 312</value>
   </data>
   <data name="grdExtra.Size" type="System.Drawing.Size, System.Drawing">
-    <value>797, 240</value>
+    <value>776, 240</value>
   </data>
   <data name="grdExtra.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
@@ -310,16 +307,16 @@
     <value>grpScore</value>
   </data>
   <data name="&gt;&gt;grdScore.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridView, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.DataGridView, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;grdScore.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>6</value>
   </data>
   <data name="grdScore.Location" type="System.Drawing.Point, System.Drawing">
-    <value>15, 18</value>
+    <value>8, 16</value>
   </data>
   <data name="grdScore.Size" type="System.Drawing.Size, System.Drawing">
-    <value>564, 240</value>
+    <value>552, 240</value>
   </data>
   <data name="grdScore.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
