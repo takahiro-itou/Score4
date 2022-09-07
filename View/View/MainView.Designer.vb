@@ -64,6 +64,7 @@ Partial Class MainView
         Me.mnuOptionsFont = New System.Windows.Forms.ToolStripMenuItem()
         Me.tabLeague = New System.Windows.Forms.TabControl()
         Me.fraScore = New System.Windows.Forms.GroupBox()
+        Me.fraDate = New System.Windows.Forms.GroupBox()
         Me.mnvDate = New System.Windows.Forms.MonthCalendar()
         Me.lblDate = New System.Windows.Forms.Label()
         Me.dgvScore = New System.Windows.Forms.DataGridView()
@@ -241,14 +242,16 @@ Partial Class MainView
         ' fraScore
         '
         resources.ApplyResources(Me.fraScore, "fraScore")
-        Me.fraScore.Controls.Add(Me.lblDate)
-        Me.fraScore.Controls.Add(Me.grdExtra)
-        Me.fraScore.Controls.Add(Me.optShowWins)
-        Me.fraScore.Controls.Add(Me.optShowMagic)
-        Me.fraScore.Controls.Add(Me.optShowRest)
-        Me.fraScore.Controls.Add(Me.chkSchedule)
-        Me.fraScore.Controls.Add(Me.mnvDate)
+        Me.fraScore.Controls.Add(Me.fraDate)
+        Me.fraDate.Controls.Add(Me.mnvDate)
+        Me.fraDate.Controls.Add(Me.lblDate)
         Me.fraScore.Controls.Add(Me.dgvScore)
+        Me.fraScore.Controls.Add(Me.chkSchedule)
+        Me.fraScore.Controls.Add(Me.optShowRest)
+        Me.fraScore.Controls.Add(Me.optShowMagic)
+        Me.fraScore.Controls.Add(Me.optShowWins)
+        Me.fraScore.Controls.Add(Me.grdExtra)
+
         Me.fraScore.Name = "fraScore"
         Me.fraScore.TabStop = False
 
@@ -267,6 +270,15 @@ Partial Class MainView
         Me.dgvScore.ReadOnly = True
         Me.dgvScore.RowHeadersVisible = False
         Me.dgvScore.RowTemplate.Height = 21
+
+        '
+        ' fraDate
+        '
+        Me.fraDate.Controls.Add(Me.mnvDate)
+        Me.fraDate.Controls.Add(Me.lblDate)
+        resources.ApplyResources(Me.fraDate, "fraDate")
+        Me.fraDate.Name = "fraScore"
+        Me.fraDate.TabStop = False
 
         '
         ' mnvDate
@@ -464,16 +476,19 @@ Partial Class MainView
     Friend WithEvents mnuMagicEasy As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents mnuMagicSep1 As System.Windows.Forms.ToolStripSeparator
     Friend WithEvents mnuMagicLine As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents fraScore As System.Windows.Forms.GroupBox
+
     Friend WithEvents tabLeague As System.Windows.Forms.TabControl
-    Friend WithEvents mnvDate As System.Windows.Forms.MonthCalendar
+    Friend WithEvents fraScore As System.Windows.Forms.GroupBox
     Friend WithEvents dgvScore As System.Windows.Forms.DataGridView
-    Friend WithEvents grdExtra As System.Windows.Forms.DataGridView
-    Friend WithEvents optShowWins As System.Windows.Forms.RadioButton
-    Friend WithEvents optShowMagic As System.Windows.Forms.RadioButton
-    Friend WithEvents optShowRest As System.Windows.Forms.RadioButton
-    Friend WithEvents chkSchedule As System.Windows.Forms.CheckBox
+    Friend WithEvents fraDate As System.Windows.Forms.GroupBox
+    Friend WithEvents mnvDate As System.Windows.Forms.MonthCalendar
     Friend WithEvents lblDate As System.Windows.Forms.Label
+    Friend WithEvents chkSchedule As System.Windows.Forms.CheckBox
+    Friend WithEvents optShowRest As System.Windows.Forms.RadioButton
+    Friend WithEvents optShowMagic As System.Windows.Forms.RadioButton
+    Friend WithEvents optShowWins As System.Windows.Forms.RadioButton
+    Friend WithEvents grdExtra As System.Windows.Forms.DataGridView
+
     Friend WithEvents colTeam As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents colTotal As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents colWon As System.Windows.Forms.DataGridViewTextBoxColumn

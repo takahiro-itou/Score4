@@ -278,6 +278,31 @@
     <value>System.Windows.Forms.SaveFileDialog, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
 
+  <data name="&gt;&gt;fraDate.Name" xml:space="preserve">
+    <value>fraDate</value>
+  </data>
+  <data name="&gt;&gt;fraDate.Parent" xml:space="preserve">
+    <value>fraScore</value>
+  </data>
+  <data name="&gt;&gt;fraDate.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;fraDate.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="fraDate.Location" type="System.Drawing.Point, System.Drawing">
+    <value>568, 16</value>
+  </data>
+  <data name="fraDate.Size" type="System.Drawing.Size, System.Drawing">
+    <value>216, 240</value>
+  </data>
+  <data name="fraDate.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="fraDate.Text" xml:space="preserve">
+    <value>&amp;Date</value>
+  </data>
+
   <data name="&gt;&gt;grdExtra.Name" xml:space="preserve">
     <value>grdExtra</value>
   </data>
