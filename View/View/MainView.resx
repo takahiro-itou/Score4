@@ -792,16 +792,19 @@
     <value>fraScore</value>
   </data>
   <data name="&gt;&gt;optShowMagic.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;optShowMagic.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>2</value>
+  </data>
+  <data name="optShowMagic.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="optShowMagic.Location" type="System.Drawing.Point, System.Drawing">
-    <value>363, 279</value>
+    <value>448, 272</value>
   </data>
   <data name="optShowMagic.Size" type="System.Drawing.Size, System.Drawing">
-    <value>128, 16</value>
+    <value>160, 24</value>
   </data>
   <data name="optShowMagic.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
