@@ -264,7 +264,7 @@ Public Sub displayTeamMagicTableToGrid(
     End If
 
     makeTeamListOnGridViewHeader(
-        numShowCount, bufShowIndex, numShowCount, False, 72,
+        numShowCount, bufShowIndex, numShowCount, False, 80,
         scoreData, objView)
     gameFilter = Score4Wrapper.GameFilter.FILTER_ALL_GAMES
 
