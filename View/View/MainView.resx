@@ -764,13 +764,13 @@
     <value>mnvDate</value>
   </data>
   <data name="&gt;&gt;mnvDate.Parent" xml:space="preserve">
-    <value>fraScore</value>
+    <value>fraDate</value>
   </data>
   <data name="&gt;&gt;mnvDate.Type" xml:space="preserve">
-    <value>System.Windows.Forms.MonthCalendar, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.MonthCalendar, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;mnvDate.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>1</value>
   </data>
   <data name="mnvDate.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
@@ -779,10 +779,10 @@
     <value>NoControl</value>
   </data>
   <data name="mnvDate.Location" type="System.Drawing.Point, System.Drawing">
-    <value>592, 18</value>
+    <value>8, 16</value>
   </data>
   <data name="mnvDate.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
+    <value>0</value>
   </data>
 
   <data name="&gt;&gt;optShowMagic.Name" xml:space="preserve">
