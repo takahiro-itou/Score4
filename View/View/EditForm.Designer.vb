@@ -199,7 +199,7 @@ Partial Class EditForm
         Me.lblDate.Name = "lblDate"
 
         '
-        'EditForm
+        ' EditForm
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None

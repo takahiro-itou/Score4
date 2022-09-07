@@ -300,25 +300,25 @@
     <value>6</value>
   </data>
 
-  <data name="&gt;&gt;grdScore.Name" xml:space="preserve">
-    <value>grdScore</value>
+  <data name="&gt;&gt;dgvScore.Name" xml:space="preserve">
+    <value>dgvScore</value>
   </data>
-  <data name="&gt;&gt;grdScore.Parent" xml:space="preserve">
+  <data name="&gt;&gt;dgvScore.Parent" xml:space="preserve">
     <value>fraScore</value>
   </data>
-  <data name="&gt;&gt;grdScore.Type" xml:space="preserve">
+  <data name="&gt;&gt;dgvScore.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridView, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;grdScore.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;dgvScore.ZOrder" xml:space="preserve">
     <value>6</value>
   </data>
-  <data name="grdScore.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="dgvScore.Location" type="System.Drawing.Point, System.Drawing">
     <value>8, 16</value>
   </data>
-  <data name="grdScore.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="dgvScore.Size" type="System.Drawing.Size, System.Drawing">
     <value>552, 240</value>
   </data>
-  <data name="grdScore.TabIndex" type="System.Int32, mscorlib">
+  <data name="dgvScore.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
 
