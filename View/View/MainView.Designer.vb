@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class MainView
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,7 +20,7 @@ Partial Class MainView
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(MainView))
         Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
@@ -61,7 +61,7 @@ Partial Class MainView
         Me.dlgOpen = New System.Windows.Forms.OpenFileDialog()
         Me.dlgSave = New System.Windows.Forms.SaveFileDialog()
         Me.dlgFont = New System.Windows.Forms.FontDialog()
-        Me.grpScore = New System.Windows.Forms.GroupBox()
+        Me.fraScore = New System.Windows.Forms.GroupBox()
         Me.lblDate = New System.Windows.Forms.Label()
         Me.grdExtra = New System.Windows.Forms.DataGridView()
         Me.optShowWins = New System.Windows.Forms.RadioButton()
@@ -81,7 +81,7 @@ Partial Class MainView
         Me.colMagic = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.colRank = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.mnuMain.SuspendLayout()
-        Me.grpScore.SuspendLayout()
+        Me.fraScore.SuspendLayout()
         CType(Me.grdExtra, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.grdScore, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -225,19 +225,19 @@ Partial Class MainView
         '
         Me.dlgOpen.FileName = "OpenFileDialog1"
         '
-        'grpScore
+        'fraScore
         '
-        resources.ApplyResources(Me.grpScore, "grpScore")
-        Me.grpScore.Controls.Add(Me.lblDate)
-        Me.grpScore.Controls.Add(Me.grdExtra)
-        Me.grpScore.Controls.Add(Me.optShowWins)
-        Me.grpScore.Controls.Add(Me.optShowMagic)
-        Me.grpScore.Controls.Add(Me.optShowRest)
-        Me.grpScore.Controls.Add(Me.chkSchedule)
-        Me.grpScore.Controls.Add(Me.mnvDate)
-        Me.grpScore.Controls.Add(Me.grdScore)
-        Me.grpScore.Name = "grpScore"
-        Me.grpScore.TabStop = False
+        resources.ApplyResources(Me.fraScore, "fraScore")
+        Me.fraScore.Controls.Add(Me.lblDate)
+        Me.fraScore.Controls.Add(Me.grdExtra)
+        Me.fraScore.Controls.Add(Me.optShowWins)
+        Me.fraScore.Controls.Add(Me.optShowMagic)
+        Me.fraScore.Controls.Add(Me.optShowRest)
+        Me.fraScore.Controls.Add(Me.chkSchedule)
+        Me.fraScore.Controls.Add(Me.mnvDate)
+        Me.fraScore.Controls.Add(Me.grdScore)
+        Me.fraScore.Name = "fraScore"
+        Me.fraScore.TabStop = False
         '
         'lblDate
         '
@@ -403,14 +403,14 @@ Partial Class MainView
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.Controls.Add(Me.grpScore)
+        Me.Controls.Add(Me.fraScore)
         Me.Controls.Add(Me.mnuMain)
         Me.Controls.Add(Me.tabLeague)
         Me.MainMenuStrip = Me.mnuMain
         Me.Name = "MainView"
         Me.mnuMain.ResumeLayout(False)
         Me.mnuMain.PerformLayout()
-        Me.grpScore.ResumeLayout(False)
+        Me.fraScore.ResumeLayout(False)
         CType(Me.grdExtra, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.grdScore, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
@@ -446,7 +446,7 @@ Partial Class MainView
     Friend WithEvents mnuMagicEasy As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents mnuMagicSep1 As System.Windows.Forms.ToolStripSeparator
     Friend WithEvents mnuMagicLine As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents grpScore As System.Windows.Forms.GroupBox
+    Friend WithEvents fraScore As System.Windows.Forms.GroupBox
     Friend WithEvents tabLeague As System.Windows.Forms.TabControl
     Friend WithEvents mnvDate As System.Windows.Forms.MonthCalendar
     Friend WithEvents grdScore As System.Windows.Forms.DataGridView
