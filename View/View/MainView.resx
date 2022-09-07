@@ -247,6 +247,49 @@
   <data name="colWon.Width" type="System.Int32, mscorlib">
     <value>48</value>
   </data>
+  <data name="&gt;&gt;dgvExtra.Name" xml:space="preserve">
+    <value>dgvExtra</value>
+  </data>
+  <data name="&gt;&gt;dgvExtra.Parent" xml:space="preserve">
+    <value>fraScore</value>
+  </data>
+  <data name="&gt;&gt;dgvExtra.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridView, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;dgvExtra.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="dgvExtra.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 312</value>
+  </data>
+  <data name="dgvExtra.Size" type="System.Drawing.Size, System.Drawing">
+    <value>776, 240</value>
+  </data>
+  <data name="dgvExtra.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+
+  <data name="&gt;&gt;dgvScore.Name" xml:space="preserve">
+    <value>dgvScore</value>
+  </data>
+  <data name="&gt;&gt;dgvScore.Parent" xml:space="preserve">
+    <value>fraScore</value>
+  </data>
+  <data name="&gt;&gt;dgvScore.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridView, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;dgvScore.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="dgvScore.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 16</value>
+  </data>
+  <data name="dgvScore.Size" type="System.Drawing.Size, System.Drawing">
+    <value>552, 240</value>
+  </data>
+  <data name="dgvScore.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
 
   <metadata name="dlgFont.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>298, 17</value>
@@ -301,50 +344,6 @@
   </data>
   <data name="fraDate.Text" xml:space="preserve">
     <value>&amp;Date</value>
-  </data>
-
-  <data name="&gt;&gt;dgvExtra.Name" xml:space="preserve">
-    <value>dgvExtra</value>
-  </data>
-  <data name="&gt;&gt;dgvExtra.Parent" xml:space="preserve">
-    <value>fraScore</value>
-  </data>
-  <data name="&gt;&gt;dgvExtra.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridView, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;dgvExtra.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="dgvExtra.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 312</value>
-  </data>
-  <data name="dgvExtra.Size" type="System.Drawing.Size, System.Drawing">
-    <value>776, 240</value>
-  </data>
-  <data name="dgvExtra.TabIndex" type="System.Int32, mscorlib">
-    <value>6</value>
-  </data>
-
-  <data name="&gt;&gt;dgvScore.Name" xml:space="preserve">
-    <value>dgvScore</value>
-  </data>
-  <data name="&gt;&gt;dgvScore.Parent" xml:space="preserve">
-    <value>fraScore</value>
-  </data>
-  <data name="&gt;&gt;dgvScore.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridView, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;dgvScore.ZOrder" xml:space="preserve">
-    <value>6</value>
-  </data>
-  <data name="dgvScore.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 16</value>
-  </data>
-  <data name="dgvScore.Size" type="System.Drawing.Size, System.Drawing">
-    <value>552, 240</value>
-  </data>
-  <data name="dgvScore.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
   </data>
 
   <data name="&gt;&gt;fraScore.Name" xml:space="preserve">
