@@ -72,7 +72,7 @@ Partial Class MainView
         Me.optShowWins = New System.Windows.Forms.RadioButton()
         Me.optShowMagic = New System.Windows.Forms.RadioButton()
         Me.optShowRest = New System.Windows.Forms.RadioButton()
-        Me.grdExtra = New System.Windows.Forms.DataGridView()
+        Me.dgvExtra = New System.Windows.Forms.DataGridView()
 
         Me.colTeam = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.colTotal = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -86,7 +86,7 @@ Partial Class MainView
 
         Me.mnuMain.SuspendLayout()
         Me.fraScore.SuspendLayout()
-        CType(Me.grdExtra, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.dgvExtra, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.dgvScore, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
 
@@ -250,7 +250,7 @@ Partial Class MainView
         Me.fraScore.Controls.Add(Me.optShowRest)
         Me.fraScore.Controls.Add(Me.optShowMagic)
         Me.fraScore.Controls.Add(Me.optShowWins)
-        Me.fraScore.Controls.Add(Me.grdExtra)
+        Me.fraScore.Controls.Add(Me.dgvExtra)
 
         Me.fraScore.Name = "fraScore"
         Me.fraScore.TabStop = False
@@ -295,19 +295,19 @@ Partial Class MainView
         Me.lblDate.Name = "lblDate"
 
         '
-        ' grdExtra
+        ' dgvExtra
         '
-        Me.grdExtra.AllowUserToAddRows = False
-        Me.grdExtra.AllowUserToDeleteRows = False
-        Me.grdExtra.AllowUserToResizeColumns = True
-        Me.grdExtra.AllowUserToResizeRows = False
-        resources.ApplyResources(Me.grdExtra, "grdExtra")
-        Me.grdExtra.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.grdExtra.MultiSelect = False
-        Me.grdExtra.Name = "grdExtra"
-        Me.grdExtra.ReadOnly = True
-        Me.grdExtra.RowHeadersVisible = False
-        Me.grdExtra.RowTemplate.Height = 21
+        Me.dgvExtra.AllowUserToAddRows = False
+        Me.dgvExtra.AllowUserToDeleteRows = False
+        Me.dgvExtra.AllowUserToResizeColumns = True
+        Me.dgvExtra.AllowUserToResizeRows = False
+        resources.ApplyResources(Me.dgvExtra, "dgvExtra")
+        Me.dgvExtra.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.dgvExtra.MultiSelect = False
+        Me.dgvExtra.Name = "dgvExtra"
+        Me.dgvExtra.ReadOnly = True
+        Me.dgvExtra.RowHeadersVisible = False
+        Me.dgvExtra.RowTemplate.Height = 21
 
         '
         'chkSchedule
@@ -440,7 +440,7 @@ Partial Class MainView
         Me.mnuMain.ResumeLayout(False)
         Me.mnuMain.PerformLayout()
         Me.fraScore.ResumeLayout(False)
-        CType(Me.grdExtra, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.dgvExtra, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.dgvScore, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
@@ -487,7 +487,7 @@ Partial Class MainView
     Friend WithEvents optShowRest As System.Windows.Forms.RadioButton
     Friend WithEvents optShowMagic As System.Windows.Forms.RadioButton
     Friend WithEvents optShowWins As System.Windows.Forms.RadioButton
-    Friend WithEvents grdExtra As System.Windows.Forms.DataGridView
+    Friend WithEvents dgvExtra As System.Windows.Forms.DataGridView
 
     Friend WithEvents colTeam As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents colTotal As System.Windows.Forms.DataGridViewTextBoxColumn
