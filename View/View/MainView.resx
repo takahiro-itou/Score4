@@ -247,6 +247,7 @@
   <data name="colWon.Width" type="System.Int32, mscorlib">
     <value>48</value>
   </data>
+
   <data name="&gt;&gt;dgvExtra.Name" xml:space="preserve">
     <value>dgvExtra</value>
   </data>
@@ -610,16 +611,16 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;mnuMain.Type" xml:space="preserve">
-    <value>System.Windows.Forms.MenuStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.MenuStrip, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;mnuMain.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>2</value>
   </data>
   <data name="mnuMain.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
   </data>
   <data name="mnuMain.Size" type="System.Drawing.Size, System.Drawing">
-    <value>866, 24</value>
+    <value>822, 24</value>
   </data>
   <data name="mnuMain.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -820,16 +821,16 @@
     <value>fraScore</value>
   </data>
   <data name="&gt;&gt;optShowRest.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;optShowRest.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>3</value>
   </data>
   <data name="optShowRest.Location" type="System.Drawing.Point, System.Drawing">
-    <value>229, 279</value>
+    <value>272, 272</value>
   </data>
   <data name="optShowRest.Size" type="System.Drawing.Size, System.Drawing">
-    <value>128, 16</value>
+    <value>160, 24</value>
   </data>
   <data name="optShowRest.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
