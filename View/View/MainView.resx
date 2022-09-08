@@ -846,19 +846,19 @@
     <value>fraScore</value>
   </data>
   <data name="&gt;&gt;optShowWins.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;optShowWins.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>1</value>
   </data>
   <data name="optShowWins.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="optShowWins.Location" type="System.Drawing.Point, System.Drawing">
-    <value>497, 279</value>
+    <value>624, 272</value>
   </data>
   <data name="optShowWins.Size" type="System.Drawing.Size, System.Drawing">
-    <value>128, 16</value>
+    <value>160, 24</value>
   </data>
   <data name="optShowWins.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
