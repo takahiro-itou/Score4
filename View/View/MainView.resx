@@ -404,10 +404,10 @@
     <value>mnuFile</value>
   </data>
   <data name="&gt;&gt;mnuFile.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="mnuFile.Size" type="System.Drawing.Size, System.Drawing">
-    <value>36, 20</value>
+    <value>37, 20</value>
   </data>
   <data name="mnuFile.Text" xml:space="preserve">
     <value>&amp;File</value>
