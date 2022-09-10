@@ -646,10 +646,10 @@
     <value>mnuOptionsFont</value>
   </data>
   <data name="&gt;&gt;mnuOptionsFont.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="mnuOptionsFont.Size" type="System.Drawing.Size, System.Drawing">
-    <value>103, 22</value>
+    <value>180, 22</value>
   </data>
   <data name="mnuOptionsFont.Text" xml:space="preserve">
     <value>&amp;Font ...</value>
