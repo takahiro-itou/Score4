@@ -672,13 +672,13 @@
     <value>mnuScoreDetail</value>
   </data>
   <data name="&gt;&gt;mnuScoreDetail.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="mnuScoreDetail.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
     <value>F3</value>
   </data>
   <data name="mnuScoreDetail.Size" type="System.Drawing.Size, System.Drawing">
-    <value>145, 22</value>
+    <value>180, 22</value>
   </data>
   <data name="mnuScoreDetail.Text" xml:space="preserve">
     <value>&amp;Detail ...</value>
