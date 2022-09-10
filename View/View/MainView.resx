@@ -743,10 +743,10 @@
     <value>mnuScoreSep1</value>
   </data>
   <data name="&gt;&gt;mnuScoreSep1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="mnuScoreSep1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>142, 6</value>
+    <value>177, 6</value>
   </data>
 
   <data name="&gt;&gt;mnuScoreSettings.Name" xml:space="preserve">
