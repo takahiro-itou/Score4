@@ -435,6 +435,9 @@
   <data name="&gt;&gt;mnuFileNew.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="mnuFileNew.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
+    <value>Ctrl+N</value>
+  </data>
   <data name="mnuFileNew.Size" type="System.Drawing.Size, System.Drawing">
     <value>180, 22</value>
   </data>
