@@ -633,14 +633,15 @@
     <value>mnuOptions</value>
   </data>
   <data name="&gt;&gt;mnuOptions.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="mnuOptions.Size" type="System.Drawing.Size, System.Drawing">
-    <value>56, 20</value>
+    <value>61, 20</value>
   </data>
   <data name="mnuOptions.Text" xml:space="preserve">
     <value>&amp;Options</value>
   </data>
+
   <data name="&gt;&gt;mnuOptionsFont.Name" xml:space="preserve">
     <value>mnuOptionsFont</value>
   </data>
