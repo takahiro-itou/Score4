@@ -33,9 +33,6 @@ Partial Class MainView
         Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle9 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
 
-        Me.dlgOpen = New System.Windows.Forms.OpenFileDialog()
-        Me.dlgSave = New System.Windows.Forms.SaveFileDialog()
-        Me.dlgFont = New System.Windows.Forms.FontDialog()
         Me.mnuMain = New System.Windows.Forms.MenuStrip()
         Me.mnuFile = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuFileNew = New System.Windows.Forms.ToolStripMenuItem()
@@ -62,6 +59,10 @@ Partial Class MainView
         Me.mnuMagicLine = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuOptions = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuOptionsFont = New System.Windows.Forms.ToolStripMenuItem()
+
+        Me.dlgOpen = New System.Windows.Forms.OpenFileDialog()
+        Me.dlgSave = New System.Windows.Forms.SaveFileDialog()
+        Me.dlgFont = New System.Windows.Forms.FontDialog()
         Me.tabLeague = New System.Windows.Forms.TabControl()
         Me.fraScore = New System.Windows.Forms.GroupBox()
         Me.fraDate = New System.Windows.Forms.GroupBox()
@@ -89,11 +90,6 @@ Partial Class MainView
         CType(Me.dgvExtra, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.dgvScore, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
-
-        '
-        ' dlgOpen
-        '
-        Me.dlgOpen.FileName = "OpenFileDialog1"
 
         '
         ' mnuMain
@@ -230,6 +226,12 @@ Partial Class MainView
         '
         Me.mnuOptionsFont.Name = "mnuOptionsFont"
         resources.ApplyResources(Me.mnuOptionsFont, "mnuOptionsFont")
+
+        '
+        ' dlgOpen
+        '
+        Me.dlgOpen.FileName = "OpenFileDialog1"
+
 
         '
         'tabLeague
@@ -447,9 +449,6 @@ Partial Class MainView
 
     End Sub
 
-    Friend WithEvents dlgOpen As System.Windows.Forms.OpenFileDialog
-    Friend WithEvents dlgSave As System.Windows.Forms.SaveFileDialog
-    Friend WithEvents dlgFont As System.Windows.Forms.FontDialog
     Friend WithEvents mnuMain As System.Windows.Forms.MenuStrip
     Friend WithEvents mnuFile As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents mnuFileNew As System.Windows.Forms.ToolStripMenuItem
@@ -476,6 +475,10 @@ Partial Class MainView
     Friend WithEvents mnuMagicEasy As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents mnuMagicSep1 As System.Windows.Forms.ToolStripSeparator
     Friend WithEvents mnuMagicLine As System.Windows.Forms.ToolStripMenuItem
+
+    Friend WithEvents dlgOpen As System.Windows.Forms.OpenFileDialog
+    Friend WithEvents dlgSave As System.Windows.Forms.SaveFileDialog
+    Friend WithEvents dlgFont As System.Windows.Forms.FontDialog
 
     Friend WithEvents tabLeague As System.Windows.Forms.TabControl
     Friend WithEvents fraScore As System.Windows.Forms.GroupBox
