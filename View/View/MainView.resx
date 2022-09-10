@@ -720,10 +720,10 @@
     <value>mnuScoreRefresh</value>
   </data>
   <data name="&gt;&gt;mnuScoreRefresh.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="mnuScoreRefresh.Size" type="System.Drawing.Size, System.Drawing">
-    <value>145, 22</value>
+    <value>180, 22</value>
   </data>
   <data name="mnuScoreRefresh.Text" xml:space="preserve">
     <value>&amp;Refresh</value>
