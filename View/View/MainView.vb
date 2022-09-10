@@ -253,24 +253,24 @@ Private Sub updateTables(
 
     Me.m_scoreData.countScores(trgLastDate)
     ScoreView.displayScoreTableToGrid(
-            idxLeague, modeMagic, Me.m_scoreData, Me.grdScore)
+            idxLeague, modeMagic, Me.m_scoreData, Me.dgvScore)
 
     Select Case modeExtra
     Case ExtraViewMode.EXTRA_VIEW_MAGIC_NUMBERS
         ScoreView.displayTeamMagicTableToGrid(
                 idxLeague, modeMagic,
-                Me.m_scoreData, Me.grdExtra
+                Me.m_scoreData, Me.dgvExtra
         )
     Case ExtraViewMode.EXTRA_VIEW_WIN_FOR_MATCH
         ScoreView.displayWinsForBeatTableToGrid(
                 idxLeague,
-                Me.m_scoreData, Me.grdExtra
+                Me.m_scoreData, Me.dgvExtra
         )
     Case Else
         ScoreView.displayRestGameTableToGrid(
                 idxLeague, modeSchedule,
                 Score4Wrapper.GameFilter.FILTER_ALL_GAMES,
-                Me.m_scoreData, Me.grdExtra
+                Me.m_scoreData, Me.dgvExtra
         )
     End Select
 
@@ -399,6 +399,13 @@ End Sub
 ''========================================================================
 Private Sub mnuScoreEdit_Click(sender As Object, e As EventArgs) Handles _
             mnuScoreEdit.Click
+
+    Dim frmEdit As EditForm = New EditForm()
+
+    With frmEdit
+        .setupSettings(m_scoreData, m_currentDate)
+        .Show()
+    End With
 
 End Sub
 

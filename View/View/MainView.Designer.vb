@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class MainView
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,7 +20,7 @@ Partial Class MainView
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(MainView))
         Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
@@ -32,6 +32,10 @@ Partial Class MainView
         Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle9 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+
+        Me.dlgOpen = New System.Windows.Forms.OpenFileDialog()
+        Me.dlgSave = New System.Windows.Forms.SaveFileDialog()
+        Me.dlgFont = New System.Windows.Forms.FontDialog()
         Me.mnuMain = New System.Windows.Forms.MenuStrip()
         Me.mnuFile = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuFileNew = New System.Windows.Forms.ToolStripMenuItem()
@@ -58,19 +62,18 @@ Partial Class MainView
         Me.mnuMagicLine = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuOptions = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuOptionsFont = New System.Windows.Forms.ToolStripMenuItem()
-        Me.dlgOpen = New System.Windows.Forms.OpenFileDialog()
-        Me.dlgSave = New System.Windows.Forms.SaveFileDialog()
-        Me.dlgFont = New System.Windows.Forms.FontDialog()
-        Me.grpScore = New System.Windows.Forms.GroupBox()
+        Me.tabLeague = New System.Windows.Forms.TabControl()
+        Me.fraScore = New System.Windows.Forms.GroupBox()
+        Me.fraDate = New System.Windows.Forms.GroupBox()
+        Me.mnvDate = New System.Windows.Forms.MonthCalendar()
         Me.lblDate = New System.Windows.Forms.Label()
-        Me.grdExtra = New System.Windows.Forms.DataGridView()
+        Me.dgvScore = New System.Windows.Forms.DataGridView()
+        Me.chkSchedule = New System.Windows.Forms.CheckBox()
         Me.optShowWins = New System.Windows.Forms.RadioButton()
         Me.optShowMagic = New System.Windows.Forms.RadioButton()
         Me.optShowRest = New System.Windows.Forms.RadioButton()
-        Me.chkSchedule = New System.Windows.Forms.CheckBox()
-        Me.mnvDate = New System.Windows.Forms.MonthCalendar()
-        Me.grdScore = New System.Windows.Forms.DataGridView()
-        Me.tabLeague = New System.Windows.Forms.TabControl()
+        Me.dgvExtra = New System.Windows.Forms.DataGridView()
+
         Me.colTeam = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.colTotal = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.colWon = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -80,208 +83,232 @@ Partial Class MainView
         Me.colPercent = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.colMagic = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.colRank = New System.Windows.Forms.DataGridViewTextBoxColumn()
+
         Me.mnuMain.SuspendLayout()
-        Me.grpScore.SuspendLayout()
-        CType(Me.grdExtra, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.grdScore, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.fraScore.SuspendLayout()
+        CType(Me.dgvExtra, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.dgvScore, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
+
         '
-        'mnuMain
+        ' dlgOpen
+        '
+        Me.dlgOpen.FileName = "OpenFileDialog1"
+
+        '
+        ' mnuMain
         '
         Me.mnuMain.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuFile, Me.mnuScore, Me.mnuMagic, Me.mnuOptions})
         resources.ApplyResources(Me.mnuMain, "mnuMain")
         Me.mnuMain.Name = "mnuMain"
         '
-        'mnuFile
+        ' mnuFile
         '
         Me.mnuFile.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuFileNew, Me.mnuFileOpen, Me.mnuFileSep0, Me.mnuFileSave, Me.mnuFileSaveAs, Me.mnuFileSep1, Me.mnuFileExit})
         Me.mnuFile.Name = "mnuFile"
         resources.ApplyResources(Me.mnuFile, "mnuFile")
         '
-        'mnuFileNew
+        ' mnuFileNew
         '
         Me.mnuFileNew.Name = "mnuFileNew"
         resources.ApplyResources(Me.mnuFileNew, "mnuFileNew")
         '
-        'mnuFileOpen
+        ' mnuFileOpen
         '
         Me.mnuFileOpen.Name = "mnuFileOpen"
         resources.ApplyResources(Me.mnuFileOpen, "mnuFileOpen")
         '
-        'mnuFileSep0
+        ' mnuFileSep0
         '
         Me.mnuFileSep0.Name = "mnuFileSep0"
         resources.ApplyResources(Me.mnuFileSep0, "mnuFileSep0")
         '
-        'mnuFileSave
+        ' mnuFileSave
         '
         Me.mnuFileSave.Name = "mnuFileSave"
         resources.ApplyResources(Me.mnuFileSave, "mnuFileSave")
         '
-        'mnuFileSaveAs
+        ' mnuFileSaveAs
         '
         Me.mnuFileSaveAs.Name = "mnuFileSaveAs"
         resources.ApplyResources(Me.mnuFileSaveAs, "mnuFileSaveAs")
         '
-        'mnuFileSep1
+        ' mnuFileSep1
         '
         Me.mnuFileSep1.Name = "mnuFileSep1"
         resources.ApplyResources(Me.mnuFileSep1, "mnuFileSep1")
         '
-        'mnuFileExit
+        ' mnuFileExit
         '
         Me.mnuFileExit.Name = "mnuFileExit"
         resources.ApplyResources(Me.mnuFileExit, "mnuFileExit")
         '
-        'mnuScore
+        ' mnuScore
         '
         Me.mnuScore.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuScoreEdit, Me.mnuScoreDetail, Me.mnuScoreImport, Me.mnuScoreSep0, Me.mnuScoreSettings, Me.mnuScoreSep1, Me.mnuScoreRefresh})
         Me.mnuScore.Name = "mnuScore"
         resources.ApplyResources(Me.mnuScore, "mnuScore")
         '
-        'mnuScoreEdit
+        ' mnuScoreEdit
         '
         Me.mnuScoreEdit.Name = "mnuScoreEdit"
         resources.ApplyResources(Me.mnuScoreEdit, "mnuScoreEdit")
         '
-        'mnuScoreDetail
+        ' mnuScoreDetail
         '
         Me.mnuScoreDetail.Name = "mnuScoreDetail"
         resources.ApplyResources(Me.mnuScoreDetail, "mnuScoreDetail")
         '
-        'mnuScoreImport
+        ' mnuScoreImport
         '
         Me.mnuScoreImport.Name = "mnuScoreImport"
         resources.ApplyResources(Me.mnuScoreImport, "mnuScoreImport")
         '
-        'mnuScoreSep0
+        ' mnuScoreSep0
         '
         Me.mnuScoreSep0.Name = "mnuScoreSep0"
         resources.ApplyResources(Me.mnuScoreSep0, "mnuScoreSep0")
         '
-        'mnuScoreSettings
+        ' mnuScoreSettings
         '
         Me.mnuScoreSettings.Name = "mnuScoreSettings"
         resources.ApplyResources(Me.mnuScoreSettings, "mnuScoreSettings")
         '
-        'mnuScoreSep1
+        ' mnuScoreSep1
         '
         Me.mnuScoreSep1.Name = "mnuScoreSep1"
         resources.ApplyResources(Me.mnuScoreSep1, "mnuScoreSep1")
         '
-        'mnuScoreRefresh
+        ' mnuScoreRefresh
         '
         Me.mnuScoreRefresh.Name = "mnuScoreRefresh"
         resources.ApplyResources(Me.mnuScoreRefresh, "mnuScoreRefresh")
         '
-        'mnuMagic
+        ' mnuMagic
         '
         Me.mnuMagic.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuMagicVictory, Me.mnuMagicPlayoff, Me.mnuMagicSep0, Me.mnuMagicEasy, Me.mnuMagicSep1, Me.mnuMagicLine})
         Me.mnuMagic.Name = "mnuMagic"
         resources.ApplyResources(Me.mnuMagic, "mnuMagic")
         '
-        'mnuMagicVictory
+        ' mnuMagicVictory
         '
         Me.mnuMagicVictory.Name = "mnuMagicVictory"
         resources.ApplyResources(Me.mnuMagicVictory, "mnuMagicVictory")
         '
-        'mnuMagicPlayoff
+        ' mnuMagicPlayoff
         '
         Me.mnuMagicPlayoff.Name = "mnuMagicPlayoff"
         resources.ApplyResources(Me.mnuMagicPlayoff, "mnuMagicPlayoff")
         '
-        'mnuMagicSep0
+        ' mnuMagicSep0
         '
         Me.mnuMagicSep0.Name = "mnuMagicSep0"
         resources.ApplyResources(Me.mnuMagicSep0, "mnuMagicSep0")
         '
-        'mnuMagicEasy
+        ' mnuMagicEasy
         '
         Me.mnuMagicEasy.Name = "mnuMagicEasy"
         resources.ApplyResources(Me.mnuMagicEasy, "mnuMagicEasy")
         '
-        'mnuMagicSep1
+        ' mnuMagicSep1
         '
         Me.mnuMagicSep1.Name = "mnuMagicSep1"
         resources.ApplyResources(Me.mnuMagicSep1, "mnuMagicSep1")
         '
-        'mnuMagicLine
+        ' mnuMagicLine
         '
         Me.mnuMagicLine.Name = "mnuMagicLine"
         resources.ApplyResources(Me.mnuMagicLine, "mnuMagicLine")
         '
-        'mnuOptions
+        ' mnuOptions
         '
         Me.mnuOptions.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuOptionsFont})
         Me.mnuOptions.Name = "mnuOptions"
         resources.ApplyResources(Me.mnuOptions, "mnuOptions")
         '
-        'mnuOptionsFont
+        ' mnuOptionsFont
         '
         Me.mnuOptionsFont.Name = "mnuOptionsFont"
         resources.ApplyResources(Me.mnuOptionsFont, "mnuOptionsFont")
+
         '
-        'dlgOpen
+        'tabLeague
         '
-        Me.dlgOpen.FileName = "OpenFileDialog1"
+        resources.ApplyResources(Me.tabLeague, "tabLeague")
+        Me.tabLeague.Name = "tabLeague"
+        Me.tabLeague.SelectedIndex = 0
+
         '
-        'grpScore
+        ' fraScore
         '
-        resources.ApplyResources(Me.grpScore, "grpScore")
-        Me.grpScore.Controls.Add(Me.lblDate)
-        Me.grpScore.Controls.Add(Me.grdExtra)
-        Me.grpScore.Controls.Add(Me.optShowWins)
-        Me.grpScore.Controls.Add(Me.optShowMagic)
-        Me.grpScore.Controls.Add(Me.optShowRest)
-        Me.grpScore.Controls.Add(Me.chkSchedule)
-        Me.grpScore.Controls.Add(Me.mnvDate)
-        Me.grpScore.Controls.Add(Me.grdScore)
-        Me.grpScore.Name = "grpScore"
-        Me.grpScore.TabStop = False
+        resources.ApplyResources(Me.fraScore, "fraScore")
+        Me.fraScore.Controls.Add(Me.fraDate)
+        Me.fraDate.Controls.Add(Me.mnvDate)
+        Me.fraDate.Controls.Add(Me.lblDate)
+        Me.fraScore.Controls.Add(Me.dgvScore)
+        Me.fraScore.Controls.Add(Me.chkSchedule)
+        Me.fraScore.Controls.Add(Me.optShowRest)
+        Me.fraScore.Controls.Add(Me.optShowMagic)
+        Me.fraScore.Controls.Add(Me.optShowWins)
+        Me.fraScore.Controls.Add(Me.dgvExtra)
+
+        Me.fraScore.Name = "fraScore"
+        Me.fraScore.TabStop = False
+
         '
-        'lblDate
+        ' dgvScore
+        '
+        Me.dgvScore.AllowUserToAddRows = False
+        Me.dgvScore.AllowUserToDeleteRows = False
+        Me.dgvScore.AllowUserToResizeColumns = True
+        Me.dgvScore.AllowUserToResizeRows = False
+        Me.dgvScore.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.dgvScore.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.colTeam, Me.colTotal, Me.colWon, Me.colLost, Me.colDraw, Me.colDiff, Me.colPercent, Me.colMagic, Me.colRank})
+        resources.ApplyResources(Me.dgvScore, "dgvScore")
+        Me.dgvScore.MultiSelect = False
+        Me.dgvScore.Name = "dgvScore"
+        Me.dgvScore.ReadOnly = True
+        Me.dgvScore.RowHeadersVisible = False
+        Me.dgvScore.RowTemplate.Height = 21
+
+        '
+        ' fraDate
+        '
+        Me.fraDate.Controls.Add(Me.mnvDate)
+        Me.fraDate.Controls.Add(Me.lblDate)
+        resources.ApplyResources(Me.fraDate, "fraDate")
+        Me.fraDate.Name = "fraScore"
+        Me.fraDate.TabStop = False
+
+        '
+        ' mnvDate
+        '
+        resources.ApplyResources(Me.mnvDate, "mnvDate")
+        Me.mnvDate.MaxSelectionCount = 1
+        Me.mnvDate.Name = "mnvDate"
+
+        '
+        ' lblDate
         '
         resources.ApplyResources(Me.lblDate, "lblDate")
         Me.lblDate.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
         Me.lblDate.Name = "lblDate"
+
         '
-        'grdExtra
+        ' dgvExtra
         '
-        Me.grdExtra.AllowUserToAddRows = False
-        Me.grdExtra.AllowUserToDeleteRows = False
-        Me.grdScore.AllowUserToResizeColumns = False
-        Me.grdScore.AllowUserToResizeRows = False
-        resources.ApplyResources(Me.grdExtra, "grdExtra")
-        Me.grdExtra.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.grdExtra.MultiSelect = False
-        Me.grdExtra.Name = "grdExtra"
-        Me.grdExtra.ReadOnly = True
-        Me.grdExtra.RowHeadersVisible = False
-        Me.grdExtra.RowTemplate.Height = 21
-        '
-        'optShowWins
-        '
-        Me.optShowWins.BackColor = System.Drawing.SystemColors.Window
-        resources.ApplyResources(Me.optShowWins, "optShowWins")
-        Me.optShowWins.Name = "optShowWins"
-        Me.optShowWins.TabStop = True
-        Me.optShowWins.UseVisualStyleBackColor = False
-        '
-        'optShowMagic
-        '
-        Me.optShowMagic.BackColor = System.Drawing.SystemColors.Window
-        resources.ApplyResources(Me.optShowMagic, "optShowMagic")
-        Me.optShowMagic.Name = "optShowMagic"
-        Me.optShowMagic.TabStop = True
-        Me.optShowMagic.UseVisualStyleBackColor = False
-        '
-        'optShowRest
-        '
-        Me.optShowRest.BackColor = System.Drawing.SystemColors.Window
-        resources.ApplyResources(Me.optShowRest, "optShowRest")
-        Me.optShowRest.Name = "optShowRest"
-        Me.optShowRest.TabStop = True
-        Me.optShowRest.UseVisualStyleBackColor = False
+        Me.dgvExtra.AllowUserToAddRows = False
+        Me.dgvExtra.AllowUserToDeleteRows = False
+        Me.dgvExtra.AllowUserToResizeColumns = True
+        Me.dgvExtra.AllowUserToResizeRows = False
+        resources.ApplyResources(Me.dgvExtra, "dgvExtra")
+        Me.dgvExtra.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.dgvExtra.MultiSelect = False
+        Me.dgvExtra.Name = "dgvExtra"
+        Me.dgvExtra.ReadOnly = True
+        Me.dgvExtra.RowHeadersVisible = False
+        Me.dgvExtra.RowTemplate.Height = 21
+
         '
         'chkSchedule
         '
@@ -289,35 +316,36 @@ Partial Class MainView
         resources.ApplyResources(Me.chkSchedule, "chkSchedule")
         Me.chkSchedule.Name = "chkSchedule"
         Me.chkSchedule.UseVisualStyleBackColor = False
+
         '
-        'mnvDate
+        ' optShowWins
         '
-        resources.ApplyResources(Me.mnvDate, "mnvDate")
-        Me.mnvDate.MaxSelectionCount = 1
-        Me.mnvDate.Name = "mnvDate"
+        Me.optShowWins.BackColor = System.Drawing.SystemColors.Window
+        resources.ApplyResources(Me.optShowWins, "optShowWins")
+        Me.optShowWins.Name = "optShowWins"
+        Me.optShowWins.TabStop = True
+        Me.optShowWins.UseVisualStyleBackColor = False
+
         '
-        'grdScore
+        ' optShowMagic
         '
-        Me.grdScore.AllowUserToAddRows = False
-        Me.grdScore.AllowUserToDeleteRows = False
-        Me.grdExtra.AllowUserToResizeColumns = False
-        Me.grdExtra.AllowUserToResizeRows = False
-        Me.grdScore.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.grdScore.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.colTeam, Me.colTotal, Me.colWon, Me.colLost, Me.colDraw, Me.colDiff, Me.colPercent, Me.colMagic, Me.colRank})
-        resources.ApplyResources(Me.grdScore, "grdScore")
-        Me.grdScore.MultiSelect = False
-        Me.grdScore.Name = "grdScore"
-        Me.grdScore.ReadOnly = True
-        Me.grdScore.RowHeadersVisible = False
-        Me.grdScore.RowTemplate.Height = 21
+        Me.optShowMagic.BackColor = System.Drawing.SystemColors.Window
+        resources.ApplyResources(Me.optShowMagic, "optShowMagic")
+        Me.optShowMagic.Name = "optShowMagic"
+        Me.optShowMagic.TabStop = True
+        Me.optShowMagic.UseVisualStyleBackColor = False
+
         '
-        'tabLeague
+        ' optShowRest
         '
-        resources.ApplyResources(Me.tabLeague, "tabLeague")
-        Me.tabLeague.Name = "tabLeague"
-        Me.tabLeague.SelectedIndex = 0
+        Me.optShowRest.BackColor = System.Drawing.SystemColors.Window
+        resources.ApplyResources(Me.optShowRest, "optShowRest")
+        Me.optShowRest.Name = "optShowRest"
+        Me.optShowRest.TabStop = True
+        Me.optShowRest.UseVisualStyleBackColor = False
+
         '
-        'colTeam
+        ' colTeam
         '
         DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
         Me.colTeam.DefaultCellStyle = DataGridViewCellStyle1
@@ -327,7 +355,7 @@ Partial Class MainView
         Me.colTeam.ReadOnly = True
         Me.colTeam.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
         '
-        'colTotal
+        ' colTotal
         '
         DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
         Me.colTotal.DefaultCellStyle = DataGridViewCellStyle2
@@ -336,7 +364,7 @@ Partial Class MainView
         Me.colTotal.ReadOnly = True
         Me.colTotal.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
         '
-        'colWon
+        ' colWon
         '
         DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
         Me.colWon.DefaultCellStyle = DataGridViewCellStyle3
@@ -345,7 +373,7 @@ Partial Class MainView
         Me.colWon.ReadOnly = True
         Me.colWon.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
         '
-        'colLost
+        ' colLost
         '
         DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
         Me.colLost.DefaultCellStyle = DataGridViewCellStyle4
@@ -354,7 +382,7 @@ Partial Class MainView
         Me.colLost.ReadOnly = True
         Me.colLost.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
         '
-        'colDraw
+        ' colDraw
         '
         DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
         Me.colDraw.DefaultCellStyle = DataGridViewCellStyle5
@@ -363,7 +391,7 @@ Partial Class MainView
         Me.colDraw.ReadOnly = True
         Me.colDraw.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
         '
-        'colDiff
+        ' colDiff
         '
         DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
         Me.colDiff.DefaultCellStyle = DataGridViewCellStyle6
@@ -372,7 +400,7 @@ Partial Class MainView
         Me.colDiff.ReadOnly = True
         Me.colDiff.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
         '
-        'colPercent
+        ' colPercent
         '
         DataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
         Me.colPercent.DefaultCellStyle = DataGridViewCellStyle7
@@ -381,7 +409,7 @@ Partial Class MainView
         Me.colPercent.ReadOnly = True
         Me.colPercent.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
         '
-        'colMagic
+        ' colMagic
         '
         DataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
         Me.colMagic.DefaultCellStyle = DataGridViewCellStyle8
@@ -390,7 +418,7 @@ Partial Class MainView
         Me.colMagic.ReadOnly = True
         Me.colMagic.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
         '
-        'colRank
+        ' colRank
         '
         DataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
         Me.colRank.DefaultCellStyle = DataGridViewCellStyle9
@@ -398,29 +426,31 @@ Partial Class MainView
         Me.colRank.Name = "colRank"
         Me.colRank.ReadOnly = True
         Me.colRank.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+
         '
         'MainView
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.Controls.Add(Me.grpScore)
+        Me.Controls.Add(Me.fraScore)
         Me.Controls.Add(Me.mnuMain)
         Me.Controls.Add(Me.tabLeague)
         Me.MainMenuStrip = Me.mnuMain
         Me.Name = "MainView"
         Me.mnuMain.ResumeLayout(False)
         Me.mnuMain.PerformLayout()
-        Me.grpScore.ResumeLayout(False)
-        CType(Me.grdExtra, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.grdScore, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.fraScore.ResumeLayout(False)
+        CType(Me.dgvExtra, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.dgvScore, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
     End Sub
-    Friend WithEvents mnuMain As System.Windows.Forms.MenuStrip
+
     Friend WithEvents dlgOpen As System.Windows.Forms.OpenFileDialog
     Friend WithEvents dlgSave As System.Windows.Forms.SaveFileDialog
     Friend WithEvents dlgFont As System.Windows.Forms.FontDialog
+    Friend WithEvents mnuMain As System.Windows.Forms.MenuStrip
     Friend WithEvents mnuFile As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents mnuFileNew As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents mnuFileOpen As System.Windows.Forms.ToolStripMenuItem
@@ -446,16 +476,19 @@ Partial Class MainView
     Friend WithEvents mnuMagicEasy As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents mnuMagicSep1 As System.Windows.Forms.ToolStripSeparator
     Friend WithEvents mnuMagicLine As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents grpScore As System.Windows.Forms.GroupBox
+
     Friend WithEvents tabLeague As System.Windows.Forms.TabControl
+    Friend WithEvents fraScore As System.Windows.Forms.GroupBox
+    Friend WithEvents dgvScore As System.Windows.Forms.DataGridView
+    Friend WithEvents fraDate As System.Windows.Forms.GroupBox
     Friend WithEvents mnvDate As System.Windows.Forms.MonthCalendar
-    Friend WithEvents grdScore As System.Windows.Forms.DataGridView
-    Friend WithEvents grdExtra As System.Windows.Forms.DataGridView
-    Friend WithEvents optShowWins As System.Windows.Forms.RadioButton
-    Friend WithEvents optShowMagic As System.Windows.Forms.RadioButton
-    Friend WithEvents optShowRest As System.Windows.Forms.RadioButton
-    Friend WithEvents chkSchedule As System.Windows.Forms.CheckBox
     Friend WithEvents lblDate As System.Windows.Forms.Label
+    Friend WithEvents chkSchedule As System.Windows.Forms.CheckBox
+    Friend WithEvents optShowRest As System.Windows.Forms.RadioButton
+    Friend WithEvents optShowMagic As System.Windows.Forms.RadioButton
+    Friend WithEvents optShowWins As System.Windows.Forms.RadioButton
+    Friend WithEvents dgvExtra As System.Windows.Forms.DataGridView
+
     Friend WithEvents colTeam As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents colTotal As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents colWon As System.Windows.Forms.DataGridViewTextBoxColumn

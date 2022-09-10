@@ -9,6 +9,90 @@ End Enum
 ''========================================================================
 ''    指定されたグリッドビューに残り試合のテーブルを表示する
 ''========================================================================
+Public Sub displayRecordsToGrid(
+        ByVal startDate As System.DateTime,
+        ByRef scoreData As Score4Wrapper.Document.ScoreDocument,
+        ByVal cellFont As System.Drawing.Font,
+        ByRef objView As System.Windows.Forms.DataGridView,
+        ByRef recordIndex() As Integer)
+
+    Dim i As Integer, j As Integer
+    Dim numShow As Integer
+    Dim numTeam As Integer
+    Dim teamIdxHome As Integer, teamIdxAway As Integer
+    Dim scoreHome As Integer, scoreAway As Integer
+    Dim teamNameHome As String, teamNameAway As String
+    Dim strInfo As String, flagText As String
+    Dim gameRecord As Score4Wrapper.Common.GameResult
+    Dim gameFlags As Score4Wrapper.RecordFlag
+
+    ReDim recordIndex(0)
+    makeRecordEditColumnsHeader(cellFont, objView)
+    numTeam = scoreData.getNumTeams()
+    numShow = scoreData.findGameRecords(startDate, -1, -1, recordIndex)
+
+    With objView
+        .Rows.Clear()
+
+        ' データ追加用に空行を挿入しておく
+        .Rows.Add("", "", "", "", "", "", "")
+
+        For i = 0 To numShow - 1
+            j = recordIndex(i)
+            gameRecord = scoreData.getGameRecord(j)
+            With gameRecord
+                gameFlags = .eGameFlags
+                teamIdxHome = .homeTeam
+                teamIdxAway = .awayTeam
+                scoreHome = .homeScore
+                scoreAway = .awayScore
+            End With
+
+            With scoreData
+                If (teamIdxHome >= 0) And (teamIdxHome < numTeam) Then
+                    teamNameHome = .teamInfo(teamIdxHome).teamName
+                Else
+                    teamNameHome = "???"
+                End If
+
+                If (teamIdxAway >= 0) And (teamIdxAway < numTeam) Then
+                    teamNameAway = .teamInfo(teamIdxAway).teamName
+                Else
+                    teamNameAway = "???"
+                End If
+            End With
+
+            Select Case gameFlags
+            Case Score4Wrapper.RecordFlag.GAME_SCHEDULE:
+                flagText = "SCHEDULE"
+            Case Score4Wrapper.RecordFlag.GAME_CANCEL:
+                flagText = "CANCEL"
+            Case Score4Wrapper.RecordFlag.GAME_RESULT:
+                flagText = "RESULT"
+            Case Else
+                flagText = ""
+            End Select
+            strInfo = gameFlags & ":" & flagText
+
+            .Rows.Add(
+                j,
+                teamNameHome,
+                scoreHome,
+                "-",
+                scoreAway,
+                teamNameAway,
+                strInfo
+            )
+        Next i
+
+        .Visible = True
+    End With
+
+End Sub
+
+''========================================================================
+''    指定されたグリッドビューに残り試合のテーブルを表示する
+''========================================================================
 Public Sub displayRestGameTableToGrid(
         ByVal leagueIndex As Integer,
         ByVal scheduleFilter As Score4Wrapper.GameFilter,
@@ -53,7 +137,10 @@ Public Sub displayRestGameTableToGrid(
                 bufShowIndex, .Rows(i), scoreInfo
             )
         Next i
+
+        .Visible = True
     End With
+
 End Sub
 
 ''========================================================================
@@ -177,12 +264,12 @@ Public Sub displayTeamMagicTableToGrid(
     End If
 
     makeTeamListOnGridViewHeader(
-        numShowCount, bufShowIndex, numShowCount, False, 64,
+        numShowCount, bufShowIndex, numShowCount, False, 80,
         scoreData, objView)
     gameFilter = Score4Wrapper.GameFilter.FILTER_ALL_GAMES
 
     With objView
-        .Columns(0).Width = 112
+        .Columns(0).Width = 128
 
         For i = 0 To numShowCount - 1
             Dim idxTeam As Integer = bufShowIndex(i)
@@ -199,6 +286,8 @@ Public Sub displayTeamMagicTableToGrid(
                 numTeams, numShowCount, idxTeam,
                 bufShowIndex, .Rows(i), scoreInfo)
         Next i
+
+        .Visible = True
     End With
 
 End Sub
@@ -229,12 +318,12 @@ Public Sub displayWinsForBeatTableToGrid(
     End If
 
     makeTeamListOnGridViewHeader(
-        numShowCount, bufShowIndex, numShowCount, False, 96,
+        numShowCount, bufShowIndex, numShowCount, False, 104,
         scoreData, objView)
     gameFilter = Score4Wrapper.GameFilter.FILTER_ALL_GAMES
 
     With objView
-        .Columns(0).Width = 112
+        .Columns(0).Width = 128
 
         For i = 0 To numShowCount - 1
             Dim idxTeam As Integer = bufShowIndex(i)
@@ -251,6 +340,8 @@ Public Sub displayWinsForBeatTableToGrid(
                 numTeams, numShowCount, idxTeam,
                 bufShowIndex, .Rows(i), scoreInfo)
         Next i
+
+        .Visible = True
     End With
 
 End Sub
@@ -277,6 +368,94 @@ Private Function makeGridViewColumn(
     makeGridViewColumn = textColumn
 
 End Function
+
+''========================================================================
+''    グリッドビューのヘッダ列を用意する。
+''========================================================================
+Private Sub makeRecordEditColumnsHeader(
+        ByVal cellFont As System.Drawing.Font,
+        ByRef objView As System.Windows.Forms.DataGridView)
+
+    Dim alignCenter As DataGridViewContentAlignment
+    Dim alignLeft As DataGridViewContentAlignment
+    Dim alignRight As DataGridViewContentAlignment
+    Dim textColumn As DataGridViewTextBoxColumn
+
+    Const COL_WIDTH_INDEX As Integer = 32
+    Const COL_WIDTH_TEAM As Integer = 80
+    Const COL_WIDTH_SCORE As Integer = 40
+    Const COL_WIDTH_SPACE As Integer = 24
+    Const COL_WIDTH_STATE As Integer = 64
+
+    alignCenter = DataGridViewContentAlignment.MiddleCenter
+    alignLeft = DataGridViewContentAlignment.MiddleLeft
+    alignRight = DataGridViewContentAlignment.MiddleRight
+
+    With objView
+        .Rows.Clear()
+        With .Columns
+            .Clear()
+
+            textColumn = makeGridViewColumn("index", "No.")
+            With textColumn
+                .DefaultCellStyle.Alignment = alignRight
+                .DefaultCellStyle.Font = cellFont
+                .Width = COL_WIDTH_INDEX
+            End With
+            .Add(textColumn)
+
+            textColumn = makeGridViewColumn("homeTeam", "Home")
+            With textColumn
+                .DefaultCellStyle.Alignment = alignRight
+                .DefaultCellStyle.Font = cellFont
+                .Width = COL_WIDTH_TEAM
+            End With
+            .Add(textColumn)
+
+            textColumn = makeGridViewColumn("homeScore", "")
+            With textColumn
+                .DefaultCellStyle.Alignment = alignRight
+                .DefaultCellStyle.Font = cellFont
+                .Width = COL_WIDTH_SCORE
+            End With
+            .Add(textColumn)
+
+            textColumn = makeGridViewColumn("vs", "vs")
+            With textColumn
+                .DefaultCellStyle.Alignment = alignCenter
+                .DefaultCellStyle.Font = cellFont
+                .Width = COL_WIDTH_SPACE
+            End With
+            .Add(textColumn)
+            textColumn = makeGridViewColumn("awayScore", "")
+
+            With textColumn
+                .DefaultCellStyle.Alignment = alignLeft
+                .DefaultCellStyle.Font = cellFont
+                .Width = COL_WIDTH_SCORE
+            End With
+            .Add(textColumn)
+
+            textColumn = makeGridViewColumn("arayTeam", "Visitor")
+            With textColumn
+                .DefaultCellStyle.Alignment = alignLeft
+                .DefaultCellStyle.Font = cellFont
+                .Width = COL_WIDTH_TEAM
+            End With
+            .Add(textColumn)
+
+            textColumn = makeGridViewColumn("status", "Info")
+            With textColumn
+                .DefaultCellStyle.Alignment = alignRight
+                .DefaultCellStyle.Font = cellFont
+                .Width = COL_WIDTH_STATE
+            End With
+            .Add(textColumn)
+
+        End With
+    End With
+
+End Sub
 
 ''========================================================================
 ''    グリッドビューのヘッダ列にチーム名のリストをセットする。
@@ -507,6 +686,7 @@ Private Sub writeTeamRestGamesToGridRow(
             .Style.BackColor = Color.FromArgb(0, 255, 0)
             .Value = restInter
         End With
+
     End With
 
 End Sub
