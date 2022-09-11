@@ -645,6 +645,22 @@
     <value>&amp;Options</value>
   </data>
 
+  <data name="&gt;&gt;mnuOptionsFind.Name" xml:space="preserve">
+    <value>mnuOptionsFind</value>
+  </data>
+  <data name="&gt;&gt;mnuOptionsFind.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="mnuOptionsFind.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
+    <value>Ctrl+F</value>
+  </data>
+  <data name="mnuOptionsFind.Size" type="System.Drawing.Size, System.Drawing">
+    <value>180, 22</value>
+  </data>
+  <data name="mnuOptionsFind.Text" xml:space="preserve">
+    <value>&amp;Search</value>
+  </data>
+
   <data name="&gt;&gt;mnuOptionsFont.Name" xml:space="preserve">
     <value>mnuOptionsFont</value>
   </data>
