@@ -530,7 +530,7 @@
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="mnuMagicEasy.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
+    <value>198, 22</value>
   </data>
   <data name="mnuMagicEasy.Text" xml:space="preserve">
     <value>&amp;Easy Calc Mode</value>
@@ -546,7 +546,7 @@
     <value>Ctrl+F7</value>
   </data>
   <data name="mnuMagicLine.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
+    <value>198, 22</value>
   </data>
   <data name="mnuMagicLine.Text" xml:space="preserve">
     <value>Show &amp;Details ...</value>
@@ -562,7 +562,7 @@
     <value>F8</value>
   </data>
   <data name="mnuMagicPlayoff.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
+    <value>198, 22</value>
   </data>
   <data name="mnuMagicPlayoff.Text" xml:space="preserve">
     <value>&amp;Playoff Magic</value>
@@ -575,7 +575,7 @@
     <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="mnuMagicSep0.Size" type="System.Drawing.Size, System.Drawing">
-    <value>177, 6</value>
+    <value>195, 6</value>
   </data>
 
   <data name="&gt;&gt;mnuMagicSep1.Name" xml:space="preserve">
@@ -585,7 +585,7 @@
     <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="mnuMagicSep1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>177, 6</value>
+    <value>195, 6</value>
   </data>
 
   <data name="&gt;&gt;mnuMagicVictory.Name" xml:space="preserve">
@@ -598,7 +598,7 @@
     <value>F7</value>
   </data>
   <data name="mnuMagicVictory.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
+    <value>198, 22</value>
   </data>
   <data name="mnuMagicVictory.Text" xml:space="preserve">
     <value>&amp;Victory Magic</value>
