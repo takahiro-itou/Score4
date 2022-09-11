@@ -6,6 +6,9 @@ Public Enum ExtraViewMode As Integer
     EXTRA_VIEW_WIN_FOR_MATCH = 2
 End Enum
 
+Public Const MAGIC_NO_PROBABILITY_WONS As Integer = _
+    Score4Wrapper.Common.Consts.MAGIC_NO_PROBABILITY_WONS
+
 ''========================================================================
 ''    指定されたグリッドビューに残り試合のテーブルを表示する
 ''========================================================================
@@ -597,7 +600,7 @@ Private Sub writeTeamMagicToGridRow(
             numWins = beatInfo.numNeedWins
 
             Dim beatProb As Integer = beatInfo.numWinsDiff
-            If beatProb <= -Score4Wrapper.Consts.MAGIC_NO_PROBABILITY_WONS Then
+            If beatProb <= -MAGIC_NO_PROBABILITY_WONS Then
                 cellText = "-----"
                 backColor = Color.FromArgb(255, 0, 0)
                 foreColor = Color.FromArgb(255, 255, 255)
