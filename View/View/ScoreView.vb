@@ -7,7 +7,10 @@ Public Enum ExtraViewMode As Integer
 End Enum
 
 Public Const MAGIC_NO_PROBABILITY_WONS As Integer = _
-    Score4Wrapper.Common.Consts.MAGIC_NO_PROBABILITY_WONS
+    Score4Wrapper.Consts.MAGIC_NO_PROBABILITY_WONS
+
+Public Const MAGICLIST_NO_DATA_ENTRY As Integer = _
+    Score4Wrapper.Consts.MAGICLIST_NO_DATA_ENTRY
 
 ''========================================================================
 ''    指定されたグリッドビューに残り試合のテーブルを表示する
@@ -205,14 +208,18 @@ Public Sub displayScoreTableToGrid(
 
             ' マジック
             Dim magicValue As Integer = magicInfo.magicNumber(magicMode)
-            strMagic = magicValue
-            If magicValue < 0 Then
-                strMagic = "---"
-            End If
             If magicInfo.magicFlags(magicMode) Then
-                strMagic = "M " & strMagic
+                If (magicValue = MAGICLIST_NO_DATA_ENTRY) Then
+                    strMagic = "M --"
+                Else
+                    strMagic = "M " & magicValue
+                End If
             Else
-                strMagic = strMagic
+                If (magicValue <= -MAGIC_NO_PROBABILITY_WONS) Then
+                    strMagic = "---"
+                Else
+                    strMagic = magicValue
+                End If
             End If
 
             ' 確定順位範囲
