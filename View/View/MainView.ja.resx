@@ -178,46 +178,53 @@
   </data>
 
   <data name="mnuScore.Size" type="System.Drawing.Size, System.Drawing">
-    <value>58, 20</value>
+    <value>59, 20</value>
   </data>
   <data name="mnuScore.Text" xml:space="preserve">
     <value>スコア(&amp;S)</value>
   </data>
+
   <data name="mnuScoreDetail.Size" type="System.Drawing.Size, System.Drawing">
-    <value>170, 22</value>
+    <value>180, 22</value>
   </data>
   <data name="mnuScoreDetail.Text" xml:space="preserve">
     <value>詳細(&amp;D) ...</value>
   </data>
+
   <data name="mnuScoreEdit.Size" type="System.Drawing.Size, System.Drawing">
-    <value>170, 22</value>
+    <value>180, 22</value>
   </data>
   <data name="mnuScoreEdit.Text" xml:space="preserve">
     <value>編集(&amp;E) ...</value>
   </data>
+
   <data name="mnuScoreImport.Size" type="System.Drawing.Size, System.Drawing">
-    <value>170, 22</value>
+    <value>180, 22</value>
   </data>
   <data name="mnuScoreImport.Text" xml:space="preserve">
     <value>インポート(&amp;I) ...</value>
   </data>
+
   <data name="mnuScoreRefresh.Size" type="System.Drawing.Size, System.Drawing">
-    <value>170, 22</value>
+    <value>180, 22</value>
   </data>
   <data name="mnuScoreRefresh.Text" xml:space="preserve">
-    <value>最新の情報に更新</value>
+    <value>最新の情報に更新(&amp;R)</value>
   </data>
+
   <data name="mnuScoreSep0.Size" type="System.Drawing.Size, System.Drawing">
-    <value>167, 6</value>
+    <value>177, 6</value>
   </data>
+
   <data name="mnuScoreSep1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>167, 6</value>
+    <value>177, 6</value>
   </data>
+
   <data name="mnuScoreSettings.Size" type="System.Drawing.Size, System.Drawing">
-    <value>170, 22</value>
+    <value>180, 22</value>
   </data>
   <data name="mnuScoreSettings.Text" xml:space="preserve">
-    <value>設定の変更(&amp;O) ...</value>
+    <value>設定の変更(&amp;S) ...</value>
   </data>
 
   <data name="optShowMagic.Text" xml:space="preserve">
