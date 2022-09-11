@@ -59,14 +59,6 @@ Private Sub updateRecordTable(ByVal targetDate As System.DateTime)
 End Sub
 
 ''========================================================================
-''    「編集」ボタンのクリックイベントハンドラ。
-''========================================================================
-Private Sub btnEdit_Click(sender As Object, e As EventArgs) Handles _
-            btnEdit.Click
-
-End Sub
-
-''========================================================================
 ''    「削除」ボタンのクリックイベントハンドラ。
 ''========================================================================
 Private Sub btnDelete_Click(sender As Object, e As EventArgs) Handles _
@@ -94,15 +86,45 @@ Private Sub btnDelete_Click(sender As Object, e As EventArgs) Handles _
 
     gameRecord = new Score4Wrapper.Common.GameResult
     With gameRecord
-        .eGameFlags   = Score4Wrapper.RecordFlag.GAME_EMPTY
-        .homeTeam     = 0
-        .awayTeam     = 0
-        .homeScore    = 0
-        .awayScore    = 0
+        .eGameFlags = Score4Wrapper.RecordFlag.GAME_EMPTY
+        .homeTeam   = 0
+        .awayTeam   = 0
+        .homeScore  = 0
+        .awayScore  = 0
     End With
 
     m_gameRecord.setGameRecord(selectedRecord, gameRecord)
     updateRecordTable(m_currentDate)
+
+End Sub
+
+''========================================================================
+''    「編集」ボタンのクリックイベントハンドラ。
+''========================================================================
+Private Sub btnEdit_Click(sender As Object, e As EventArgs) Handles _
+            btnEdit.Click
+
+    Dim selectedRecord As Integer
+    Dim gameRecord As Score4Wrapper.Common.GameResult
+    Dim msgAns As System.Windows.Forms.DialogResult
+
+    ' 入力されたデータを集計する。
+    gameRecord = new Score4Wrapper.Common.GameResult
+    With gameRecord
+        .eGameFlags = cmbFlags.SelectedIndex
+        .homeTeam   = cmbTeamHome.SelectedIndex
+        .awayTeam   = cmbTeamAway.SelectedIndex
+        .homeScore  = updScoreHome.Value
+        .awayScore  = updScoreAway.Value
+    End With
+
+    If (m_selectedRecord < 0) Then
+        ' 新規データの追加
+    Else
+        ' 既存データの変更
+        selectedRecord = m_showIndex(m_selectedRecord)
+        m_gameRecord.setGameRecord(selectedRecord, gameRecord)
+    End If
 
 End Sub
 
