@@ -164,13 +164,14 @@
   </data>
 
   <data name="mnuOptions.Size" type="System.Drawing.Size, System.Drawing">
-    <value>76, 20</value>
+    <value>80, 20</value>
   </data>
   <data name="mnuOptions.Text" xml:space="preserve">
     <value>オプション(&amp;O)</value>
   </data>
+
   <data name="mnuOptionsFont.Size" type="System.Drawing.Size, System.Drawing">
-    <value>128, 22</value>
+    <value>180, 22</value>
   </data>
   <data name="mnuOptionsFont.Text" xml:space="preserve">
     <value>フォント(&amp;F) ...</value>
