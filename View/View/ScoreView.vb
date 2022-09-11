@@ -264,7 +264,7 @@ Public Sub displayTeamMagicTableToGrid(
     End If
 
     makeTeamListOnGridViewHeader(
-        numShowCount, bufShowIndex, numShowCount, False, 80,
+        numShowCount, bufShowIndex, numShowCount, False, 88,
         scoreData, objView)
     gameFilter = Score4Wrapper.GameFilter.FILTER_ALL_GAMES
 
@@ -592,7 +592,7 @@ Private Sub writeTeamMagicToGridRow(
             numWins = beatInfo.numNeedWins
 
             Dim beatProb As Integer = beatInfo.numWinsDiff
-            If (beatProb <= -9999) Then
+            If beatProb <= -Score4Wrapper.Consts.MAGIC_NO_PROBABILITY_WONS Then
                 cellText = "-----"
                 backColor = Color.FromArgb(255, 0, 0)
                 foreColor = Color.FromArgb(255, 255, 255)
@@ -608,13 +608,15 @@ Private Sub writeTeamMagicToGridRow(
 
             If (beatFlag = Score4Wrapper.MagicFilter.MF_ON_MAGIC) Then
                 If (numWins <= 0) Then
-                    cellText = "M 0 :  ---"
+                    cellText = "M 0 : -----"
                     backColor = Color.FromArgb(0, 0, 255)
                     foreColor = Color.FromArgb(255, 255, 255)
                 Else
                     cellText = "M " & numWins & " : " & cellText
                     backColor = Color.FromArgb(0, 255, 255)
                 End If
+            ElseIf beatFlag = Score4Wrapper.MagicFilter.MF_NEVER_BEAT Then
+                cellText = "(---) : " & cellText
             Else
                 cellText = "(" & beatInfo.numWinsSelf & ") : " & cellText
             End If
