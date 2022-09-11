@@ -202,10 +202,14 @@ Public Sub displayScoreTableToGrid(
 
             ' マジック
             Dim magicValue As Integer = magicInfo.magicNumber(magicMode)
+            strMagic = magicValue
+            If magicValue < 0 Then
+                strMagic = "---"
+            End If
             If magicInfo.magicFlags(magicMode) Then
-                strMagic = "M " & magicValue
+                strMagic = "M " & strMagic
             Else
-                strMagic = magicInfo.magicNumber(magicMode)
+                strMagic = strMagic
             End If
 
             ' 確定順位範囲
