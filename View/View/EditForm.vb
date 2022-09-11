@@ -112,6 +112,7 @@ Private Sub btnEdit_Click(sender As Object, e As EventArgs) Handles _
     gameRecord = new Score4Wrapper.Common.GameResult
     With gameRecord
         .eGameFlags = cmbFlags.SelectedIndex
+        .recordDate = m_currentDate
         .homeTeam   = cmbTeamHome.SelectedIndex
         .awayTeam   = cmbTeamAway.SelectedIndex
         .homeScore  = updScoreHome.Value
