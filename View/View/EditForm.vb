@@ -126,6 +126,8 @@ Private Sub btnEdit_Click(sender As Object, e As EventArgs) Handles _
         m_gameRecord.setGameRecord(selectedRecord, gameRecord)
     End If
 
+    updateRecordTable(m_currentDate)
+
 End Sub
 
 ''========================================================================
