@@ -112,10 +112,11 @@
   </data>
 
   <data name="mnuFileSep0.Size" type="System.Drawing.Size, System.Drawing">
-    <value>178, 6</value>
+    <value>186, 6</value>
   </data>
+
   <data name="mnuFileSep1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>178, 6</value>
+    <value>186, 6</value>
   </data>
 
   <data name="mnuMagic.Size" type="System.Drawing.Size, System.Drawing">
