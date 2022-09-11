@@ -201,8 +201,9 @@ Public Sub displayScoreTableToGrid(
             End If
 
             ' マジック
+            Dim magicValue As Integer = magicInfo.magicNumber(magicMode)
             If magicInfo.magicFlags(magicMode) Then
-                strMagic = "M" & magicInfo.magicNumber(magicMode)
+                strMagic = "M " & magicValue
             Else
                 strMagic = magicInfo.magicNumber(magicMode)
             End If
