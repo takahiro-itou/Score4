@@ -495,6 +495,14 @@ ScoreDocument  &
 ScoreDocument::copyFrom(
         const   ScoreDocument  &src)
 {
+    this->m_leagueInfos     = src.m_leagueInfos;
+    this->m_teamInfos       = src.m_teamInfos;
+    this->m_gameResults     = src.m_gameResults;
+    this->m_fOptimized      = src.m_fOptimized;
+    this->m_lastActiveDate  = src.m_lastActiveDate;
+    this->m_lastRecordDate  = src.m_lastRecordDate;
+    this->m_lastImportDate  = src.m_lastImportDate;
+
     return ( *this );
 }
 
