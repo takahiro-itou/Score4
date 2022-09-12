@@ -166,6 +166,24 @@ ScoreDocument::ScoreDocument()
 }
 
 //----------------------------------------------------------------
+//    インスタンスを初期化する
+//  （コピーコンストラクタ）。
+//
+
+ScoreDocument::ScoreDocument(
+        const   ScoreDocument  &src)
+    : m_leagueInfos(),
+      m_teamInfos  (),
+      m_gameResults(),
+      m_fOptimized (BOOL_FALSE),
+      m_lastActiveDate(0),
+      m_lastRecordDate(0),
+      m_lastImportDate(0)
+{
+    copyFrom(src);
+}
+
+//----------------------------------------------------------------
 //    インスタンスを破棄する
 //  （デストラクタ）。
 //
@@ -467,6 +485,17 @@ ScoreDocument::computeRankRange(
     }
 
     return ( ERR_SUCCESS );
+}
+
+//----------------------------------------------------------------
+//    指定したデータのコピーを作成する。
+//
+
+ScoreDocument  &
+ScoreDocument::copyFrom(
+        const   ScoreDocument  &src)
+{
+    return ( *this );
 }
 
 //----------------------------------------------------------------
