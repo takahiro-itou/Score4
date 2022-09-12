@@ -941,7 +941,7 @@ ScoreDocument::setGameRecord(
         const  RecordIndex  idxRecord,
         const  GameResult   &gameRecord)
 {
-    if ( (idxRecord < 0) || (this->m_gameResults.size() <= idxRecord) ) {
+    if ( (idxRecord < 0) || (this->getNumRecords() <= idxRecord) ) {
         return ( ERR_INDEX_OUT_OF_RANGE );
     }
     this->m_gameResults[idxRecord]  = gameRecord;
