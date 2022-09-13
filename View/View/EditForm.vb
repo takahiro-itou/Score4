@@ -106,7 +106,7 @@ Private Sub btnEdit_Click(sender As Object, e As EventArgs) Handles _
 
     Dim selectedRecord As Integer
     Dim gameRecord As Score4Wrapper.Common.GameResult
-    Dim msgAns As System.Windows.Forms.DialogResult
+    ' Dim msgAns As System.Windows.Forms.DialogResult
 
     ' 入力されたデータを集計する。
     gameRecord = new Score4Wrapper.Common.GameResult
