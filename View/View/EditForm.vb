@@ -1,6 +1,7 @@
 ﻿Public Class EditForm
 
 Private m_gameRecord As Score4Wrapper.Document.ScoreDocument
+Private m_editBuffer As Score4Wrapper.Document.ScoreDocument
 
 Private m_currentDate As System.DateTime
 Private m_selectedRecord As Integer
@@ -16,9 +17,11 @@ Public Sub setupSettings(
     Dim i As Integer, numTeams As Integer
     Dim strName As String
 
-    If (Me.m_gameRecord Is Nothing) Then
-        Me.m_gameRecord = objSource
-    End If
+    Me.m_gameRecord = Nothing
+    Me.m_editBuffer = Nothing
+
+    Me.m_gameRecord = Score4Wrapper.Document.ScoreDocument.createCopy(objSource)
+    Me.m_editBuffer = Score4Wrapper.Document.ScoreDocument.createCopy(objSource)
 
     ' チーム一覧を表示する
     With Me.m_gameRecord
