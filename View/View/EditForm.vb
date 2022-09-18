@@ -192,6 +192,7 @@ Private Sub btnEdit_Click(sender As Object, e As EventArgs) Handles _
 
     If (m_selectedRecord < 0) Then
         ' 新規データの追加
+        m_workBuffer.appendGameRecord(gameRecord)
     Else
         ' 既存データの変更
         selectedRecord = m_showIndex(m_selectedRecord)
