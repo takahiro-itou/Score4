@@ -408,6 +408,7 @@ Private Sub mnuScoreEdit_Click(sender As Object, e As EventArgs) Handles _
 
         If .isModified() Then
             ' 変更内容を受け取る
+            .applyEditData(m_scoreData)
         End If
 
         .Dispose()
