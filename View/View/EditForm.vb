@@ -1,10 +1,39 @@
 ﻿Public Class EditForm
 
-Private m_gameRecord As Score4Wrapper.Document.ScoreDocument
+Private m_workBuffer As Score4Wrapper.Document.ScoreDocument
+Private m_editResult As Score4Wrapper.Document.ScoreDocument
 
 Private m_currentDate As System.DateTime
 Private m_selectedRecord As Integer
 Private m_showIndex() As Integer
+Private m_flagModified As Boolean
+
+''========================================================================
+''    変更内容をメインフォーム側のオブジェクトに適用する。
+''========================================================================
+Public Function applyEditData(
+        ByRef objDest As Score4Wrapper.Document.ScoreDocument) As Boolean
+
+    if (m_flagModified = True) Then
+        objDest.copyFrom(m_editResult)
+    End If
+    applyEditData = m_flagModified
+End Function
+
+''========================================================================
+''    フォームでデータを変更していれば True を返す。
+''========================================================================
+Public Function isModified() As Boolean
+    isModified = m_flagModified
+End Function
+
+''========================================================================
+''    変更内容を適用する準備。
+''========================================================================
+Private Sub setEditResult()
+    m_editResult.copyFrom(m_workBuffer)
+    m_flagModified = True
+End Sub
 
 ''========================================================================
 ''    設定の初期値を用意する。
@@ -16,12 +45,14 @@ Public Sub setupSettings(
     Dim i As Integer, numTeams As Integer
     Dim strName As String
 
-    If (Me.m_gameRecord Is Nothing) Then
-        Me.m_gameRecord = objSource
-    End If
+    m_workBuffer = Nothing
+    m_editResult = Nothing
+
+    m_workBuffer = Score4Wrapper.Document.ScoreDocument.createCopy(objSource)
+    m_editResult = Score4Wrapper.Document.ScoreDocument.createCopy(objSource)
 
     ' チーム一覧を表示する
-    With Me.m_gameRecord
+    With Me.m_workBuffer
         numTeams = .getNumTeams()
         cmbTeamHome.Items.Clear()
         cmbTeamAway.Items.Clear()
@@ -54,15 +85,47 @@ Private Sub updateRecordTable(ByVal targetDate As System.DateTime)
     lblDate.Text = targetDate
 
     displayRecordsToGrid(
-        targetDate, m_gameRecord, Me.Font, dgvRecord, m_showIndex)
+        targetDate, m_workBuffer, Me.Font, dgvRecord, m_showIndex)
 
 End Sub
 
 ''========================================================================
-''    「編集」ボタンのクリックイベントハンドラ。
+''    「Apply」 ボタンのクリックイベントハンドラ。
+''
+''    編集フォームを閉じずに、変更を適用する
 ''========================================================================
-Private Sub btnEdit_Click(sender As Object, e As EventArgs) Handles _
-            btnEdit.Click
+Private Sub btnApply_Click(sender As Object, e As EventArgs) Handles _
+            btnApply.Click
+
+    setEditResult()
+    updateRecordTable(m_currentDate)
+
+End Sub
+
+''========================================================================
+''    「Cancel」ボタンのクリックイベントハンドラ。
+''
+''    変更を破棄して、編集フォームを閉じる。
+''========================================================================
+Private Sub btnCancel_Click(sender As Object, e As EventArgs) Handles _
+            btnCancel.Click
+
+    Dim msgAns As System.Windows.Forms.DialogResult
+
+    If (m_flagModified = True) Then
+        msgAns = MessageBox.Show(
+            "Apply ボタンによって既に適用されている変更も取り消しますか？",
+            "Cancel",
+            MessageBoxButtons.YesNo, MessageBoxIcon.Question)
+        If (msgAns = Windows.Forms.DialogResult.Yes) Then
+            m_flagModified = False
+        Else
+            m_flagModified = True
+        End If
+    Else
+        m_flagModified = False
+    End If
+    Me.Close()
 
 End Sub
 
@@ -94,15 +157,63 @@ Private Sub btnDelete_Click(sender As Object, e As EventArgs) Handles _
 
     gameRecord = new Score4Wrapper.Common.GameResult
     With gameRecord
-        .eGameFlags   = Score4Wrapper.RecordFlag.GAME_EMPTY
-        .homeTeam     = 0
-        .awayTeam     = 0
-        .homeScore    = 0
-        .awayScore    = 0
+        .eGameFlags = Score4Wrapper.RecordFlag.GAME_EMPTY
+        .homeTeam   = 0
+        .awayTeam   = 0
+        .homeScore  = 0
+        .awayScore  = 0
     End With
 
-    m_gameRecord.setGameRecord(selectedRecord, gameRecord)
+    m_workBuffer.setGameRecord(selectedRecord, gameRecord)
     updateRecordTable(m_currentDate)
+
+End Sub
+
+''========================================================================
+''    「編集」ボタンのクリックイベントハンドラ。
+''========================================================================
+Private Sub btnEdit_Click(sender As Object, e As EventArgs) Handles _
+            btnEdit.Click
+
+    Dim selectedRecord As Integer
+    Dim gameRecord As Score4Wrapper.Common.GameResult
+    ' Dim msgAns As System.Windows.Forms.DialogResult
+
+    ' 入力されたデータを集計する。
+    gameRecord = new Score4Wrapper.Common.GameResult
+    With gameRecord
+        .eGameFlags = cmbFlags.SelectedIndex
+        .recordDate = m_currentDate
+        .homeTeam   = cmbTeamHome.SelectedIndex
+        .awayTeam   = cmbTeamAway.SelectedIndex
+        .homeScore  = updScoreHome.Value
+        .awayScore  = updScoreAway.Value
+    End With
+
+    If (m_selectedRecord < 0) Then
+        ' 新規データの追加
+        m_workBuffer.appendGameRecord(gameRecord)
+    Else
+        ' 既存データの変更
+        selectedRecord = m_showIndex(m_selectedRecord)
+        m_workBuffer.setGameRecord(selectedRecord, gameRecord)
+    End If
+
+    updateRecordTable(m_currentDate)
+
+End Sub
+
+''========================================================================
+''    「OK」ボタンのクリックイベントハンドラ。
+''
+''    編集フォームを閉じずに、変更を適用する
+''========================================================================
+Private Sub btnOK_Click(sender As Object, e As EventArgs) Handles _
+            btnOK.Click
+
+    setEditResult()
+    m_flagModified = True
+    Me.Close()
 
 End Sub
 
@@ -132,7 +243,7 @@ Private Sub dgvRecord_CellClick( _
     Else
         idxRec = m_showIndex(m_selectedRecord)
         btnEdit.Text = "Edit"
-        gameRecord = m_gameRecord.getGameRecord(idxRec)
+        gameRecord = m_workBuffer.getGameRecord(idxRec)
 
         With gameRecord
             cmbFlags.SelectedIndex = .eGameFlags
