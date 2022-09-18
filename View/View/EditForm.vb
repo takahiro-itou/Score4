@@ -9,6 +9,18 @@ Private m_showIndex() As Integer
 Private m_flagModified As Boolean
 
 ''========================================================================
+''    変更内容をメインフォーム側のオブジェクトに適用する。
+''========================================================================
+Public Function applyEditData(
+        ByRef objDest As Score4Wrapper.Document.ScoreDocument) As Boolean
+
+    if (m_flagModified = True) Then
+        objDest.copyFrom(m_editResult)
+    End If
+    applyEditData = m_flagModified
+End Function
+
+''========================================================================
 ''    フォームでデータを変更していれば True を返す。
 ''========================================================================
 Public Function isModified() As Boolean
