@@ -404,7 +404,13 @@ Private Sub mnuScoreEdit_Click(sender As Object, e As EventArgs) Handles _
 
     With frmEdit
         .setupSettings(m_scoreData, m_currentDate)
-        .Show()
+        .ShowDialog(Me)
+
+        If isModified() Then
+            ' 変更内容を受け取る
+        End If
+
+        .Dispose()
     End With
 
 End Sub
