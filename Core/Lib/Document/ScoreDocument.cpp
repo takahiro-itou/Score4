@@ -166,6 +166,24 @@ ScoreDocument::ScoreDocument()
 }
 
 //----------------------------------------------------------------
+//    インスタンスを初期化する
+//  （コピーコンストラクタ）。
+//
+
+ScoreDocument::ScoreDocument(
+        const   ScoreDocument  &src)
+    : m_leagueInfos(),
+      m_teamInfos  (),
+      m_gameResults(),
+      m_fOptimized (BOOL_FALSE),
+      m_lastActiveDate(0),
+      m_lastRecordDate(0),
+      m_lastImportDate(0)
+{
+    copyFrom(src);
+}
+
+//----------------------------------------------------------------
 //    インスタンスを破棄する
 //  （デストラクタ）。
 //
@@ -470,6 +488,25 @@ ScoreDocument::computeRankRange(
 }
 
 //----------------------------------------------------------------
+//    指定したデータのコピーを作成する。
+//
+
+ScoreDocument  &
+ScoreDocument::copyFrom(
+        const   ScoreDocument  &src)
+{
+    this->m_leagueInfos     = src.m_leagueInfos;
+    this->m_teamInfos       = src.m_teamInfos;
+    this->m_gameResults     = src.m_gameResults;
+    this->m_fOptimized      = src.m_fOptimized;
+    this->m_lastActiveDate  = src.m_lastActiveDate;
+    this->m_lastRecordDate  = src.m_lastRecordDate;
+    this->m_lastImportDate  = src.m_lastImportDate;
+
+    return ( *this );
+}
+
+//----------------------------------------------------------------
 //    試合結果を集計する。
 //
 
@@ -735,6 +772,16 @@ ScoreDocument::makeWinningRateTable(
 }
 
 //----------------------------------------------------------------
+//    ゲームレコードを最適化する。
+//
+
+ErrCode
+ScoreDocument::optimizeGameRecords()
+{
+    return ( ERR_FAILURE );
+}
+
+//----------------------------------------------------------------
 //    チーム情報用の領域を確保する。
 //
 
@@ -912,7 +959,7 @@ ScoreDocument::setGameRecord(
         const  RecordIndex  idxRecord,
         const  GameResult   &gameRecord)
 {
-    if ( (0 <= idxRecord) && (idxRecord < this->m_gameResults.size()) ) {
+    if ( (idxRecord < 0) || (this->getNumRecords() <= idxRecord) ) {
         return ( ERR_INDEX_OUT_OF_RANGE );
     }
     this->m_gameResults[idxRecord]  = gameRecord;
