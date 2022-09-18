@@ -98,6 +98,23 @@ End Sub
 Private Sub btnCancel_Click(sender As Object, e As EventArgs) Handles _
             btnCancel.Click
 
+    Dim msgAns As System.Windows.Forms.DialogResult
+
+    If (m_flagModified = True) Then
+        msgAns = MessageBox.Show(
+            "Apply ボタンによって既に適用されている変更も取り消しますか？",
+            "Cancel",
+            MessageBoxButtons.YesNo, MessageBoxIcon.Question)
+        If (msgAns = Windows.Forms.DialogResult.Yes) Then
+            m_flagModified = False
+        Else
+            m_flagModified = True
+        End If
+    Else
+        m_flagModified = False
+    End If
+    Me.Close()
+
 End Sub
 
 ''========================================================================
