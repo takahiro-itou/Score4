@@ -198,6 +198,10 @@ End Sub
 Private Sub btnOK_Click(sender As Object, e As EventArgs) Handles _
             btnOK.Click
 
+    applyEditData()
+    m_flagModified = True
+    Me.Close()
+
 End Sub
 
 ''========================================================================
