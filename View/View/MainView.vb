@@ -406,7 +406,7 @@ Private Sub mnuScoreEdit_Click(sender As Object, e As EventArgs) Handles _
         .setupSettings(m_scoreData, m_currentDate)
         .ShowDialog(Me)
 
-        If isModified() Then
+        If .isModified() Then
             ' 変更内容を受け取る
         End If
 
