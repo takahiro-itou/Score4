@@ -9,9 +9,16 @@ Private m_showIndex() As Integer
 Private m_flagModified As Boolean
 
 ''========================================================================
+''    変更内容を適用する準備。
+''========================================================================
+Public Sub applyEditData()
+    m_editResult.copyFrom(m_workBuffer)
+    m_flagModified = True
+End Sub
+
+''========================================================================
 ''    フォームでデータを変更していれば True を返す。
 ''========================================================================
-
 Public Function isModified() As Boolean
     isModified = m_flagModified
 End Function
@@ -77,6 +84,9 @@ End Sub
 ''========================================================================
 Private Sub btnApply_Click(sender As Object, e As EventArgs) Handles _
             btnApply.Click
+
+    applyEditData()
+    updateRecordTable(m_currentDate)
 
 End Sub
 
