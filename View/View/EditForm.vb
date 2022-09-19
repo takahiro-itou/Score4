@@ -158,6 +158,7 @@ Private Sub btnDelete_Click(sender As Object, e As EventArgs) Handles _
     gameRecord = new Score4Wrapper.Common.GameResult
     With gameRecord
         .eGameFlags = Score4Wrapper.RecordFlag.GAME_EMPTY
+        .recordDate = m_currentDate
         .homeTeam   = 0
         .awayTeam   = 0
         .homeScore  = 0
