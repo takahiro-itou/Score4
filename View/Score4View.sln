@@ -9,10 +9,11 @@ EndProject
 
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Wrapper.Net48", "Cli.Net4.8\Wrapper.Net48.vcxproj", "{FEEC9268-0C59-452E-BBD8-0644B135BEB6}"
 EndProject
+
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Wrapper.Net60", "Cli.Net6\Wrapper.Net60.vcxproj", "{DA5C3DF0-D3C4-4A63-B233-7BA74BF5E0E0}"
 EndProject
 
-Project("{778DAE3C-4631-46EA-AA77-85C1314464D9}") = "View", "View\View.vbproj", "{01FBEE28-A67A-47FA-B3EF-2906FA5B1070}"
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "View", "View\View.vbproj", "{01FBEE28-A67A-47FA-B3EF-2906FA5B1070}"
 EndProject
 
 Global
@@ -82,6 +83,10 @@ Global
 
     GlobalSection(SolutionProperties) = preSolution
         HideSolutionNode = FALSE
+    EndGlobalSection
+
+    GlobalSection(ExtensibilityGlobals) = postSolution
+        SolutionGuid = {8FC8A769-CBAF-4533-A7EE-ACF39BEB0158}
     EndGlobalSection
 
 EndGlobal
