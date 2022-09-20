@@ -23,6 +23,7 @@ Partial Class MainView
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(MainView))
+        Dim DataGridViewCellStyle0 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
@@ -31,7 +32,6 @@ Partial Class MainView
         Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle9 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
 
         Me.mnuMain = New System.Windows.Forms.MenuStrip()
         Me.mnuFile = New System.Windows.Forms.ToolStripMenuItem()
@@ -349,8 +349,8 @@ Partial Class MainView
         '
         ' colTeam
         '
-        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        Me.colTeam.DefaultCellStyle = DataGridViewCellStyle1
+        DataGridViewCellStyle0.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        Me.colTeam.DefaultCellStyle = DataGridViewCellStyle0
         Me.colTeam.Frozen = True
         resources.ApplyResources(Me.colTeam, "colTeam")
         Me.colTeam.Name = "colTeam"
@@ -359,8 +359,8 @@ Partial Class MainView
         '
         ' colTotal
         '
-        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.colTotal.DefaultCellStyle = DataGridViewCellStyle2
+        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.colTotal.DefaultCellStyle = DataGridViewCellStyle1
         resources.ApplyResources(Me.colTotal, "colTotal")
         Me.colTotal.Name = "colTotal"
         Me.colTotal.ReadOnly = True
@@ -368,8 +368,8 @@ Partial Class MainView
         '
         ' colWon
         '
-        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.colWon.DefaultCellStyle = DataGridViewCellStyle3
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.colWon.DefaultCellStyle = DataGridViewCellStyle2
         resources.ApplyResources(Me.colWon, "colWon")
         Me.colWon.Name = "colWon"
         Me.colWon.ReadOnly = True
@@ -377,8 +377,8 @@ Partial Class MainView
         '
         ' colLost
         '
-        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.colLost.DefaultCellStyle = DataGridViewCellStyle4
+        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.colLost.DefaultCellStyle = DataGridViewCellStyle3
         resources.ApplyResources(Me.colLost, "colLost")
         Me.colLost.Name = "colLost"
         Me.colLost.ReadOnly = True
@@ -386,8 +386,8 @@ Partial Class MainView
         '
         ' colDraw
         '
-        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.colDraw.DefaultCellStyle = DataGridViewCellStyle5
+        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.colDraw.DefaultCellStyle = DataGridViewCellStyle4
         resources.ApplyResources(Me.colDraw, "colDraw")
         Me.colDraw.Name = "colDraw"
         Me.colDraw.ReadOnly = True
@@ -395,8 +395,8 @@ Partial Class MainView
         '
         ' colDiff
         '
-        DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.colDiff.DefaultCellStyle = DataGridViewCellStyle6
+        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.colDiff.DefaultCellStyle = DataGridViewCellStyle5
         resources.ApplyResources(Me.colDiff, "colDiff")
         Me.colDiff.Name = "colDiff"
         Me.colDiff.ReadOnly = True
@@ -404,8 +404,8 @@ Partial Class MainView
         '
         ' colPercent
         '
-        DataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.colPercent.DefaultCellStyle = DataGridViewCellStyle7
+        DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.colPercent.DefaultCellStyle = DataGridViewCellStyle6
         resources.ApplyResources(Me.colPercent, "colPercent")
         Me.colPercent.Name = "colPercent"
         Me.colPercent.ReadOnly = True
@@ -413,8 +413,8 @@ Partial Class MainView
         '
         ' colMagic
         '
-        DataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.colMagic.DefaultCellStyle = DataGridViewCellStyle8
+        DataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.colMagic.DefaultCellStyle = DataGridViewCellStyle7
         resources.ApplyResources(Me.colMagic, "colMagic")
         Me.colMagic.Name = "colMagic"
         Me.colMagic.ReadOnly = True
@@ -422,8 +422,8 @@ Partial Class MainView
         '
         ' colRank
         '
-        DataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.colRank.DefaultCellStyle = DataGridViewCellStyle9
+        DataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.colRank.DefaultCellStyle = DataGridViewCellStyle8
         resources.ApplyResources(Me.colRank, "colRank")
         Me.colRank.Name = "colRank"
         Me.colRank.ReadOnly = True
