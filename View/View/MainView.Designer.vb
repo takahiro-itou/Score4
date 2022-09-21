@@ -110,38 +110,53 @@ Partial Class MainView
         '
         ' mnuFileNew
         '
-        Me.mnuFileNew.Name = "mnuFileNew"
         resources.ApplyResources(Me.mnuFileNew, "mnuFileNew")
+        Me.mnuFileNew.Name = "mnuFileNew"
         '
         ' mnuFileOpen
         '
-        Me.mnuFileOpen.Name = "mnuFileOpen"
         resources.ApplyResources(Me.mnuFileOpen, "mnuFileOpen")
+        Me.mnuFileOpen.Name = "mnuFileOpen"
         '
         ' mnuFileSep0
         '
-        Me.mnuFileSep0.Name = "mnuFileSep0"
         resources.ApplyResources(Me.mnuFileSep0, "mnuFileSep0")
+        Me.mnuFileSep0.Name = "mnuFileSep0"
         '
         ' mnuFileSave
         '
-        Me.mnuFileSave.Name = "mnuFileSave"
         resources.ApplyResources(Me.mnuFileSave, "mnuFileSave")
+        Me.mnuFileSave.Name = "mnuFileSave"
         '
         ' mnuFileSaveAs
         '
-        Me.mnuFileSaveAs.Name = "mnuFileSaveAs"
         resources.ApplyResources(Me.mnuFileSaveAs, "mnuFileSaveAs")
+        Me.mnuFileSaveAs.Name = "mnuFileSaveAs"
         '
         ' mnuFileSep1
         '
-        Me.mnuFileSep1.Name = "mnuFileSep1"
         resources.ApplyResources(Me.mnuFileSep1, "mnuFileSep1")
+        Me.mnuFileSep1.Name = "mnuFileSep1"
+        '
+        ' mnuFileOpenText
+        '
+        resources.ApplyResources(Me.mnuFileOpenText, "mnuFileOpenText")
+        Me.mnuFileOpenText.Name = "mnuFileOpenText"
+        '
+        ' mnuFileExportText
+        '
+        resources.ApplyResources(Me.mnuFileExportText, "mnuFileExportText")
+        Me.mnuFileExportText.Name = "mnuFileExportText"
+        '
+        ' mnuFileSep2
+        '
+        resources.ApplyResources(Me.mnuFileSep2, "mnuFileSep2")
+        Me.mnuFileSep2.Name = "mnuFileSep2"
         '
         ' mnuFileExit
         '
-        Me.mnuFileExit.Name = "mnuFileExit"
         resources.ApplyResources(Me.mnuFileExit, "mnuFileExit")
+        Me.mnuFileExit.Name = "mnuFileExit"
         '
         ' mnuScore
         '
