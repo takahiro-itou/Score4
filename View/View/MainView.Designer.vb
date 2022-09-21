@@ -160,44 +160,44 @@ Partial Class MainView
         '
         ' mnuScore
         '
+        resources.ApplyResources(Me.mnuScore, "mnuScore")
         Me.mnuScore.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuScoreEdit, Me.mnuScoreDetail, Me.mnuScoreImport, Me.mnuScoreSep0, Me.mnuScoreSettings, Me.mnuScoreSep1, Me.mnuScoreRefresh})
         Me.mnuScore.Name = "mnuScore"
-        resources.ApplyResources(Me.mnuScore, "mnuScore")
         '
         ' mnuScoreEdit
         '
-        Me.mnuScoreEdit.Name = "mnuScoreEdit"
         resources.ApplyResources(Me.mnuScoreEdit, "mnuScoreEdit")
+        Me.mnuScoreEdit.Name = "mnuScoreEdit"
         '
         ' mnuScoreDetail
         '
-        Me.mnuScoreDetail.Name = "mnuScoreDetail"
         resources.ApplyResources(Me.mnuScoreDetail, "mnuScoreDetail")
+        Me.mnuScoreDetail.Name = "mnuScoreDetail"
         '
         ' mnuScoreImport
         '
-        Me.mnuScoreImport.Name = "mnuScoreImport"
         resources.ApplyResources(Me.mnuScoreImport, "mnuScoreImport")
+        Me.mnuScoreImport.Name = "mnuScoreImport"
         '
         ' mnuScoreSep0
         '
-        Me.mnuScoreSep0.Name = "mnuScoreSep0"
         resources.ApplyResources(Me.mnuScoreSep0, "mnuScoreSep0")
+        Me.mnuScoreSep0.Name = "mnuScoreSep0"
         '
         ' mnuScoreSettings
         '
-        Me.mnuScoreSettings.Name = "mnuScoreSettings"
         resources.ApplyResources(Me.mnuScoreSettings, "mnuScoreSettings")
+        Me.mnuScoreSettings.Name = "mnuScoreSettings"
         '
         ' mnuScoreSep1
         '
-        Me.mnuScoreSep1.Name = "mnuScoreSep1"
         resources.ApplyResources(Me.mnuScoreSep1, "mnuScoreSep1")
+        Me.mnuScoreSep1.Name = "mnuScoreSep1"
         '
         ' mnuScoreRefresh
         '
-        Me.mnuScoreRefresh.Name = "mnuScoreRefresh"
         resources.ApplyResources(Me.mnuScoreRefresh, "mnuScoreRefresh")
+        Me.mnuScoreRefresh.Name = "mnuScoreRefresh"
         '
         ' mnuMagic
         '
