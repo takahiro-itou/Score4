@@ -318,11 +318,11 @@ Partial Class MainView
         '
         ' dgvExtra
         '
+        resources.ApplyResources(Me.dgvExtra, "dgvExtra")
         Me.dgvExtra.AllowUserToAddRows = False
         Me.dgvExtra.AllowUserToDeleteRows = False
         Me.dgvExtra.AllowUserToResizeColumns = True
         Me.dgvExtra.AllowUserToResizeRows = False
-        resources.ApplyResources(Me.dgvExtra, "dgvExtra")
         Me.dgvExtra.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dgvExtra.MultiSelect = False
         Me.dgvExtra.Name = "dgvExtra"
