@@ -280,13 +280,12 @@ Partial Class MainView
         '
         ' dgvScore
         '
+        resources.ApplyResources(Me.dgvScore, "dgvScore")
         Me.dgvScore.AllowUserToAddRows = False
         Me.dgvScore.AllowUserToDeleteRows = False
-        Me.dgvScore.AllowUserToResizeColumns = True
         Me.dgvScore.AllowUserToResizeRows = False
         Me.dgvScore.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dgvScore.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.colTeam, Me.colTotal, Me.colWon, Me.colLost, Me.colDraw, Me.colDiff, Me.colPercent, Me.colMagic, Me.colRank})
-        resources.ApplyResources(Me.dgvScore, "dgvScore")
         Me.dgvScore.MultiSelect = False
         Me.dgvScore.Name = "dgvScore"
         Me.dgvScore.ReadOnly = True
