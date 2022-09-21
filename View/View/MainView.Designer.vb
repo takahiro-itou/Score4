@@ -201,39 +201,39 @@ Partial Class MainView
         '
         ' mnuMagic
         '
+        resources.ApplyResources(Me.mnuMagic, "mnuMagic")
         Me.mnuMagic.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuMagicVictory, Me.mnuMagicPlayoff, Me.mnuMagicSep0, Me.mnuMagicEasy, Me.mnuMagicSep1, Me.mnuMagicLine})
         Me.mnuMagic.Name = "mnuMagic"
-        resources.ApplyResources(Me.mnuMagic, "mnuMagic")
         '
         ' mnuMagicVictory
         '
-        Me.mnuMagicVictory.Name = "mnuMagicVictory"
         resources.ApplyResources(Me.mnuMagicVictory, "mnuMagicVictory")
+        Me.mnuMagicVictory.Name = "mnuMagicVictory"
         '
         ' mnuMagicPlayoff
         '
-        Me.mnuMagicPlayoff.Name = "mnuMagicPlayoff"
         resources.ApplyResources(Me.mnuMagicPlayoff, "mnuMagicPlayoff")
+        Me.mnuMagicPlayoff.Name = "mnuMagicPlayoff"
         '
         ' mnuMagicSep0
         '
-        Me.mnuMagicSep0.Name = "mnuMagicSep0"
         resources.ApplyResources(Me.mnuMagicSep0, "mnuMagicSep0")
+        Me.mnuMagicSep0.Name = "mnuMagicSep0"
         '
         ' mnuMagicEasy
         '
-        Me.mnuMagicEasy.Name = "mnuMagicEasy"
         resources.ApplyResources(Me.mnuMagicEasy, "mnuMagicEasy")
+        Me.mnuMagicEasy.Name = "mnuMagicEasy"
         '
         ' mnuMagicSep1
         '
-        Me.mnuMagicSep1.Name = "mnuMagicSep1"
         resources.ApplyResources(Me.mnuMagicSep1, "mnuMagicSep1")
+        Me.mnuMagicSep1.Name = "mnuMagicSep1"
         '
         ' mnuMagicLine
         '
-        Me.mnuMagicLine.Name = "mnuMagicLine"
         resources.ApplyResources(Me.mnuMagicLine, "mnuMagicLine")
+        Me.mnuMagicLine.Name = "mnuMagicLine"
         '
         ' mnuOptions
         '
