@@ -23,7 +23,6 @@ Partial Class MainView
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(MainView))
-        Dim DataGridViewCellStyle0 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
@@ -32,6 +31,7 @@ Partial Class MainView
         Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle9 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
 
         Me.mnuMain = New System.Windows.Forms.MenuStrip()
         Me.mnuFile = New System.Windows.Forms.ToolStripMenuItem()
@@ -41,6 +41,9 @@ Partial Class MainView
         Me.mnuFileSave = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuFileSaveAs = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuFileSep1 = New System.Windows.Forms.ToolStripSeparator()
+        Me.mnuFileOpenText = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuFileExportText = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuFileSep2 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuFileExit = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuScore = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuScoreEdit = New System.Windows.Forms.ToolStripMenuItem()
@@ -70,9 +73,9 @@ Partial Class MainView
         Me.lblDate = New System.Windows.Forms.Label()
         Me.dgvScore = New System.Windows.Forms.DataGridView()
         Me.chkSchedule = New System.Windows.Forms.CheckBox()
-        Me.optShowWins = New System.Windows.Forms.RadioButton()
-        Me.optShowMagic = New System.Windows.Forms.RadioButton()
         Me.optShowRest = New System.Windows.Forms.RadioButton()
+        Me.optShowMagic = New System.Windows.Forms.RadioButton()
+        Me.optShowWins = New System.Windows.Forms.RadioButton()
         Me.dgvExtra = New System.Windows.Forms.DataGridView()
 
         Me.colTeam = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -87,22 +90,23 @@ Partial Class MainView
 
         Me.mnuMain.SuspendLayout()
         Me.fraScore.SuspendLayout()
-        CType(Me.dgvExtra, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.fraDate.SuspendLayout()
         CType(Me.dgvScore, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.dgvExtra, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
 
         '
         ' mnuMain
         '
-        Me.mnuMain.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuFile, Me.mnuScore, Me.mnuMagic, Me.mnuOptions})
         resources.ApplyResources(Me.mnuMain, "mnuMain")
+        Me.mnuMain.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuFile, Me.mnuScore, Me.mnuMagic, Me.mnuOptions})
         Me.mnuMain.Name = "mnuMain"
         '
         ' mnuFile
         '
-        Me.mnuFile.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuFileNew, Me.mnuFileOpen, Me.mnuFileSep0, Me.mnuFileSave, Me.mnuFileSaveAs, Me.mnuFileSep1, Me.mnuFileExit})
-        Me.mnuFile.Name = "mnuFile"
         resources.ApplyResources(Me.mnuFile, "mnuFile")
+        Me.mnuFile.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuFileNew, Me.mnuFileOpen, Me.mnuFileSep0, Me.mnuFileSave, Me.mnuFileSaveAs, Me.mnuFileSep1, Me.mnuFileOpenText, Me.mnuFileExportText, Me.mnuFileSep2, Me.mnuFileExit})
+        Me.mnuFile.Name = "mnuFile"
         '
         ' mnuFileNew
         '
@@ -349,8 +353,8 @@ Partial Class MainView
         '
         ' colTeam
         '
-        DataGridViewCellStyle0.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        Me.colTeam.DefaultCellStyle = DataGridViewCellStyle0
+        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        Me.colTeam.DefaultCellStyle = DataGridViewCellStyle1
         Me.colTeam.Frozen = True
         resources.ApplyResources(Me.colTeam, "colTeam")
         Me.colTeam.Name = "colTeam"
@@ -359,8 +363,8 @@ Partial Class MainView
         '
         ' colTotal
         '
-        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.colTotal.DefaultCellStyle = DataGridViewCellStyle1
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.colTotal.DefaultCellStyle = DataGridViewCellStyle2
         resources.ApplyResources(Me.colTotal, "colTotal")
         Me.colTotal.Name = "colTotal"
         Me.colTotal.ReadOnly = True
@@ -368,8 +372,8 @@ Partial Class MainView
         '
         ' colWon
         '
-        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.colWon.DefaultCellStyle = DataGridViewCellStyle2
+        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.colWon.DefaultCellStyle = DataGridViewCellStyle3
         resources.ApplyResources(Me.colWon, "colWon")
         Me.colWon.Name = "colWon"
         Me.colWon.ReadOnly = True
@@ -377,8 +381,8 @@ Partial Class MainView
         '
         ' colLost
         '
-        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.colLost.DefaultCellStyle = DataGridViewCellStyle3
+        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.colLost.DefaultCellStyle = DataGridViewCellStyle4
         resources.ApplyResources(Me.colLost, "colLost")
         Me.colLost.Name = "colLost"
         Me.colLost.ReadOnly = True
@@ -386,8 +390,8 @@ Partial Class MainView
         '
         ' colDraw
         '
-        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.colDraw.DefaultCellStyle = DataGridViewCellStyle4
+        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.colDraw.DefaultCellStyle = DataGridViewCellStyle5
         resources.ApplyResources(Me.colDraw, "colDraw")
         Me.colDraw.Name = "colDraw"
         Me.colDraw.ReadOnly = True
@@ -395,8 +399,8 @@ Partial Class MainView
         '
         ' colDiff
         '
-        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.colDiff.DefaultCellStyle = DataGridViewCellStyle5
+        DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.colDiff.DefaultCellStyle = DataGridViewCellStyle6
         resources.ApplyResources(Me.colDiff, "colDiff")
         Me.colDiff.Name = "colDiff"
         Me.colDiff.ReadOnly = True
@@ -404,8 +408,8 @@ Partial Class MainView
         '
         ' colPercent
         '
-        DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.colPercent.DefaultCellStyle = DataGridViewCellStyle6
+        DataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.colPercent.DefaultCellStyle = DataGridViewCellStyle7
         resources.ApplyResources(Me.colPercent, "colPercent")
         Me.colPercent.Name = "colPercent"
         Me.colPercent.ReadOnly = True
@@ -413,8 +417,8 @@ Partial Class MainView
         '
         ' colMagic
         '
-        DataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.colMagic.DefaultCellStyle = DataGridViewCellStyle7
+        DataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.colMagic.DefaultCellStyle = DataGridViewCellStyle8
         resources.ApplyResources(Me.colMagic, "colMagic")
         Me.colMagic.Name = "colMagic"
         Me.colMagic.ReadOnly = True
@@ -422,8 +426,8 @@ Partial Class MainView
         '
         ' colRank
         '
-        DataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        Me.colRank.DefaultCellStyle = DataGridViewCellStyle8
+        DataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        Me.colRank.DefaultCellStyle = DataGridViewCellStyle9
         resources.ApplyResources(Me.colRank, "colRank")
         Me.colRank.Name = "colRank"
         Me.colRank.ReadOnly = True
@@ -458,6 +462,9 @@ Partial Class MainView
     Friend WithEvents mnuFileSaveAs As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents mnuFileSep1 As System.Windows.Forms.ToolStripSeparator
     Friend WithEvents mnuFileExit As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents mnuFileOpenText As ToolStripMenuItem
+    Friend WithEvents mnuFileExportText As ToolStripMenuItem
+    Friend WithEvents mnuFileSep2 As ToolStripSeparator
     Friend WithEvents mnuScore As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents mnuScoreEdit As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents mnuScoreDetail As System.Windows.Forms.ToolStripMenuItem
