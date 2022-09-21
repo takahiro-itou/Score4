@@ -250,10 +250,14 @@ Partial Class MainView
         ' dlgOpen
         '
         Me.dlgOpen.FileName = "OpenFileDialog1"
-
+        resources.ApplyResources(Me.dlgOpen, "dlgOpen")
+        '
+        ' dlgSave
+        '
+        resources.ApplyResources(Me.dlgSave, "dlgSave")
 
         '
-        'tabLeague
+        ' tabLeague
         '
         resources.ApplyResources(Me.tabLeague, "tabLeague")
         Me.tabLeague.Name = "tabLeague"
@@ -264,15 +268,12 @@ Partial Class MainView
         '
         resources.ApplyResources(Me.fraScore, "fraScore")
         Me.fraScore.Controls.Add(Me.fraDate)
-        Me.fraDate.Controls.Add(Me.mnvDate)
-        Me.fraDate.Controls.Add(Me.lblDate)
         Me.fraScore.Controls.Add(Me.dgvScore)
         Me.fraScore.Controls.Add(Me.chkSchedule)
         Me.fraScore.Controls.Add(Me.optShowRest)
         Me.fraScore.Controls.Add(Me.optShowMagic)
         Me.fraScore.Controls.Add(Me.optShowWins)
         Me.fraScore.Controls.Add(Me.dgvExtra)
-
         Me.fraScore.Name = "fraScore"
         Me.fraScore.TabStop = False
 
@@ -295,10 +296,10 @@ Partial Class MainView
         '
         ' fraDate
         '
+        resources.ApplyResources(Me.fraDate, "fraDate")
         Me.fraDate.Controls.Add(Me.mnvDate)
         Me.fraDate.Controls.Add(Me.lblDate)
-        resources.ApplyResources(Me.fraDate, "fraDate")
-        Me.fraDate.Name = "fraScore"
+        Me.fraDate.Name = "fraDate"
         Me.fraDate.TabStop = False
 
         '
