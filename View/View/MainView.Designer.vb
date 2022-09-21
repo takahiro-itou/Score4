@@ -237,14 +237,14 @@ Partial Class MainView
         '
         ' mnuOptions
         '
+        resources.ApplyResources(Me.mnuOptions, "mnuOptions")
         Me.mnuOptions.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuOptionsFont})
         Me.mnuOptions.Name = "mnuOptions"
-        resources.ApplyResources(Me.mnuOptions, "mnuOptions")
         '
         ' mnuOptionsFont
         '
-        Me.mnuOptionsFont.Name = "mnuOptionsFont"
         resources.ApplyResources(Me.mnuOptionsFont, "mnuOptionsFont")
+        Me.mnuOptionsFont.Name = "mnuOptionsFont"
 
         '
         ' dlgOpen
