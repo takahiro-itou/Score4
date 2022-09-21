@@ -332,18 +332,18 @@ Partial Class MainView
         Me.dgvExtra.RowTemplate.Height = 21
 
         '
-        'chkSchedule
+        ' chkSchedule
         '
-        Me.chkSchedule.BackColor = System.Drawing.SystemColors.Window
         resources.ApplyResources(Me.chkSchedule, "chkSchedule")
+        Me.chkSchedule.BackColor = System.Drawing.SystemColors.Window
         Me.chkSchedule.Name = "chkSchedule"
         Me.chkSchedule.UseVisualStyleBackColor = False
 
         '
         ' optShowWins
         '
-        Me.optShowWins.BackColor = System.Drawing.SystemColors.Window
         resources.ApplyResources(Me.optShowWins, "optShowWins")
+        Me.optShowWins.BackColor = System.Drawing.SystemColors.Window
         Me.optShowWins.Name = "optShowWins"
         Me.optShowWins.TabStop = True
         Me.optShowWins.UseVisualStyleBackColor = False
@@ -351,8 +351,8 @@ Partial Class MainView
         '
         ' optShowMagic
         '
-        Me.optShowMagic.BackColor = System.Drawing.SystemColors.Window
         resources.ApplyResources(Me.optShowMagic, "optShowMagic")
+        Me.optShowMagic.BackColor = System.Drawing.SystemColors.Window
         Me.optShowMagic.Name = "optShowMagic"
         Me.optShowMagic.TabStop = True
         Me.optShowMagic.UseVisualStyleBackColor = False
@@ -360,8 +360,8 @@ Partial Class MainView
         '
         ' optShowRest
         '
-        Me.optShowRest.BackColor = System.Drawing.SystemColors.Window
         resources.ApplyResources(Me.optShowRest, "optShowRest")
+        Me.optShowRest.BackColor = System.Drawing.SystemColors.Window
         Me.optShowRest.Name = "optShowRest"
         Me.optShowRest.TabStop = True
         Me.optShowRest.UseVisualStyleBackColor = False
@@ -450,7 +450,7 @@ Partial Class MainView
         Me.colRank.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
 
         '
-        'MainView
+        ' MainView
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
@@ -462,8 +462,9 @@ Partial Class MainView
         Me.mnuMain.ResumeLayout(False)
         Me.mnuMain.PerformLayout()
         Me.fraScore.ResumeLayout(False)
-        CType(Me.dgvExtra, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.fraDate.ResumeLayout(False)
         CType(Me.dgvScore, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.dgvExtra, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
