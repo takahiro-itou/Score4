@@ -354,6 +354,18 @@ DocumentFile::readFromBinaryFile(
 }
 
 //----------------------------------------------------------------
+//    データをテキストファイルから読み込む。
+//
+
+ErrCode
+DocumentFile::readFromTextFile(
+        const  std::string  &fileName,
+        ScoreDocument  *    ptrDoc)
+{
+    return ( ERR_FAILURE );
+}
+
+//----------------------------------------------------------------
 //    データをテキストストリームから読み込む。
 //
 
