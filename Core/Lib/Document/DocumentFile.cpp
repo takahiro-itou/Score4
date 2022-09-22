@@ -27,6 +27,7 @@
 #include    "Score4Core/Common/TextParser.h"
 
 #include    <fcntl.h>
+#include    <fstream>
 #include    <memory.h>
 #include    <sstream>
 #include    <stdexcept>
@@ -362,7 +363,8 @@ DocumentFile::readFromTextFile(
         const  std::string  &fileName,
         ScoreDocument  *    ptrDoc)
 {
-    return ( ERR_FAILURE );
+    std::ifstream   ifs(fileName.c_str());
+    return ( readFromTextStream(ifs, ptrDoc) );
 }
 
 //----------------------------------------------------------------
