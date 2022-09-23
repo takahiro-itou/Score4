@@ -101,6 +101,34 @@ Private Function openScoreDataFromBinary(ByVal fileName As String) As Boolean
 End Function
 
 ''========================================================================
+''    ファイルを開いてデータを読み込む。
+''========================================================================
+Private Function openScoreDataFromText(ByVal fileName As String) As Boolean
+
+    Dim retVal As Score4Wrapper.ErrCode
+    Dim msgAns As System.Windows.Forms.DialogResult
+
+    Do
+        retVal = Score4Wrapper.Document.DocumentFile.readFromTextFile(
+            fileName, Me.m_scoreData)
+        If retVal = Score4Wrapper.ErrCode.ERR_SUCCESS Then
+            Exit Do
+        End If
+
+        msgAns = MessageBox.Show(
+            "データの読み込みに失敗しました。再試行しますか？", "Error",
+             MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation)
+        If (msgAns = vbNo) Then
+            openScoreDataFromText = False
+            Exit Function
+        End If
+    Loop Until (retVal = Score4Wrapper.ErrCode.ERR_SUCCESS)
+
+    openScoreDataFromText = postprocessReadScoreData(fileName)
+
+End Function
+
+''========================================================================
 ''    データを読み込んだ後の処理を行う。
 '========================================================================
 Private Function postprocessReadScoreData(ByVal fileName As String) As Boolean
