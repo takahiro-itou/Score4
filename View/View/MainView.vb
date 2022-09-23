@@ -356,6 +356,28 @@ Private Sub mnuFileOpen_Click(sender As Object, e As EventArgs) Handles _
 End Sub
 
 ''========================================================================
+''    メニュー「ファイル」－「テキストを開く」
+''========================================================================
+Private Sub mnuFileOpenText_Click(sender As Object, e As EventArgs) Handles _
+            mnuFileOpenText.Click
+
+    If isModificationClean() = False Then Exit Sub
+
+    With dlgOpen
+        .DefaultExt = ".csv"
+        .FileName = m_lastFileName
+        .Filter = "Text files(*.csv;*.txt)|*.csv;*.txt|All files(*.*)|*.*"
+        .FilterIndex = 1
+        .InitialDirectory = m_appPath
+
+        If .ShowDialog() = DialogResult.OK Then
+            openScoreDataFromText(.FileName)
+        End If
+    End With
+
+End Sub
+
+''========================================================================
 ''    メニュー「ファイル」－「上書き保存」
 ''========================================================================
 Private Sub mnuFileSave_Click(sender As Object, e As EventArgs) Handles _
