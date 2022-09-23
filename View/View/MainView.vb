@@ -172,6 +172,25 @@ Private Function postprocessReadScoreData(ByVal fileName As String) As Boolean
 End Function
 
 ''========================================================================
+''    データを保存した後の処理を行う。
+'========================================================================
+Private Function postprocessSaveScoreData(ByVal fileName As String) As Boolean
+
+    ' 表示内容を最新の情報に更新する。
+    m_flagModified = False
+    updateScoreView()
+
+    MessageBox.Show(
+        "保存は正常に完了しました。", "Save",
+        MessageBoxButtons.OK, MessageBoxIcon.Information)
+    m_lastFileName = fileName
+
+    postprocessSaveScoreData = True
+
+End Function
+
+
+''========================================================================
 ''    データをインポートする。
 ''========================================================================
 Private Function processImportData(ByVal importAutoStart As Boolean) As Boolean
@@ -225,15 +244,7 @@ Private Function saveScoreData(ByVal fileName As String) As Boolean
         End If
     Loop Until (retVal = Score4Wrapper.ErrCode.ERR_SUCCESS)
 
-    m_flagModified = False
-    updateScoreView()
-
-    MessageBox.Show(
-        "保存は正常に完了しました。", "Save",
-        MessageBoxButtons.OK, MessageBoxIcon.Information)
-    m_lastFileName = fileName
-
-    saveScoreData = True
+    saveScoreData = postprocessSaveScoreData(fileName)
 
 End Function
 
