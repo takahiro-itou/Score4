@@ -96,7 +96,6 @@ Private Function openScoreDataFromBinary(ByVal fileName As String) As Boolean
         End If
     Loop Until (retVal = Score4Wrapper.ErrCode.ERR_SUCCESS)
 
-    m_lastFileName = fileName
     openScoreDataFromBinary = postprocessReadScoreData(fileName)
 
 End Function
@@ -125,8 +124,7 @@ Private Function openScoreDataFromText(ByVal fileName As String) As Boolean
         End If
     Loop Until (retVal = Score4Wrapper.ErrCode.ERR_SUCCESS)
 
-    m_lastFileName = ""
-    openScoreDataFromText = postprocessReadScoreData(fileName)
+    openScoreDataFromText = postprocessReadScoreData("")
 
 End Function
 
@@ -144,6 +142,7 @@ Private Function postprocessReadScoreData(ByVal fileName As String) As Boolean
 
     MessageBox.Show("ロードは正常に完了しました", "Load",
                     MessageBoxButtons.OK, MessageBoxIcon.Information)
+    m_lastFileName = fileName
 
     If (flagAutoImport) Then
         msgAns = MessageBox.Show(
