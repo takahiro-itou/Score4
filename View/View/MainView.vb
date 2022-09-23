@@ -84,7 +84,7 @@ Private Function openScoreDataFile(
     Dim msgAns As System.Windows.Forms.DialogResult
 
     Do
-        If (Not flagBinary) Then
+        If (flagBinary = False) Then
             retVal = Score4Wrapper.Document.DocumentFile.readFromTextFile(
                 fileName, Me.m_scoreData)
         Else
@@ -117,7 +117,7 @@ Private Function openScoreDataFromBinary(ByVal fileName As String) As Boolean
 
     retVal = openScoreDataFile(fileName, True)
     openScoreDataFromBinary = retVal
-    If (Not retVal) Then
+    If (retVal = False) Then
         Exit Function
     End If
     openScoreDataFromBinary = postprocessReadScoreData(fileName)
@@ -133,7 +133,7 @@ Private Function openScoreDataFromText(ByVal fileName As String) As Boolean
 
     retVal = openScoreDataFile(fileName, False)
     openScoreDataFromText = retVal
-    If (Not retVal) Then
+    If (retVal = False) Then
         Exit Function
     End If
     openScoreDataFromText = postprocessReadScoreData("")
@@ -223,13 +223,21 @@ End Function
 ''========================================================================
 ''    データをファイルに保存する。
 ''========================================================================
-Private Function saveScoreDataToBinary(ByVal fileName As String) As Boolean
+Private Function saveScoreDataFile(
+        ByVal fileName As String,
+        ByVal flagBinary As Boolean) As Boolean
+
     Dim retVal As Score4Wrapper.ErrCode
     Dim msgAns As System.Windows.Forms.DialogResult
 
     Do
-        retVal = Score4Wrapper.Document.DocumentFile.saveToBinaryFile(
-            Me.m_scoreData, fileName)
+        If (flagBinary = False) Then
+            retVal = Score4Wrapper.Document.DocumentFile.saveToTextFile(
+                Me.m_scoreData, fileName)
+        Else
+            retVal = Score4Wrapper.Document.DocumentFile.saveToBinaryFile(
+                Me.m_scoreData, fileName)
+        End If
         If retVal = Score4Wrapper.ErrCode.ERR_SUCCESS Then
             Exit Do
         End If
@@ -239,11 +247,27 @@ Private Function saveScoreDataToBinary(ByVal fileName As String) As Boolean
             "Error",
             MessageBoxButtons.YesNo)
         If (msgAns = vbNo) Then
-            saveScoreDataToBinary = False
+            saveScoreDataFile = False
             Exit Function
         End If
     Loop Until (retVal = Score4Wrapper.ErrCode.ERR_SUCCESS)
 
+    saveScoreDataFile = True
+
+End Function
+
+''========================================================================
+''    データをファイルに保存する。
+''========================================================================
+Private Function saveScoreDataToBinary(ByVal fileName As String) As Boolean
+
+    Dim retVal As Boolean
+
+    retVal = saveScoreDataFile(fileName, True)
+    saveScoreDataToBinary = retVal
+    If (retVal = False) Then
+        Exit Function
+    End If
     saveScoreDataToBinary = postprocessSaveScoreData(fileName)
 
 End Function
