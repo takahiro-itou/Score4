@@ -96,6 +96,18 @@ Private Function openScoreDataFromBinary(ByVal fileName As String) As Boolean
         End If
     Loop Until (retVal = Score4Wrapper.ErrCode.ERR_SUCCESS)
 
+    openScoreDataFromBinary = postprocessReadScoreData(fileName)
+
+End Function
+
+''========================================================================
+''    データを読み込んだ後の処理を行う。
+'========================================================================
+Private Function postprocessReadScoreData(ByVal fileName As String) As Boolean
+
+    Dim msgAns As System.Windows.Forms.DialogResult
+    Dim flagAutoImport As Boolean = False
+
     ' 表示内容を最新の情報に更新する。
     m_flagModified = False
     updateScoreView()
@@ -103,8 +115,6 @@ Private Function openScoreDataFromBinary(ByVal fileName As String) As Boolean
     MessageBox.Show("ロードは正常に完了しました", "Load",
                     MessageBoxButtons.OK, MessageBoxIcon.Information)
     m_lastFileName = fileName
-
-    Dim flagAutoImport As Boolean = False
 
     If (flagAutoImport) Then
         msgAns = MessageBox.Show(
@@ -117,7 +127,8 @@ Private Function openScoreDataFromBinary(ByVal fileName As String) As Boolean
     End If
 
     mnvDate.SelectionStart = m_scoreData.lastActiveDate
-    Return True
+    postprocessReadScoreData = True
+
 End Function
 
 ''========================================================================
