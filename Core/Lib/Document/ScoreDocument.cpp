@@ -300,6 +300,26 @@ ScoreDocument::calculateMagicNumbers(
 DateSerial
 ScoreDocument::checkLastDate()
 {
+    DateSerial  recordDate  = 0;
+
+    this->m_lastActiveDate  = 0;
+    this->m_lastRecordDate  = 0;
+
+    const  RecordIndex
+        numRecords  = static_cast<RecordIndex>(this->m_gameResults.size());
+    for ( RecordIndex i = 0; i < numRecords; ++ i ) {
+        const   GameResult  &gr = this->m_gameResults.at(i);
+        if ( gr.eGameFlags == GAME_EMPTY ) {
+            continue;
+        }
+        recordDate  = gr.recordDate;
+        if ( gr.eGameFlags == GAME_RESULT ) {
+            updateLastDate(BOOL_FALSE, recordDate);
+        } else {
+            updateLastDate(BOOL_TRUE,  recordDate);
+        }
+    }
+
     return ( this->m_lastRecordDate );
 }
 
