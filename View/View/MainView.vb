@@ -54,7 +54,8 @@ Private Sub moveWindowToStartPosition()
     Dim fw As Integer = Me.Width
     Dim fh As Integer = Me.Height
 
-    Dim sc As System.Windows.Forms.Screen = System.Windows.Forms.Screen.FromControl(Me)
+    Dim sc As System.Windows.Forms.Screen = _
+            System.Windows.Forms.Screen.FromControl(Me)
     Dim sx As Integer = sc.Bounds.Left
     Dim sy As Integer = sc.Bounds.Top
 
@@ -71,6 +72,41 @@ Private Sub moveWindowToStartPosition()
 
     Me.Bounds = New Rectangle(fx, fy, fw, fh)
 End Sub
+
+''========================================================================
+''    ファイルを開いてデータを読み込む。
+''========================================================================
+Private Function openScoreDataFile(
+        ByVal fileName As String,
+        ByVal flagBinary As Boolean) As Boolean
+
+    Dim retVal As Score4Wrapper.ErrCode
+    Dim msgAns As System.Windows.Forms.DialogResult
+
+    Do
+        If (Not flagBinary) Then
+            retVal = Score4Wrapper.Document.DocumentFile.readFromTextFile(
+                fileName, Me.m_scoreData)
+        Else
+            retVal = Score4Wrapper.Document.DocumentFile.readFromBinaryFile(
+                fileName, Me.m_scoreData)
+        End If
+        If retVal = Score4Wrapper.ErrCode.ERR_SUCCESS Then
+            Exit Do
+        End If
+
+        msgAns = MessageBox.Show(
+            "データの読み込みに失敗しました。再試行しますか？", "Error",
+             MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation)
+        If (msgAns = vbNo) Then
+            openScoreDataFile = False
+            Exit Function
+        End If
+    Loop Until (retVal = Score4Wrapper.ErrCode.ERR_SUCCESS)
+
+    openScoreDataFile = True
+
+End Function
 
 ''========================================================================
 ''    ファイルを開いてデータを読み込む。
