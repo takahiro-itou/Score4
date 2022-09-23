@@ -113,25 +113,13 @@ End Function
 ''========================================================================
 Private Function openScoreDataFromBinary(ByVal fileName As String) As Boolean
 
-    Dim retVal As Score4Wrapper.ErrCode
-    Dim msgAns As System.Windows.Forms.DialogResult
+    Dim retVal As Boolean
 
-    Do
-        retVal = Score4Wrapper.Document.DocumentFile.readFromBinaryFile(
-            fileName, Me.m_scoreData)
-        If retVal = Score4Wrapper.ErrCode.ERR_SUCCESS Then
-            Exit Do
-        End If
-
-        msgAns = MessageBox.Show(
-            "データの読み込みに失敗しました。再試行しますか？", "Error",
-             MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation)
-        If (msgAns = vbNo) Then
-            openScoreDataFromBinary = False
-            Exit Function
-        End If
-    Loop Until (retVal = Score4Wrapper.ErrCode.ERR_SUCCESS)
-
+    retVal = openScoreDataFile(fileName, True)
+    openScoreDataFromBinary = retVal
+    If (Not retVal) Then
+        Exit Function
+    End If
     openScoreDataFromBinary = postprocessReadScoreData(fileName)
 
 End Function
@@ -141,25 +129,13 @@ End Function
 ''========================================================================
 Private Function openScoreDataFromText(ByVal fileName As String) As Boolean
 
-    Dim retVal As Score4Wrapper.ErrCode
-    Dim msgAns As System.Windows.Forms.DialogResult
+    Dim retVal As Boolean
 
-    Do
-        retVal = Score4Wrapper.Document.DocumentFile.readFromTextFile(
-            fileName, Me.m_scoreData)
-        If retVal = Score4Wrapper.ErrCode.ERR_SUCCESS Then
-            Exit Do
-        End If
-
-        msgAns = MessageBox.Show(
-            "データの読み込みに失敗しました。再試行しますか？", "Error",
-             MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation)
-        If (msgAns = vbNo) Then
-            openScoreDataFromText = False
-            Exit Function
-        End If
-    Loop Until (retVal = Score4Wrapper.ErrCode.ERR_SUCCESS)
-
+    retVal = openScoreDataFile(fileName, False)
+    openScoreDataFromText = retVal
+    If (Not retVal) Then
+        Exit Function
+    End If
     openScoreDataFromText = postprocessReadScoreData("")
 
 End Function
