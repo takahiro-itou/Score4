@@ -698,6 +698,18 @@ DocumentFile::saveToBinaryFile(
 }
 
 //----------------------------------------------------------------
+//    データをテキストファイルに書き込む。
+//
+
+ErrCode
+DocumentFile::saveToTextFile(
+        const  ScoreDocument  & objDoc,
+        const  std::string    & fileName)
+{
+    return ( ERR_FAILURE );
+}
+
+//----------------------------------------------------------------
 //    データをテキストストリームに書き込む.
 //
 
