@@ -401,7 +401,6 @@ Private Sub mnuFileExportText_Click(sender As Object, e As EventArgs) Handles _
 
         If .ShowDialog() = DialogResult.OK Then
             saveScoreDataToText(.FileName)
-            Exit Sub
         End If
     End With
 
