@@ -386,6 +386,28 @@ Private Sub updateTables(
 End Sub
 
 ''========================================================================
+''    メニュー「ファイル」－「テキストとしてエクスポート」
+''========================================================================
+Private Sub mnuFileExportText_Click(sender As Object, e As EventArgs) Handles _
+            mnuFileExportText.Click
+
+    With dlgSave
+        .DefaultExt = ".csv"
+        .FileName = m_lastFileName
+        .Filter = "Text files(*.csv;*.txt)|*.csv;*.txt|All files(*.*)|*.*"
+        .FilterIndex = 1
+        .InitialDirectory = m_appPath
+        .OverwritePrompt = True
+
+        If .ShowDialog() = DialogResult.OK Then
+            saveScoreDataToText(.FileName)
+            Exit Sub
+        End If
+    End With
+
+End Sub
+
+''========================================================================
 ''    メニュー「ファイル」－「終了」
 ''========================================================================
 Private Sub mnuFileExit_Click(sender As Object, e As EventArgs) Handles _
