@@ -96,6 +96,7 @@ Private Function openScoreDataFromBinary(ByVal fileName As String) As Boolean
         End If
     Loop Until (retVal = Score4Wrapper.ErrCode.ERR_SUCCESS)
 
+    m_lastFileName = fileName
     openScoreDataFromBinary = postprocessReadScoreData(fileName)
 
 End Function
@@ -124,6 +125,7 @@ Private Function openScoreDataFromText(ByVal fileName As String) As Boolean
         End If
     Loop Until (retVal = Score4Wrapper.ErrCode.ERR_SUCCESS)
 
+    m_lastFileName = ""
     openScoreDataFromText = postprocessReadScoreData(fileName)
 
 End Function
@@ -142,7 +144,6 @@ Private Function postprocessReadScoreData(ByVal fileName As String) As Boolean
 
     MessageBox.Show("ロードは正常に完了しました", "Load",
                     MessageBoxButtons.OK, MessageBoxIcon.Information)
-    m_lastFileName = fileName
 
     If (flagAutoImport) Then
         msgAns = MessageBox.Show(
@@ -170,6 +171,7 @@ End Function
 ''    ファイル名を指定して保存する。
 ''========================================================================
 Private Function processSaveAs() As Boolean
+
     With dlgSave
         .DefaultExt = ".gsr"
         .FileName = m_lastFileName
@@ -179,11 +181,13 @@ Private Function processSaveAs() As Boolean
         .OverwritePrompt = True
 
         If .ShowDialog() = DialogResult.OK Then
-            Return saveScoreData(.FileName)
+            processSaveAs = saveScoreData(.FileName)
+            Exit Function
         End If
     End With
 
-    Return False
+    processSaveAs = False
+
 End Function
 
 ''========================================================================
@@ -205,7 +209,8 @@ Private Function saveScoreData(ByVal fileName As String) As Boolean
             "Error",
             MessageBoxButtons.YesNo)
         If (msgAns = vbNo) Then
-            Return False
+            saveScoreData = False
+            Exit Function
         End If
     Loop Until (retVal = Score4Wrapper.ErrCode.ERR_SUCCESS)
 
@@ -217,7 +222,8 @@ Private Function saveScoreData(ByVal fileName As String) As Boolean
         MessageBoxButtons.OK, MessageBoxIcon.Information)
     m_lastFileName = fileName
 
-    Return True
+    saveScoreData = True
+
 End Function
 
 ''========================================================================
@@ -388,6 +394,7 @@ Private Sub mnuFileSave_Click(sender As Object, e As EventArgs) Handles _
     Else
         saveScoreData(m_lastFileName)
     End If
+
 End Sub
 
 ''========================================================================
@@ -395,7 +402,9 @@ End Sub
 ''========================================================================
 Private Sub mnuFileSaveAs_Click(sender As Object, e As EventArgs) Handles _
             mnuFileSaveAs.Click
+
     processSaveAs()
+
 End Sub
 
 ''========================================================================
