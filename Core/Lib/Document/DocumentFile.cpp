@@ -706,7 +706,8 @@ DocumentFile::saveToTextFile(
         const  ScoreDocument  & objDoc,
         const  std::string    & fileName)
 {
-    return ( ERR_FAILURE );
+    std::ofstream   ofs(fileName.c_str());
+    return ( saveToTextStream(objDoc, ofs) );
 }
 
 //----------------------------------------------------------------
