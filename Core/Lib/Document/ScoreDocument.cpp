@@ -794,6 +794,29 @@ ScoreDocument::resizeTeamInfos(
 }
 
 //----------------------------------------------------------------
+//    最終日付を更新する。
+//
+
+ErrCode
+ScoreDocument::updateLastDate(
+        const   Boolean     flgRecordOnly,
+        const   DateSerial  dsVal)
+{
+    ErrCode retVal  = ERR_SUCCESS;
+
+    if ( this->m_lastRecordDate < dsVal ) {
+        retVal  = setLastRecordDate(dsVal);
+    }
+    if ( flgRecordOnly != BOOL_FALSE ) {
+        return ( retVal );
+    }
+    if ( this->m_lastActiveDate < dsVal ) {
+        retVal  = setLastActiveDate(dsVal);
+    }
+    return ( retVal );
+}
+
+//----------------------------------------------------------------
 //    試合結果のレコードを比較する。
 //
 
