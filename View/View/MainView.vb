@@ -75,7 +75,7 @@ End Sub
 ''========================================================================
 ''    ファイルを開いてデータを読み込む。
 ''========================================================================
-Private Function openScoreData(ByVal fileName As String) As Boolean
+Private Function openScoreDataFromBinary(ByVal fileName As String) As Boolean
 
     Dim retVal As Score4Wrapper.ErrCode
     Dim msgAns As System.Windows.Forms.DialogResult
@@ -91,7 +91,8 @@ Private Function openScoreData(ByVal fileName As String) As Boolean
             "データの読み込みに失敗しました。再試行しますか？", "Error",
              MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation)
         If (msgAns = vbNo) Then
-            Return False
+            openScoreDataFromBinary = False
+            Exit Function
         End If
     Loop Until (retVal = Score4Wrapper.ErrCode.ERR_SUCCESS)
 
@@ -309,7 +310,7 @@ Private Sub mnuFileOpen_Click(sender As Object, e As EventArgs) Handles _
         .InitialDirectory = m_appPath
 
         If .ShowDialog() = DialogResult.OK Then
-            openScoreData(.FileName)
+            openScoreDataFromBinary(.FileName)
         End If
     End With
 
