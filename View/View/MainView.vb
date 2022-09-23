@@ -273,6 +273,22 @@ Private Function saveScoreDataToBinary(ByVal fileName As String) As Boolean
 End Function
 
 ''========================================================================
+''    データをファイルに保存する。
+''========================================================================
+Private Function saveScoreDataToText(ByVal fileName As String) As Boolean
+
+    Dim retVal As Boolean
+
+    retVal = saveScoreDataFile(fileName, False)
+    saveScoreDataToText = retVal
+    If (retVal = False) Then
+        Exit Function
+    End If
+    saveScoreDataToText = postprocessSaveScoreData("")
+
+End Function
+
+''========================================================================
 ''    ウィンドウの現在位置を保存する。
 ''========================================================================
 Private Sub saveWindowPrefs()
