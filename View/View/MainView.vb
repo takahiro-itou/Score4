@@ -211,7 +211,7 @@ Private Function processSaveAs() As Boolean
         .OverwritePrompt = True
 
         If .ShowDialog() = DialogResult.OK Then
-            processSaveAs = saveScoreData(.FileName)
+            processSaveAs = saveScoreDataToBinary(.FileName)
             Exit Function
         End If
     End With
@@ -223,7 +223,7 @@ End Function
 ''========================================================================
 ''    データをファイルに保存する。
 ''========================================================================
-Private Function saveScoreData(ByVal fileName As String) As Boolean
+Private Function saveScoreDataToBinary(ByVal fileName As String) As Boolean
     Dim retVal As Score4Wrapper.ErrCode
     Dim msgAns As System.Windows.Forms.DialogResult
 
@@ -239,12 +239,12 @@ Private Function saveScoreData(ByVal fileName As String) As Boolean
             "Error",
             MessageBoxButtons.YesNo)
         If (msgAns = vbNo) Then
-            saveScoreData = False
+            saveScoreDataToBinary = False
             Exit Function
         End If
     Loop Until (retVal = Score4Wrapper.ErrCode.ERR_SUCCESS)
 
-    saveScoreData = postprocessSaveScoreData(fileName)
+    saveScoreDataToBinary = postprocessSaveScoreData(fileName)
 
 End Function
 
@@ -414,7 +414,7 @@ Private Sub mnuFileSave_Click(sender As Object, e As EventArgs) Handles _
     If (m_lastFileName = "") Then
         processSaveAs()
     Else
-        saveScoreData(m_lastFileName)
+        saveScoreDataToBinary(m_lastFileName)
     End If
 
 End Sub
