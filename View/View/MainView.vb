@@ -231,6 +231,9 @@ Private Function saveScoreDataFile(
     Dim retVal As Score4Wrapper.ErrCode
     Dim msgAns As System.Windows.Forms.DialogResult
 
+    ' 保存する前に最終日付をチェック
+    Me.m_scoreData.checkLastDate()
+
     Do
         If (flagBinary = False) Then
             retVal = Score4Wrapper.Document.DocumentFile.saveToTextFile(
