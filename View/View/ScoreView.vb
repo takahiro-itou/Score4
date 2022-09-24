@@ -574,6 +574,29 @@ Private Sub makeTeamListOnGridViewHeader(
 End Sub
 
 ''========================================================================
+''    指定したタブコントロールにリーグ一覧を表示する。
+''========================================================================
+Public Sub updateLeagueTab(
+        ByRef scoreData As Score4Wrapper.Document.ScoreDocument,
+        ByRef destTab As System.Windows.Forms.TabControl)
+
+    Dim leagueInfo As Score4Wrapper.Common.Leagueinfo
+    Dim numLeagues As Integer = scoreData.getNumLeagues()
+
+    With destTab
+        .TabPages.Clear()
+        For i = 0 To numLeagues - 1
+            Dim leagueTab As System.Windows.Forms.TabPage
+
+            leagueInfo = scoreData.leagueInfo(i)
+            leagueTab = New System.Windows.Forms.TabPage(leagueInfo.leagueName)
+            .TabPages.Add(leagueTab)
+        Next i
+    End With
+
+End Sub
+
+''========================================================================
 ''    指定されたグリッドの行に、チームのマジック等を書き込む。
 ''========================================================================
 Private Sub writeTeamMagicToGridRow(
