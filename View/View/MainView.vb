@@ -150,6 +150,7 @@ Private Function postprocessReadScoreData(ByVal fileName As String) As Boolean
 
     ' 表示内容を最新の情報に更新する。
     m_flagModified = False
+    m_scoreData.checkLastDate()
     updateScoreView()
 
     MessageBox.Show("ロードは正常に完了しました", "Load",
