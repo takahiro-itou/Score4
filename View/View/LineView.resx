@@ -110,6 +110,31 @@ o  <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>&amp;Close</value>
   </data>
 
+  <data name="&gt;&gt;dgvLine.Name" xml:space="preserve">
+    <value>dgvLine</value>
+  </data>
+  <data name="&gt;&gt;dgvLine.Parent" xml:space="preserve">
+    <value>fraLine</value>
+  </data>
+  <data name="&gt;&gt;dgvLine.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridView, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;dgvLine.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="dgvLine.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Bottom, Left</value>
+  </data>
+  <data name="dgvLine.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 16</value>
+  </data>
+  <data name="dgvLine.Size" type="System.Drawing.Size, System.Drawing">
+    <value>480, 416</value>
+  </data>
+  <data name="dgvLine.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+
   <data name="&gt;&gt;fraDate.Name" xml:space="preserve">
     <value>fraDate</value>
   </data>
@@ -315,31 +340,6 @@ o  <data name="&gt;&gt;$this.Name" xml:space="preserve">
   </data>
   <data name="&gt;&gt;MonthCalendar1.ZOrder" xml:space="preserve">
     <value>1</value>
-  </data>
-
-  <data name="dgvLine.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Bottom, Left</value>
-  </data>
-  <data name="dgvLine.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 16</value>
-  </data>
-  <data name="dgvLine.Size" type="System.Drawing.Size, System.Drawing">
-    <value>480, 416</value>
-  </data>
-  <data name="dgvLine.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;dgvLine.Name" xml:space="preserve">
-    <value>dgvLine</value>
-  </data>
-  <data name="&gt;&gt;dgvLine.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridView, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;dgvLine.Parent" xml:space="preserve">
-    <value>fraLine</value>
-  </data>
-  <data name="&gt;&gt;dgvLine.ZOrder" xml:space="preserve">
-    <value>3</value>
   </data>
 
 </root>
