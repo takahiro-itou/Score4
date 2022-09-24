@@ -138,6 +138,31 @@ o  <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>&amp;Date</value>
   </data>
 
+  <data name="&gt;&gt;fraLine.Name" xml:space="preserve">
+    <value>fraLine</value>
+  </data>
+  <data name="&gt;&gt;fraLine.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;fraLine.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;fraLine.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="fraLine.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Bottom, Left, Right</value>
+  </data>
+  <data name="fraLine.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 32</value>
+  </data>
+  <data name="fraLine.Size" type="System.Drawing.Size, System.Drawing">
+    <value>720, 440</value>
+  </data>
+  <data name="fraLine.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+
   <data name="tabLeague.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left, Right</value>
   </data>
@@ -163,9 +188,6 @@ o  <data name="&gt;&gt;$this.Name" xml:space="preserve">
   </data>
   <data name="&gt;&gt;tabLeague.ZOrder" xml:space="preserve">
     <value>1</value>
-  </data>
-  <data name="fraLine.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Bottom, Left, Right</value>
   </data>
   <data name="fraShowMode.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Right</value>
@@ -317,27 +339,6 @@ o  <data name="&gt;&gt;$this.Name" xml:space="preserve">
   </data>
   <data name="&gt;&gt;dgvLine.ZOrder" xml:space="preserve">
     <value>3</value>
-  </data>
-  <data name="fraLine.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 32</value>
-  </data>
-  <data name="fraLine.Size" type="System.Drawing.Size, System.Drawing">
-    <value>720, 440</value>
-  </data>
-  <data name="fraLine.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
-  </data>
-  <data name="&gt;&gt;fraLine.Name" xml:space="preserve">
-    <value>fraLine</value>
-  </data>
-  <data name="&gt;&gt;fraLine.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;fraLine.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;fraLine.ZOrder" xml:space="preserve">
-    <value>0</value>
   </data>
 
 </root>
