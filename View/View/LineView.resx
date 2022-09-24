@@ -163,6 +163,34 @@ o  <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>2</value>
   </data>
 
+  <data name="&gt;&gt;fraShowMode.Name" xml:space="preserve">
+    <value>fraShowMode</value>
+  </data>
+  <data name="&gt;&gt;fraShowMode.Parent" xml:space="preserve">
+    <value>fraLine</value>
+  </data>
+  <data name="&gt;&gt;fraShowMode.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;fraShowMode.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="fraShowMode.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Bottom, Right</value>
+  </data>
+  <data name="fraShowMode.Location" type="System.Drawing.Point, System.Drawing">
+    <value>496, 248</value>
+  </data>
+  <data name="fraShowMode.Size" type="System.Drawing.Size, System.Drawing">
+    <value>216, 104</value>
+  </data>
+  <data name="fraShowMode.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="fraShowMode.Text" xml:space="preserve">
+    <value>&amp;Show Mode</value>
+  </data>
+
   <data name="tabLeague.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left, Right</value>
   </data>
@@ -188,9 +216,6 @@ o  <data name="&gt;&gt;$this.Name" xml:space="preserve">
   </data>
   <data name="&gt;&gt;tabLeague.ZOrder" xml:space="preserve">
     <value>1</value>
-  </data>
-  <data name="fraShowMode.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Bottom, Right</value>
   </data>
   <data name="optShowPlayoff.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -241,30 +266,6 @@ o  <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>fraShowMode</value>
   </data>
   <data name="&gt;&gt;optShowVictory.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="fraShowMode.Location" type="System.Drawing.Point, System.Drawing">
-    <value>496, 248</value>
-  </data>
-  <data name="fraShowMode.Size" type="System.Drawing.Size, System.Drawing">
-    <value>216, 104</value>
-  </data>
-  <data name="fraShowMode.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
-  </data>
-  <data name="fraShowMode.Text" xml:space="preserve">
-    <value>&amp;Show Mode</value>
-  </data>
-  <data name="&gt;&gt;fraShowMode.Name" xml:space="preserve">
-    <value>fraShowMode</value>
-  </data>
-  <data name="&gt;&gt;fraShowMode.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;fraShowMode.Parent" xml:space="preserve">
-    <value>fraLine</value>
-  </data>
-  <data name="&gt;&gt;fraShowMode.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="lblDate.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
