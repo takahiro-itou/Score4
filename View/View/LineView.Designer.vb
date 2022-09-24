@@ -81,6 +81,7 @@ Partial Class LineView
         Me.fraShowMode.Controls.Add(Me.optShowVictory)
         Me.fraShowMode.Name = "fraShowMode"
         Me.fraShowMode.TabStop = False
+        Me.fraShowMode.Visible = False
 
         '
         ' optShowPlayoff
