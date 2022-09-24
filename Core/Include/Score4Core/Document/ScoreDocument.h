@@ -44,18 +44,18 @@ class  ScoreDocument
 //
 private:
 
-    typedef     Common::WinsForBeatList     WinsForBeatList;
+    typedef     Common::WinsForBeatList         WinsForBeatList;
 
-    typedef     Common::CountedScores       CountedScores;
-    typedef     std::vector<CountedScores>  CountedScoreList;
+    typedef     Common::CountedScores           CountedScores;
+    typedef     std::vector<CountedScores>      CountedScoreList;
 
-    typedef     Common::GameCountTable      GameCountTable;
+    typedef     Common::GameCountTable          GameCountTable;
 
-    typedef     std::vector< std::vector<WinningRate> >
-    WinningRateTable;
+    typedef     std::vector<WinningRate>        WinningRateList;
+    typedef     std::vector<WinningRateList>    WinningRateTable;
 
-    typedef     std::vector< std::vector<NumOfDigits> >
-    NumOfDigitsTable;
+    typedef     std::vector<NumOfDigits>        NumOfDigitsList;
+    typedef     std::vector<NumOfDigitsList>    NumOfDigitsTable;
 
 public:
 
@@ -334,12 +334,9 @@ public:
     //----------------------------------------------------------------
     /**   勝率テーブルを作成する。
     **
-    **  @param [in] csData         集計済みデータ。
-    **  @param [in] leagueIndex    桁数テーブルを作成するリーグ。
-    **  @param[out] rateTable      勝率テーブルを格納する変数。
-    **  @param[out] digitsTable    桁数テーブルを格納する変数。
-    **          勝率テーブルの対応するセルを表示するのに
-    **          最低限必要な桁数を格納する。
+    **  @param [in] csData        集計済みデータ。
+    **  @param [in] leagueIndex   桁数テーブルを作成するリーグ。
+    **  @param[out] rateTable     勝率テーブルを格納する変数。
     **  @return     残り試合数の最大値を返す。
     **      最も多くの試合を残しているチームの、その残り試合数。
     **/
@@ -347,8 +344,7 @@ public:
     makeWinningRateTable(
             const  CountedScoreList &csData,
             const  LeagueIndex      leagueIndex,
-            WinningRateTable        &rateTable,
-            NumOfDigitsTable        &digitsTable)  const;
+            WinningRateTable        &rateTable)  const;
 
     //----------------------------------------------------------------
     /**   ゲームレコードを最適化する。
@@ -430,6 +426,40 @@ public:
             const   GamesCount          teamRest,
             const   GamesCount          enemyRest,
             const   Boolean             allowEqual);
+
+    //----------------------------------------------------------------
+    /**   表示桁数リストを作成する。
+    **
+    **  @param [in] rateList      勝率テーブルを格納する変数。
+    **  @param[out] digitsList    桁数テーブルを格納する変数。
+    **          勝率テーブルの対応するセルを表示するのに
+    **          最低限必要な桁数を格納する。
+    **  @return     エラーコードを返す。
+    **      -   異常終了の場合は、
+    **          エラーの種類を示す非ゼロ値を返す。
+    **      -   正常終了の場合は、ゼロを返す。
+    **/
+    static  ErrCode
+    makeDigitsList(
+            const  WinningRateList  &rateList,
+            NumOfDigitsList         &digitsList);
+
+    //----------------------------------------------------------------
+    /**   表示桁数テーブルを作成する。
+    **
+    **  @param [in] rateTable     勝率テーブルを格納する変数。
+    **  @param[out] digitsTable   桁数テーブルを格納する変数。
+    **          勝率テーブルの対応するセルを表示するのに
+    **          最低限必要な桁数を格納する。
+    **  @return     エラーコードを返す。
+    **      -   異常終了の場合は、
+    **          エラーの種類を示す非ゼロ値を返す。
+    **      -   正常終了の場合は、ゼロを返す。
+    **/
+    static  ErrCode
+    makeDigitsTable(
+            const  WinningRateTable &rateTable,
+            NumOfDigitsTable        &digitsTable);
 
 //========================================================================
 //

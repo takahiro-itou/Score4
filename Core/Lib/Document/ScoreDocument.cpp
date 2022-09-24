@@ -275,11 +275,9 @@ ScoreDocument::calculateMagicNumbers(
         CountedScoreList    &bufCounted)  const
 {
     WinningRateTable    dblPercent;
-    NumOfDigitsTable    dummyDigitsBuffer;
 
     const   TeamIndex   numTeam = getNumTeams();
-    makeWinningRateTable(
-            bufCounted, -1, dblPercent, dummyDigitsBuffer);
+    makeWinningRateTable(bufCounted, -1, dblPercent);
 
     for ( TeamIndex i = 0; i < numTeam; ++ i ) {
         makeWinsForBeatTable(dblPercent, i, bufCounted);
@@ -725,14 +723,13 @@ GamesCount
 ScoreDocument::makeWinningRateTable(
         const  CountedScoreList &csData,
         const  LeagueIndex      leagueIndex,
-        WinningRateTable        &rateTable,
-        NumOfDigitsTable        &digitsTable)  const
+        WinningRateTable        &rateTable)  const
 {
     const   TeamIndex  numTeam  = this->getNumTeams();
 
     //  配列を確保する。    //
     rateTable.resize(numTeam);
-    digitsTable.resize(numTeam);
+//    digitsTable.resize(numTeam);
 
     GamesCount  maxRestGame = 0;
     for ( TeamIndex teamIndex = 0; teamIndex < numTeam; ++ teamIndex ) {
@@ -743,7 +740,7 @@ ScoreDocument::makeWinningRateTable(
             maxRestGame = teamRestGames;
         }
         rateTable.at(teamIndex).resize(teamRestGames + 1);
-        digitsTable.at(teamIndex).resize(teamRestGames + 1);
+//        digitsTable.at(teamIndex).resize(teamRestGames + 1);
     }
 
     GamesCount  allPercentListCount = (maxRestGame + 1) * numTeam;
@@ -942,6 +939,30 @@ ScoreDocument::calculateGamesForWin(
     }
 
     return ( nResult );
+}
+
+//----------------------------------------------------------------
+//    表示桁数リストを作成する。
+//
+
+ErrCode
+ScoreDocument::makeDigitsList(
+        const  WinningRateList  &rateList,
+        NumOfDigitsList         &digitsList)
+{
+    return ( ERR_FAILURE );
+}
+
+//----------------------------------------------------------------
+//    表示桁数テーブルを作成する。
+//
+
+ErrCode
+ScoreDocument::makeDigitsTable(
+        const  WinningRateTable &rateTable,
+        NumOfDigitsTable        &digitsTable)
+{
+    return ( ERR_FAILURE );
 }
 
 //========================================================================
