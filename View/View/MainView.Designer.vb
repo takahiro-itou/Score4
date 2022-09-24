@@ -41,6 +41,9 @@ Partial Class MainView
         Me.mnuFileSave = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuFileSaveAs = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuFileSep1 = New System.Windows.Forms.ToolStripSeparator()
+        Me.mnuFileOpenText = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuFileExportText = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuFileSep2 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuFileExit = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuScore = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuScoreEdit = New System.Windows.Forms.ToolStripMenuItem()
@@ -70,9 +73,9 @@ Partial Class MainView
         Me.lblDate = New System.Windows.Forms.Label()
         Me.dgvScore = New System.Windows.Forms.DataGridView()
         Me.chkSchedule = New System.Windows.Forms.CheckBox()
-        Me.optShowWins = New System.Windows.Forms.RadioButton()
-        Me.optShowMagic = New System.Windows.Forms.RadioButton()
         Me.optShowRest = New System.Windows.Forms.RadioButton()
+        Me.optShowMagic = New System.Windows.Forms.RadioButton()
+        Me.optShowWins = New System.Windows.Forms.RadioButton()
         Me.dgvExtra = New System.Windows.Forms.DataGridView()
 
         Me.colTeam = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -87,154 +90,174 @@ Partial Class MainView
 
         Me.mnuMain.SuspendLayout()
         Me.fraScore.SuspendLayout()
-        CType(Me.dgvExtra, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.fraDate.SuspendLayout()
         CType(Me.dgvScore, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.dgvExtra, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
 
         '
         ' mnuMain
         '
-        Me.mnuMain.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuFile, Me.mnuScore, Me.mnuMagic, Me.mnuOptions})
         resources.ApplyResources(Me.mnuMain, "mnuMain")
+        Me.mnuMain.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuFile, Me.mnuScore, Me.mnuMagic, Me.mnuOptions})
         Me.mnuMain.Name = "mnuMain"
         '
         ' mnuFile
         '
-        Me.mnuFile.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuFileNew, Me.mnuFileOpen, Me.mnuFileSep0, Me.mnuFileSave, Me.mnuFileSaveAs, Me.mnuFileSep1, Me.mnuFileExit})
-        Me.mnuFile.Name = "mnuFile"
         resources.ApplyResources(Me.mnuFile, "mnuFile")
+        Me.mnuFile.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuFileNew, Me.mnuFileOpen, Me.mnuFileSep0, Me.mnuFileSave, Me.mnuFileSaveAs, Me.mnuFileSep1, Me.mnuFileOpenText, Me.mnuFileExportText, Me.mnuFileSep2, Me.mnuFileExit})
+        Me.mnuFile.Name = "mnuFile"
         '
         ' mnuFileNew
         '
-        Me.mnuFileNew.Name = "mnuFileNew"
         resources.ApplyResources(Me.mnuFileNew, "mnuFileNew")
+        Me.mnuFileNew.Name = "mnuFileNew"
         '
         ' mnuFileOpen
         '
-        Me.mnuFileOpen.Name = "mnuFileOpen"
         resources.ApplyResources(Me.mnuFileOpen, "mnuFileOpen")
+        Me.mnuFileOpen.Name = "mnuFileOpen"
         '
         ' mnuFileSep0
         '
-        Me.mnuFileSep0.Name = "mnuFileSep0"
         resources.ApplyResources(Me.mnuFileSep0, "mnuFileSep0")
+        Me.mnuFileSep0.Name = "mnuFileSep0"
         '
         ' mnuFileSave
         '
-        Me.mnuFileSave.Name = "mnuFileSave"
         resources.ApplyResources(Me.mnuFileSave, "mnuFileSave")
+        Me.mnuFileSave.Name = "mnuFileSave"
         '
         ' mnuFileSaveAs
         '
-        Me.mnuFileSaveAs.Name = "mnuFileSaveAs"
         resources.ApplyResources(Me.mnuFileSaveAs, "mnuFileSaveAs")
+        Me.mnuFileSaveAs.Name = "mnuFileSaveAs"
         '
         ' mnuFileSep1
         '
-        Me.mnuFileSep1.Name = "mnuFileSep1"
         resources.ApplyResources(Me.mnuFileSep1, "mnuFileSep1")
+        Me.mnuFileSep1.Name = "mnuFileSep1"
+        '
+        ' mnuFileOpenText
+        '
+        resources.ApplyResources(Me.mnuFileOpenText, "mnuFileOpenText")
+        Me.mnuFileOpenText.Name = "mnuFileOpenText"
+        '
+        ' mnuFileExportText
+        '
+        resources.ApplyResources(Me.mnuFileExportText, "mnuFileExportText")
+        Me.mnuFileExportText.Name = "mnuFileExportText"
+        '
+        ' mnuFileSep2
+        '
+        resources.ApplyResources(Me.mnuFileSep2, "mnuFileSep2")
+        Me.mnuFileSep2.Name = "mnuFileSep2"
         '
         ' mnuFileExit
         '
-        Me.mnuFileExit.Name = "mnuFileExit"
         resources.ApplyResources(Me.mnuFileExit, "mnuFileExit")
+        Me.mnuFileExit.Name = "mnuFileExit"
         '
         ' mnuScore
         '
+        resources.ApplyResources(Me.mnuScore, "mnuScore")
         Me.mnuScore.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuScoreEdit, Me.mnuScoreDetail, Me.mnuScoreImport, Me.mnuScoreSep0, Me.mnuScoreSettings, Me.mnuScoreSep1, Me.mnuScoreRefresh})
         Me.mnuScore.Name = "mnuScore"
-        resources.ApplyResources(Me.mnuScore, "mnuScore")
         '
         ' mnuScoreEdit
         '
-        Me.mnuScoreEdit.Name = "mnuScoreEdit"
         resources.ApplyResources(Me.mnuScoreEdit, "mnuScoreEdit")
+        Me.mnuScoreEdit.Name = "mnuScoreEdit"
         '
         ' mnuScoreDetail
         '
-        Me.mnuScoreDetail.Name = "mnuScoreDetail"
         resources.ApplyResources(Me.mnuScoreDetail, "mnuScoreDetail")
+        Me.mnuScoreDetail.Name = "mnuScoreDetail"
         '
         ' mnuScoreImport
         '
-        Me.mnuScoreImport.Name = "mnuScoreImport"
         resources.ApplyResources(Me.mnuScoreImport, "mnuScoreImport")
+        Me.mnuScoreImport.Name = "mnuScoreImport"
         '
         ' mnuScoreSep0
         '
-        Me.mnuScoreSep0.Name = "mnuScoreSep0"
         resources.ApplyResources(Me.mnuScoreSep0, "mnuScoreSep0")
+        Me.mnuScoreSep0.Name = "mnuScoreSep0"
         '
         ' mnuScoreSettings
         '
-        Me.mnuScoreSettings.Name = "mnuScoreSettings"
         resources.ApplyResources(Me.mnuScoreSettings, "mnuScoreSettings")
+        Me.mnuScoreSettings.Name = "mnuScoreSettings"
         '
         ' mnuScoreSep1
         '
-        Me.mnuScoreSep1.Name = "mnuScoreSep1"
         resources.ApplyResources(Me.mnuScoreSep1, "mnuScoreSep1")
+        Me.mnuScoreSep1.Name = "mnuScoreSep1"
         '
         ' mnuScoreRefresh
         '
-        Me.mnuScoreRefresh.Name = "mnuScoreRefresh"
         resources.ApplyResources(Me.mnuScoreRefresh, "mnuScoreRefresh")
+        Me.mnuScoreRefresh.Name = "mnuScoreRefresh"
         '
         ' mnuMagic
         '
+        resources.ApplyResources(Me.mnuMagic, "mnuMagic")
         Me.mnuMagic.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuMagicVictory, Me.mnuMagicPlayoff, Me.mnuMagicSep0, Me.mnuMagicEasy, Me.mnuMagicSep1, Me.mnuMagicLine})
         Me.mnuMagic.Name = "mnuMagic"
-        resources.ApplyResources(Me.mnuMagic, "mnuMagic")
         '
         ' mnuMagicVictory
         '
-        Me.mnuMagicVictory.Name = "mnuMagicVictory"
         resources.ApplyResources(Me.mnuMagicVictory, "mnuMagicVictory")
+        Me.mnuMagicVictory.Name = "mnuMagicVictory"
         '
         ' mnuMagicPlayoff
         '
-        Me.mnuMagicPlayoff.Name = "mnuMagicPlayoff"
         resources.ApplyResources(Me.mnuMagicPlayoff, "mnuMagicPlayoff")
+        Me.mnuMagicPlayoff.Name = "mnuMagicPlayoff"
         '
         ' mnuMagicSep0
         '
-        Me.mnuMagicSep0.Name = "mnuMagicSep0"
         resources.ApplyResources(Me.mnuMagicSep0, "mnuMagicSep0")
+        Me.mnuMagicSep0.Name = "mnuMagicSep0"
         '
         ' mnuMagicEasy
         '
-        Me.mnuMagicEasy.Name = "mnuMagicEasy"
         resources.ApplyResources(Me.mnuMagicEasy, "mnuMagicEasy")
+        Me.mnuMagicEasy.Name = "mnuMagicEasy"
         '
         ' mnuMagicSep1
         '
-        Me.mnuMagicSep1.Name = "mnuMagicSep1"
         resources.ApplyResources(Me.mnuMagicSep1, "mnuMagicSep1")
+        Me.mnuMagicSep1.Name = "mnuMagicSep1"
         '
         ' mnuMagicLine
         '
-        Me.mnuMagicLine.Name = "mnuMagicLine"
         resources.ApplyResources(Me.mnuMagicLine, "mnuMagicLine")
+        Me.mnuMagicLine.Name = "mnuMagicLine"
         '
         ' mnuOptions
         '
+        resources.ApplyResources(Me.mnuOptions, "mnuOptions")
         Me.mnuOptions.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuOptionsFont})
         Me.mnuOptions.Name = "mnuOptions"
-        resources.ApplyResources(Me.mnuOptions, "mnuOptions")
         '
         ' mnuOptionsFont
         '
-        Me.mnuOptionsFont.Name = "mnuOptionsFont"
         resources.ApplyResources(Me.mnuOptionsFont, "mnuOptionsFont")
+        Me.mnuOptionsFont.Name = "mnuOptionsFont"
 
         '
         ' dlgOpen
         '
         Me.dlgOpen.FileName = "OpenFileDialog1"
-
+        resources.ApplyResources(Me.dlgOpen, "dlgOpen")
+        '
+        ' dlgSave
+        '
+        resources.ApplyResources(Me.dlgSave, "dlgSave")
 
         '
-        'tabLeague
+        ' tabLeague
         '
         resources.ApplyResources(Me.tabLeague, "tabLeague")
         Me.tabLeague.Name = "tabLeague"
@@ -245,28 +268,24 @@ Partial Class MainView
         '
         resources.ApplyResources(Me.fraScore, "fraScore")
         Me.fraScore.Controls.Add(Me.fraDate)
-        Me.fraDate.Controls.Add(Me.mnvDate)
-        Me.fraDate.Controls.Add(Me.lblDate)
         Me.fraScore.Controls.Add(Me.dgvScore)
         Me.fraScore.Controls.Add(Me.chkSchedule)
         Me.fraScore.Controls.Add(Me.optShowRest)
         Me.fraScore.Controls.Add(Me.optShowMagic)
         Me.fraScore.Controls.Add(Me.optShowWins)
         Me.fraScore.Controls.Add(Me.dgvExtra)
-
         Me.fraScore.Name = "fraScore"
         Me.fraScore.TabStop = False
 
         '
         ' dgvScore
         '
+        resources.ApplyResources(Me.dgvScore, "dgvScore")
         Me.dgvScore.AllowUserToAddRows = False
         Me.dgvScore.AllowUserToDeleteRows = False
-        Me.dgvScore.AllowUserToResizeColumns = True
         Me.dgvScore.AllowUserToResizeRows = False
         Me.dgvScore.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dgvScore.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.colTeam, Me.colTotal, Me.colWon, Me.colLost, Me.colDraw, Me.colDiff, Me.colPercent, Me.colMagic, Me.colRank})
-        resources.ApplyResources(Me.dgvScore, "dgvScore")
         Me.dgvScore.MultiSelect = False
         Me.dgvScore.Name = "dgvScore"
         Me.dgvScore.ReadOnly = True
@@ -276,10 +295,10 @@ Partial Class MainView
         '
         ' fraDate
         '
+        resources.ApplyResources(Me.fraDate, "fraDate")
         Me.fraDate.Controls.Add(Me.mnvDate)
         Me.fraDate.Controls.Add(Me.lblDate)
-        resources.ApplyResources(Me.fraDate, "fraDate")
-        Me.fraDate.Name = "fraScore"
+        Me.fraDate.Name = "fraDate"
         Me.fraDate.TabStop = False
 
         '
@@ -299,11 +318,11 @@ Partial Class MainView
         '
         ' dgvExtra
         '
+        resources.ApplyResources(Me.dgvExtra, "dgvExtra")
         Me.dgvExtra.AllowUserToAddRows = False
         Me.dgvExtra.AllowUserToDeleteRows = False
         Me.dgvExtra.AllowUserToResizeColumns = True
         Me.dgvExtra.AllowUserToResizeRows = False
-        resources.ApplyResources(Me.dgvExtra, "dgvExtra")
         Me.dgvExtra.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dgvExtra.MultiSelect = False
         Me.dgvExtra.Name = "dgvExtra"
@@ -312,18 +331,18 @@ Partial Class MainView
         Me.dgvExtra.RowTemplate.Height = 21
 
         '
-        'chkSchedule
+        ' chkSchedule
         '
-        Me.chkSchedule.BackColor = System.Drawing.SystemColors.Window
         resources.ApplyResources(Me.chkSchedule, "chkSchedule")
+        Me.chkSchedule.BackColor = System.Drawing.SystemColors.Window
         Me.chkSchedule.Name = "chkSchedule"
         Me.chkSchedule.UseVisualStyleBackColor = False
 
         '
         ' optShowWins
         '
-        Me.optShowWins.BackColor = System.Drawing.SystemColors.Window
         resources.ApplyResources(Me.optShowWins, "optShowWins")
+        Me.optShowWins.BackColor = System.Drawing.SystemColors.Window
         Me.optShowWins.Name = "optShowWins"
         Me.optShowWins.TabStop = True
         Me.optShowWins.UseVisualStyleBackColor = False
@@ -331,8 +350,8 @@ Partial Class MainView
         '
         ' optShowMagic
         '
-        Me.optShowMagic.BackColor = System.Drawing.SystemColors.Window
         resources.ApplyResources(Me.optShowMagic, "optShowMagic")
+        Me.optShowMagic.BackColor = System.Drawing.SystemColors.Window
         Me.optShowMagic.Name = "optShowMagic"
         Me.optShowMagic.TabStop = True
         Me.optShowMagic.UseVisualStyleBackColor = False
@@ -340,8 +359,8 @@ Partial Class MainView
         '
         ' optShowRest
         '
-        Me.optShowRest.BackColor = System.Drawing.SystemColors.Window
         resources.ApplyResources(Me.optShowRest, "optShowRest")
+        Me.optShowRest.BackColor = System.Drawing.SystemColors.Window
         Me.optShowRest.Name = "optShowRest"
         Me.optShowRest.TabStop = True
         Me.optShowRest.UseVisualStyleBackColor = False
@@ -430,7 +449,7 @@ Partial Class MainView
         Me.colRank.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
 
         '
-        'MainView
+        ' MainView
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
@@ -442,8 +461,9 @@ Partial Class MainView
         Me.mnuMain.ResumeLayout(False)
         Me.mnuMain.PerformLayout()
         Me.fraScore.ResumeLayout(False)
-        CType(Me.dgvExtra, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.fraDate.ResumeLayout(False)
         CType(Me.dgvScore, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.dgvExtra, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -458,6 +478,9 @@ Partial Class MainView
     Friend WithEvents mnuFileSaveAs As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents mnuFileSep1 As System.Windows.Forms.ToolStripSeparator
     Friend WithEvents mnuFileExit As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents mnuFileOpenText As ToolStripMenuItem
+    Friend WithEvents mnuFileExportText As ToolStripMenuItem
+    Friend WithEvents mnuFileSep2 As ToolStripSeparator
     Friend WithEvents mnuScore As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents mnuScoreEdit As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents mnuScoreDetail As System.Windows.Forms.ToolStripMenuItem

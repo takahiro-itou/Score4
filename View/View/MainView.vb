@@ -54,7 +54,8 @@ Private Sub moveWindowToStartPosition()
     Dim fw As Integer = Me.Width
     Dim fh As Integer = Me.Height
 
-    Dim sc As System.Windows.Forms.Screen = System.Windows.Forms.Screen.FromControl(Me)
+    Dim sc As System.Windows.Forms.Screen = _
+            System.Windows.Forms.Screen.FromControl(Me)
     Dim sx As Integer = sc.Bounds.Left
     Dim sy As Integer = sc.Bounds.Top
 
@@ -75,14 +76,21 @@ End Sub
 ''========================================================================
 ''    ファイルを開いてデータを読み込む。
 ''========================================================================
-Private Function openScoreData(ByVal fileName As String) As Boolean
+Private Function openScoreDataFile(
+        ByVal fileName As String,
+        ByVal flagBinary As Boolean) As Boolean
 
     Dim retVal As Score4Wrapper.ErrCode
     Dim msgAns As System.Windows.Forms.DialogResult
 
     Do
-        retVal = Score4Wrapper.Document.DocumentFile.readFromBinaryFile(
-            fileName, Me.m_scoreData)
+        If (flagBinary = False) Then
+            retVal = Score4Wrapper.Document.DocumentFile.readFromTextFile(
+                fileName, Me.m_scoreData)
+        Else
+            retVal = Score4Wrapper.Document.DocumentFile.readFromBinaryFile(
+                fileName, Me.m_scoreData)
+        End If
         If retVal = Score4Wrapper.ErrCode.ERR_SUCCESS Then
             Exit Do
         End If
@@ -91,19 +99,63 @@ Private Function openScoreData(ByVal fileName As String) As Boolean
             "データの読み込みに失敗しました。再試行しますか？", "Error",
              MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation)
         If (msgAns = vbNo) Then
-            Return False
+            openScoreDataFile = False
+            Exit Function
         End If
     Loop Until (retVal = Score4Wrapper.ErrCode.ERR_SUCCESS)
 
+    openScoreDataFile = True
+
+End Function
+
+''========================================================================
+''    ファイルを開いてデータを読み込む。
+''========================================================================
+Private Function openScoreDataFromBinary(ByVal fileName As String) As Boolean
+
+    Dim retVal As Boolean
+
+    retVal = openScoreDataFile(fileName, True)
+    openScoreDataFromBinary = retVal
+    If (retVal = False) Then
+        Exit Function
+    End If
+    openScoreDataFromBinary = postprocessReadScoreData(fileName)
+
+End Function
+
+''========================================================================
+''    ファイルを開いてデータを読み込む。
+''========================================================================
+Private Function openScoreDataFromText(ByVal fileName As String) As Boolean
+
+    Dim retVal As Boolean
+
+    retVal = openScoreDataFile(fileName, False)
+    openScoreDataFromText = retVal
+    If (retVal = False) Then
+        Exit Function
+    End If
+    openScoreDataFromText = postprocessReadScoreData("")
+
+End Function
+
+''========================================================================
+''    データを読み込んだ後の処理を行う。
+'========================================================================
+Private Function postprocessReadScoreData(ByVal fileName As String) As Boolean
+
+    Dim msgAns As System.Windows.Forms.DialogResult
+    Dim flagAutoImport As Boolean = False
+
     ' 表示内容を最新の情報に更新する。
     m_flagModified = False
+    m_scoreData.checkLastDate()
     updateScoreView()
 
     MessageBox.Show("ロードは正常に完了しました", "Load",
                     MessageBoxButtons.OK, MessageBoxIcon.Information)
     m_lastFileName = fileName
-
-    Dim flagAutoImport As Boolean = False
 
     If (flagAutoImport) Then
         msgAns = MessageBox.Show(
@@ -116,8 +168,28 @@ Private Function openScoreData(ByVal fileName As String) As Boolean
     End If
 
     mnvDate.SelectionStart = m_scoreData.lastActiveDate
-    Return True
+    postprocessReadScoreData = True
+
 End Function
+
+''========================================================================
+''    データを保存した後の処理を行う。
+'========================================================================
+Private Function postprocessSaveScoreData(ByVal fileName As String) As Boolean
+
+    ' 表示内容を最新の情報に更新する。
+    m_flagModified = False
+    updateScoreView()
+
+    MessageBox.Show(
+        "保存は正常に完了しました。", "Save",
+        MessageBoxButtons.OK, MessageBoxIcon.Information)
+    m_lastFileName = fileName
+
+    postprocessSaveScoreData = True
+
+End Function
+
 
 ''========================================================================
 ''    データをインポートする。
@@ -130,6 +202,7 @@ End Function
 ''    ファイル名を指定して保存する。
 ''========================================================================
 Private Function processSaveAs() As Boolean
+
     With dlgSave
         .DefaultExt = ".gsr"
         .FileName = m_lastFileName
@@ -139,23 +212,36 @@ Private Function processSaveAs() As Boolean
         .OverwritePrompt = True
 
         If .ShowDialog() = DialogResult.OK Then
-            Return saveScoreData(.FileName)
+            processSaveAs = saveScoreDataToBinary(.FileName)
+            Exit Function
         End If
     End With
 
-    Return False
+    processSaveAs = False
+
 End Function
 
 ''========================================================================
 ''    データをファイルに保存する。
 ''========================================================================
-Private Function saveScoreData(ByVal fileName As String) As Boolean
+Private Function saveScoreDataFile(
+        ByVal fileName As String,
+        ByVal flagBinary As Boolean) As Boolean
+
     Dim retVal As Score4Wrapper.ErrCode
     Dim msgAns As System.Windows.Forms.DialogResult
 
+    ' 保存する前に最終日付をチェック
+    Me.m_scoreData.checkLastDate()
+
     Do
-        retVal = Score4Wrapper.Document.DocumentFile.saveToBinaryFile(
-            Me.m_scoreData, fileName)
+        If (flagBinary = False) Then
+            retVal = Score4Wrapper.Document.DocumentFile.saveToTextFile(
+                Me.m_scoreData, fileName)
+        Else
+            retVal = Score4Wrapper.Document.DocumentFile.saveToBinaryFile(
+                Me.m_scoreData, fileName)
+        End If
         If retVal = Score4Wrapper.ErrCode.ERR_SUCCESS Then
             Exit Do
         End If
@@ -165,19 +251,45 @@ Private Function saveScoreData(ByVal fileName As String) As Boolean
             "Error",
             MessageBoxButtons.YesNo)
         If (msgAns = vbNo) Then
-            Return False
+            saveScoreDataFile = False
+            Exit Function
         End If
     Loop Until (retVal = Score4Wrapper.ErrCode.ERR_SUCCESS)
 
-    m_flagModified = False
-    updateScoreView()
+    saveScoreDataFile = True
 
-    MessageBox.Show(
-        "保存は正常に完了しました。", "Save",
-        MessageBoxButtons.OK, MessageBoxIcon.Information)
-    m_lastFileName = fileName
+End Function
 
-    Return True
+''========================================================================
+''    データをファイルに保存する。
+''========================================================================
+Private Function saveScoreDataToBinary(ByVal fileName As String) As Boolean
+
+    Dim retVal As Boolean
+
+    retVal = saveScoreDataFile(fileName, True)
+    saveScoreDataToBinary = retVal
+    If (retVal = False) Then
+        Exit Function
+    End If
+    saveScoreDataToBinary = postprocessSaveScoreData(fileName)
+
+End Function
+
+''========================================================================
+''    データをファイルに保存する。
+''========================================================================
+Private Function saveScoreDataToText(ByVal fileName As String) As Boolean
+
+    Dim retVal As Boolean
+
+    retVal = saveScoreDataFile(fileName, False)
+    saveScoreDataToText = retVal
+    If (retVal = False) Then
+        Exit Function
+    End If
+    saveScoreDataToText = postprocessSaveScoreData("")
+
 End Function
 
 ''========================================================================
@@ -278,6 +390,27 @@ Private Sub updateTables(
 End Sub
 
 ''========================================================================
+''    メニュー「ファイル」－「テキストとしてエクスポート」
+''========================================================================
+Private Sub mnuFileExportText_Click(sender As Object, e As EventArgs) Handles _
+            mnuFileExportText.Click
+
+    With dlgSave
+        .DefaultExt = ".csv"
+        .FileName = m_lastFileName
+        .Filter = "Text files(*.csv;*.txt)|*.csv;*.txt|All files(*.*)|*.*"
+        .FilterIndex = 1
+        .InitialDirectory = m_appPath
+        .OverwritePrompt = True
+
+        If .ShowDialog() = DialogResult.OK Then
+            saveScoreDataToText(.FileName)
+        End If
+    End With
+
+End Sub
+
+''========================================================================
 ''    メニュー「ファイル」－「終了」
 ''========================================================================
 Private Sub mnuFileExit_Click(sender As Object, e As EventArgs) Handles _
@@ -309,7 +442,29 @@ Private Sub mnuFileOpen_Click(sender As Object, e As EventArgs) Handles _
         .InitialDirectory = m_appPath
 
         If .ShowDialog() = DialogResult.OK Then
-            openScoreData(.FileName)
+            openScoreDataFromBinary(.FileName)
+        End If
+    End With
+
+End Sub
+
+''========================================================================
+''    メニュー「ファイル」－「テキストを開く」
+''========================================================================
+Private Sub mnuFileOpenText_Click(sender As Object, e As EventArgs) Handles _
+            mnuFileOpenText.Click
+
+    If isModificationClean() = False Then Exit Sub
+
+    With dlgOpen
+        .DefaultExt = ".csv"
+        .FileName = m_lastFileName
+        .Filter = "Text files(*.csv;*.txt)|*.csv;*.txt|All files(*.*)|*.*"
+        .FilterIndex = 1
+        .InitialDirectory = m_appPath
+
+        If .ShowDialog() = DialogResult.OK Then
+            openScoreDataFromText(.FileName)
         End If
     End With
 
@@ -324,8 +479,9 @@ Private Sub mnuFileSave_Click(sender As Object, e As EventArgs) Handles _
     If (m_lastFileName = "") Then
         processSaveAs()
     Else
-        saveScoreData(m_lastFileName)
+        saveScoreDataToBinary(m_lastFileName)
     End If
+
 End Sub
 
 ''========================================================================
@@ -333,7 +489,9 @@ End Sub
 ''========================================================================
 Private Sub mnuFileSaveAs_Click(sender As Object, e As EventArgs) Handles _
             mnuFileSaveAs.Click
+
     processSaveAs()
+
 End Sub
 
 ''========================================================================

@@ -27,6 +27,7 @@
 #include    "Score4Core/Common/TextParser.h"
 
 #include    <fcntl.h>
+#include    <fstream>
 #include    <memory.h>
 #include    <sstream>
 #include    <stdexcept>
@@ -351,6 +352,19 @@ DocumentFile::readFromBinaryFile(
         retErr  = readFromBinaryBuffer(&(buf[0]), cbFile, ptrDoc);
 #endif
     return ( retErr );
+}
+
+//----------------------------------------------------------------
+//    データをテキストファイルから読み込む。
+//
+
+ErrCode
+DocumentFile::readFromTextFile(
+        const  std::string  &fileName,
+        ScoreDocument  *    ptrDoc)
+{
+    std::ifstream   ifs(fileName.c_str());
+    return ( readFromTextStream(ifs, ptrDoc) );
 }
 
 //----------------------------------------------------------------
@@ -681,6 +695,19 @@ DocumentFile::saveToBinaryFile(
     fclose(fp);
 
     return ( ERR_SUCCESS );
+}
+
+//----------------------------------------------------------------
+//    データをテキストファイルに書き込む。
+//
+
+ErrCode
+DocumentFile::saveToTextFile(
+        const  ScoreDocument  & objDoc,
+        const  std::string    & fileName)
+{
+    std::ofstream   ofs(fileName.c_str());
+    return ( saveToTextStream(objDoc, ofs) );
 }
 
 //----------------------------------------------------------------
