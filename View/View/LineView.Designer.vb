@@ -31,7 +31,7 @@ Partial Class LineView
         Me.optShowVictory = New System.Windows.Forms.RadioButton()
         Me.fraDate = New System.Windows.Forms.GroupBox()
         Me.lblDate = New System.Windows.Forms.Label()
-        Me.MonthCalendar1 = New System.Windows.Forms.MonthCalendar()
+        Me.mncDate = New System.Windows.Forms.MonthCalendar()
         Me.dgvLine = New System.Windows.Forms.DataGridView()
         Me.fraLine.SuspendLayout()
         Me.fraShowMode.SuspendLayout()
@@ -89,7 +89,7 @@ Partial Class LineView
         '
         resources.ApplyResources(Me.fraDate, "fraDate")
         Me.fraDate.Controls.Add(Me.lblDate)
-        Me.fraDate.Controls.Add(Me.MonthCalendar1)
+        Me.fraDate.Controls.Add(Me.mncDate)
         Me.fraDate.Name = "fraDate"
         Me.fraDate.TabStop = False
         '
@@ -99,10 +99,10 @@ Partial Class LineView
         Me.lblDate.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
         Me.lblDate.Name = "lblDate"
         '
-        'MonthCalendar1
+        ' mncDate
         '
-        resources.ApplyResources(Me.MonthCalendar1, "MonthCalendar1")
-        Me.MonthCalendar1.Name = "MonthCalendar1"
+        resources.ApplyResources(Me.mncDate, "mncDate")
+        Me.mncDate.Name = "mncDate"
         '
         'dgvLine
         '
@@ -137,7 +137,7 @@ Partial Class LineView
     Friend WithEvents fraLine As GroupBox
     Friend WithEvents dgvLine As DataGridView
     Friend WithEvents fraDate As GroupBox
-    Friend WithEvents MonthCalendar1 As MonthCalendar
+    Friend WithEvents mncDate As MonthCalendar
     Friend WithEvents lblDate As Label
     Friend WithEvents fraShowMode As GroupBox
     Friend WithEvents btnExit As Button

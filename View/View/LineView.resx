@@ -247,6 +247,25 @@ o  <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>MiddleCenter</value>
   </data>
 
+  <data name="&gt;&gt;mncDate.Name" xml:space="preserve">
+    <value>mncDate</value>
+  </data>
+  <data name="&gt;&gt;mncDate.Parent" xml:space="preserve">
+    <value>fraDate</value>
+  </data>
+  <data name="&gt;&gt;mncDate.Type" xml:space="preserve">
+    <value>System.Windows.Forms.MonthCalendar, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;mncDate.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="mncDate.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 24</value>
+  </data>
+  <data name="mncDate.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+
   <data name="tabLeague.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left, Right</value>
   </data>
@@ -322,25 +341,6 @@ o  <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>fraShowMode</value>
   </data>
   <data name="&gt;&gt;optShowVictory.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-
-  <data name="MonthCalendar1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 24</value>
-  </data>
-  <data name="MonthCalendar1.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;MonthCalendar1.Name" xml:space="preserve">
-    <value>MonthCalendar1</value>
-  </data>
-  <data name="&gt;&gt;MonthCalendar1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.MonthCalendar, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;MonthCalendar1.Parent" xml:space="preserve">
-    <value>fraDate</value>
-  </data>
-  <data name="&gt;&gt;MonthCalendar1.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
 
