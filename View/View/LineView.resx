@@ -319,31 +319,29 @@ o  <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>&amp;Victory Line</value>
   </data>
 
+  <data name="&gt;&gt;tabLeague.Name" xml:space="preserve">
+    <value>tabLeague</value>
+  </data>
+  <data name="&gt;&gt;tabLeague.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;tabLeague.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabControl, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tabLeague.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
   <data name="tabLeague.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left, Right</value>
   </data>
-
   <data name="tabLeague.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
   </data>
   <data name="tabLeague.Size" type="System.Drawing.Size, System.Drawing">
     <value>736, 480</value>
   </data>
-
   <data name="tabLeague.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
-  </data>
-  <data name="&gt;&gt;tabLeague.Name" xml:space="preserve">
-    <value>tabLeague</value>
-  </data>
-  <data name="&gt;&gt;tabLeague.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabControl, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tabLeague.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;tabLeague.ZOrder" xml:space="preserve">
-    <value>1</value>
   </data>
 
 </root>
