@@ -508,6 +508,13 @@ End Sub
 Private Sub mnuMagicLine_Click(sender As Object, e As EventArgs) Handles _
             mnuMagicLine.Click
 
+    Dim frmLine As LineView = New LineView()
+
+    With frmLine
+        .ShowDialog(Me)
+        .Dispose()
+    End With
+
 End Sub
 
 ''========================================================================
