@@ -200,6 +200,12 @@ Private Sub btnEdit_Click(sender As Object, e As EventArgs) Handles _
         m_workBuffer.setGameRecord(selectedRecord, gameRecord)
     End If
 
+    If (gameRecord.eGameFlags = Score4Wrapper.RecordFlag.GAME_RESULT) Then
+        m_workBuffer.updateLastDate(False, m_currentDate)
+    Else
+        m_workBuffer.updateLastDate(True, m_currentDate)
+    End If
+
     updateRecordTable(m_currentDate)
 
 End Sub

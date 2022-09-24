@@ -294,6 +294,36 @@ ScoreDocument::calculateMagicNumbers(
 }
 
 //----------------------------------------------------------------
+//    全てのレコードを検査して最終日付を設定する。
+//
+
+DateSerial
+ScoreDocument::checkLastDate()
+{
+    DateSerial  recordDate  = 0;
+
+    this->m_lastActiveDate  = 0;
+    this->m_lastRecordDate  = 0;
+
+    const  RecordIndex
+        numRecords  = static_cast<RecordIndex>(this->m_gameResults.size());
+    for ( RecordIndex i = 0; i < numRecords; ++ i ) {
+        const   GameResult  &gr = this->m_gameResults.at(i);
+        if ( gr.eGameFlags == GAME_EMPTY ) {
+            continue;
+        }
+        recordDate  = gr.recordDate;
+        if ( gr.eGameFlags == GAME_RESULT ) {
+            updateLastDate(BOOL_FALSE, recordDate);
+        } else {
+            updateLastDate(BOOL_TRUE,  recordDate);
+        }
+    }
+
+    return ( this->m_lastRecordDate );
+}
+
+//----------------------------------------------------------------
 //    ドキュメントの内容をクリアする。
 //
 
@@ -791,6 +821,29 @@ ScoreDocument::resizeTeamInfos(
 {
     this->m_teamInfos.resize(numTeam);
     return ( ERR_SUCCESS );
+}
+
+//----------------------------------------------------------------
+//    最終日付を更新する。
+//
+
+ErrCode
+ScoreDocument::updateLastDate(
+        const   Boolean     flgRecordOnly,
+        const   DateSerial  dsVal)
+{
+    ErrCode retVal  = ERR_SUCCESS;
+
+    if ( this->m_lastRecordDate < dsVal ) {
+        retVal  = setLastRecordDate(dsVal);
+    }
+    if ( flgRecordOnly != BOOL_FALSE ) {
+        return ( retVal );
+    }
+    if ( this->m_lastActiveDate < dsVal ) {
+        retVal  = setLastActiveDate(dsVal);
+    }
+    return ( retVal );
 }
 
 //----------------------------------------------------------------

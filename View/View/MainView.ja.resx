@@ -85,46 +85,64 @@
   </data>
 
   <data name="mnuFileExit.Size" type="System.Drawing.Size, System.Drawing">
-    <value>189, 22</value>
+    <value>214, 22</value>
   </data>
   <data name="mnuFileExit.Text" xml:space="preserve">
     <value>終了(&amp;X)</value>
   </data>
 
+  <data name="mnuFileExportText.Size" type="System.Drawing.Size, System.Drawing">
+    <value>214, 22</value>
+  </data>
+  <data name="mnuFileExportText.Text" xml:space="preserve">
+    <value>テキストとしてエクスポート(&amp;E) ...</value>
+  </data>
+
   <data name="mnuFileNew.Size" type="System.Drawing.Size, System.Drawing">
-    <value>189, 22</value>
+    <value>214, 22</value>
   </data>
   <data name="mnuFileNew.Text" xml:space="preserve">
     <value>新規作成(&amp;N)</value>
   </data>
 
   <data name="mnuFileOpen.Size" type="System.Drawing.Size, System.Drawing">
-    <value>189, 22</value>
+    <value>214, 22</value>
   </data>
   <data name="mnuFileOpen.Text" xml:space="preserve">
     <value>開く(&amp;O) ...</value>
   </data>
 
+  <data name="mnuFileOpenText.Size" type="System.Drawing.Size, System.Drawing">
+    <value>214, 22</value>
+  </data>
+  <data name="mnuFileOpenText.Text" xml:space="preserve">
+    <value>テキストを開く(&amp;T) ...</value>
+  </data>
+
   <data name="mnuFileSave.Size" type="System.Drawing.Size, System.Drawing">
-    <value>189, 22</value>
+    <value>214, 22</value>
   </data>
   <data name="mnuFileSave.Text" xml:space="preserve">
     <value>上書き保存(&amp;S)</value>
   </data>
 
   <data name="mnuFileSaveAs.Size" type="System.Drawing.Size, System.Drawing">
-    <value>189, 22</value>
+    <value>214, 22</value>
   </data>
   <data name="mnuFileSaveAs.Text" xml:space="preserve">
     <value>名前を付けて保存(&amp;A) ...</value>
   </data>
 
   <data name="mnuFileSep0.Size" type="System.Drawing.Size, System.Drawing">
-    <value>186, 6</value>
+    <value>211, 6</value>
   </data>
 
   <data name="mnuFileSep1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>186, 6</value>
+    <value>211, 6</value>
+  </data>
+
+  <data name="mnuFileSep2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>211, 6</value>
   </data>
 
   <data name="mnuMagic.Size" type="System.Drawing.Size, System.Drawing">
@@ -244,9 +262,11 @@
   <data name="optShowMagic.Text" xml:space="preserve">
     <value>マジック(&amp;M)</value>
   </data>
+
   <data name="optShowRest.Text" xml:space="preserve">
     <value>残り試合数(&amp;R)</value>
   </data>
+
   <data name="optShowWins.Text" xml:space="preserve">
     <value>必要勝利数(&amp;W)</value>
   </data>

@@ -194,6 +194,21 @@ public:
             ScoreDocument  *    ptrDoc);
 
     //----------------------------------------------------------------
+    /**   データをテキストファイルから読み込む。
+    **
+    **  @param [in] fileName    ファイル名。
+    **  @param[out] ptrDoc      ドキュメントを格納する変数。
+    **  @return     エラーコードを返す。
+    **      -   異常終了の場合は、
+    **          エラーの種類を示す非ゼロ値を返す。
+    **      -   正常終了の場合は、ゼロを返す。
+    **/
+    ErrCode
+    readFromTextFile(
+            const  std::string  &fileName,
+            ScoreDocument  *    ptrDoc);
+
+    //----------------------------------------------------------------
     /**   データをテキストストリームから読み込む。
     **
     **  @param [in,out] inStr     入力ストリーム。
@@ -256,6 +271,21 @@ public:
     **/
     static  ErrCode
     saveToBinaryFile(
+            const  ScoreDocument  & objDoc,
+            const  std::string    & fileName);
+
+    //----------------------------------------------------------------
+    /**   データをテキストファイルに書き込む。
+    **
+    **  @param [in] objDoc      ドキュメント。
+    **  @param [in] fileName    ファイル名。
+    **  @return     エラーコードを返す。
+    **      -   異常終了の場合は、
+    **          エラーの種類を示す非ゼロ値を返す。
+    **      -   正常終了の場合は、ゼロを返す。
+    **/
+    static  ErrCode
+    saveToTextFile(
             const  ScoreDocument  & objDoc,
             const  std::string    & fileName);
 

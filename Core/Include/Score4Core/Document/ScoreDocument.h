@@ -189,6 +189,14 @@ public:
             CountedScoreList    &bufCounted)  const;
 
     //----------------------------------------------------------------
+    /**   全てのレコードを検査して最終日付を設定する。
+    **
+    **  @return     チェックした最後の日付を返す。
+    **/
+    virtual  DateSerial
+    checkLastDate();
+
+    //----------------------------------------------------------------
     /**   ドキュメントの内容をクリアする。
     **
     **  @return     エラーコードを返す。
@@ -365,6 +373,23 @@ public:
     virtual  ErrCode
     resizeTeamInfos(
             const   TeamIndex   numTeam);
+
+    //----------------------------------------------------------------
+    /**   最終日付を更新する。
+    **
+    **  @param [in] flgRecordOnly   設定する内容。
+    **      - True :  レコード日付のみ設定。
+    **      - False : レコード日付と試合日付の両方を設定。
+    **  @param [in] dsVal           設定する値。
+    **  @return     エラーコードを返す。
+    **      -   異常終了の場合は、
+    **          エラーの種類を示す非ゼロ値を返す。
+    **      -   正常終了の場合は、ゼロを返す。
+    **/
+    virtual  ErrCode
+    updateLastDate(
+            const   Boolean     flgRecordOnly,
+            const   DateSerial  dsVal);
 
     //----------------------------------------------------------------
     /**   試合結果のレコードを比較する。
