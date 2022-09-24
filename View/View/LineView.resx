@@ -110,6 +110,34 @@ o  <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>&amp;Close</value>
   </data>
 
+  <data name="&gt;&gt;fraDate.Name" xml:space="preserve">
+    <value>fraDate</value>
+  </data>
+  <data name="&gt;&gt;fraDate.Parent" xml:space="preserve">
+    <value>fraLine</value>
+  </data>
+  <data name="&gt;&gt;fraDate.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;fraDate.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="fraDate.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Bottom, Right</value>
+  </data>
+  <data name="fraDate.Location" type="System.Drawing.Point, System.Drawing">
+    <value>496, 8</value>
+  </data>
+  <data name="fraDate.Size" type="System.Drawing.Size, System.Drawing">
+    <value>216, 232</value>
+  </data>
+  <data name="fraDate.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="fraDate.Text" xml:space="preserve">
+    <value>&amp;Date</value>
+  </data>
+
   <data name="tabLeague.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left, Right</value>
   </data>
@@ -217,9 +245,6 @@ o  <data name="&gt;&gt;$this.Name" xml:space="preserve">
   <data name="&gt;&gt;fraShowMode.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="fraDate.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Bottom, Right</value>
-  </data>
   <data name="lblDate.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left, Right</value>
   </data>
@@ -268,30 +293,7 @@ o  <data name="&gt;&gt;$this.Name" xml:space="preserve">
   <data name="&gt;&gt;MonthCalendar1.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="fraDate.Location" type="System.Drawing.Point, System.Drawing">
-    <value>496, 8</value>
-  </data>
-  <data name="fraDate.Size" type="System.Drawing.Size, System.Drawing">
-    <value>216, 232</value>
-  </data>
-  <data name="fraDate.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="fraDate.Text" xml:space="preserve">
-    <value>&amp;Date</value>
-  </data>
-  <data name="&gt;&gt;fraDate.Name" xml:space="preserve">
-    <value>fraDate</value>
-  </data>
-  <data name="&gt;&gt;fraDate.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;fraDate.Parent" xml:space="preserve">
-    <value>fraLine</value>
-  </data>
-  <data name="&gt;&gt;fraDate.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
+
   <data name="dgvLine.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left</value>
   </data>
