@@ -499,7 +499,9 @@ Private Sub mnuMagicLine_Click(sender As Object, e As EventArgs) Handles _
     Dim frmLine As LineView = New LineView()
 
     With frmLine
+         .initializeView(Me.m_scoreData, Me.m_currentDate)
         .ShowDialog(Me)
+
         .Dispose()
     End With
 
