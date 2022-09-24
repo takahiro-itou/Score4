@@ -71,6 +71,10 @@
     <value>日付(&amp;D)</value>
   </data>
 
+  <data name="fraShowMode.Text" xml:space="preserve">
+    <value>表示モード(&amp;S)</value>
+  </data>
+
   <data name="optShowPlayoff.Text" xml:space="preserve">
     <value>プレーオフ進出ライン(&amp;P)</value>
   </data>
