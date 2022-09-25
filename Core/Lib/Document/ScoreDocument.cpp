@@ -951,7 +951,16 @@ ScoreDocument::makeDigitsFromUnique(
         const  WinningRateList  &rateList,
         NumOfDigitsList         &digitsList)
 {
-    return ( 0 );
+    const   size_t  numData = rateList.size();
+    digitsList.clear();
+    digitsList.resize(numData);
+
+    NumOfDigits maxNumDigit = 3;
+    for ( size_t pos = 0; pos < numData; ++ pos ) {
+        digitsList[pos] = maxNumDigit;
+    }
+
+    return ( maxNumDigit );
 }
 
 //----------------------------------------------------------------
@@ -1465,7 +1474,15 @@ ScoreDocument::findDigitsList(
         const  NumOfDigitsList  &digitsList,
         const  WinningRate      wrValue)
 {
-    return ( 0 );
+    const   size_t  numData = std::min(rateList.size(), digitsList.size());
+
+    for ( size_t i = 0; i < numData; ++ i ) {
+        if ( rateList[i] == wrValue ) {
+            return ( digitsList[i] );
+        }
+    }
+
+    return ( -1 );
 }
 
 //----------------------------------------------------------------
