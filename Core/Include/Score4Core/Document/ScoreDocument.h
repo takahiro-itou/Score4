@@ -430,16 +430,13 @@ public:
     //----------------------------------------------------------------
     /**   表示桁数リストを作成する。
     **
-    **  @param [in] rateList      勝率テーブルを格納する変数。
-    **  @param[out] digitsList    桁数テーブルを格納する変数。
-    **          勝率テーブルの対応するセルを表示するのに
+    **  @param [in] rateList      勝率リスト。
+    **  @param[out] digitsList    桁数リストを格納する変数。
+    **          勝率リストの対応する要素を表示するのに
     **          最低限必要な桁数を格納する。
-    **  @return     エラーコードを返す。
-    **      -   異常終了の場合は、
-    **          エラーの種類を示す非ゼロ値を返す。
-    **      -   正常終了の場合は、ゼロを返す。
+    **  @return     桁数リスト内の最大値を返す。
     **/
-    static  ErrCode
+    static  NumOfDigits
     makeDigitsList(
             const  WinningRateList  &rateList,
             NumOfDigitsList         &digitsList);
@@ -447,16 +444,13 @@ public:
     //----------------------------------------------------------------
     /**   表示桁数テーブルを作成する。
     **
-    **  @param [in] rateTable     勝率テーブルを格納する変数。
+    **  @param [in] rateTable     勝率テーブル。
     **  @param[out] digitsTable   桁数テーブルを格納する変数。
     **          勝率テーブルの対応するセルを表示するのに
     **          最低限必要な桁数を格納する。
-    **  @return     エラーコードを返す。
-    **      -   異常終了の場合は、
-    **          エラーの種類を示す非ゼロ値を返す。
-    **      -   正常終了の場合は、ゼロを返す。
+    **  @return     桁数テーブル内の最大値を返す。
     **/
-    static  ErrCode
+    static  NumOfDigits
     makeDigitsTable(
             const  WinningRateTable &rateTable,
             NumOfDigitsTable        &digitsTable);

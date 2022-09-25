@@ -945,7 +945,7 @@ ScoreDocument::calculateGamesForWin(
 //    表示桁数リストを作成する。
 //
 
-ErrCode
+NumOfDigits
 ScoreDocument::makeDigitsList(
         const  WinningRateList  &rateList,
         NumOfDigitsList         &digitsList)
@@ -957,7 +957,7 @@ ScoreDocument::makeDigitsList(
 //    表示桁数テーブルを作成する。
 //
 
-ErrCode
+NumOfDigits
 ScoreDocument::makeDigitsTable(
         const  WinningRateTable &rateTable,
         NumOfDigitsTable        &digitsTable)
