@@ -174,7 +174,9 @@ Public Sub displayScoreTableToGrid(
 
     ReDim bufWinRate(0 To numShowCount - 1)
     ReDim bufShowDigit(0 To numShowCount - 1)
+
     For i = 0 To numShowCount - 1
+        idxTeam = bufShowIndex(i)
         scoreInfo = scoreData.scoreInfo(idxTeam)
         With scoreInfo
             numWons = .numWons(2)
