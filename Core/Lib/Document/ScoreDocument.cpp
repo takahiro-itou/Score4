@@ -20,6 +20,7 @@
 
 #include    "Score4Core/Document/ScoreDocument.h"
 
+#include    <algorithm>
 #include    <memory.h>
 #include    <stdio.h>
 #include    <vector>
@@ -950,7 +951,19 @@ ScoreDocument::makeDigitsList(
         const  WinningRateList  &rateList,
         NumOfDigitsList         &digitsList)
 {
-    return ( 0 );
+    const   size_t  numData = rateList.size();
+    digitsList.clear();
+    digitsList.resize(numData);
+
+    WinningRateList workRate = rateList;
+    std::sort(workRate.begin(), workRate.end());
+
+    NumOfDigits maxNumDigit = 3;
+    for ( size_t pos = 0; pos < numData; ++ pos ) {
+        digitsList[pos] = maxNumDigit;
+    }
+
+    return ( maxNumDigit );
 }
 
 //----------------------------------------------------------------
