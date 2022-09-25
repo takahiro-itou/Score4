@@ -229,7 +229,7 @@ Public Sub displayScoreTableToGrid(
             If (wpDenom = 0) Then
                 strPerc = "---"
             Else
-                strPerc = Format(numWons / wpDenom, "#.000")
+                strPerc = formatDouble(numWons / wpDenom, bufShowDigit(i))
             End If
 
             ' マジック
