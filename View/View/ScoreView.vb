@@ -158,21 +158,46 @@ Public Sub displayScoreTableToGrid(
         ByRef scoreData As Score4Wrapper.Document.ScoreDocument,
         ByRef objView As System.Windows.Forms.DataGridView)
 
-    Dim i As Integer, idxTeam As Integer
+    Dim i As Integer, idxTeam As Integer, numTeam As Integer
     Dim numWons As Integer, numLost As Integer, numDraw As Integer
+    Dim numGame As Integer, wpDenom As Integer
     Dim bufShowIndex() As Integer
+    Dim bufShowDigit() As Integer
+    Dim bufWinRate() As Double
     Dim numShowCount As Integer
     Dim topDiff As Integer
+    Dim scoreInfo As Score4Wrapper.Common.CountedScores
 
-    ReDim bufShowIndex(0 To scoreData.getNumTeams() - 1)
+    numTeam = scoreData.getNumTeams()
+    ReDim bufShowIndex(0 To numTeam - 1)
     numShowCount = scoreData.computeRankOrder(leagueIndex, bufShowIndex)
+
+    ReDim bufWinRate(0 To numShowCount - 1)
+    ReDim bufShowDigit(0 To numShowCount - 1)
+    For i = 0 To numShowCount - 1
+        scoreInfo = scoreData.scoreInfo(idxTeam)
+        With scoreInfo
+            numWons = .numWons(2)
+            numLost = .numLost(2)
+            numDraw = .numDraw(2)
+            numGame = .numGames(2)
+            wpDenom = numGame - numDraw
+        End With
+
+        If (wpDenom = 0) Then
+            bufWinRate(i) = 0
+        Else
+            bufWinRate(i) = (numWons / wpDenom)
+        End If
+    Next i
+    Score4Wrapper.Document.ScoreDocument.makeDigitsList(
+        bufWinRate, bufShowDigit)
 
     With objView
         .Rows.Clear()
         For i = 0 To numShowCount - 1
             idxTeam = bufShowIndex(i)
             Dim teamInfo As Score4Wrapper.Common.TeamInfo
-            Dim scoreInfo As Score4Wrapper.Common.CountedScores
             Dim magicInfo As Score4Wrapper.Common.MagicInfo
 
             teamInfo = scoreData.teamInfo(idxTeam)
@@ -199,8 +224,8 @@ Public Sub displayScoreTableToGrid(
             End If
 
             ' 勝率
-            Dim numGame As Integer = scoreInfo.numGames(2)
-            Dim wpDenom As Integer = numGame - numDraw
+            numGame = scoreInfo.numGames(2)
+            wpDenom = numGame - numDraw
             If (wpDenom = 0) Then
                 strPerc = "---"
             Else
