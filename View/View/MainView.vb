@@ -607,6 +607,9 @@ Private Sub MainView_Load(sender As Object, e As EventArgs) Handles MyBase.Load
     moveWindowToStartPosition()
 End Sub
 
+''========================================================================
+''    タブを選択したら、そのリーグの情報に切り替える。
+''========================================================================
 Private Sub tabLeague_SelectedIndexChanged(sender As Object, e As EventArgs) _
         Handles tabLeague.SelectedIndexChanged
 
@@ -617,6 +620,7 @@ Private Sub tabLeague_SelectedIndexChanged(sender As Object, e As EventArgs) _
 End Sub
 
 ''========================================================================
+''    カレンダーをクリックしたら、その日付までのデータに切り替える。
 ''========================================================================
 Private Sub mnvDate_DateChanged(sender As Object, e As DateRangeEventArgs) _
         Handles mnvDate.DateChanged
