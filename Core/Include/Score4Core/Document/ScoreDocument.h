@@ -755,6 +755,16 @@ private:
             CountedScores     & trgCS)  const;
 
     //----------------------------------------------------------------
+    /**   表示桁数リストから指定した要素を検索する。
+    **
+    **/
+    static  NumOfDigits
+    findDigitsList(
+            const  WinningRateList  &rateList,
+            const  NumOfDigitsList  &digitsList,
+            const  WinningRate      wrValue)
+
+    //----------------------------------------------------------------
     /**   敵チームを上回るのに必要な勝利数を計算する。
     **
     **  @param [in] rateTable     事前に作成した勝率テーブル。
