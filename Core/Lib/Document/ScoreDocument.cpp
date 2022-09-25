@@ -950,7 +950,7 @@ ScoreDocument::makeDigitsList(
         const  WinningRateList  &rateList,
         NumOfDigitsList         &digitsList)
 {
-    return ( ERR_FAILURE );
+    return ( 0 );
 }
 
 //----------------------------------------------------------------
@@ -962,7 +962,44 @@ ScoreDocument::makeDigitsTable(
         const  WinningRateTable &rateTable,
         NumOfDigitsTable        &digitsTable)
 {
-    return ( ERR_FAILURE );
+    const   size_t  numRows = rateTable.size();
+
+    digitsTable.clear();
+    digitsTable.resize(numRows);
+
+    size_t  totalCells  = 0;
+    for ( size_t i = 0; i < numRows; ++ i ) {
+        const   size_t  numCols = rateTable[i].size();
+        digitsTable[i].clear();
+        digitsTable[i].resize(numCols);
+        totalCells  += numCols;
+    }
+
+    //  データを１次元配列に詰め直す。  //
+    WinningRateList workRate  (totalCells);
+    NumOfDigitsList workDigits(totalCells);
+
+    size_t  pos = 0;
+    for ( size_t i = 0; i < numRows; ++ i ) {
+        const   size_t  numCols = rateTable[i].size();
+        for ( size_t j = 0; j < numCols; ++ j ) {
+            workRate[pos++] = rateTable[i][j];
+        }
+    }
+
+    //  リスト版の関数を呼び出して結果を得る。  //
+    const  NumOfDigits  retVal  = makeDigitsList(workRate, workDigits);
+
+    //  結果を元のテーブルの形に戻す。  //
+    pos = 0;
+    for ( size_t i = 0; i < numRows; ++ i ) {
+        const   size_t  numCols = digitsTable[i].size();
+        for ( size_t j = 0; j < numCols; ++ j ) {
+            digitsTable[i][j] = workDigits[pos++];
+        }
+    }
+
+    return ( retVal );
 }
 
 //========================================================================
