@@ -976,12 +976,25 @@ ScoreDocument::makeDigitsList(
     digitsList.clear();
     digitsList.resize(numData);
 
-    WinningRateList workRate = rateList;
-    std::sort(workRate.begin(), workRate.end());
+    NumOfDigitsList workDigits;
+    WinningRateList workRate    = rateList;
+    NumOfDigits     maxNumDigit = 0;
 
-    NumOfDigits maxNumDigit = 3;
+    std::sort(workRate.begin(), workRate.end());
+    workRate.erase(
+            std::unique(workRate.begin(), workRate.end()),
+            workRate.end());
+
+    const   size_t  numUniq = workRate.size();
+    maxNumDigit = makeDigitsFromUnique(workRate, workDigits);
+
+    NumOfDigits retVal;
     for ( size_t pos = 0; pos < numData; ++ pos ) {
-        digitsList[pos] = maxNumDigit;
+        retVal  = findDigitsList(workRate, workDigits, rateList[pos]);
+        if ( retVal < 0 ) {
+            retVal  = maxNumDigit;
+        }
+        digitsList[pos] = retVal;
     }
 
     return ( maxNumDigit );
