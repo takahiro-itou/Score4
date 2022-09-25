@@ -431,6 +431,21 @@ public:
     /**   表示桁数リストを作成する。
     **
     **  @param [in] rateList      勝率リスト。
+    **          ただし要素はソートおよび重複除去済みとする。
+    **  @param[out] digitsList    桁数リストを格納する変数。
+    **          勝率リストの対応する要素を表示するのに
+    **          最低限必要な桁数を格納する。
+    **  @return     桁数リスト内の最大値を返す。
+    **/
+    static  NumOfDigits
+    makeDigitsFromUnique(
+            const  WinningRateList  &rateList,
+            NumOfDigitsList         &digitsList);
+
+    //----------------------------------------------------------------
+    /**   表示桁数リストを作成する。
+    **
+    **  @param [in] rateList      勝率リスト。
     **  @param[out] digitsList    桁数リストを格納する変数。
     **          勝率リストの対応する要素を表示するのに
     **          最低限必要な桁数を格納する。
@@ -757,12 +772,16 @@ private:
     //----------------------------------------------------------------
     /**   表示桁数リストから指定した要素を検索する。
     **
+    **  @param [in] rateList      勝率リスト。
+    **  @param [in] digitsList    桁数リスト。
+    **  @param [in] wrValue       検索する値。
+    **  @return     検索した値に対応する桁数。
     **/
     static  NumOfDigits
     findDigitsList(
             const  WinningRateList  &rateList,
             const  NumOfDigitsList  &digitsList,
-            const  WinningRate      wrValue)
+            const  WinningRate      wrValue);
 
     //----------------------------------------------------------------
     /**   敵チームを上回るのに必要な勝利数を計算する。

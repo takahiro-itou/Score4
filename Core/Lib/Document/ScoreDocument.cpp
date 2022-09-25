@@ -947,6 +947,18 @@ ScoreDocument::calculateGamesForWin(
 //
 
 NumOfDigits
+ScoreDocument::makeDigitsFromUnique(
+        const  WinningRateList  &rateList,
+        NumOfDigitsList         &digitsList)
+{
+    return ( 0 );
+}
+
+//----------------------------------------------------------------
+//    表示桁数リストを作成する。
+//
+
+NumOfDigits
 ScoreDocument::makeDigitsList(
         const  WinningRateList  &rateList,
         NumOfDigitsList         &digitsList)
@@ -1441,6 +1453,19 @@ ScoreDocument::countTotalScores(
     }
 
     return ( ERR_SUCCESS );
+}
+
+//----------------------------------------------------------------
+//    表示桁数リストから指定した要素を検索する。
+//
+
+NumOfDigits
+ScoreDocument::findDigitsList(
+        const  WinningRateList  &rateList,
+        const  NumOfDigitsList  &digitsList,
+        const  WinningRate      wrValue)
+{
+    return ( 0 );
 }
 
 //----------------------------------------------------------------
