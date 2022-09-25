@@ -56,6 +56,9 @@ Private Sub tabLeague_SelectedIndexChanged(sender As Object, e As EventArgs) _
         Handles tabLeague.SelectedIndexChanged
 
     Dim idxLeague As Integer = tabLeague.SelectedIndex
+    If (idxLeague < 0) Then
+        Exit Sub
+    End If
     updateMagicLine(idxLeague, Me.m_currentDate)
 
 End Sub
