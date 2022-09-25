@@ -51,25 +51,25 @@ private:
 
     typedef     Common::GameCountTable          GameCountTable;
 
+public:
+
+    /**   リーグ情報。  **/
+    typedef     Common::LeagueInfo              LeagueInfo;
+
+    /**   チーム情報。  **/
+    typedef     Common::TeamInfo                TeamInfo;
+
+    /**   ゲーム結果のレコード。    **/
+    typedef     Common::GameResult              GameResult;
+
+    /**   レコード番号の配列。      **/
+    typedef     std::vector<RecordIndex>        RecordIndexList;
+
     typedef     std::vector<WinningRate>        WinningRateList;
     typedef     std::vector<WinningRateList>    WinningRateTable;
 
     typedef     std::vector<NumOfDigits>        NumOfDigitsList;
     typedef     std::vector<NumOfDigitsList>    NumOfDigitsTable;
-
-public:
-
-    /**   リーグ情報。  **/
-    typedef     Common::LeagueInfo          LeagueInfo;
-
-    /**   チーム情報。  **/
-    typedef     Common::TeamInfo            TeamInfo;
-
-    /**   ゲーム結果のレコード。    **/
-    typedef     Common::GameResult          GameResult;
-
-    /**   レコード番号の配列。      **/
-    typedef     std::vector<RecordIndex>    RecordIndexList;
 
 //========================================================================
 //
