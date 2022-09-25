@@ -158,7 +158,8 @@ Public Sub displayScoreTableToGrid(
         ByRef scoreData As Score4Wrapper.Document.ScoreDocument,
         ByRef objView As System.Windows.Forms.DataGridView)
 
-    Dim i As Integer
+    Dim i As Integer, idxTeam As Integer
+    Dim numWons As Integer, numLost As Integer, numDraw As Integer
     Dim bufShowIndex() As Integer
     Dim numShowCount As Integer
     Dim topDiff As Integer
@@ -169,7 +170,7 @@ Public Sub displayScoreTableToGrid(
     With objView
         .Rows.Clear()
         For i = 0 To numShowCount - 1
-            Dim idxTeam As Integer = bufShowIndex(i)
+            idxTeam = bufShowIndex(i)
             Dim teamInfo As Score4Wrapper.Common.TeamInfo
             Dim scoreInfo As Score4Wrapper.Common.CountedScores
             Dim magicInfo As Score4Wrapper.Common.MagicInfo
@@ -178,9 +179,9 @@ Public Sub displayScoreTableToGrid(
             scoreInfo = scoreData.scoreInfo(idxTeam)
             magicInfo = scoreInfo.totalMagicInfo
 
-            Dim numWons As Integer = scoreInfo.numWons(2)
-            Dim numLost As Integer = scoreInfo.numLost(2)
-            Dim numDraw As Integer = scoreInfo.numDraw(2)
+            numWons = scoreInfo.numWons(2)
+            numLost = scoreInfo.numLost(2)
+            numDraw = scoreInfo.numDraw(2)
             Dim strDiff As String
             Dim strPerc As String
             Dim strMagic As String
