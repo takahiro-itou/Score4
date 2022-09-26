@@ -958,7 +958,7 @@ ScoreDocument::makeDigitsFromUnique(
     NumOfDigits maxNumDigit = 3;
     for ( size_t pos = 0; pos < numData - 1; ++ pos ) {
         const  WinningRate  wrLower = rateList[pos];
-        const  WinningRate  wrUpper = rateList[pos];
+        const  WinningRate  wrUpper = rateList[pos + 1];
         NumOfDigits     nDigits = 3;
         NumOfDigits     digitsRate  = 1000;
         long            ltLower, ltUpper;
