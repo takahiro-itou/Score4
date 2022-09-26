@@ -963,8 +963,8 @@ ScoreDocument::makeDigitsFromUnique(
         NumOfDigits     digitsRate  = 1000;
         long            ltLower, ltUpper;
         for ( nDigits = 3; nDigits < 10; ++ nDigits ) {
-            ltLower = static_cast<int>(wrLpper * digitsRate + 0.5);
-            ltUpper = static_cast<int>(wrUower * digitsRate + 0.5);
+            ltLower = static_cast<int>(wrLower * digitsRate + 0.5);
+            ltUpper = static_cast<int>(wrUpper * digitsRate + 0.5);
             if ( (ltUpper - ltLower) > 1 ) {
                 break;
             }
