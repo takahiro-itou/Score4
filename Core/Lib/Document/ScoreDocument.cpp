@@ -968,6 +968,7 @@ ScoreDocument::makeDigitsFromUnique(
             if ( (ltUpper - ltLower) > 1 ) {
                 break;
             }
+            digitsRate  *= 10;
         }
         if ( maxNumDigit < nDigits ) {
             maxNumDigit = nDigits;
