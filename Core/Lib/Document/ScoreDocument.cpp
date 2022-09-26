@@ -960,11 +960,11 @@ ScoreDocument::makeDigitsFromUnique(
         const  WinningRate  wrLower = rateList[pos];
         const  WinningRate  wrUpper = rateList[pos + 1];
         NumOfDigits     nDigits = 3;
-        NumOfDigits     digitsRate  = 1000;
+        long            digitsRate  = 1000;
         long            ltLower, ltUpper;
         for ( nDigits = 3; nDigits < 10; ++ nDigits ) {
-            ltLower = static_cast<int>(wrLower * digitsRate + 0.5);
-            ltUpper = static_cast<int>(wrUpper * digitsRate + 0.5);
+            ltLower = static_cast<long>(wrLower * digitsRate + 0.5);
+            ltUpper = static_cast<long>(wrUpper * digitsRate + 0.5);
             if ( (ltUpper - ltLower) > 1 ) {
                 break;
             }
