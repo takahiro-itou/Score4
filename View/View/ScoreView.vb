@@ -348,6 +348,8 @@ Public Sub displayVictoryLineToGrid(
     Dim numTeams As Integer, idxTeam As Integer
     Dim numShowCount As Integer
     Dim numRest As Integer, maxRestGame As Integer
+    Dim strRate As String
+
     Dim ratesTable(,) As Double = Nothing
     Dim digitTable(,) As Integer = Nothing
     Dim scoreInfo As Score4Wrapper.Common.CountedScores
@@ -382,6 +384,13 @@ Public Sub displayVictoryLineToGrid(
 
             scoreInfo = scoreData.scoreInfo(idxTeam)
             numRest = scoreInfo.numTotalRestGames(gameFilter)
+
+            For i = 0 To numRest
+                strRate = StringOperation.formatDouble(
+                        ratesTable(j, i), digitTable(j, i))
+                .Rows(i).Cells(j).Value = strRate
+            Next i
+
         Next j
 
         .Visible = True
