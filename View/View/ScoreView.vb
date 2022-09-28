@@ -13,7 +13,7 @@ Public Const MAGICLIST_NO_DATA_ENTRY As Integer = _
     Score4Wrapper.Consts.MAGICLIST_NO_DATA_ENTRY
 
 ''========================================================================
-''    指定されたグリッドビューに残り試合のテーブルを表示する
+''    指定されたグリッドビューにゲームレコードを表示する
 ''========================================================================
 Public Sub displayRecordsToGrid(
         ByVal startDate As System.DateTime,
