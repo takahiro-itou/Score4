@@ -34,8 +34,12 @@ Private Sub updateMagicLine(
     With Me
         .m_currentLeague = idxLeague
         .m_currentDate = targetDate
+        .m_gameScore.countScores(targetDate)
     End With
     lblDate.Text = targetDate
+
+    ScoreView.displayVictoryLineToGrid(
+        idxLeague, Me.m_gameScore, Me.dgvLine)
 
 End Sub
 
