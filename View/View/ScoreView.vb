@@ -347,6 +347,9 @@ Public Sub displayVictoryLineToGrid(
     Dim bufShowIndex() As Integer
     Dim numTeams As Integer
     Dim numShowCount As Integer
+    Dim maxRestGame As Integer
+    Dim ratesTable(,) As Double
+    Dim digitTable(,) As Integer
 
     numTeams = scoreData.getNumTeams()
     ReDim bufShowIndex(0 To numTeams - 1)
@@ -359,6 +362,14 @@ Public Sub displayVictoryLineToGrid(
     makeTeamListOnGridViewHeader(
         numShowCount, bufShowIndex, numShowCount, False, 60,
         scoreData, objView)
+
+    maxRestGame = scoreData.makeWinningRateTable(leagueIndex, ratesTable)
+    Score4Wrapper.Document.ScoreDocument.makeDigitsTable(
+        ratesTable, digitTable)
+
+    With objView
+        .Columns(0).HeaderText = "勝数"
+    End With
 
 End Sub
 
