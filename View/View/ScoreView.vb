@@ -343,13 +343,15 @@ Public Sub displayVictoryLineToGrid(
         ByRef scoreData As Score4Wrapper.Document.ScoreDocument,
         ByRef objView As System.Windows.Forms.DataGridView)
 
-    Dim i As Integer
+    Dim i As Integer, j As Integer
     Dim bufShowIndex() As Integer
-    Dim numTeams As Integer
+    Dim numTeams As Integer, idxTeam As Integer
     Dim numShowCount As Integer
-    Dim maxRestGame As Integer
+    Dim numRest As Integer, maxRestGame As Integer
     Dim ratesTable(,) As Double = Nothing
     Dim digitTable(,) As Integer = Nothing
+    Dim scoreInfo As Score4Wrapper.Common.CountedScores
+    Dim gameFilter As Score4Wrapper.GameFilter
 
     numTeams = scoreData.getNumTeams()
     ReDim bufShowIndex(0 To numTeams - 1)
@@ -362,6 +364,7 @@ Public Sub displayVictoryLineToGrid(
     makeTeamListOnGridViewHeader(
         numShowCount, bufShowIndex, numShowCount, False, 60,
         scoreData, objView)
+    gameFilter = Score4Wrapper.GameFilter.FILTER_ALL_GAMES
 
     maxRestGame = scoreData.makeWinningRateTable(leagueIndex, ratesTable)
     Score4Wrapper.Document.ScoreDocument.makeDigitsTable(
@@ -369,6 +372,19 @@ Public Sub displayVictoryLineToGrid(
 
     With objView
         .Columns(0).HeaderText = "勝数"
+        .Rows.Clear()
+        For i = 0 To maxRestGame
+            .Rows.Add("" & (maxRestGame - i) & "勝")
+        Next i
+
+        For j = 0 To numShowCount - 1
+            idxTeam = bufShowIndex(j)
+
+            scoreInfo = scoreData.scoreInfo(idxTeam)
+            numRest = scoreInfo.numTotalRestGames(gameFilter)
+        Next j
+
+        .Visible = True
     End With
 
 End Sub
