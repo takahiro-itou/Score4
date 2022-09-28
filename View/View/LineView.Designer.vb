@@ -66,12 +66,15 @@ Partial Class LineView
         resources.ApplyResources(Me.dgvLine, "dgvLine")
         Me.dgvLine.AllowUserToAddRows = False
         Me.dgvLine.AllowUserToDeleteRows = False
+        Me.dgvLine.AllowUserToResizeColumns = True
+        Me.dgvLine.AllowUserToResizeRows = False
         Me.dgvLine.ColumnHeadersHeightSizeMode = _
             System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.dgvLine.MultiSelect = False
         Me.dgvLine.Name = "dgvLine"
         Me.dgvLine.ReadOnly = True
-        Me.dgvLine.RowTemplate.Height = 25
-
+        Me.dgvLine.RowHeadersVisible = False
+        Me.dgvLine.RowTemplate.Height = 21
 
         '
         ' fraShowMode
