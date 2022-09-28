@@ -336,6 +336,33 @@ Public Sub displayTeamMagicTableToGrid(
 End Sub
 
 ''========================================================================
+''    指定されたグリッドビューに優勝ラインを表示する。
+''========================================================================
+Public Sub displayVictoryLineToGrid(
+        ByVal leagueIndex As Integer,
+        ByRef scoreData As Score4Wrapper.Document.ScoreDocument,
+        ByRef objView As System.Windows.Forms.DataGridView)
+
+    Dim i As Integer
+    Dim bufShowIndex() As Integer
+    Dim numTeams As Integer
+    Dim numShowCount As Integer
+
+    numTeams = scoreData.getNumTeams()
+    ReDim bufShowIndex(0 To numTeams - 1)
+    numShowCount = scoreData.computeRankOrder(leagueIndex, bufShowIndex)
+    If (numShowCount = 0) Then
+        objView.Visible = False
+        Exit Sub
+    End If
+
+    makeTeamListOnGridViewHeader(
+        numShowCount, bufShowIndex, numShowCount, False, 60,
+        scoreData, objView)
+
+End Sub
+
+''========================================================================
 ''    指定されたグリッドビューに下記テーブルの内容を表示する。
 ''
 ''    各対戦相手毎に、その相手より (確実に) 上位になるために、
