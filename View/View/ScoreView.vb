@@ -348,8 +348,8 @@ Public Sub displayVictoryLineToGrid(
     Dim numTeams As Integer
     Dim numShowCount As Integer
     Dim maxRestGame As Integer
-    Dim ratesTable(,) As Double
-    Dim digitTable(,) As Integer
+    Dim ratesTable(,) As Double = Nothing
+    Dim digitTable(,) As Integer = Nothing
 
     numTeams = scoreData.getNumTeams()
     ReDim bufShowIndex(0 To numTeams - 1)
