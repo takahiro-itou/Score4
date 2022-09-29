@@ -354,6 +354,7 @@ Public Sub displayVictoryLineToGrid(
     Dim numTeams As Integer, idxTeam As Integer
     Dim numShowCount As Integer
     Dim numRest As Integer, maxRestGame As Integer
+    Dim maxDigits As Integer, colWidth As Integer
     Dim strRate As String, strGame As String, strFormat As String
 
     Dim ratesTable(,) As Double = Nothing
@@ -369,19 +370,26 @@ Public Sub displayVictoryLineToGrid(
         Exit Sub
     End If
 
+    maxRestGame = scoreData.makeWinningRateTable(leagueIndex, ratesTable)
+    maxDigits = Score4Wrapper.Document.ScoreDocument.makeDigitsTable(
+        ratesTable, digitTable)
+
+    If (maxRestGame <= 9) Then
+        strFormat = "{0,1:##0}-{1,1:##0}: "
+    Else If (maxRestGame <= 99) Then
+        strFormat = "{0,2:##0}-{1,2:##0}: "
+    Else
+        strFormat = "{0,3:##0}-{1,3:##0}: "
+    End If
+    colWidth = 96
+
     makeTeamListOnGridViewHeader(
         numShowCount, bufShowIndex, numShowCount, False,
-        96,
+        colWidth,
         DataGridViewContentAlignment.MiddleRight,
         DataGridViewContentAlignment.MiddleLeft,
         scoreData, objView)
     gameFilter = Score4Wrapper.GameFilter.FILTER_ALL_GAMES
-
-    maxRestGame = scoreData.makeWinningRateTable(leagueIndex, ratesTable)
-    Score4Wrapper.Document.ScoreDocument.makeDigitsTable(
-        ratesTable, digitTable)
-
-    strFormat = "{0,3:##0}-{1,3:##0}: "
 
     With objView
         With .Columns(0)
