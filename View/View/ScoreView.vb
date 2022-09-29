@@ -364,7 +364,7 @@ Public Sub displayVictoryLineToGrid(
     End If
 
     makeTeamListOnGridViewHeader(
-        numShowCount, bufShowIndex, numShowCount, False, 60,
+        numShowCount, bufShowIndex, numShowCount, False, 96,
         scoreData, objView)
     gameFilter = Score4Wrapper.GameFilter.FILTER_ALL_GAMES
 
@@ -386,7 +386,8 @@ Public Sub displayVictoryLineToGrid(
             numRest = scoreInfo.numTotalRestGames(gameFilter)
 
             For i = 0 To numRest
-                strGame = i & "-" & (numRest - i) & " "
+                strGame = String.Format(
+                        "{0,3:##0}-{1,3:##0}:", i, numRest -  i)
                 strRate = StringOperation.formatDouble(
                         ratesTable(idxTeam, i), digitTable(idxTeam, i))
                 .Rows(maxRestGame - i).Cells(j + 1).Value = strGame & strRate
