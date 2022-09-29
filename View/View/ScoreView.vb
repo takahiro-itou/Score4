@@ -124,6 +124,7 @@ Public Sub displayRestGameTableToGrid(
         numShowCount, bufShowIndex, numTeams, True,
         48,
         DataGridViewContentAlignment.MiddleRight,
+        DataGridViewContentAlignment.MiddleRight,
         scoreData, objView)
 
     With objView
@@ -312,6 +313,7 @@ Public Sub displayTeamMagicTableToGrid(
         numShowCount, bufShowIndex, numShowCount, False,
         88,
         DataGridViewContentAlignment.MiddleRight,
+        DataGridViewContentAlignment.MiddleRight,
         scoreData, objView)
     gameFilter = Score4Wrapper.GameFilter.FILTER_ALL_GAMES
 
@@ -370,6 +372,7 @@ Public Sub displayVictoryLineToGrid(
     makeTeamListOnGridViewHeader(
         numShowCount, bufShowIndex, numShowCount, False,
         96,
+        DataGridViewContentAlignment.MiddleRight,
         DataGridViewContentAlignment.MiddleLeft,
         scoreData, objView)
     gameFilter = Score4Wrapper.GameFilter.FILTER_ALL_GAMES
@@ -379,7 +382,10 @@ Public Sub displayVictoryLineToGrid(
         ratesTable, digitTable)
 
     With objView
-        .Columns(0).HeaderText = "勝数"
+        With .Columns(0)
+            .HeaderText = "勝数"
+            .Width = 48
+        End With
         .Rows.Clear()
         For i = 0 To maxRestGame
             .Rows.Add("" & (maxRestGame - i) & "勝")
@@ -434,6 +440,7 @@ Public Sub displayWinsForBeatTableToGrid(
     makeTeamListOnGridViewHeader(
         numShowCount, bufShowIndex, numShowCount, False,
         104,
+        DataGridViewContentAlignment.MiddleRight,
         DataGridViewContentAlignment.MiddleRight,
         scoreData, objView)
     gameFilter = Score4Wrapper.GameFilter.FILTER_ALL_GAMES
@@ -582,6 +589,7 @@ Private Sub makeTeamListOnGridViewHeader(
         ByVal numTeams As Integer,
         ByVal flagShowTotal As Boolean,
         ByVal columnWidth As Integer,
+        ByVal headAlign As DataGridViewContentAlignment,
         ByVal cellAlign As DataGridViewContentAlignment,
         ByRef scoreData As Score4Wrapper.Document.ScoreDocument,
         ByRef objView As System.Windows.Forms.DataGridView)
@@ -601,7 +609,7 @@ Private Sub makeTeamListOnGridViewHeader(
 
         textColumn = makeGridViewColumn("team", "Team")
         With textColumn
-            .DefaultCellStyle.Alignment = cellAlign
+            .DefaultCellStyle.Alignment = headAlign
             .Width = columnWidth
         End With
         .Add(textColumn)
