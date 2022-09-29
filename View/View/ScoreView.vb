@@ -362,6 +362,8 @@ Public Sub displayVictoryLineToGrid(
     Dim scoreInfo As Score4Wrapper.Common.CountedScores
     Dim gameFilter As Score4Wrapper.GameFilter
 
+    Const WIDTH_PER_DIGIT As Integer = 8
+
     numTeams = scoreData.getNumTeams()
     ReDim bufShowIndex(0 To numTeams - 1)
     numShowCount = scoreData.computeRankOrder(leagueIndex, bufShowIndex)
@@ -375,13 +377,15 @@ Public Sub displayVictoryLineToGrid(
         ratesTable, digitTable)
 
     If (maxRestGame <= 9) Then
+        colWidth = 72
         strFormat = "{0,1:##0}-{1,1:##0}: "
     Else If (maxRestGame <= 99) Then
+        colWidth = 88
         strFormat = "{0,2:##0}-{1,2:##0}: "
     Else
+        colWidth = 102
         strFormat = "{0,3:##0}-{1,3:##0}: "
     End If
-    colWidth = 96
 
     makeTeamListOnGridViewHeader(
         numShowCount, bufShowIndex, numShowCount, False,
