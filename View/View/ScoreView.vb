@@ -348,7 +348,7 @@ Public Sub displayVictoryLineToGrid(
     Dim numTeams As Integer, idxTeam As Integer
     Dim numShowCount As Integer
     Dim numRest As Integer, maxRestGame As Integer
-    Dim strRate As String
+    Dim strRate As String, strGame As String
 
     Dim ratesTable(,) As Double = Nothing
     Dim digitTable(,) As Integer = Nothing
@@ -386,9 +386,10 @@ Public Sub displayVictoryLineToGrid(
             numRest = scoreInfo.numTotalRestGames(gameFilter)
 
             For i = 0 To numRest
+                strGame = i & "-" & (numRest - i) & " "
                 strRate = StringOperation.formatDouble(
                         ratesTable(idxTeam, i), digitTable(idxTeam, i))
-                .Rows(maxRestGame - i).Cells(j + 1).Value = strRate
+                .Rows(maxRestGame - i).Cells(j + 1).Value = strGame & strRate
             Next i
 
         Next j
