@@ -121,7 +121,9 @@ Public Sub displayRestGameTableToGrid(
     numShowCount = scoreData.computeRankOrder(leagueIndex, bufShowIndex)
 
     makeTeamListOnGridViewHeader(
-        numShowCount, bufShowIndex, numTeams, True, 48,
+        numShowCount, bufShowIndex, numTeams, True,
+        48,
+        DataGridViewContentAlignment.MiddleRight,
         scoreData, objView)
 
     With objView
@@ -307,7 +309,9 @@ Public Sub displayTeamMagicTableToGrid(
     End If
 
     makeTeamListOnGridViewHeader(
-        numShowCount, bufShowIndex, numShowCount, False, 88,
+        numShowCount, bufShowIndex, numShowCount, False,
+        88,
+        DataGridViewContentAlignment.MiddleRight,
         scoreData, objView)
     gameFilter = Score4Wrapper.GameFilter.FILTER_ALL_GAMES
 
@@ -364,7 +368,9 @@ Public Sub displayVictoryLineToGrid(
     End If
 
     makeTeamListOnGridViewHeader(
-        numShowCount, bufShowIndex, numShowCount, False, 96,
+        numShowCount, bufShowIndex, numShowCount, False,
+        96,
+        DataGridViewContentAlignment.MiddleLeft,
         scoreData, objView)
     gameFilter = Score4Wrapper.GameFilter.FILTER_ALL_GAMES
 
@@ -426,7 +432,9 @@ Public Sub displayWinsForBeatTableToGrid(
     End If
 
     makeTeamListOnGridViewHeader(
-        numShowCount, bufShowIndex, numShowCount, False, 104,
+        numShowCount, bufShowIndex, numShowCount, False,
+        104,
+        DataGridViewContentAlignment.MiddleRight,
         scoreData, objView)
     gameFilter = Score4Wrapper.GameFilter.FILTER_ALL_GAMES
 
@@ -574,6 +582,7 @@ Private Sub makeTeamListOnGridViewHeader(
         ByVal numTeams As Integer,
         ByVal flagShowTotal As Boolean,
         ByVal columnWidth As Integer,
+        ByVal cellAlign As DataGridViewContentAlignment,
         ByRef scoreData As Score4Wrapper.Document.ScoreDocument,
         ByRef objView As System.Windows.Forms.DataGridView)
 
@@ -581,10 +590,7 @@ Private Sub makeTeamListOnGridViewHeader(
     Dim idxTeam As Integer
     Dim colName As String
     Dim colText As String
-    Dim cellAlign As DataGridViewContentAlignment
     Dim textColumn As DataGridViewTextBoxColumn
-
-    cellAlign = DataGridViewContentAlignment.MiddleRight
 
     If (numTeams = -1) Then
         numTeams = scoreData.getNumTeams()
