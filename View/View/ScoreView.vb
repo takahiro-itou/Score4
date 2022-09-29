@@ -387,7 +387,7 @@ Public Sub displayVictoryLineToGrid(
 
             For i = 0 To numRest
                 strRate = StringOperation.formatDouble(
-                        ratesTable(j, i), digitTable(j, i))
+                        ratesTable(idxTeam, i), digitTable(idxTeam, i))
                 .Rows(i).Cells(j).Value = strRate
             Next i
 
