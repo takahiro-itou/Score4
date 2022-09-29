@@ -354,7 +354,7 @@ Public Sub displayVictoryLineToGrid(
     Dim numTeams As Integer, idxTeam As Integer
     Dim numShowCount As Integer
     Dim numRest As Integer, maxRestGame As Integer
-    Dim strRate As String, strGame As String
+    Dim strRate As String, strGame As String, strFormat As String
 
     Dim ratesTable(,) As Double = Nothing
     Dim digitTable(,) As Integer = Nothing
@@ -381,6 +381,8 @@ Public Sub displayVictoryLineToGrid(
     Score4Wrapper.Document.ScoreDocument.makeDigitsTable(
         ratesTable, digitTable)
 
+    strFormat = "{0,3:##0}-{1,3:##0}: "
+
     With objView
         With .Columns(0)
             .HeaderText = "勝数"
@@ -398,8 +400,7 @@ Public Sub displayVictoryLineToGrid(
             numRest = scoreInfo.numTotalRestGames(gameFilter)
 
             For i = 0 To numRest
-                strGame = String.Format(
-                        "{0,3:##0}-{1,3:##0}:", i, numRest -  i)
+                strGame = String.Format(strFormat, i, numRest -  i)
                 strRate = StringOperation.formatDouble(
                         ratesTable(idxTeam, i), digitTable(idxTeam, i))
                 .Rows(maxRestGame - i).Cells(j + 1).Value = strGame & strRate
