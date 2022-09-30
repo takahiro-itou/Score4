@@ -73,7 +73,7 @@ o  <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>System.Windows.Forms.Form, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>736, 481</value>
+    <value>832, 481</value>
   </data>
   <data name="$this.Font" type="System.Drawing.Font, System.Drawing">
     <value>ＭＳ ゴシック, 9pt</value>
@@ -98,7 +98,7 @@ o  <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>Bottom, Right</value>
   </data>
   <data name="btnExit.Location" type="System.Drawing.Point, System.Drawing">
-    <value>616, 400</value>
+    <value>712, 400</value>
   </data>
   <data name="btnExit.Size" type="System.Drawing.Size, System.Drawing">
     <value>96, 32</value>
@@ -129,7 +129,7 @@ o  <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>8, 16</value>
   </data>
   <data name="dgvLine.Size" type="System.Drawing.Size, System.Drawing">
-    <value>480, 416</value>
+    <value>576, 416</value>
   </data>
   <data name="dgvLine.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -151,7 +151,7 @@ o  <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>Top, Bottom, Right</value>
   </data>
   <data name="fraDate.Location" type="System.Drawing.Point, System.Drawing">
-    <value>496, 8</value>
+    <value>592, 8</value>
   </data>
   <data name="fraDate.Size" type="System.Drawing.Size, System.Drawing">
     <value>216, 232</value>
@@ -182,7 +182,7 @@ o  <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>8, 32</value>
   </data>
   <data name="fraLine.Size" type="System.Drawing.Size, System.Drawing">
-    <value>720, 440</value>
+    <value>816, 440</value>
   </data>
   <data name="fraLine.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -204,7 +204,7 @@ o  <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>Top, Bottom, Right</value>
   </data>
   <data name="fraShowMode.Location" type="System.Drawing.Point, System.Drawing">
-    <value>496, 248</value>
+    <value>592, 248</value>
   </data>
   <data name="fraShowMode.Size" type="System.Drawing.Size, System.Drawing">
     <value>216, 104</value>
@@ -338,7 +338,7 @@ o  <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>0, 0</value>
   </data>
   <data name="tabLeague.Size" type="System.Drawing.Size, System.Drawing">
-    <value>736, 480</value>
+    <value>832, 480</value>
   </data>
   <data name="tabLeague.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
