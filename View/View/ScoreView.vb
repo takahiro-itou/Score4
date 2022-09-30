@@ -377,13 +377,13 @@ Public Sub displayVictoryLineToGrid(
         ratesTable, digitTable)
 
     If (maxRestGame <= 9) Then
-        colWidth = WIDTH_PER_DIGIT * 9
+        colWidth = WIDTH_PER_DIGIT * (maxDigits + 5)
         strFormat = "{0,1:##0}-{1,1:##0}: "
     Else If (maxRestGame <= 99) Then
-        colWidth = WIDTH_PER_DIGIT * 11
+        colWidth = WIDTH_PER_DIGIT * (maxDigits + 7)
         strFormat = "{0,2:##0}-{1,2:##0}: "
     Else
-        colWidth = WIDTH_PER_DIGIT * 13
+        colWidth = WIDTH_PER_DIGIT * (maxDigits * 9)
         strFormat = "{0,3:##0}-{1,3:##0}: "
     End If
 
