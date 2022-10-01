@@ -1,5 +1,7 @@
 ﻿Public Class EditForm
 
+Private Const INI_SEC_EDIT_FORM As String = "EditForm"
+
 Private m_workBuffer As Score4Wrapper.Document.ScoreDocument
 Private m_editResult As Score4Wrapper.Document.ScoreDocument
 
@@ -7,6 +9,8 @@ Private m_currentDate As System.DateTime
 Private m_selectedRecord As Integer
 Private m_showIndex() As Integer
 Private m_flagModified As Boolean
+
+Private m_iniFileName As String
 
 ''========================================================================
 ''    変更内容をメインフォーム側のオブジェクトに適用する。
@@ -19,6 +23,18 @@ Public Function applyEditData(
     End If
     applyEditData = m_flagModified
 End Function
+
+''========================================================================
+''    フォームの初期位置を設定する。
+''========================================================================
+Public Sub initializeFormPosition(
+        ByVal iniFileName As String,
+        ByRef ownerForm As System.Windows.Forms.Form)
+
+    Me.m_iniFileName = iniFileName
+    moveWindowToStartPosition(m_iniFileName, INI_SEC_EDIT_FORM, Me, ownerForm)
+
+End Sub
 
 ''========================================================================
 ''    フォームでデータを変更していれば True を返す。
@@ -263,6 +279,19 @@ Private Sub dgvRecord_CellClick( _
 
 End Sub
 
+''========================================================================
+''    フォームを閉じるときに現在位置等を保存する。
+''========================================================================
+Private Sub EditForm_FormClosing(sender As Object, e As FormClosingEventArgs) _
+        Handles Me.FormClosing
+
+    saveWindowPrefs(m_iniFileName, INI_SEC_EDIT_FORM, Me)
+
+End Sub
+
+''========================================================================
+''    カレンダーをクリックしたら、その日付のデータに切り替える。
+''========================================================================
 Private Sub mnvEdit_DateChanged(sender As Object, e As DateRangeEventArgs) _
         Handles mnvEdit.DateChanged
 

@@ -479,7 +479,8 @@ Private Sub mnuMagicLine_Click(sender As Object, e As EventArgs) Handles _
     Dim frmLine As LineView = New LineView()
 
     With frmLine
-         .initializeView(Me.m_scoreData, Me.m_currentDate)
+        .initializeFormPosition(Me.m_iniFileName, Me)
+        .initializeView(Me.m_scoreData, Me.m_currentDate)
         .ShowDialog(Me)
 
         .Dispose()
@@ -538,6 +539,7 @@ Private Sub mnuScoreEdit_Click(sender As Object, e As EventArgs) Handles _
     Dim frmEdit As EditForm = New EditForm()
 
     With frmEdit
+        .initializeFormPosition(Me.m_iniFileName, Me)
         .setupSettings(m_scoreData, m_currentDate)
         .ShowDialog(Me)
 
@@ -577,6 +579,9 @@ Private Sub mnuScoreSettings_Click(sender As Object, e As EventArgs) Handles _
 
 End Sub
 
+''========================================================================
+''    フォームを閉じるときに現在位置等を保存する。
+''========================================================================
 Private Sub MainView_FormClosing(sender As Object, e As FormClosingEventArgs) _
         Handles Me.FormClosing
 
@@ -584,6 +589,9 @@ Private Sub MainView_FormClosing(sender As Object, e As FormClosingEventArgs) _
 
 End Sub
 
+''========================================================================
+''    フォームのロードイベントハンドラ。
+''========================================================================
 Private Sub MainView_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
     m_scoreData = New Score4Wrapper.Document.ScoreDocument
