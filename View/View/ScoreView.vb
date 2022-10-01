@@ -490,6 +490,33 @@ Public Sub displayWinsForBeatTableToGrid(
 End Sub
 
 ''========================================================================
+''    表示対象チームの最終勝数の内、最小値を求める。
+''========================================================================
+Public Function getLastMinWins(
+        ByVal numShowCount As Integer
+        ByRef showIndex() As Integer,
+        ByRef scoreData As Score4Wrapper.Document.ScoreDocument)
+
+    Dim i As Integer, idxTeam As Integer
+    Dim numWons As Integer
+    Dim minWons As Integer
+    Dim scoreInfo As Score4Wrapper.Common.CountedScores
+
+    minWons = -1
+    For i = 0 To numShowCount - 1
+        idxTeam = showIndex(i)
+        scoreInfo = scoreData.scoreInfo(idxTeam)
+        numWons = scoreInfo.numWons(2)
+        If (minWons < 0) Or (numWons < minWons) Then
+            minWons = numWons
+        End If
+    Next i
+
+    getLastMinWins = minWons
+
+End Sub
+
+''========================================================================
 ''    指定されたグリッドビューに残り試合のテーブルを表示する
 ''========================================================================
 Private Function makeGridViewColumn(
