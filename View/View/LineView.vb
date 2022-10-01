@@ -64,6 +64,17 @@ Private Sub mncDate_DateChanged(sender As Object, e As DateRangeEventArgs) _
 End Sub
 
 ''========================================================================
+''    ラジオボタンを選択したら、表示する情報を切り替える。
+''========================================================================
+Private Sub optShowMode_CheckedChanged(sender As Object, e As EventArgs) _
+        Handles optShowRestWin.CheckedChanged, _
+                optShowLastWin.CheckedChanged
+
+    updateMagicLine(Me.m_currentLeague, Me.m_currentDate)
+
+End Sub
+
+''========================================================================
 ''    タブを選択したら、そのリーグの情報に切り替える。
 ''========================================================================
 Private Sub tabLeague_SelectedIndexChanged(sender As Object, e As EventArgs) _
