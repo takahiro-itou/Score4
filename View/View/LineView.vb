@@ -19,6 +19,9 @@ Public Sub initializeView(
     ScoreView.updateLeagueTab(Me.m_gameScore, Me.tabLeague)
     updateMagicLine(0, startDate)
 
+    ' ラジオボタンを選択する。
+    optShowRestWin.Checked = True
+
     ' 指定した日付を選択する。
     mncDate.SelectionStart = startDate
 
