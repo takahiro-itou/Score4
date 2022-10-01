@@ -6,6 +6,12 @@ Public Enum ExtraViewMode As Integer
     EXTRA_VIEW_WIN_FOR_MATCH = 2
 End Enum
 
+Public Enum LineViewMode As Integer
+    LINE_VIEW_REST_WINS = 0
+    LINE_VIEW_LAST_WINS = 1
+    LINE_VIEW_WIN_RATES = 2
+End Enum
+
 Public Const MAGIC_NO_PROBABILITY_WONS As Integer = _
     Score4Wrapper.Consts.MAGIC_NO_PROBABILITY_WONS
 
@@ -13,7 +19,7 @@ Public Const MAGICLIST_NO_DATA_ENTRY As Integer = _
     Score4Wrapper.Consts.MAGICLIST_NO_DATA_ENTRY
 
 ''========================================================================
-''    指定されたグリッドビューに残り試合のテーブルを表示する
+''    指定されたグリッドビューにゲームレコードを表示する
 ''========================================================================
 Public Sub displayRecordsToGrid(
         ByVal startDate As System.DateTime,
@@ -121,7 +127,10 @@ Public Sub displayRestGameTableToGrid(
     numShowCount = scoreData.computeRankOrder(leagueIndex, bufShowIndex)
 
     makeTeamListOnGridViewHeader(
-        numShowCount, bufShowIndex, numTeams, True, 48,
+        numShowCount, bufShowIndex, numTeams, True,
+        48,
+        DataGridViewContentAlignment.MiddleRight,
+        DataGridViewContentAlignment.MiddleRight,
         scoreData, objView)
 
     With objView
@@ -158,29 +167,60 @@ Public Sub displayScoreTableToGrid(
         ByRef scoreData As Score4Wrapper.Document.ScoreDocument,
         ByRef objView As System.Windows.Forms.DataGridView)
 
-    Dim i As Integer
+    Dim i As Integer, idxTeam As Integer, numTeam As Integer
+    Dim numWons As Integer, numLost As Integer, numDraw As Integer
+    Dim numGame As Integer, wpDenom As Integer
     Dim bufShowIndex() As Integer
+    Dim bufShowDigit() As Integer
+    Dim bufWinRate() As Double
     Dim numShowCount As Integer
     Dim topDiff As Integer
+    Dim scoreInfo As Score4Wrapper.Common.CountedScores
 
-    ReDim bufShowIndex(0 To scoreData.getNumTeams() - 1)
+    Const gameFilter As Score4Wrapper.GameFilter = _
+            Score4Wrapper.GameFilter.FILTER_ALL_GAMES
+
+    numTeam = scoreData.getNumTeams()
+    ReDim bufShowIndex(0 To numTeam - 1)
     numShowCount = scoreData.computeRankOrder(leagueIndex, bufShowIndex)
+
+    ReDim bufWinRate(0 To numShowCount - 1)
+    ReDim bufShowDigit(0 To numShowCount - 1)
+
+    For i = 0 To numShowCount - 1
+        idxTeam = bufShowIndex(i)
+        scoreInfo = scoreData.scoreInfo(idxTeam)
+        With scoreInfo
+            numWons = .numWons(gameFilter)
+            numLost = .numLost(gameFilter)
+            numDraw = .numDraw(gameFilter)
+            numGame = .numGames(gameFilter)
+            wpDenom = numGame - numDraw
+        End With
+
+        If (wpDenom = 0) Then
+            bufWinRate(i) = 0
+        Else
+            bufWinRate(i) = (numWons / wpDenom)
+        End If
+    Next i
+    Score4Wrapper.Document.ScoreDocument.makeDigitsList(
+        bufWinRate, bufShowDigit)
 
     With objView
         .Rows.Clear()
         For i = 0 To numShowCount - 1
-            Dim idxTeam As Integer = bufShowIndex(i)
+            idxTeam = bufShowIndex(i)
             Dim teamInfo As Score4Wrapper.Common.TeamInfo
-            Dim scoreInfo As Score4Wrapper.Common.CountedScores
             Dim magicInfo As Score4Wrapper.Common.MagicInfo
 
             teamInfo = scoreData.teamInfo(idxTeam)
             scoreInfo = scoreData.scoreInfo(idxTeam)
             magicInfo = scoreInfo.totalMagicInfo
 
-            Dim numWons As Integer = scoreInfo.numWons(2)
-            Dim numLost As Integer = scoreInfo.numLost(2)
-            Dim numDraw As Integer = scoreInfo.numDraw(2)
+            numWons = scoreInfo.numWons(gameFilter)
+            numLost = scoreInfo.numLost(gameFilter)
+            numDraw = scoreInfo.numDraw(gameFilter)
             Dim strDiff As String
             Dim strPerc As String
             Dim strMagic As String
@@ -198,12 +238,12 @@ Public Sub displayScoreTableToGrid(
             End If
 
             ' 勝率
-            Dim numGame As Integer = scoreInfo.numGames(2)
-            Dim wpDenom As Integer = numGame - numDraw
+            numGame = scoreInfo.numGames(gameFilter)
+            wpDenom = numGame - numDraw
             If (wpDenom = 0) Then
                 strPerc = "---"
             Else
-                strPerc = Format(numWons / wpDenom, "#.000")
+                strPerc = formatDouble(numWons / wpDenom, bufShowDigit(i))
             End If
 
             ' マジック
@@ -279,7 +319,10 @@ Public Sub displayTeamMagicTableToGrid(
     End If
 
     makeTeamListOnGridViewHeader(
-        numShowCount, bufShowIndex, numShowCount, False, 88,
+        numShowCount, bufShowIndex, numShowCount, False,
+        88,
+        DataGridViewContentAlignment.MiddleRight,
+        DataGridViewContentAlignment.MiddleRight,
         scoreData, objView)
     gameFilter = Score4Wrapper.GameFilter.FILTER_ALL_GAMES
 
@@ -301,6 +344,96 @@ Public Sub displayTeamMagicTableToGrid(
                 numTeams, numShowCount, idxTeam,
                 bufShowIndex, .Rows(i), scoreInfo)
         Next i
+
+        .Visible = True
+    End With
+
+End Sub
+
+''========================================================================
+''    指定されたグリッドビューに優勝ラインを表示する。
+''========================================================================
+Public Sub displayVictoryLineToGrid(
+        ByVal leagueIndex As Integer,
+        ByRef scoreData As Score4Wrapper.Document.ScoreDocument,
+        ByVal flagViewMode As LineViewMode,
+        ByRef objView As System.Windows.Forms.DataGridView)
+
+    Dim i As Integer, j As Integer, idxRow As Integer
+    Dim bufShowIndex() As Integer
+    Dim numTeams As Integer, idxTeam As Integer
+    Dim numShowCount As Integer
+    Dim curWins As Integer
+    Dim numRest As Integer, maxRestGame As Integer
+    Dim lastMinWins As Integer, lastMaxWins As Integer
+    Dim maxDigits As Integer, colWidth As Integer
+    Dim strRate As String, strGame As String, strFormat As String
+
+    Dim ratesTable(,) As Double = Nothing
+    Dim digitTable(,) As Integer = Nothing
+    Dim scoreInfo As Score4Wrapper.Common.CountedScores
+    Dim gameFilter As Score4Wrapper.GameFilter
+
+    Const WIDTH_PER_DIGIT As Integer = 8
+
+    numTeams = scoreData.getNumTeams()
+    ReDim bufShowIndex(0 To numTeams - 1)
+    numShowCount = scoreData.computeRankOrder(leagueIndex, bufShowIndex)
+    If (numShowCount = 0) Then
+        objView.Visible = False
+        Exit Sub
+    End If
+
+    lastMaxWins = getLastMaxWins(numShowCount, bufShowIndex, scoreData)
+    lastMinWins = getLastMinWins(numShowCount, bufShowIndex, scoreData)
+
+    maxRestGame = scoreData.makeWinningRateTable(leagueIndex, ratesTable)
+    maxDigits = Score4Wrapper.Document.ScoreDocument.makeDigitsTable(
+        ratesTable, digitTable)
+
+    If (maxRestGame <= 9) Then
+        colWidth = WIDTH_PER_DIGIT * (maxDigits + 5)
+        strFormat = "{0,1:##0}-{1,1:##0}: "
+    Else If (maxRestGame <= 99) Then
+        colWidth = WIDTH_PER_DIGIT * (maxDigits + 7)
+        strFormat = "{0,2:##0}-{1,2:##0}: "
+    Else
+        colWidth = WIDTH_PER_DIGIT * (maxDigits * 9)
+        strFormat = "{0,3:##0}-{1,3:##0}: "
+    End If
+
+    makeTeamListOnGridViewHeader(
+        numShowCount, bufShowIndex, numShowCount, False,
+        colWidth,
+        DataGridViewContentAlignment.MiddleRight,
+        DataGridViewContentAlignment.MiddleLeft,
+        scoreData, objView)
+    gameFilter = Score4Wrapper.GameFilter.FILTER_ALL_GAMES
+
+    makeLineViewGridRows(
+        flagViewMode, lastMinWins, lastMaxWins, maxRestGame, objView)
+
+    With objView
+        For j = 0 To numShowCount - 1
+            idxTeam = bufShowIndex(j)
+
+            scoreInfo = scoreData.scoreInfo(idxTeam)
+            With scoreInfo
+                numRest = .numTotalRestGames(gameFilter)
+                curWins = .numWons(gameFilter)
+            End With
+
+            For i = 0 To numRest
+                strGame = String.Format(strFormat, i, numRest -  i)
+                strRate = StringOperation.formatDouble(
+                        ratesTable(idxTeam, i), digitTable(idxTeam, i))
+                idxRow = getShowLineRowIndex(
+                        i, curWins, flagViewMode, lastMinWins, lastMaxWins,
+                        maxRestGame)
+                .Rows(idxRow).Cells(j + 1).Value = strGame & strRate
+            Next i
+
+        Next j
 
         .Visible = True
     End With
@@ -333,7 +466,10 @@ Public Sub displayWinsForBeatTableToGrid(
     End If
 
     makeTeamListOnGridViewHeader(
-        numShowCount, bufShowIndex, numShowCount, False, 104,
+        numShowCount, bufShowIndex, numShowCount, False,
+        104,
+        DataGridViewContentAlignment.MiddleRight,
+        DataGridViewContentAlignment.MiddleRight,
         scoreData, objView)
     gameFilter = Score4Wrapper.GameFilter.FILTER_ALL_GAMES
 
@@ -362,7 +498,93 @@ Public Sub displayWinsForBeatTableToGrid(
 End Sub
 
 ''========================================================================
-''    指定されたグリッドビューに残り試合のテーブルを表示する
+''    表示対象チームの最終勝数の内、最大値を求める。
+''========================================================================
+Public Function getLastMaxWins(
+        ByVal numShowCount As Integer,
+        ByRef showIndex() As Integer,
+        ByRef scoreData As Score4Wrapper.Document.ScoreDocument)
+
+    Dim i As Integer, idxTeam As Integer
+    Dim numWins As Integer, numRest As Integer
+    Dim maxWins As Integer
+    Dim scoreInfo As Score4Wrapper.Common.CountedScores
+
+    Const gameFilter As Score4Wrapper.GameFilter = _
+            Score4Wrapper.GameFilter.FILTER_ALL_GAMES
+
+    maxWins = -1
+    For i = 0 To numShowCount - 1
+        idxTeam = showIndex(i)
+        scoreInfo = scoreData.scoreInfo(idxTeam)
+        numWins = scoreInfo.numWons(gameFilter)
+        numRest = scoreInfo.numTotalRestGames(gameFilter)
+        numWins = numWins + numRest
+        If (maxWins < numWins) Then
+            maxWins = numWins
+        End If
+    Next i
+
+    getLastMaxWins = maxWins
+
+End Function
+
+''========================================================================
+''    表示対象チームの最終勝数の内、最小値を求める。
+''========================================================================
+Public Function getLastMinWins(
+        ByVal numShowCount As Integer,
+        ByRef showIndex() As Integer,
+        ByRef scoreData As Score4Wrapper.Document.ScoreDocument)
+
+    Dim i As Integer, idxTeam As Integer
+    Dim numWins As Integer
+    Dim minWins As Integer
+    Dim scoreInfo As Score4Wrapper.Common.CountedScores
+
+    Const gameFilter As Score4Wrapper.GameFilter = _
+            Score4Wrapper.GameFilter.FILTER_ALL_GAMES
+
+    minWins = -1
+    For i = 0 To numShowCount - 1
+        idxTeam = showIndex(i)
+        scoreInfo = scoreData.scoreInfo(idxTeam)
+        numWins = scoreInfo.numWons(gameFilter)
+        If (minWins < 0) Or (numWins < minWins) Then
+            minWins = numWins
+        End If
+    Next i
+
+    getLastMinWins = minWins
+
+End Function
+
+''========================================================================
+''    指定した勝数を表示する行を計算する。
+''========================================================================
+Public Function getShowLineRowIndex(
+        ByVal restNumWins As Integer,
+        ByVal curNumWins As Integer,
+        ByVal flagViewMode As LineViewMode,
+        ByVal lastMinWins As Integer,
+        ByVal lastMaxWins As Integer,
+        ByVal restMaxGames As Integer) As Integer
+
+    Select Case flagViewMode
+    Case LineViewMode.LINE_VIEW_REST_WINS
+        getShowLineRowIndex = restMaxGames - restNumWins
+        Exit Function
+    Case LineViewMode.LINE_VIEW_LAST_WINS
+        getShowLineRowIndex = lastMaxWins - (curNumWins + restNumWins)
+        Exit Function
+    End Select
+
+    getShowLineRowIndex = lastMaxWins - (curNumWins + restNumWins)
+
+End Function
+
+''========================================================================
+''    グリッドビューのヘッダ列を用意する。
 ''========================================================================
 Private Function makeGridViewColumn(
         ByVal colName As String,
@@ -383,6 +605,39 @@ Private Function makeGridViewColumn(
     makeGridViewColumn = textColumn
 
 End Function
+
+''========================================================================
+''    ライン表示用グリッドビューの行を用意する。
+''========================================================================
+Private Sub makeLineViewGridRows(
+        ByVal flagViewMode As LineViewMode,
+        ByVal lastMinWins As Integer,
+        ByVal lastMaxWins As Integer,
+        ByVal restMaxGames As Integer,
+        ByRef objView As System.Windows.Forms.DataGridView)
+
+    Dim i As Integer
+
+    With objView
+        With .Columns(0)
+            .HeaderText = "勝数"
+            .Width = 48
+        End With
+        .Rows.Clear()
+
+        Select Case flagViewMode
+        Case LineViewMode.LINE_VIEW_REST_WINS
+            For i = 0 To restMaxGames
+                .Rows.Add("" & (restMaxGames - i) & "勝")
+            Next i
+        Case LineViewMode.LINE_VIEW_LAST_WINS
+            For i = lastMaxWins To lastMinWins Step -1
+                .Rows.Add("" & (i) & "勝")
+            Next i
+        End Select
+    End With
+
+End Sub
 
 ''========================================================================
 ''    グリッドビューのヘッダ列を用意する。
@@ -481,6 +736,8 @@ Private Sub makeTeamListOnGridViewHeader(
         ByVal numTeams As Integer,
         ByVal flagShowTotal As Boolean,
         ByVal columnWidth As Integer,
+        ByVal headAlign As DataGridViewContentAlignment,
+        ByVal cellAlign As DataGridViewContentAlignment,
         ByRef scoreData As Score4Wrapper.Document.ScoreDocument,
         ByRef objView As System.Windows.Forms.DataGridView)
 
@@ -488,10 +745,7 @@ Private Sub makeTeamListOnGridViewHeader(
     Dim idxTeam As Integer
     Dim colName As String
     Dim colText As String
-    Dim cellAlign As DataGridViewContentAlignment
     Dim textColumn As DataGridViewTextBoxColumn
-
-    cellAlign = DataGridViewContentAlignment.MiddleRight
 
     If (numTeams = -1) Then
         numTeams = scoreData.getNumTeams()
@@ -502,7 +756,7 @@ Private Sub makeTeamListOnGridViewHeader(
 
         textColumn = makeGridViewColumn("team", "Team")
         With textColumn
-            .DefaultCellStyle.Alignment = cellAlign
+            .DefaultCellStyle.Alignment = headAlign
             .Width = columnWidth
         End With
         .Add(textColumn)
@@ -569,6 +823,29 @@ Private Sub makeTeamListOnGridViewHeader(
             End With
             .Add(textColumn)
         End If
+    End With
+
+End Sub
+
+''========================================================================
+''    指定したタブコントロールにリーグ一覧を表示する。
+''========================================================================
+Public Sub updateLeagueTab(
+        ByRef scoreData As Score4Wrapper.Document.ScoreDocument,
+        ByRef destTab As System.Windows.Forms.TabControl)
+
+    Dim leagueInfo As Score4Wrapper.Common.Leagueinfo
+    Dim numLeagues As Integer = scoreData.getNumLeagues()
+
+    With destTab
+        .TabPages.Clear()
+        For i = 0 To numLeagues - 1
+            Dim leagueTab As System.Windows.Forms.TabPage
+
+            leagueInfo = scoreData.leagueInfo(i)
+            leagueTab = New System.Windows.Forms.TabPage(leagueInfo.leagueName)
+            .TabPages.Add(leagueTab)
+        Next i
     End With
 
 End Sub

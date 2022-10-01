@@ -1,0 +1,347 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+
+  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+o  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+    <value>LineView</value>
+  </data>
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Form, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
+    <value>832, 481</value>
+  </data>
+  <data name="$this.Font" type="System.Drawing.Font, System.Drawing">
+    <value>ＭＳ ゴシック, 9pt</value>
+  </data>
+  <data name="$this.Text" xml:space="preserve">
+    <value>LineView</value>
+  </data>
+
+  <data name="&gt;&gt;btnExit.Name" xml:space="preserve">
+    <value>btnExit</value>
+  </data>
+  <data name="&gt;&gt;btnExit.Parent" xml:space="preserve">
+    <value>fraLine</value>
+  </data>
+  <data name="&gt;&gt;btnExit.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btnExit.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="btnExit.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Right</value>
+  </data>
+  <data name="btnExit.Location" type="System.Drawing.Point, System.Drawing">
+    <value>712, 400</value>
+  </data>
+  <data name="btnExit.Size" type="System.Drawing.Size, System.Drawing">
+    <value>96, 32</value>
+  </data>
+  <data name="btnExit.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="btnExit.Text" xml:space="preserve">
+    <value>&amp;Close</value>
+  </data>
+
+  <data name="&gt;&gt;dgvLine.Name" xml:space="preserve">
+    <value>dgvLine</value>
+  </data>
+  <data name="&gt;&gt;dgvLine.Parent" xml:space="preserve">
+    <value>fraLine</value>
+  </data>
+  <data name="&gt;&gt;dgvLine.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridView, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;dgvLine.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="dgvLine.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Bottom, Left</value>
+  </data>
+  <data name="dgvLine.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 16</value>
+  </data>
+  <data name="dgvLine.Size" type="System.Drawing.Size, System.Drawing">
+    <value>576, 416</value>
+  </data>
+  <data name="dgvLine.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+
+  <data name="&gt;&gt;fraDate.Name" xml:space="preserve">
+    <value>fraDate</value>
+  </data>
+  <data name="&gt;&gt;fraDate.Parent" xml:space="preserve">
+    <value>fraLine</value>
+  </data>
+  <data name="&gt;&gt;fraDate.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;fraDate.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="fraDate.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Bottom, Right</value>
+  </data>
+  <data name="fraDate.Location" type="System.Drawing.Point, System.Drawing">
+    <value>592, 8</value>
+  </data>
+  <data name="fraDate.Size" type="System.Drawing.Size, System.Drawing">
+    <value>216, 232</value>
+  </data>
+  <data name="fraDate.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="fraDate.Text" xml:space="preserve">
+    <value>&amp;Date</value>
+  </data>
+
+  <data name="&gt;&gt;fraLine.Name" xml:space="preserve">
+    <value>fraLine</value>
+  </data>
+  <data name="&gt;&gt;fraLine.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;fraLine.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;fraLine.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="fraLine.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Bottom, Left, Right</value>
+  </data>
+  <data name="fraLine.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 32</value>
+  </data>
+  <data name="fraLine.Size" type="System.Drawing.Size, System.Drawing">
+    <value>816, 440</value>
+  </data>
+  <data name="fraLine.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+
+  <data name="&gt;&gt;fraShowMode.Name" xml:space="preserve">
+    <value>fraShowMode</value>
+  </data>
+  <data name="&gt;&gt;fraShowMode.Parent" xml:space="preserve">
+    <value>fraLine</value>
+  </data>
+  <data name="&gt;&gt;fraShowMode.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;fraShowMode.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="fraShowMode.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Bottom, Right</value>
+  </data>
+  <data name="fraShowMode.Location" type="System.Drawing.Point, System.Drawing">
+    <value>592, 248</value>
+  </data>
+  <data name="fraShowMode.Size" type="System.Drawing.Size, System.Drawing">
+    <value>216, 104</value>
+  </data>
+  <data name="fraShowMode.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="fraShowMode.Text" xml:space="preserve">
+    <value>&amp;Show Mode</value>
+  </data>
+
+  <data name="&gt;&gt;lblDate.Name" xml:space="preserve">
+    <value>lblDate</value>
+  </data>
+  <data name="&gt;&gt;lblDate.Parent" xml:space="preserve">
+    <value>fraDate</value>
+  </data>
+  <data name="&gt;&gt;lblDate.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblDate.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="lblDate.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Bottom, Left, Right</value>
+  </data>
+  <data name="lblDate.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 192</value>
+  </data>
+  <data name="lblDate.Size" type="System.Drawing.Size, System.Drawing">
+    <value>196, 32</value>
+  </data>
+  <data name="lblDate.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="lblDate.Text" xml:space="preserve">
+    <value>Date</value>
+  </data>
+  <data name="lblDate.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleCenter</value>
+  </data>
+
+  <data name="&gt;&gt;mncDate.Name" xml:space="preserve">
+    <value>mncDate</value>
+  </data>
+  <data name="&gt;&gt;mncDate.Parent" xml:space="preserve">
+    <value>fraDate</value>
+  </data>
+  <data name="&gt;&gt;mncDate.Type" xml:space="preserve">
+    <value>System.Windows.Forms.MonthCalendar, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;mncDate.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="mncDate.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 24</value>
+  </data>
+  <data name="mncDate.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+
+  <data name="&gt;&gt;optShowLastWin.Name" xml:space="preserve">
+    <value>optShowLastWin</value>
+  </data>
+  <data name="&gt;&gt;optShowLastWin.Parent" xml:space="preserve">
+    <value>fraShowMode</value>
+  </data>
+  <data name="&gt;&gt;optShowLastWin.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;optShowLastWin.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="optShowLastWin.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="optShowLastWin.Location" type="System.Drawing.Point, System.Drawing">
+    <value>16, 64</value>
+  </data>
+  <data name="optShowLastWin.Size" type="System.Drawing.Size, System.Drawing">
+    <value>184, 24</value>
+  </data>
+  <data name="optShowLastWin.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="optShowLastWin.Text" xml:space="preserve">
+    <value>&amp;Last Wins</value>
+  </data>
+
+  <data name="&gt;&gt;optShowRestWin.Name" xml:space="preserve">
+    <value>optShowRestWin</value>
+  </data>
+  <data name="&gt;&gt;optShowRestWin.Parent" xml:space="preserve">
+    <value>fraShowMode</value>
+  </data>
+  <data name="&gt;&gt;optShowRestWin.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;optShowRestWin.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="optShowRestWin.Location" type="System.Drawing.Point, System.Drawing">
+    <value>16, 24</value>
+  </data>
+  <data name="optShowRestWin.Size" type="System.Drawing.Size, System.Drawing">
+    <value>184, 24</value>
+  </data>
+  <data name="optShowRestWin.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="optShowRestWin.Text" xml:space="preserve">
+    <value>&amp;Rest Games</value>
+  </data>
+
+  <data name="&gt;&gt;tabLeague.Name" xml:space="preserve">
+    <value>tabLeague</value>
+  </data>
+  <data name="&gt;&gt;tabLeague.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;tabLeague.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabControl, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tabLeague.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="tabLeague.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Bottom, Left, Right</value>
+  </data>
+  <data name="tabLeague.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="tabLeague.Size" type="System.Drawing.Size, System.Drawing">
+    <value>832, 480</value>
+  </data>
+  <data name="tabLeague.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+
+</root>
