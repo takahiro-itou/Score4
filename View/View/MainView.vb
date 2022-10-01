@@ -630,6 +630,8 @@ Private Sub MainView_Load(sender As Object, e As EventArgs) Handles MyBase.Load
     m_iniFileName = m_appPath & "\Score.ini"
     moveWindowToStartPosition()
 
+    optShowRest.Checked = True
+
 End Sub
 
 ''========================================================================
