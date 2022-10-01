@@ -37,7 +37,7 @@ Public Sub moveWindowToStartPosition(
     Else
         With ownerForm
             bx = .Left
-            by = .Right
+            by = .Top
             bw = .Width
             bh = .Height
         End With
