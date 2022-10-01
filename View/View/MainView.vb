@@ -45,35 +45,6 @@ Private Function isModificationClean() As Boolean
 End Function
 
 ''========================================================================
-''    ウィンドウを初期位置に移動する。
-''========================================================================
-Private Sub moveWindowToStartPosition()
-
-    Dim fx As Integer
-    Dim fy As Integer
-    Dim fw As Integer = Me.Width
-    Dim fh As Integer = Me.Height
-
-    Dim sc As System.Windows.Forms.Screen = _
-            System.Windows.Forms.Screen.FromControl(Me)
-    Dim sx As Integer = sc.Bounds.Left
-    Dim sy As Integer = sc.Bounds.Top
-
-    fx = GetSettingINI(m_iniFileName, INI_SEC_MAINWINDOW, "Left", -1)
-    fy = GetSettingINI(m_iniFileName, INI_SEC_MAINWINDOW, "Top", -1)
-    If (fx < sx) Or (fx + fw > sc.Bounds.Right) Then
-        ' ウィンドウが画面からはみ出す場合は、画面中央に移動させる。 '
-        fx = sx + (sc.Bounds.Width - fw) \ 2
-    End If
-    If (fy < sy) Or (fy + fh > sc.Bounds.Bottom) Then
-        ' ウィンドウが画面からはみ出す場合は、画面中央に移動させる。 '
-        fy = sy + (sc.Bounds.Height - fh) \ 2
-    End If
-
-    Me.Bounds = New Rectangle(fx, fy, fw, fh)
-End Sub
-
-''========================================================================
 ''    ファイルを開いてデータを読み込む。
 ''========================================================================
 Private Function openScoreDataFile(
@@ -291,16 +262,6 @@ Private Function saveScoreDataToText(ByVal fileName As String) As Boolean
     saveScoreDataToText = postprocessSaveScoreData("")
 
 End Function
-
-''========================================================================
-''    ウィンドウの現在位置を保存する。
-''========================================================================
-Private Sub saveWindowPrefs()
-    With Me
-        SaveSettingINI(m_iniFileName, INI_SEC_MAINWINDOW, "Left", .Left)
-        SaveSettingINI(m_iniFileName, INI_SEC_MAINWINDOW, "Top", .Top)
-    End With
-End Sub
 
 ''========================================================================
 ''    ビューの内容を、最新の情報に更新する。
@@ -619,7 +580,7 @@ End Sub
 Private Sub MainView_FormClosing(sender As Object, e As FormClosingEventArgs) _
         Handles Me.FormClosing
 
-    saveWindowPrefs()
+    saveWindowPrefs(m_iniFileName, INI_SEC_MAINWINDOW, Me)
 
 End Sub
 
@@ -628,7 +589,8 @@ Private Sub MainView_Load(sender As Object, e As EventArgs) Handles MyBase.Load
     m_scoreData = New Score4Wrapper.Document.ScoreDocument
     m_appPath = GetAppPath()
     m_iniFileName = m_appPath & "\Score.ini"
-    moveWindowToStartPosition()
+
+    moveWindowToStartPosition(m_iniFileName, INI_SEC_MAINWINDOW, Me, Nothing)
 
     optShowRest.Checked = True
 
