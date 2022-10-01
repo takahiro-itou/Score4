@@ -456,6 +456,7 @@ Partial Class MainView
         Me.Controls.Add(Me.fraScore)
         Me.Controls.Add(Me.mnuMain)
         Me.Controls.Add(Me.tabLeague)
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
         Me.MainMenuStrip = Me.mnuMain
         Me.Name = "MainView"
         Me.mnuMain.ResumeLayout(False)

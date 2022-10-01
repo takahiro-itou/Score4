@@ -302,19 +302,6 @@ Private Sub saveWindowPrefs()
     End With
 End Sub
 
-Private Sub updateLeagueTab()
-    Dim numLeagues As Integer = m_scoreData.getNumLeagues()
-
-    With Me.tabLeague
-        .TabPages.Clear()
-        For i = 0 To numLeagues - 1
-            Dim leagueInfo As Score4Wrapper.Common.LeagueInfo = m_scoreData.leagueInfo(i)
-            Dim leagueTab As System.Windows.Forms.TabPage = New System.Windows.Forms.TabPage(leagueInfo.leagueName)
-            .TabPages.Add(leagueTab)
-        Next
-    End With
-End Sub
-
 ''========================================================================
 ''    ビューの内容を、最新の情報に更新する。
 ''========================================================================
@@ -323,7 +310,8 @@ Private Sub updateScoreView()
     Dim strCaption As String
     Dim lastActiveDate As System.DateTime
     Dim lastRecordDate As System.DateTime
-    updateLeagueTab()
+
+    ScoreView.updateLeagueTab(Me.m_scoreData, Me.tabLeague)
 
     ' ウィンドウのキャプション。
     strCaption = "成績／順位　: "
@@ -387,6 +375,25 @@ Private Sub updateTables(
     End Select
 
     lblDate.Text = trgLastDate
+End Sub
+
+''========================================================================
+''    チェックボックスの状態によって、残り試合数の表示に
+''  日程上の「予定」試合を集計するか決定する
+''========================================================================
+Private Sub chkSchedule_CheckedChanged(sender As Object, e As EventArgs) _
+        Handles chkSchedule.CheckedChanged
+Dim flagSchedule As Score4Wrapper.GameFilter
+
+    If (chkSchedule.CheckState = CheckState.Checked) Then
+        flagSchedule = Score4Wrapper.GameFilter.FILTER_SCHEDULE
+    Else
+        flagSchedule = 0
+    End If
+
+    updateTables(
+        m_currentLeague, m_currentDate, m_flagMagicMode,
+        m_flagExtraView, flagSchedule)
 End Sub
 
 ''========================================================================
@@ -508,6 +515,15 @@ End Sub
 Private Sub mnuMagicLine_Click(sender As Object, e As EventArgs) Handles _
             mnuMagicLine.Click
 
+    Dim frmLine As LineView = New LineView()
+
+    With frmLine
+         .initializeView(Me.m_scoreData, Me.m_currentDate)
+        .ShowDialog(Me)
+
+        .Dispose()
+    End With
+
 End Sub
 
 ''========================================================================
@@ -579,7 +595,9 @@ End Sub
 ''========================================================================
 Private Sub mnuScoreImport_Click(sender As Object, e As EventArgs) Handles _
             mnuScoreImport.Click
+
     processImportData(False)
+
 End Sub
 
 ''========================================================================
@@ -600,26 +618,22 @@ End Sub
 
 Private Sub MainView_FormClosing(sender As Object, e As FormClosingEventArgs) _
         Handles Me.FormClosing
+
     saveWindowPrefs()
+
 End Sub
 
 Private Sub MainView_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
     m_scoreData = New Score4Wrapper.Document.ScoreDocument
     m_appPath = GetAppPath()
     m_iniFileName = m_appPath & "\Score.ini"
     moveWindowToStartPosition()
-End Sub
 
-Private Sub tabLeague_SelectedIndexChanged(sender As Object, e As EventArgs) _
-        Handles tabLeague.SelectedIndexChanged
-
-    Dim idxLeague As Integer = tabLeague.SelectedIndex
-    updateTables(
-        idxLeague, m_currentDate, m_flagMagicMode,
-        m_flagExtraView, m_flagSchedule)
 End Sub
 
 ''========================================================================
+''    カレンダーをクリックしたら、その日付までのデータに切り替える。
 ''========================================================================
 Private Sub mnvDate_DateChanged(sender As Object, e As DateRangeEventArgs) _
         Handles mnvDate.DateChanged
@@ -627,27 +641,12 @@ Private Sub mnvDate_DateChanged(sender As Object, e As DateRangeEventArgs) _
     updateTables(
         m_currentLeague, mnvDate.SelectionStart, m_flagMagicMode,
         m_flagExtraView, m_flagSchedule)
+
 End Sub
 
 ''========================================================================
-''    チェックボックスの状態によって、残り試合数の表示に
-''  日程上の「予定」試合を集計するか決定する
+''    ラジオボタンを選択したら、表示する情報を切り替える。
 ''========================================================================
-Private Sub chkSchedule_CheckedChanged(sender As Object, e As EventArgs) _
-        Handles chkSchedule.CheckedChanged
-Dim flagSchedule As Score4Wrapper.GameFilter
-
-    If (chkSchedule.CheckState = CheckState.Checked) Then
-        flagSchedule = Score4Wrapper.GameFilter.FILTER_SCHEDULE
-    Else
-        flagSchedule = 0
-    End If
-
-    updateTables(
-        m_currentLeague, m_currentDate, m_flagMagicMode,
-        m_flagExtraView, flagSchedule)
-End Sub
-
 Private Sub optShowExtra_CheckedChanged(sender As Object, e As EventArgs) _
         Handles optShowRest.CheckedChanged, optShowMagic.CheckedChanged, _
                 optShowWins.CheckedChanged
@@ -667,6 +666,23 @@ Private Sub optShowExtra_CheckedChanged(sender As Object, e As EventArgs) _
     updateTables(
         m_currentLeague, m_currentDate, m_flagMagicMode,
         modeExtra, m_flagSchedule)
+
+End Sub
+
+''========================================================================
+''    タブを選択したら、そのリーグの情報に切り替える。
+''========================================================================
+Private Sub tabLeague_SelectedIndexChanged(sender As Object, e As EventArgs) _
+        Handles tabLeague.SelectedIndexChanged
+
+    Dim idxLeague As Integer = tabLeague.SelectedIndex
+    If (idxLeague < 0) Then
+        Exit Sub
+    End If
+    updateTables(
+        idxLeague, m_currentDate, m_flagMagicMode,
+        m_flagExtraView, m_flagSchedule)
+
 End Sub
 
 End Class

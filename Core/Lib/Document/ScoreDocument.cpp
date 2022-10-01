@@ -20,6 +20,7 @@
 
 #include    "Score4Core/Document/ScoreDocument.h"
 
+#include    <algorithm>
 #include    <memory.h>
 #include    <stdio.h>
 #include    <vector>
@@ -275,11 +276,9 @@ ScoreDocument::calculateMagicNumbers(
         CountedScoreList    &bufCounted)  const
 {
     WinningRateTable    dblPercent;
-    NumOfDigitsTable    dummyDigitsBuffer;
 
     const   TeamIndex   numTeam = getNumTeams();
-    makeWinningRateTable(
-            bufCounted, -1, dblPercent, dummyDigitsBuffer);
+    makeWinningRateTable(bufCounted, -1, dblPercent);
 
     for ( TeamIndex i = 0; i < numTeam; ++ i ) {
         makeWinsForBeatTable(dblPercent, i, bufCounted);
@@ -725,14 +724,13 @@ GamesCount
 ScoreDocument::makeWinningRateTable(
         const  CountedScoreList &csData,
         const  LeagueIndex      leagueIndex,
-        WinningRateTable        &rateTable,
-        NumOfDigitsTable        &digitsTable)  const
+        WinningRateTable        &rateTable)  const
 {
     const   TeamIndex  numTeam  = this->getNumTeams();
 
     //  配列を確保する。    //
     rateTable.resize(numTeam);
-    digitsTable.resize(numTeam);
+//    digitsTable.resize(numTeam);
 
     GamesCount  maxRestGame = 0;
     for ( TeamIndex teamIndex = 0; teamIndex < numTeam; ++ teamIndex ) {
@@ -743,7 +741,7 @@ ScoreDocument::makeWinningRateTable(
             maxRestGame = teamRestGames;
         }
         rateTable.at(teamIndex).resize(teamRestGames + 1);
-        digitsTable.at(teamIndex).resize(teamRestGames + 1);
+//        digitsTable.at(teamIndex).resize(teamRestGames + 1);
     }
 
     GamesCount  allPercentListCount = (maxRestGame + 1) * numTeam;
@@ -942,6 +940,132 @@ ScoreDocument::calculateGamesForWin(
     }
 
     return ( nResult );
+}
+
+//----------------------------------------------------------------
+//    表示桁数リストを作成する。
+//
+
+NumOfDigits
+ScoreDocument::makeDigitsFromUnique(
+        const  WinningRateList  &rateList,
+        NumOfDigitsList         &digitsList)
+{
+    const   size_t  numData = rateList.size();
+    digitsList.clear();
+    digitsList.resize(numData);
+
+    NumOfDigits maxNumDigit = 3;
+    for ( size_t pos = 0; pos < numData - 1; ++ pos ) {
+        const  WinningRate  wrLower = rateList[pos];
+        const  WinningRate  wrUpper = rateList[pos + 1];
+        NumOfDigits     nDigits = 3;
+        long            digitsRate  = 1000;
+        long            ltLower, ltUpper;
+        for ( nDigits = 3; nDigits < 10; ++ nDigits ) {
+            ltLower = static_cast<long>(wrLower * digitsRate + 0.5);
+            ltUpper = static_cast<long>(wrUpper * digitsRate + 0.5);
+            if ( (ltUpper - ltLower) > 1 ) {
+                break;
+            }
+            digitsRate  *= 10;
+        }
+        if ( maxNumDigit < nDigits ) {
+            maxNumDigit = nDigits;
+        }
+        if ( digitsList[pos] < nDigits ) {
+            digitsList[pos] = nDigits;
+        }
+        digitsList[pos + 1] = nDigits;
+    }
+
+    return ( maxNumDigit );
+}
+
+//----------------------------------------------------------------
+//    表示桁数リストを作成する。
+//
+
+NumOfDigits
+ScoreDocument::makeDigitsList(
+        const  WinningRateList  &rateList,
+        NumOfDigitsList         &digitsList)
+{
+    const   size_t  numData = rateList.size();
+    digitsList.clear();
+    digitsList.resize(numData);
+
+    NumOfDigitsList workDigits;
+    WinningRateList workRate    = rateList;
+    NumOfDigits     maxNumDigit = 0;
+
+    std::sort(workRate.begin(), workRate.end());
+    workRate.erase(
+            std::unique(workRate.begin(), workRate.end()),
+            workRate.end());
+
+    const   size_t  numUniq = workRate.size();
+    maxNumDigit = makeDigitsFromUnique(workRate, workDigits);
+
+    NumOfDigits retVal;
+    for ( size_t pos = 0; pos < numData; ++ pos ) {
+        retVal  = findDigitsList(workRate, workDigits, rateList[pos]);
+        if ( retVal < 0 ) {
+            retVal  = maxNumDigit;
+        }
+        digitsList[pos] = retVal;
+    }
+
+    return ( maxNumDigit );
+}
+
+//----------------------------------------------------------------
+//    表示桁数テーブルを作成する。
+//
+
+NumOfDigits
+ScoreDocument::makeDigitsTable(
+        const  WinningRateTable &rateTable,
+        NumOfDigitsTable        &digitsTable)
+{
+    const   size_t  numRows = rateTable.size();
+
+    digitsTable.clear();
+    digitsTable.resize(numRows);
+
+    size_t  totalCells  = 0;
+    for ( size_t i = 0; i < numRows; ++ i ) {
+        const   size_t  numCols = rateTable[i].size();
+        digitsTable[i].clear();
+        digitsTable[i].resize(numCols);
+        totalCells  += numCols;
+    }
+
+    //  データを１次元配列に詰め直す。  //
+    WinningRateList workRate  (totalCells);
+    NumOfDigitsList workDigits(totalCells);
+
+    size_t  pos = 0;
+    for ( size_t i = 0; i < numRows; ++ i ) {
+        const   size_t  numCols = rateTable[i].size();
+        for ( size_t j = 0; j < numCols; ++ j ) {
+            workRate[pos++] = rateTable[i][j];
+        }
+    }
+
+    //  リスト版の関数を呼び出して結果を得る。  //
+    const  NumOfDigits  retVal  = makeDigitsList(workRate, workDigits);
+
+    //  結果を元のテーブルの形に戻す。  //
+    pos = 0;
+    for ( size_t i = 0; i < numRows; ++ i ) {
+        const   size_t  numCols = digitsTable[i].size();
+        for ( size_t j = 0; j < numCols; ++ j ) {
+            digitsTable[i][j] = workDigits[pos++];
+        }
+    }
+
+    return ( retVal );
 }
 
 //========================================================================
@@ -1370,6 +1494,27 @@ ScoreDocument::countTotalScores(
     }
 
     return ( ERR_SUCCESS );
+}
+
+//----------------------------------------------------------------
+//    表示桁数リストから指定した要素を検索する。
+//
+
+NumOfDigits
+ScoreDocument::findDigitsList(
+        const  WinningRateList  &rateList,
+        const  NumOfDigitsList  &digitsList,
+        const  WinningRate      wrValue)
+{
+    const   size_t  numData = std::min(rateList.size(), digitsList.size());
+
+    for ( size_t i = 0; i < numData; ++ i ) {
+        if ( rateList[i] == wrValue ) {
+            return ( digitsList[i] );
+        }
+    }
+
+    return ( -1 );
 }
 
 //----------------------------------------------------------------

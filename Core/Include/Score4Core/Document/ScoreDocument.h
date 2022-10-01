@@ -44,32 +44,32 @@ class  ScoreDocument
 //
 private:
 
-    typedef     Common::WinsForBeatList     WinsForBeatList;
+    typedef     Common::WinsForBeatList         WinsForBeatList;
 
-    typedef     Common::CountedScores       CountedScores;
-    typedef     std::vector<CountedScores>  CountedScoreList;
+    typedef     Common::CountedScores           CountedScores;
+    typedef     std::vector<CountedScores>      CountedScoreList;
 
-    typedef     Common::GameCountTable      GameCountTable;
-
-    typedef     std::vector< std::vector<WinningRate> >
-    WinningRateTable;
-
-    typedef     std::vector< std::vector<NumOfDigits> >
-    NumOfDigitsTable;
+    typedef     Common::GameCountTable          GameCountTable;
 
 public:
 
     /**   リーグ情報。  **/
-    typedef     Common::LeagueInfo          LeagueInfo;
+    typedef     Common::LeagueInfo              LeagueInfo;
 
     /**   チーム情報。  **/
-    typedef     Common::TeamInfo            TeamInfo;
+    typedef     Common::TeamInfo                TeamInfo;
 
     /**   ゲーム結果のレコード。    **/
-    typedef     Common::GameResult          GameResult;
+    typedef     Common::GameResult              GameResult;
 
     /**   レコード番号の配列。      **/
-    typedef     std::vector<RecordIndex>    RecordIndexList;
+    typedef     std::vector<RecordIndex>        RecordIndexList;
+
+    typedef     std::vector<WinningRate>        WinningRateList;
+    typedef     std::vector<WinningRateList>    WinningRateTable;
+
+    typedef     std::vector<NumOfDigits>        NumOfDigitsList;
+    typedef     std::vector<NumOfDigitsList>    NumOfDigitsTable;
 
 //========================================================================
 //
@@ -334,12 +334,9 @@ public:
     //----------------------------------------------------------------
     /**   勝率テーブルを作成する。
     **
-    **  @param [in] csData         集計済みデータ。
-    **  @param [in] leagueIndex    桁数テーブルを作成するリーグ。
-    **  @param[out] rateTable      勝率テーブルを格納する変数。
-    **  @param[out] digitsTable    桁数テーブルを格納する変数。
-    **          勝率テーブルの対応するセルを表示するのに
-    **          最低限必要な桁数を格納する。
+    **  @param [in] csData        集計済みデータ。
+    **  @param [in] leagueIndex   桁数テーブルを作成するリーグ。
+    **  @param[out] rateTable     勝率テーブルを格納する変数。
     **  @return     残り試合数の最大値を返す。
     **      最も多くの試合を残しているチームの、その残り試合数。
     **/
@@ -347,8 +344,7 @@ public:
     makeWinningRateTable(
             const  CountedScoreList &csData,
             const  LeagueIndex      leagueIndex,
-            WinningRateTable        &rateTable,
-            NumOfDigitsTable        &digitsTable)  const;
+            WinningRateTable        &rateTable)  const;
 
     //----------------------------------------------------------------
     /**   ゲームレコードを最適化する。
@@ -430,6 +426,49 @@ public:
             const   GamesCount          teamRest,
             const   GamesCount          enemyRest,
             const   Boolean             allowEqual);
+
+    //----------------------------------------------------------------
+    /**   表示桁数リストを作成する。
+    **
+    **  @param [in] rateList      勝率リスト。
+    **          ただし要素はソートおよび重複除去済みとする。
+    **  @param[out] digitsList    桁数リストを格納する変数。
+    **          勝率リストの対応する要素を表示するのに
+    **          最低限必要な桁数を格納する。
+    **  @return     桁数リスト内の最大値を返す。
+    **/
+    static  NumOfDigits
+    makeDigitsFromUnique(
+            const  WinningRateList  &rateList,
+            NumOfDigitsList         &digitsList);
+
+    //----------------------------------------------------------------
+    /**   表示桁数リストを作成する。
+    **
+    **  @param [in] rateList      勝率リスト。
+    **  @param[out] digitsList    桁数リストを格納する変数。
+    **          勝率リストの対応する要素を表示するのに
+    **          最低限必要な桁数を格納する。
+    **  @return     桁数リスト内の最大値を返す。
+    **/
+    static  NumOfDigits
+    makeDigitsList(
+            const  WinningRateList  &rateList,
+            NumOfDigitsList         &digitsList);
+
+    //----------------------------------------------------------------
+    /**   表示桁数テーブルを作成する。
+    **
+    **  @param [in] rateTable     勝率テーブル。
+    **  @param[out] digitsTable   桁数テーブルを格納する変数。
+    **          勝率テーブルの対応するセルを表示するのに
+    **          最低限必要な桁数を格納する。
+    **  @return     桁数テーブル内の最大値を返す。
+    **/
+    static  NumOfDigits
+    makeDigitsTable(
+            const  WinningRateTable &rateTable,
+            NumOfDigitsTable        &digitsTable);
 
 //========================================================================
 //
@@ -729,6 +768,20 @@ private:
     countTotalScores(
             const  LeagueIndex  idxLeague,
             CountedScores     & trgCS)  const;
+
+    //----------------------------------------------------------------
+    /**   表示桁数リストから指定した要素を検索する。
+    **
+    **  @param [in] rateList      勝率リスト。
+    **  @param [in] digitsList    桁数リスト。
+    **  @param [in] wrValue       検索する値。
+    **  @return     検索した値に対応する桁数。
+    **/
+    static  NumOfDigits
+    findDigitsList(
+            const  WinningRateList  &rateList,
+            const  NumOfDigitsList  &digitsList,
+            const  WinningRate      wrValue);
 
     //----------------------------------------------------------------
     /**   敵チームを上回るのに必要な勝利数を計算する。

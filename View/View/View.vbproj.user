@@ -4,6 +4,9 @@
     <Compile Update="EditForm.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="LineView.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="MainView.vb">
       <SubType>Form</SubType>
     </Compile>

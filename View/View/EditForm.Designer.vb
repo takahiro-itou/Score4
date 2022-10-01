@@ -211,6 +211,7 @@ Partial Class EditForm
         Me.Controls.Add(Me.dgvRecord)
         Me.Controls.Add(Me.fraInput)
         Me.Controls.Add(Me.fraView)
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
         Me.Name = "EditForm"
 
         CType(Me.dgvRecord, System.ComponentModel.ISupportInitialize).EndInit()
