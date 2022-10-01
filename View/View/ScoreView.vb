@@ -588,7 +588,7 @@ Public Function getShowLineRowIndex(
 End Function
 
 ''========================================================================
-''    指定されたグリッドビューに残り試合のテーブルを表示する
+''    グリッドビューのヘッダ列を用意する。
 ''========================================================================
 Private Function makeGridViewColumn(
         ByVal colName As String,
