@@ -291,7 +291,7 @@ o  <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="optShowLastWin.Text" xml:space="preserve">
-    <value>&amp;Playoff Line</value>
+    <value>&amp;Last Wins</value>
   </data>
 
   <data name="&gt;&gt;optShowRestWin.Name" xml:space="preserve">
@@ -316,7 +316,7 @@ o  <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="optShowRestWin.Text" xml:space="preserve">
-    <value>&amp;Victory Line</value>
+    <value>&amp;Rest Games</value>
   </data>
 
   <data name="&gt;&gt;tabLeague.Name" xml:space="preserve">

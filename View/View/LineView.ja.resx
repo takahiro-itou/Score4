@@ -76,11 +76,11 @@
   </data>
 
   <data name="optShowLastWin.Text" xml:space="preserve">
-    <value>プレーオフ進出ライン(&amp;P)</value>
+    <value>最終の合計勝数(&amp;L)</value>
   </data>
 
   <data name="optShowRestWin.Text" xml:space="preserve">
-    <value>優勝ライン(&amp;V)</value>
+    <value>残り試合の勝数(&amp;R)</value>
   </data>
 
 </root>
