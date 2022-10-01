@@ -956,6 +956,10 @@ ScoreDocument::makeDigitsFromUnique(
     digitsList.resize(numData);
 
     NumOfDigits maxNumDigit = 3;
+    if ( numData == 0 ) {
+        return ( maxNumDigit );
+    }
+
     for ( size_t pos = 0; pos < numData - 1; ++ pos ) {
         const  WinningRate  wrLower = rateList[pos];
         const  WinningRate  wrUpper = rateList[pos + 1];
