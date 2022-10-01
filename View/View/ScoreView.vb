@@ -555,6 +555,28 @@ Public Function getLastMinWins(
 End Function
 
 ''========================================================================
+''    指定した勝数を表示する行を計算する。
+''========================================================================
+Public Function getShowLineRowIndex(
+        ByVal restNumWins As Integer,
+        ByVal curNumWins As Integer,
+        ByVal flagViewMode As LineViewMode,
+        ByVal lastMinWins As Integer,
+        ByVal lastMaxWins As Integer,
+        ByVal restMaxGames As Integer) As Integer
+
+    Select Case flagViewMode
+    Case LineViewMode.LINE_VIEW_REST_WINS
+        getShowLineRowIndex = restMaxGames - restNumWins
+        Exit Function
+    Case LineViewMode.LINE_VIEW_LAST_WINS
+    End Select
+
+    getShowLineRowIndex = restMaxGames - restNumWins
+
+End Function
+
+''========================================================================
 ''    指定されたグリッドビューに残り試合のテーブルを表示する
 ''========================================================================
 Private Function makeGridViewColumn(
