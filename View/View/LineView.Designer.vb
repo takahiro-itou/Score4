@@ -33,7 +33,7 @@ Partial Class LineView
         Me.lblDate = New System.Windows.Forms.Label()
         Me.fraShowMode = New System.Windows.Forms.GroupBox()
         Me.optShowPlayoff = New System.Windows.Forms.RadioButton()
-        Me.optShowVictory = New System.Windows.Forms.RadioButton()
+        Me.optShowRestWin = New System.Windows.Forms.RadioButton()
         Me.btnExit = New System.Windows.Forms.Button()
 
         Me.fraLine.SuspendLayout()
@@ -81,7 +81,7 @@ Partial Class LineView
         '
         resources.ApplyResources(Me.fraShowMode, "fraShowMode")
         Me.fraShowMode.Controls.Add(Me.optShowPlayoff)
-        Me.fraShowMode.Controls.Add(Me.optShowVictory)
+        Me.fraShowMode.Controls.Add(Me.optShowRestWin)
         Me.fraShowMode.Name = "fraShowMode"
         Me.fraShowMode.TabStop = False
         Me.fraShowMode.Visible = False
@@ -96,13 +96,13 @@ Partial Class LineView
         Me.optShowPlayoff.UseVisualStyleBackColor = False
 
         '
-        'optShowVictory
+        'optShowRestWin
         '
-        resources.ApplyResources(Me.optShowVictory, "optShowVictory")
-        Me.optShowVictory.BackColor = System.Drawing.Color.White
-        Me.optShowVictory.Name = "optShowVictory"
-        Me.optShowVictory.TabStop = True
-        Me.optShowVictory.UseVisualStyleBackColor = False
+        resources.ApplyResources(Me.optShowRestWin, "optShowRestWin")
+        Me.optShowRestWin.BackColor = System.Drawing.Color.White
+        Me.optShowRestWin.Name = "optShowRestWin"
+        Me.optShowRestWin.TabStop = True
+        Me.optShowRestWin.UseVisualStyleBackColor = False
 
         '
         ' fraDate
@@ -163,7 +163,7 @@ Partial Class LineView
     Friend WithEvents lblDate As Label
     Friend WithEvents fraShowMode As GroupBox
     Friend WithEvents optShowPlayoff As RadioButton
-    Friend WithEvents optShowVictory As RadioButton
+    Friend WithEvents optShowRestWin As RadioButton
     Friend WithEvents btnExit As Button
 
 End Class

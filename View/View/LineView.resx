@@ -294,28 +294,28 @@ o  <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>&amp;Playoff Line</value>
   </data>
 
-  <data name="&gt;&gt;optShowVictory.Name" xml:space="preserve">
-    <value>optShowVictory</value>
+  <data name="&gt;&gt;optShowRestWin.Name" xml:space="preserve">
+    <value>optShowRestWin</value>
   </data>
-  <data name="&gt;&gt;optShowVictory.Parent" xml:space="preserve">
+  <data name="&gt;&gt;optShowRestWin.Parent" xml:space="preserve">
     <value>fraShowMode</value>
   </data>
-  <data name="&gt;&gt;optShowVictory.Type" xml:space="preserve">
+  <data name="&gt;&gt;optShowRestWin.Type" xml:space="preserve">
     <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;optShowVictory.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;optShowRestWin.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="optShowVictory.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="optShowRestWin.Location" type="System.Drawing.Point, System.Drawing">
     <value>16, 24</value>
   </data>
-  <data name="optShowVictory.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="optShowRestWin.Size" type="System.Drawing.Size, System.Drawing">
     <value>184, 24</value>
   </data>
-  <data name="optShowVictory.TabIndex" type="System.Int32, mscorlib">
+  <data name="optShowRestWin.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="optShowVictory.Text" xml:space="preserve">
+  <data name="optShowRestWin.Text" xml:space="preserve">
     <value>&amp;Victory Line</value>
   </data>
 

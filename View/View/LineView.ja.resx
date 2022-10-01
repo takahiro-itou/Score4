@@ -79,7 +79,7 @@
     <value>プレーオフ進出ライン(&amp;P)</value>
   </data>
 
-  <data name="optShowVictory.Text" xml:space="preserve">
+  <data name="optShowRestWin.Text" xml:space="preserve">
     <value>優勝ライン(&amp;V)</value>
   </data>
 
