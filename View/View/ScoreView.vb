@@ -575,9 +575,11 @@ Public Function getShowLineRowIndex(
         getShowLineRowIndex = restMaxGames - restNumWins
         Exit Function
     Case LineViewMode.LINE_VIEW_LAST_WINS
+        getShowLineRowIndex = lastMaxWins - (curNumWins + restNumWins)
+        Exit Function
     End Select
 
-    getShowLineRowIndex = restMaxGames - restNumWins
+    getShowLineRowIndex = lastMaxWins - (curNumWins + restNumWins)
 
 End Function
 
