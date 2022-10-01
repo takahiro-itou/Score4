@@ -40,6 +40,14 @@ Private Sub updateMagicLine(
     End With
     lblDate.Text = targetDate
 
+    If optShowRestWin.Checked Then
+        flagViewMode = LineViewMode.LINE_VIEW_REST_WINS
+    Else If optShowLastWin.Checked Then
+        flagViewMode = LineViewMode.LINE_VIEW_LAST_WINS
+    Else
+        flagViewMode = LineViewMode.LINE_VIEW_LAST_WINS
+    End If
+
     ScoreView.displayVictoryLineToGrid(
         idxLeague, Me.m_gameScore, flagViewMode, Me.dgvLine)
 
