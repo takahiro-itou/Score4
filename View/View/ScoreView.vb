@@ -6,6 +6,12 @@ Public Enum ExtraViewMode As Integer
     EXTRA_VIEW_WIN_FOR_MATCH = 2
 End Enum
 
+Public Enum LineViewMode As Integer
+    LINE_VIEW_REST_WINS = 0
+    LINE_VIEW_LAST_WINS = 1
+    LINE_VIEW_WIN_RATES = 2
+End Enum
+
 Public Const MAGIC_NO_PROBABILITY_WONS As Integer = _
     Score4Wrapper.Consts.MAGIC_NO_PROBABILITY_WONS
 
