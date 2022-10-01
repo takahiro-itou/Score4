@@ -501,26 +501,26 @@ Public Function getLastMaxWins(
         ByRef scoreData As Score4Wrapper.Document.ScoreDocument)
 
     Dim i As Integer, idxTeam As Integer
-    Dim numWons As Integer, numRest As Integer
-    Dim maxWons As Integer
+    Dim numWins As Integer, numRest As Integer
+    Dim maxWins As Integer
     Dim scoreInfo As Score4Wrapper.Common.CountedScores
 
     Const gameFilter As Score4Wrapper.GameFilter = _
             Score4Wrapper.GameFilter.FILTER_ALL_GAMES
 
-    maxWons = -1
+    maxWins = -1
     For i = 0 To numShowCount - 1
         idxTeam = showIndex(i)
         scoreInfo = scoreData.scoreInfo(idxTeam)
-        numWons = scoreInfo.numWons(gameFilter)
+        numWins = scoreInfo.numWons(gameFilter)
         numRest = scoreInfo.numTotalRestGames(gameFilter)
-        numWons = numWons + numRest
-        If (maxWons < numWons) Then
-            maxWons = numWons
+        numWins = numWins + numRest
+        If (maxWins < numWins) Then
+            maxWins = numWins
         End If
     Next i
 
-    getLastMaxWins = maxWons
+    getLastMaxWins = maxWins
 
 End Function
 
@@ -533,24 +533,24 @@ Public Function getLastMinWins(
         ByRef scoreData As Score4Wrapper.Document.ScoreDocument)
 
     Dim i As Integer, idxTeam As Integer
-    Dim numWons As Integer
-    Dim minWons As Integer
+    Dim numWins As Integer
+    Dim minWins As Integer
     Dim scoreInfo As Score4Wrapper.Common.CountedScores
 
     Const gameFilter As Score4Wrapper.GameFilter = _
             Score4Wrapper.GameFilter.FILTER_ALL_GAMES
 
-    minWons = -1
+    minWins = -1
     For i = 0 To numShowCount - 1
         idxTeam = showIndex(i)
         scoreInfo = scoreData.scoreInfo(idxTeam)
-        numWons = scoreInfo.numWons(gameFilter)
-        If (minWons < 0) Or (numWons < minWons) Then
-            minWons = numWons
+        numWins = scoreInfo.numWons(gameFilter)
+        If (minWins < 0) Or (numWins < minWins) Then
+            minWins = numWins
         End If
     Next i
 
-    getLastMinWins = minWons
+    getLastMinWins = minWins
 
 End Function
 
