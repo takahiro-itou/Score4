@@ -359,11 +359,13 @@ Public Sub displayVictoryLineToGrid(
         ByVal flagViewMode As LineViewMode,
         ByRef objView As System.Windows.Forms.DataGridView)
 
-    Dim i As Integer, j As Integer
+    Dim i As Integer, j As Integer, idxRow As Integer
     Dim bufShowIndex() As Integer
     Dim numTeams As Integer, idxTeam As Integer
     Dim numShowCount As Integer
+    Dim curWins As Integer
     Dim numRest As Integer, maxRestGame As Integer
+    Dim lastMinWins As Integer, lastMaxWins As Integer
     Dim maxDigits As Integer, colWidth As Integer
     Dim strRate As String, strGame As String, strFormat As String
 
@@ -381,6 +383,9 @@ Public Sub displayVictoryLineToGrid(
         objView.Visible = False
         Exit Sub
     End If
+
+    lastMaxWins = getLastMaxWins(numShowCount, bufShowIndex, scoreData)
+    lastMinWins = getLastMinWins(numShowCount, bufShowIndex, scoreData)
 
     maxRestGame = scoreData.makeWinningRateTable(leagueIndex, ratesTable)
     maxDigits = Score4Wrapper.Document.ScoreDocument.makeDigitsTable(
@@ -419,13 +424,19 @@ Public Sub displayVictoryLineToGrid(
             idxTeam = bufShowIndex(j)
 
             scoreInfo = scoreData.scoreInfo(idxTeam)
-            numRest = scoreInfo.numTotalRestGames(gameFilter)
+            With scoreInfo
+                numRest = .numTotalRestGames(gameFilter)
+                curWins = .numWons(gameFilter)
+            End With
 
             For i = 0 To numRest
                 strGame = String.Format(strFormat, i, numRest -  i)
                 strRate = StringOperation.formatDouble(
                         ratesTable(idxTeam, i), digitTable(idxTeam, i))
-                .Rows(maxRestGame - i).Cells(j + 1).Value = strGame & strRate
+                idxRow = getShowLineRowIndex(
+                        i, curWins, flagViewMode, lastMinWins, lastMaxWins,
+                        maxRestGame)
+                .Rows(idxRow).Cells(j + 1).Value = strGame & strRate
             Next i
 
         Next j
