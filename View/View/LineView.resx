@@ -266,31 +266,31 @@ o  <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>0</value>
   </data>
 
-  <data name="&gt;&gt;optShowPlayoff.Name" xml:space="preserve">
-    <value>optShowPlayoff</value>
+  <data name="&gt;&gt;optShowLastWin.Name" xml:space="preserve">
+    <value>optShowLastWin</value>
   </data>
-  <data name="&gt;&gt;optShowPlayoff.Parent" xml:space="preserve">
+  <data name="&gt;&gt;optShowLastWin.Parent" xml:space="preserve">
     <value>fraShowMode</value>
   </data>
-  <data name="&gt;&gt;optShowPlayoff.Type" xml:space="preserve">
+  <data name="&gt;&gt;optShowLastWin.Type" xml:space="preserve">
     <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;optShowPlayoff.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;optShowLastWin.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="optShowPlayoff.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="optShowLastWin.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="optShowPlayoff.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="optShowLastWin.Location" type="System.Drawing.Point, System.Drawing">
     <value>16, 64</value>
   </data>
-  <data name="optShowPlayoff.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="optShowLastWin.Size" type="System.Drawing.Size, System.Drawing">
     <value>184, 24</value>
   </data>
-  <data name="optShowPlayoff.TabIndex" type="System.Int32, mscorlib">
+  <data name="optShowLastWin.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
-  <data name="optShowPlayoff.Text" xml:space="preserve">
+  <data name="optShowLastWin.Text" xml:space="preserve">
     <value>&amp;Playoff Line</value>
   </data>
 

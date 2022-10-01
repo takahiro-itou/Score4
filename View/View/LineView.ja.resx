@@ -75,7 +75,7 @@
     <value>表示モード(&amp;S)</value>
   </data>
 
-  <data name="optShowPlayoff.Text" xml:space="preserve">
+  <data name="optShowLastWin.Text" xml:space="preserve">
     <value>プレーオフ進出ライン(&amp;P)</value>
   </data>
 

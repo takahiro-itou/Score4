@@ -32,7 +32,7 @@ Partial Class LineView
         Me.mncDate = New System.Windows.Forms.MonthCalendar()
         Me.lblDate = New System.Windows.Forms.Label()
         Me.fraShowMode = New System.Windows.Forms.GroupBox()
-        Me.optShowPlayoff = New System.Windows.Forms.RadioButton()
+        Me.optShowLastWin = New System.Windows.Forms.RadioButton()
         Me.optShowRestWin = New System.Windows.Forms.RadioButton()
         Me.btnExit = New System.Windows.Forms.Button()
 
@@ -80,20 +80,20 @@ Partial Class LineView
         ' fraShowMode
         '
         resources.ApplyResources(Me.fraShowMode, "fraShowMode")
-        Me.fraShowMode.Controls.Add(Me.optShowPlayoff)
         Me.fraShowMode.Controls.Add(Me.optShowRestWin)
+        Me.fraShowMode.Controls.Add(Me.optShowLastWin)
         Me.fraShowMode.Name = "fraShowMode"
         Me.fraShowMode.TabStop = False
         Me.fraShowMode.Visible = False
 
         '
-        ' optShowPlayoff
+        ' optShowLastWin
         '
-        resources.ApplyResources(Me.optShowPlayoff, "optShowPlayoff")
-        Me.optShowPlayoff.BackColor = System.Drawing.Color.White
-        Me.optShowPlayoff.Name = "optShowPlayoff"
-        Me.optShowPlayoff.TabStop = True
-        Me.optShowPlayoff.UseVisualStyleBackColor = False
+        resources.ApplyResources(Me.optShowLastWin, "optShowLastWin")
+        Me.optShowLastWin.BackColor = System.Drawing.Color.White
+        Me.optShowLastWin.Name = "optShowLastWin"
+        Me.optShowLastWin.TabStop = True
+        Me.optShowLastWin.UseVisualStyleBackColor = False
 
         '
         'optShowRestWin
@@ -162,8 +162,8 @@ Partial Class LineView
     Friend WithEvents mncDate As MonthCalendar
     Friend WithEvents lblDate As Label
     Friend WithEvents fraShowMode As GroupBox
-    Friend WithEvents optShowPlayoff As RadioButton
     Friend WithEvents optShowRestWin As RadioButton
+    Friend WithEvents optShowLastWin As RadioButton
     Friend WithEvents btnExit As Button
 
 End Class
