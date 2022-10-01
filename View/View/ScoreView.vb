@@ -493,7 +493,7 @@ End Sub
 ''    表示対象チームの最終勝数の内、最小値を求める。
 ''========================================================================
 Public Function getLastMinWins(
-        ByVal numShowCount As Integer
+        ByVal numShowCount As Integer,
         ByRef showIndex() As Integer,
         ByRef scoreData As Score4Wrapper.Document.ScoreDocument)
 
@@ -514,7 +514,7 @@ Public Function getLastMinWins(
 
     getLastMinWins = minWons
 
-End Sub
+End Function
 
 ''========================================================================
 ''    指定されたグリッドビューに残り試合のテーブルを表示する
