@@ -1698,6 +1698,12 @@ ScoreDocument::writeTeamMagicNumbers(
             break;
         }
 
+        if ( num <= 0 ) {
+            //  プレーオフ進出チーム数が指定されていない場合等  //
+            //  ゼロになっているとエラーになるので補正する。    //
+            num = 1;
+        }
+
         //  一旦マジックは点灯していない場合を書き込んでおく。  //
         miOut.magicFlags [mode] = MIF_WINS_DIFF;
         miOut.magicNumber[mode] = sorted2.at(num - 1)->numWinsDiff;
