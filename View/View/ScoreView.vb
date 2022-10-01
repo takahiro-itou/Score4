@@ -490,6 +490,38 @@ Public Sub displayWinsForBeatTableToGrid(
 End Sub
 
 ''========================================================================
+''    表示対象チームの最終勝数の内、最大値を求める。
+''========================================================================
+Public Function getLastMaxWins(
+        ByVal numShowCount As Integer,
+        ByRef showIndex() As Integer,
+        ByRef scoreData As Score4Wrapper.Document.ScoreDocument)
+
+    Dim i As Integer, idxTeam As Integer
+    Dim numWons As Integer, numRest As Integer
+    Dim maxWons As Integer
+    Dim scoreInfo As Score4Wrapper.Common.CountedScores
+    Dim gameFilter As Score4Wrapper.GameFilter
+
+    gameFilter = Score4Wrapper.GameFilter.FILTER_ALL_GAMES
+
+    maxWons = -1
+    For i = 0 To numShowCount - 1
+        idxTeam = showIndex(i)
+        scoreInfo = scoreData.scoreInfo(idxTeam)
+        numWons = scoreInfo.numWons(gameFilter)
+        numRest = scoreInfo.numTotalRestGames(gameFilter)
+        numWons = numWons + numRest
+        If (maxWons < numWons) Then
+            maxWons = numWons
+        End If
+    Next i
+
+    getLastMaxWins = maxWons
+
+End Function
+
+''========================================================================
 ''    表示対象チームの最終勝数の内、最小値を求める。
 ''========================================================================
 Public Function getLastMinWins(
