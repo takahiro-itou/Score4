@@ -31,6 +31,8 @@ Private Sub updateMagicLine(
         ByVal idxLeague As Integer,
         Byval targetDate As System.DateTime)
 
+    Dim flagViewMode As LineViewMode
+
     With Me
         .m_currentLeague = idxLeague
         .m_currentDate = targetDate
@@ -39,7 +41,7 @@ Private Sub updateMagicLine(
     lblDate.Text = targetDate
 
     ScoreView.displayVictoryLineToGrid(
-        idxLeague, Me.m_gameScore, Me.dgvLine)
+        idxLeague, Me.m_gameScore, flagViewMode, Me.dgvLine)
 
 End Sub
 

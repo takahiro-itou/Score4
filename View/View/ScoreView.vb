@@ -353,6 +353,7 @@ End Sub
 Public Sub displayVictoryLineToGrid(
         ByVal leagueIndex As Integer,
         ByRef scoreData As Score4Wrapper.Document.ScoreDocument,
+        ByVal flagViewMode As LineViewMode,
         ByRef objView As System.Windows.Forms.DataGridView)
 
     Dim i As Integer, j As Integer
