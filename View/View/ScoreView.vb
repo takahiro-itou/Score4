@@ -410,16 +410,10 @@ Public Sub displayVictoryLineToGrid(
         scoreData, objView)
     gameFilter = Score4Wrapper.GameFilter.FILTER_ALL_GAMES
 
-    With objView
-        With .Columns(0)
-            .HeaderText = "勝数"
-            .Width = 48
-        End With
-        .Rows.Clear()
-        For i = 0 To maxRestGame
-            .Rows.Add("" & (maxRestGame - i) & "勝")
-        Next i
+    makeLineViewGridRows(
+        flagViewMode, lastMinWins, lastMaxWins, maxRestGame, objView)
 
+    With objView
         For j = 0 To numShowCount - 1
             idxTeam = bufShowIndex(j)
 
@@ -609,6 +603,39 @@ Private Function makeGridViewColumn(
     makeGridViewColumn = textColumn
 
 End Function
+
+''========================================================================
+''    ライン表示用グリッドビューの行を用意する。
+''========================================================================
+Private Sub makeLineViewGridRows(
+        ByVal flagViewMode As LineViewMode,
+        ByVal lastMinWins As Integer,
+        ByVal lastMaxWins As Integer,
+        ByVal restMaxGames As Integer,
+        ByRef objView As System.Windows.Forms.DataGridView)
+
+    Dim i As Integer
+
+    With objView
+        With .Columns(0)
+            .HeaderText = "勝数"
+            .Width = 48
+        End With
+        .Rows.Clear()
+
+        Select Case flagViewMode
+        Case LineViewMode.LINE_VIEW_REST_WINS
+            For i = 0 To restMaxGames
+                .Rows.Add("" & (restMaxGames - i) & "勝")
+            Next i
+        Case LineViewMode.LINE_VIEW_LAST_WINS
+            For i = lastMaxWins To lastMinWins Step -1
+                .Rows.Add("" & (i) & "勝")
+            Next i
+        End Select
+    End With
+
+End Sub
 
 ''========================================================================
 ''    グリッドビューのヘッダ列を用意する。
