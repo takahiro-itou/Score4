@@ -177,6 +177,9 @@ Public Sub displayScoreTableToGrid(
     Dim topDiff As Integer
     Dim scoreInfo As Score4Wrapper.Common.CountedScores
 
+    Const gameFilter As Score4Wrapper.GameFilter = _
+            Score4Wrapper.GameFilter.FILTER_ALL_GAMES
+
     numTeam = scoreData.getNumTeams()
     ReDim bufShowIndex(0 To numTeam - 1)
     numShowCount = scoreData.computeRankOrder(leagueIndex, bufShowIndex)
@@ -188,10 +191,10 @@ Public Sub displayScoreTableToGrid(
         idxTeam = bufShowIndex(i)
         scoreInfo = scoreData.scoreInfo(idxTeam)
         With scoreInfo
-            numWons = .numWons(2)
-            numLost = .numLost(2)
-            numDraw = .numDraw(2)
-            numGame = .numGames(2)
+            numWons = .numWons(gameFilter)
+            numLost = .numLost(gameFilter)
+            numDraw = .numDraw(gameFilter)
+            numGame = .numGames(gameFilter)
             wpDenom = numGame - numDraw
         End With
 
@@ -215,9 +218,9 @@ Public Sub displayScoreTableToGrid(
             scoreInfo = scoreData.scoreInfo(idxTeam)
             magicInfo = scoreInfo.totalMagicInfo
 
-            numWons = scoreInfo.numWons(2)
-            numLost = scoreInfo.numLost(2)
-            numDraw = scoreInfo.numDraw(2)
+            numWons = scoreInfo.numWons(gameFilter)
+            numLost = scoreInfo.numLost(gameFilter)
+            numDraw = scoreInfo.numDraw(gameFilter)
             Dim strDiff As String
             Dim strPerc As String
             Dim strMagic As String
@@ -235,7 +238,7 @@ Public Sub displayScoreTableToGrid(
             End If
 
             ' 勝率
-            numGame = scoreInfo.numGames(2)
+            numGame = scoreInfo.numGames(gameFilter)
             wpDenom = numGame - numDraw
             If (wpDenom = 0) Then
                 strPerc = "---"
@@ -501,9 +504,9 @@ Public Function getLastMaxWins(
     Dim numWons As Integer, numRest As Integer
     Dim maxWons As Integer
     Dim scoreInfo As Score4Wrapper.Common.CountedScores
-    Dim gameFilter As Score4Wrapper.GameFilter
 
-    gameFilter = Score4Wrapper.GameFilter.FILTER_ALL_GAMES
+    Const gameFilter As Score4Wrapper.GameFilter = _
+            Score4Wrapper.GameFilter.FILTER_ALL_GAMES
 
     maxWons = -1
     For i = 0 To numShowCount - 1
@@ -534,11 +537,14 @@ Public Function getLastMinWins(
     Dim minWons As Integer
     Dim scoreInfo As Score4Wrapper.Common.CountedScores
 
+    Const gameFilter As Score4Wrapper.GameFilter = _
+            Score4Wrapper.GameFilter.FILTER_ALL_GAMES
+
     minWons = -1
     For i = 0 To numShowCount - 1
         idxTeam = showIndex(i)
         scoreInfo = scoreData.scoreInfo(idxTeam)
-        numWons = scoreInfo.numWons(2)
+        numWons = scoreInfo.numWons(gameFilter)
         If (minWons < 0) Or (numWons < minWons) Then
             minWons = numWons
         End If
