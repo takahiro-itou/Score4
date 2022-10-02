@@ -125,6 +125,7 @@ Private Function postprocessReadScoreData(ByVal fileName As String) As Boolean
     Dim flagAutoImport As Boolean = False
 
     ' 表示内容を最新の情報に更新する。
+    setControlsEnabled(True)
     m_flagModified = False
     m_scoreData.checkLastDate()
     updateScoreView()
