@@ -26,7 +26,8 @@ Private m_flagSchedule As Score4Wrapper.GameFilter
 Private Function isModificationClean() As Boolean
 
     If (m_flagModified = False) Then
-        Return True
+        isModificationClean = True
+        Exit Function
     End If
 
     Dim msgAns As System.Windows.Forms.DialogResult
@@ -34,14 +35,16 @@ Private Function isModificationClean() As Boolean
         "このデータには変更が加えられています。保存しますか？", "Save",
         MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question)
     If (msgAns = Windows.Forms.DialogResult.Cancel) Then
-        Return False
+        isModificationClean = False
+        Exit Function
     End If
 
     If (msgAns = Windows.Forms.DialogResult.Yes) Then
 
     End If
 
-    Return True
+    isModificationClean = True
+
 End Function
 
 ''========================================================================
