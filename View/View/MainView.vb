@@ -9,6 +9,8 @@ Private m_iniFileName As String
 Private m_currentFontName As String
 Private m_currentFontSize As Integer
 
+Private m_flagEnabledData As Boolean
+
 Private m_flagModified As Boolean
 Private m_lastFileName As String
 
@@ -265,6 +267,22 @@ Private Function saveScoreDataToText(ByVal fileName As String) As Boolean
     saveScoreDataToText = postprocessSaveScoreData("")
 
 End Function
+
+''========================================================================
+''    コントロールの有効無効を切り替える。
+''========================================================================
+Private Sub setControlsEnabled(ByVal flagEnable As Boolean)
+
+    m_flagEnabledData = flagEnable
+
+    mnuFileSave.Enabled = flagEnable
+    mnuFileSaveAs.Enabled = flagEnable
+    mnuFileExportText.Enabled = flagEnable
+    mnuScore.Enabled = flagEnable
+    mnuMagic.Enabled = flagEnable
+    fraScore.Enabled = flagEnable
+
+End Sub
 
 ''========================================================================
 ''    ビューの内容を、最新の情報に更新する。
