@@ -9,6 +9,8 @@ Private m_iniFileName As String
 Private m_currentFontName As String
 Private m_currentFontSize As Integer
 
+Private m_flagEnabledData As Boolean
+
 Private m_flagModified As Boolean
 Private m_lastFileName As String
 
@@ -26,7 +28,8 @@ Private m_flagSchedule As Score4Wrapper.GameFilter
 Private Function isModificationClean() As Boolean
 
     If (m_flagModified = False) Then
-        Return True
+        isModificationClean = True
+        Exit Function
     End If
 
     Dim msgAns As System.Windows.Forms.DialogResult
@@ -34,14 +37,16 @@ Private Function isModificationClean() As Boolean
         "このデータには変更が加えられています。保存しますか？", "Save",
         MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question)
     If (msgAns = Windows.Forms.DialogResult.Cancel) Then
-        Return False
+        isModificationClean = False
+        Exit Function
     End If
 
     If (msgAns = Windows.Forms.DialogResult.Yes) Then
 
     End If
 
-    Return True
+    isModificationClean = True
+
 End Function
 
 ''========================================================================
@@ -120,6 +125,7 @@ Private Function postprocessReadScoreData(ByVal fileName As String) As Boolean
     Dim flagAutoImport As Boolean = False
 
     ' 表示内容を最新の情報に更新する。
+    setControlsEnabled(True)
     m_flagModified = False
     m_scoreData.checkLastDate()
     updateScoreView()
@@ -165,8 +171,11 @@ End Function
 ''========================================================================
 ''    データをインポートする。
 ''========================================================================
-Private Function processImportData(ByVal importAutoStart As Boolean) As Boolean
-    Return False
+Private Function processImportData(
+        ByVal importAutoStart As Boolean) As Boolean
+
+    processImportData = False
+
 End Function
 
 ''========================================================================
@@ -262,6 +271,22 @@ Private Function saveScoreDataToText(ByVal fileName As String) As Boolean
     saveScoreDataToText = postprocessSaveScoreData("")
 
 End Function
+
+''========================================================================
+''    コントロールの有効無効を切り替える。
+''========================================================================
+Private Sub setControlsEnabled(ByVal flagEnable As Boolean)
+
+    m_flagEnabledData = flagEnable
+
+    mnuFileSave.Enabled = flagEnable
+    mnuFileSaveAs.Enabled = flagEnable
+    mnuFileExportText.Enabled = flagEnable
+    mnuScore.Enabled = flagEnable
+    mnuMagic.Enabled = flagEnable
+    fraScore.Enabled = flagEnable
+
+End Sub
 
 ''========================================================================
 ''    ビューの内容を、最新の情報に更新する。
@@ -593,6 +618,8 @@ End Sub
 ''    フォームのロードイベントハンドラ。
 ''========================================================================
 Private Sub MainView_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
+    setControlsEnabled(False)
 
     m_scoreData = New Score4Wrapper.Document.ScoreDocument
     m_appPath = GetAppPath()
