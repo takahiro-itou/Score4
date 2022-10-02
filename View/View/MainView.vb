@@ -170,8 +170,11 @@ End Function
 ''========================================================================
 ''    データをインポートする。
 ''========================================================================
-Private Function processImportData(ByVal importAutoStart As Boolean) As Boolean
-    Return False
+Private Function processImportData(
+        ByVal importAutoStart As Boolean) As Boolean
+
+    processImportData = False
+
 End Function
 
 ''========================================================================
