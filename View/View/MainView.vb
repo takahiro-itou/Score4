@@ -618,6 +618,8 @@ End Sub
 ''========================================================================
 Private Sub MainView_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
+    setControlsEnabled(False)
+
     m_scoreData = New Score4Wrapper.Document.ScoreDocument
     m_appPath = GetAppPath()
     m_iniFileName = m_appPath & "\Score.ini"
