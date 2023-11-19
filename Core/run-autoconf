@@ -2,8 +2,9 @@
 
 script_dir=$(readlink -f $(dirname $0))
 build_script='build.sh'
+rebuild_script='rebuild.sh'
 
-rm -f ${build_script}
+rm -f ${build_script} ${rebuild_script}
 
 time  ${script_dir}/configure ; echo $?
 
@@ -13,4 +14,11 @@ cat << __EOF__  | tee ${build_script}
 time  make && make -s check ; echo \$?
 __EOF__
 
-chmod 755 ${build_script}
+cat << __EOF__  | tee ${rebuild_script}
+#!/bin/bash  -xue
+
+make clean
+time  make && make -s check ; echo \$?
+__EOF__
+
+chmod 755 ${build_script} ${rebuild_script}
