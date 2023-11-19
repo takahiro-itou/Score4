@@ -1,16 +1,5 @@
 #! /bin/bash  -xue
 
-script_dir=$(readlink -f $(dirname $0))
-target_script='build.sh'
+script_dir=$(readlink -f "$(dirname "$0")")
 
-rm -f ${target_script}
-
-time  cmake ${script_dir} ; echo $?
-
-cat << __EOF__  | tee ${target_script}
-#!/bin/bash  -xue
-
-time  make && ctest . ; echo \$?
-__EOF__
-
-chmod 755 ${target_script}
+"${script_dir}/run-cmake"  -DCMAKE_BUILD_TYPE=Release "$@"
