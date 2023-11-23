@@ -336,6 +336,18 @@ protected:
             const  std::string  &message,
             const  std::string  &what);
 
+    //----------------------------------------------------------------
+    /**   発生した警告を登録する。
+    **
+    **  @param [in] message
+    **  @param [in] what
+    **  @return     void.
+    **/
+    void
+    appendWarningLog(
+            const  std::string  &message,
+            const  std::string  &what);
+
 //========================================================================
 //
 //    For Internal Use Only.

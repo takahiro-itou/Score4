@@ -822,6 +822,17 @@ DocumentFile::appendErrorInfo(
     return;
 }
 
+//----------------------------------------------------------------
+//    発生した警告の情報を登録する。
+//
+
+void
+DocumentFile::appendWarningLog(
+        const  std::string  &message,
+        const  std::string  &what)
+{
+}
+
 //========================================================================
 //
 //    For Internal Use Only.
