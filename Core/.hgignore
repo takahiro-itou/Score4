@@ -4,7 +4,7 @@ syntax: glob
 syntax: regexp
 Makefile$
 Makefile\.in$
-\.h\.in$
+Config\.h\.in$
 
 ^\.Config/
 ^\.M4/InitAutoMake.m4$
@@ -13,6 +13,6 @@ Makefile\.in$
 ^autom4te\.cache\/
 ^configure$
 
-Tests/CMakeLists.txt
-Tests/Makefile.am
+^Lib/.*/Tests/CMakeLists.txt
+^Lib/.*/Tests/Makefile.am
 
