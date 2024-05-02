@@ -55,5 +55,7 @@ jobs:
       - name: make distcheck
         run : |
           cd build
-          env DISTCHECK_CONFIGURE_FLAGS='--without-cppunit'  make distcheck
+          env DISTCHECK_CONFIGURE_FLAGS=${CPPUNIT_DIR}  make distcheck
+        env :
+           CPPUNIT_DIR : ${{ steps.install-cppunit.outputs.real-install-dir }}
         shell : bash
