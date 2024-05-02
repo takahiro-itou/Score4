@@ -4,13 +4,18 @@ syntax: glob
 syntax: regexp
 Makefile$
 Makefile\.in$
-\.h\.in$
+Config\.h\.in$
+
 ^\.Config/
 ^\.M4/InitAutoMake.m4$
 ^References$
 ^aclocal\.m4$
 ^autom4te\.cache\/
 ^configure$
-Tests/CMakeLists.txt
-Tests/Makefile.am
+
+^Lib/.*/Tests/CMakeLists.txt
+^Lib/.*/Tests/Makefile.am
+
+subinclude:.CMake/.hgignore
+subinclude:.M4/.hgignore
 
