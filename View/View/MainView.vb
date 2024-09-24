@@ -144,10 +144,15 @@ Private Function postprocessReadScoreData(ByVal fileName As String) As Boolean
         End If
     End If
 
+    updateTables(
+        m_currentLeague, m_scoreData.lastActiveDate, m_flagMagicMode,
+        m_flagExtraView, m_flagSchedule)
+
     mnvDate.SelectionStart = m_scoreData.lastActiveDate
     postprocessReadScoreData = True
 
 End Function
+
 
 ''========================================================================
 ''    データを保存した後の処理を行う。
