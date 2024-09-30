@@ -89,6 +89,7 @@ Public Sub setupSettings(
     End With
 
     ' 指定した日付を選択する
+    updateRecordTable(startupDate)
     mnvEdit.SelectionStart = startupDate
 End Sub
 
